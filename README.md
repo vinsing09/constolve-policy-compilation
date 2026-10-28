@@ -236,14 +236,15 @@ Test Environments for Tool-Calling Agents*, 2026.
 
 ## Verified
 
-On 28 October 2026 this repository was cloned fresh from GitHub into an empty temporary folder
-and `bash reproduce/verify_all.sh` was run twice: with Python 3.14.4 and only the standard
-library (step 7 skipped), and with the Python 3.12.14 environment of `requirements.txt`. Both
-exited 0. Two negative controls were also run on the clone: flipping one criterion in one
-stored trace makes `separation.py` refuse (`files differ from the seal full-fixed-2.sha256`),
-and committing a one-line change to `scripts/runlog.py` makes it refuse
-(`manifest provenance wrong: ['wrapper']`). Output of the run with the full environment
-(step 6 shortened to its summary lines):
+On 28 October 2026 this repository (commit 4bded6d) was cloned fresh from GitHub into an empty
+temporary folder and `bash reproduce/verify_all.sh` was run twice: with Python 3.14.4 and only
+the standard library (step 8 skipped), and with the Python 3.12.14 environment of
+`requirements.txt`. Both exited 0 and left the checkout unchanged. Two negative controls were
+run on an earlier clone: flipping one criterion in one stored trace makes `separation.py`
+refuse (`files differ from the seal full-fixed-2.sha256`), and committing a one-line change to
+`scripts/runlog.py` makes it refuse (`manifest provenance wrong: ['wrapper']`). Changing an
+expected value in `paper_tables.py` makes it report a mismatch and exit 1. Output of the run
+with the full environment (step 6 shortened to its summary lines):
 
 ```
 == 0. secret and personal-data scan
@@ -306,12 +307,85 @@ SECONDARY (main + follow-up pooled, functional duplicates merged)
 == 5. rule coverage (rewrites coverage.csv and coverage.md; must be unchanged)
 {"not_checkable": 11, "not_covered": 20, "covered": 20}
 coverage.csv and coverage.md unchanged
+
 == 6. duplicate re-analysis (rewrites results.json; must be unchanged)
 original_24 {'units': 24, 'pooled_gap': 30.0, 'gap_over_units': 30.0, 'ci95': [24.55696202531646, 35.294117647058826], 'signflip_p_mc': 0.0001, 'signflip_p_exact': 0.0, ...}
 clustered_19 {'units': 19, 'pooled_gap': 30.0, 'gap_over_units': 30.0, 'ci95': [24.65753424657534, 35.43859649122807], 'signflip_p_mc': 0.0001, 'signflip_p_exact': 0.0001, ...}
 results.json unchanged
 
-== 7. engine replay smoke test (needs requirements.txt; skipped otherwise)
+== 7. the paper's Tables 1-6 and Figure 2, checked against the printed values
+Table 1 (Domains and compilation outcomes), telecom column and compiled tools
+  telecom: tasks 114, tool schemas 43, policy length 23,318, tasks with customer actions 94, tools compiled 43/43, health predicates 11, derived observables 5, environment size 2,337 lines
+  airline tools compiled 14/14; retail tools compiled 16/16
+
+Table 2 (The 24-scenario telecom suite)
+  scenarios 24, distinct tests 19, criteria 93, requiring a call 74, no argument values 48, forbidding a call 19, repeats 5, conversations per arm 120, graded actions per arm 370
+
+Table 3 (Policy rule coverage by policy section)
+  section                                  rules covered not_cov not_chk
+  General                                      8       2       2       4
+  Customer lookup                              1       0       1       0
+  Technical support                            1       0       1       0
+  Overdue bill payment                         7       2       3       2
+  Line suspension                              3       2       1       0
+  Data refueling                               4       1       1       2
+  Change plan                                  6       0       3       3
+  Data roaming                                 2       1       1       0
+  Cellular service                             9       6       3       0
+  Mobile data                                  5       4       1       0
+  MMS                                          5       2       3       0
+  Total                                       51      20      20      11
+
+Table 4 (Per-scenario results; # = suite index + 1)
+   1  policy 18/25  stub 11/25  delta  +28.0
+   2  policy 16/25  stub  9/25  delta  +28.0
+   3  policy  5/20  stub  0/20  delta  +25.0
+   4  policy 11/15  stub  8/15  delta  +20.0
+   5  policy 15/25  stub  5/25  delta  +40.0
+   6  policy 12/15  stub  7/15  delta  +33.3
+   7  policy 10/10  stub  7/10  delta  +30.0
+   8  policy  5/ 5  stub  3/ 5  delta  +40.0
+   9  policy 20/20  stub 12/20  delta  +40.0
+  10  policy  8/10  stub  4/10  delta  +40.0
+  11  policy  5/ 5  stub  5/ 5  delta   +0.0
+  12  policy 16/20  stub 12/20  delta  +20.0
+  13  policy  5/10  stub  2/10  delta  +30.0
+  14  policy 15/15  stub  5/15  delta  +66.7
+  15  policy  5/ 5  stub  2/ 5  delta  +60.0
+  16  policy 20/25  stub 13/25  delta  +28.0
+  17  policy 15/20  stub  7/20  delta  +40.0
+  18  policy  9/15  stub  5/15  delta  +26.7
+  19  policy  9/10  stub  7/10  delta  +20.0
+  20  policy  4/ 5  stub  5/ 5  delta  -20.0
+  21  policy 20/25  stub 14/25  delta  +24.0
+  22  policy 15/20  stub  9/20  delta  +30.0
+  23  policy 15/15  stub  8/15  delta  +46.7
+  24  policy  0/10  stub  2/10  delta  -20.0
+  pooled policy 273/370 (73.8%), stub 162/370 (43.8%), separation +30.0
+
+Figure 2 (Per-scenario separation on the 19 distinct scenarios), points sorted:
+  -20, -20, 0, 20, 23.33, 24, 25, 28, 28, 30, 30, 30, 33.33, 35, 40, 40, 46.67, 50, 66.67
+Discrimination (Section 5.3): 19 clusters, bootstrap 95% CI [24.7, 35.4], ahead / behind / tied 16 / 2 / 1, sign-flip p (exact) 0.00007
+
+Table 5 (Catching removed rules; 63 valid blocks, 19 distinct scenarios)
+  rule                   checks(scen) ctrl%  var%   drop   p      caught untied(p)
+  R2_apn                  52 ( 7)    100.0  65.4  +34.6 0.0078 yes    -3.7 (0.249)
+  R6_transfer_scope       63 (19)     69.8  54.0  +15.9 0.0581 no     -0.6 (0.234)
+  R3_payment              16 ( 3)    100.0  75.0  +25.0 0.2500 no     -10.1 (0.008)
+  R5_escalate_unfixable   26 ( 4)     61.5  34.6  +26.9 0.1250 no     -1.8 (0.358)
+  R1_airplane             28 ( 8)     85.7  92.9   -7.1 0.7188 no     -1.4 (0.557)
+  R4_suspension           24 ( 7)    100.0  91.7   +8.3 0.2500 no     -3.2 (0.230)
+  caught 1 of 6; off-target untied drops >= 20 with p < 0.05: 0 of 6
+
+Table 6 (Pre-registered follow-up and pooled secondary analysis)
+  primary  R3_payment              60 ( 6)  96.7  76.7  +20.0 0.0625 no
+  primary  R5_escalate_unfixable   40 ( 8)  42.5  37.5   +5.0 0.4219 no
+  pooled   R3_payment              76 ( 9)  97.4  76.3  +21.1 0.0156 meets
+  pooled   R5_escalate_unfixable   61 (12)  49.2  34.4  +14.8 0.0879 no
+
+paper tables: all values match the paper
+
+== 8. engine replay smoke test (needs requirements.txt; skipped otherwise)
 engine replay: 48 conversations, 0 errors, 110 of 186 graded actions completed (stored run, repeat 0: 118); 40 conversations grade the same as stored
 
 ALL REPRODUCTIONS MATCH
