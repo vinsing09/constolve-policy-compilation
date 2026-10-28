@@ -265,12 +265,14 @@ Test Environments for Tool-Calling Agents*, 2026.
 
 ## Verified
 
-On 28 October 2026 this repository (commit 4bded6d) was cloned fresh from GitHub into an empty
+On 29 October 2026 this repository (commit 04b15d5) was cloned fresh from GitHub into an empty
 temporary folder and `bash reproduce/verify_all.sh` was run twice: with Python 3.14.4 and only
-the standard library (step 8 skipped), and with the Python 3.12.14 environment of
-`requirements.txt`. Both exited 0 and left the checkout unchanged. Two negative controls were
-run on an earlier clone: flipping one criterion in one stored trace makes `separation.py`
-refuse (`files differ from the seal full-fixed-2.sha256`), and committing a one-line change to
+the standard library (step 12 skipped), and with the Python 3.12.14 environment of
+`requirements.txt`. Both exited 0 and left the checkout unchanged. Step 10 is the negative
+control for the released records: one flipped verdict, one recorded error, one removed repair
+set or one divergent replay makes the matching check fail. Two negative controls were run on an
+earlier clone: flipping one criterion in one stored trace makes `separation.py` refuse
+(`files differ from the seal full-fixed-2.sha256`), and committing a one-line change to
 `scripts/runlog.py` makes it refuse (`manifest provenance wrong: ['wrapper']`). Changing an
 expected value in `paper_tables.py` makes it report a mismatch and exit 1. Output of the run
 with the full environment (step 6 shortened to its summary lines):
@@ -342,10 +344,37 @@ original_24 {'units': 24, 'pooled_gap': 30.0, 'gap_over_units': 30.0, 'ci95': [2
 clustered_19 {'units': 19, 'pooled_gap': 30.0, 'gap_over_units': 30.0, 'ci95': [24.65753424657534, 35.43859649122807], 'signflip_p_mc': 0.0001, 'signflip_p_exact': 0.0001, ...}
 results.json unchanged
 
-== 7. the paper's Tables 1-6 and Figure 2, checked against the printed values
+== 7. fault types and repair-call-set coverage (105/113, 90/94, 17/17) from records/coverage
+emitted scenarios 92,184 (21,516 distinct repair sets match no benchmark task)
+benchmark tasks 114; excluded (repair set empty): ['[service_issue]contract_end_suspension|lock_sim_card_pin[PERSONA:Hard]']
+covered 105 of 113; repair-graded 90 of 94; escalation-graded tasks among the covered 15; uncovered 8
+fault types 19: agent-repairable 17 (complete 16, partial 1 ['overdue_bill_suspension']), escalation-only 2
+  (counting every call of each atom's fix sequence: 17 complete)
+coverage: all values match the paper and the archived report
+
+== 8. determinism replays: archived reports (summaries only) in records/determinism
+telecom  30 scenarios x 3 replays; identical: in-process state 30, in-process predicates 30, in-process returns 30, cross-process state 30, cross-process predicates 30; diverged []
+airline  7 scenarios x 4 replays; identical: in-process state 7, in-process predicates 7, in-process returns 7, cross-process state 7, cross-process predicates 7; diverged []
+retail   4 scenarios x 4 replays; identical: in-process state 4, in-process predicates 4, in-process returns 4, cross-process state 4, cross-process predicates 4; diverged []
+determinism: archived reports match the paper (no divergence)
+
+== 9. verdict instability, Table 7, from the 834 per-run verdicts in records/verdict-instability
+Table 7 (Verdict instability, three identical runs per task)
+  domain   tasks runs flipped        passes/run   pass^1 pass^3 drop
+  airline     50  150  17 (34.0%) [23, 31, 27]     54.0   38.0 16.0pp
+  telecom    114  342  34 (29.8%) [34, 37, 30]     29.5   14.9 14.6pp
+  retail     114  342  35 (30.7%) [78, 77, 77]     67.8   53.5 14.3pp
+  total 278 tasks, 834 runs; no run recorded an error
+instability: all values match the paper and the archived summaries
+
+== 10. the record checks fail on altered records
+OK
+
+== 11. the paper's Tables 1-7, Figure 2 and Sections 5.1-5.2, checked against the printed values
 Table 1 (Domains and compilation outcomes), telecom column and compiled tools
   telecom: tasks 114, tool schemas 43, policy length 23,318, tasks with customer actions 94, tools compiled 43/43, health predicates 11, derived observables 5, environment size 2,337 lines
   airline tools compiled 14/14; retail tools compiled 16/16
+  Section 5.1: the benchmark's own telecom environment, 2,851 lines
 
 Table 2 (The 24-scenario telecom suite)
   scenarios 24, distinct tests 19, criteria 93, requiring a call 74, no argument values 48, forbidding a call 19, repeats 5, conversations per arm 120, graded actions per arm 370
@@ -412,9 +441,13 @@ Table 6 (Pre-registered follow-up and pooled secondary analysis)
   pooled   R3_payment              76 ( 9)  97.4  76.3  +21.1 0.0156 meets
   pooled   R5_escalate_unfixable   61 (12)  49.2  34.4  +14.8 0.0879 no
 
+Section 5.2: coverage 105/113, repair-graded 90/94, fault types 16 complete + 1 partial of 17, 92,184 emitted
+Section 5.1: determinism telecom 30x3, airline 7x4, retail 4x4
+Table 7 (Verdict instability): airline 50 tasks 150 runs, 34.0% flip, drop 16.0; retail 114 tasks 342 runs, 30.7% flip, drop 14.3; telecom 114 tasks 342 runs, 29.8% flip, drop 14.6
+
 paper tables: all values match the paper
 
-== 8. engine replay smoke test (needs requirements.txt; skipped otherwise)
+== 12. engine replay smoke test (needs requirements.txt; skipped otherwise)
 engine replay: 48 conversations, 0 errors, 110 of 186 graded actions completed (stored run, repeat 0: 118); 40 conversations grade the same as stored
 
 ALL REPRODUCTIONS MATCH
