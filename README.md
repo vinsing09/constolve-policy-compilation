@@ -6,6 +6,9 @@ telecom environment, the generated suite, the scenario generator, the run, scori
 statistics code, the conversation traces of every run the paper's telecom results rest on,
 and scripts that recompute those results without calling a model.
 
+Preprint and archived copy of this release on Zenodo: DOI
+[10.5281/zenodo.23741457](https://doi.org/10.5281/zenodo.23741457).
+
 From the paper's abstract:
 
 > Tool-calling agents work under operating policies that a general benchmark cannot know. We

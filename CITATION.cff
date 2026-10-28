@@ -10,6 +10,7 @@ authors:
     email: vineet@constolve.com
 date-released: 2026-10-29
 license: MIT
+doi: 10.5281/zenodo.23741457
 repository-code: "https://github.com/vinsing09/constolve-policy-compilation"
 keywords:
   - tool-calling agents
@@ -24,6 +25,8 @@ preferred-citation:
     - family-names: Singh
       given-names: Vineet
       affiliation: Constolve
-    orcid: "https://orcid.org/0009-0005-5190-6042"
-    email: vineet@constolve.com
+      orcid: "https://orcid.org/0009-0005-5190-6042"
+      email: vineet@constolve.com
   year: 2026
+  doi: 10.5281/zenodo.23741457
+  url: "https://doi.org/10.5281/zenodo.23741457"
