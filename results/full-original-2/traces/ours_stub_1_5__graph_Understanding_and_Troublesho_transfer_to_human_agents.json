@@ -1,0 +1,303 @@
+{
+ "case": "5:[graph:Understanding and Troublesho]transfer_to_human_agents",
+ "arm": "stub",
+ "repeat": 1,
+ "solved": false,
+ "actions_done": 2,
+ "actions_required": 3,
+ "turns": 17,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "get_data_usage",
+  "get_details_by_id",
+  "check_wifi_calling_status",
+  "check_wifi_calling_status",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "diagnosed_before_handoff",
+   "ok": false,
+   "why": "tool 'check_status_bar' was never called"
+  },
+  {
+   "id": "s2_get_data_usage",
+   "ok": true,
+   "why": "tool 'get_data_usage' was called"
+  },
+  {
+   "id": "s3_transfer_to_human_agents",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no signal at all. Nothing loads, I can't send picture messages, and I can't get online or make a call. Can you help?"
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're having trouble with your phone signal. Let's try to get this resolved!\n\nTo assist you better, could you please provide your phone number or the name on your account? This will help me check your line status and see if there are any issues affecting your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your number. I checked your account, and your line status is currently \"Active,\" which means there are no suspensions or holds on your service.\n\nSince your line appears active but you have no signal and can't use any services, let's try the following quick troubleshooting steps:\n\n1. Restart your phone.\n2. Make sure Airplane Mode is turned off.\n3. Check if your SIM card is properly inserted.\n4. Try toggling mobile data off and on.\n\nIf you've already tried these steps or if the issue persists, please let me know. I can check further for network outages or escalate the issue if needed. Have you noticed this problem only in a specific location, or is it happening everywhere?",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I've already tried restarting my phone and turning airplane mode on and off. The SIM card is in properly and I've toggled mobile data too, but nothing changed. I'm at home in Boston and haven't had a signal at all here."
+  },
+  {
+   "role": "agent",
+   "content": "I see that you have used 50.5GB of data, which is slightly over your plan's 50GB data limit for this billing cycle. When you exceed your data limit, your data services may be suspended or significantly slowed down, which could explain why you can't get online or send picture messages.\n\nHowever, this should not affect your ability to make regular calls or send standard text messages. Since you have no signal at all, there may be an additional issue.\n\nWould you like me to add more data to your plan (this will incur an extra charge), or would you prefer I escalate this issue to a human agent for further investigation? Please let me know how you'd like to proceed.",
+   "tool_calls": [
+    {
+     "tool_name": "get_data_usage",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_data_usage",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "plan_name": "Advantage 50GB",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 0,
+      "data_limit_gb": 50,
+      "total_data_available_gb": 50,
+      "cycle_end_date": "2025-03-05"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I'm not interested in buying more data right now. Can you check if there's a network issue, or help me get my signal back another way?"
+  },
+  {
+   "role": "agent",
+   "content": "Your device (Pixel 8 Pro) and SIM are both showing as active, and there are no suspensions or holds on your line. This suggests the issue is not with your account or device activation.\n\nSince you have no signal at all, and everything on your account appears normal, the most likely causes are:\n\n- A local network outage in your area\n- A hardware issue with your phone\u2019s antenna or SIM slot (less common if the device is otherwise working)\n\nAt this point, I recommend the following:\n\n1. Try your SIM card in another compatible phone, if possible. This will help determine if the issue is with your phone or the network/SIM.\n2. If you have Wi-Fi access, enable Wi-Fi calling (if supported) to make calls and send texts while we investigate further.\n\nI will also escalate this to a human agent who can check for local outages and provide more advanced troubleshooting or arrange a replacement SIM if needed.\n\nWould you like me to connect you to a human agent now for further assistance?",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "DEV-55210"
+     },
+     "params": {
+      "id": "DEV-55210"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "device_id": "DEV-55210",
+      "device_type": "phone",
+      "model": "Pixel 8 Pro",
+      "imei": "356938035643809",
+      "esim_capable": true,
+      "activation_status": "Active",
+      "activation_date": "2023-05-18",
+      "last_esim_transfer_date": "2023-05-18",
+      "entity_type": "device"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I don't have another phone to test the SIM in, but I do have Wi-Fi at home. Can you walk me through enabling Wi-Fi calling first?"
+  },
+  {
+   "role": "agent",
+   "content": "Absolutely! Here\u2019s how you can enable Wi-Fi Calling on your Pixel 8 Pro:\n\n1. **Open the Phone app** (the app you use to make calls).\n2. Tap the **three dots** (menu) in the top-right corner.\n3. Select **Settings**.\n4. Tap on **Calls** or **Calling accounts** (the exact wording may vary).\n5. Look for **Wi-Fi Calling** and tap on it.\n6. Toggle the switch to **turn on Wi-Fi Calling**.\n\nOnce enabled, your phone will use your Wi-Fi connection to make and receive calls and texts when cellular signal is unavailable.\n\nIf you don\u2019t see the Wi-Fi Calling option, it may be under:\n- Settings > Network & Internet > Mobile network > Advanced > Wi-Fi Calling\n\nLet me know if you run into any issues or if the option is missing. I\u2019m here to help!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked and Wi-Fi Calling is still off on my phone. I tried to turn it on, but it's not enabled yet. What should I do next?",
+   "tool_calls": [
+    {
+     "tool_name": "check_wifi_calling_status",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking. If you see the Wi-Fi Calling option but are unable to enable it, it could be due to one of the following reasons:\n\n1. Wi-Fi Calling may not be activated on your line from our end.\n2. There may be a temporary network or account issue preventing activation.\n3. Your device software may need an update (less common).\n\nLet me check your line settings to ensure Wi-Fi Calling is enabled on your account. If it is, and you still can\u2019t turn it on, I\u2019ll escalate this to a human agent for further assistance.\nI currently don\u2019t have the ability to directly enable Wi-Fi Calling from my side, but I can escalate your issue to a human agent who can check your account settings and ensure Wi-Fi Calling is activated for you.\n\nWould you like me to connect you to a human agent now for further help with enabling Wi-Fi Calling and resolving your signal issue?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Let's try enabling Wi-Fi Calling first before escalating. Can you guide me through any steps on my phone that might help get it working?"
+  },
+  {
+   "role": "agent",
+   "content": "Absolutely! Here are some steps you can try on your Pixel 8 Pro to get Wi-Fi Calling working:\n\n1. **Check for Software Updates:**\n   - Go to Settings > System > System update.\n   - Download and install any available updates, then restart your phone.\n\n2. **Restart Your Phone:**\n   - Even if you\u2019ve already done this, try restarting again after checking for updates.\n\n3. **Check Network Settings:**\n   - Go to Settings > Network & Internet > Mobile network.\n   - Make sure your carrier is selected and mobile data is on.\n\n4. **Reset Network Settings:**\n   - Go to Settings > System > Reset options > Reset Wi-Fi, mobile & Bluetooth.\n   - This will reset your network settings (you\u2019ll need to reconnect to Wi-Fi networks afterward).\n\n5. **Try Enabling Wi-Fi Calling Again:**\n   - Go to Settings > Network & Internet > Calls & SMS > Wi-Fi Calling.\n   - Try toggling it on.\n\n6. **Connect to a Strong Wi-Fi Network:**\n   - Make sure you\u2019re connected to a reliable Wi-Fi network with internet access.\n\n7. **SIM Card Re-insertion:**\n   - Power off your phone, remove the SIM card, wait 30 seconds, reinsert it, and power the phone back on.\n\nIf you try these steps and still can\u2019t enable Wi-Fi Calling, please let me know what happens at each step or if you see any error messages. If it still doesn\u2019t work, I can escalate your case to a human agent for further investigation.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked Wi-Fi Calling and it's still off. I tried to turn it on, but it won't enable\u2014there's no error message, it just stays off.",
+   "tool_calls": [
+    {
+     "tool_name": "check_wifi_calling_status",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "I've transferred your case to a human agent who can check your account settings and investigate the issue further. They will be able to assist you with enabling Wi-Fi Calling and resolving your signal problem.\n\nThank you for your patience\u2014someone from our support team will be with you shortly to help you get reconnected.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez (+1-617-555-0148) has no signal at all at home in Boston. Line and device are active, no suspensions. Customer has exceeded data limit but cannot make calls or send texts either. Wi-Fi Calling option is present but cannot be enabled (no error message, just stays off). Customer has tried all basic troubleshooting steps. Needs advanced support to check account settings, network issues, or provisioning problems."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez (+1-617-555-0148) has no signal at all at home in Boston. Line and device are active, no suspensions. Customer has exceeded data limit but cannot make calls or send texts either. Wi-Fi Calling option is present but cannot be enabled (no error message, just stays off). Customer has tried all basic troubleshooting steps. Needs advanced support to check account settings, network issues, or provisioning problems."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

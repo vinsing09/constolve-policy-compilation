@@ -1,0 +1,202 @@
+{
+ "case": "23:[graph:Understanding and Troublesho]transfer_to_human_agents",
+ "arm": "R4_suspension",
+ "repeat": 0,
+ "solved": false,
+ "actions_done": 0,
+ "actions_required": 2,
+ "turns": 5,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "get_bills_for_customer",
+  "resume_line"
+ ],
+ "criteria": [
+  {
+   "id": "diagnosed_before_handoff",
+   "ok": false,
+   "why": "tool 'check_status_bar' was never called"
+  },
+  {
+   "id": "s2_transfer_to_human_agents",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was never called by the assistant"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, nothing loads, and I can't send any picture messages. It's completely dead as far as the network goes."
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot your service issue. First, I\u2019ll need to identify your account to check for any line or account problems. Could you please provide one of the following:\n\n- The phone number associated with your account\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I\u2019ll begin diagnosing the issue.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Sure, my phone number is +1-617-555-0148. My name is Sofia Martinez."
+  },
+  {
+   "role": "agent",
+   "content": "Your line is currently suspended, which is why you have no service or ability to send picture messages. The suspension is due to your contract end date being in the past (November 30, 2024). Even though your bills are paid, I am not able to lift the suspension because the contract has expired.\n\nTo resolve this, you will need assistance from a human agent who can discuss your contract options or next steps. Would you like me to transfer you to a human agent for further help?",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_bills_for_customer",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "limit": 3
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "limit": 3
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "resume_line",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": true
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Suspended",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2024-11-30",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_bills_for_customer",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "count": 2,
+      "bills": [
+       {
+        "bill_id": "BILL-4501283-2025-02",
+        "customer_id": "CUS-4501283",
+        "period_start": "2025-01-06",
+        "period_end": "2025-02-05",
+        "issue_date": "2025-02-06",
+        "total_amount_due": 70.0,
+        "due_date": "2025-02-26",
+        "status": "Paid"
+       },
+       {
+        "bill_id": "BILL-4501283-2025-01",
+        "customer_id": "CUS-4501283",
+        "period_start": "2024-12-06",
+        "period_end": "2025-01-05",
+        "issue_date": "2025-01-06",
+        "total_amount_due": 65.0,
+        "due_date": "2025-01-26",
+        "status": "Paid"
+       }
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "resume_line",
+     "response": {},
+     "latency_ms": 0,
+     "error": "Line LN-8830142 cannot be resumed because its contract end date (2024-11-30) is in the past."
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

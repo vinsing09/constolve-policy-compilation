@@ -1,0 +1,318 @@
+{
+ "case": "19:[graph:Telecom Agent Policy]refuel_data",
+ "arm": "R5_escalate_unfixable",
+ "repeat": 0,
+ "solved": true,
+ "actions_done": 2,
+ "actions_required": 2,
+ "turns": 23,
+ "calls": [
+  "get_customer_by_phone",
+  "check_status_bar",
+  "toggle_wifi",
+  "reset_apn_settings",
+  "reboot_device",
+  "get_details_by_id",
+  "get_details_by_id",
+  "refuel_data",
+  "run_speed_test"
+ ],
+ "criteria": [
+  {
+   "id": "s0_refuel_data",
+   "ok": true,
+   "why": "tool 'refuel_data' was called with {'customer_id': 'CUS-4501283', 'line_id': 'LN-8830142'}"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was not called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone won't connect to the internet at all unless I'm on Wi-Fi, and I can't send picture messages either. Can you help?"
+  },
+  {
+   "role": "agent",
+   "content": "I can help you with this issue! To get started, I\u2019ll need to identify your account so I can check your line and plan details. Could you please provide one of the following:\n\n- Your phone number\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I\u2019ll guide you through troubleshooting your mobile data and picture messaging (MMS) issues.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148 and my name is Sofia Martinez."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you, Sofia. I have identified your account. To help resolve your issues with mobile data and picture messaging (MMS), I\u2019ll need to guide you through a few quick checks on your phone.\n\nAre you ready to proceed with some troubleshooting steps? If so, please let me know what type of phone you are using (Android or iPhone), or simply say \"ready\" and I\u2019ll guide you step by step.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I'm ready! I have an Android phone."
+  },
+  {
+   "role": "agent",
+   "content": "Great! Let\u2019s start by checking a few things on your Android phone to diagnose why mobile data and MMS (picture messaging) aren\u2019t working.\n\nFirst, please check your phone\u2019s status bar for the following:\n- Is Airplane Mode enabled?\n- Do you see any signal bars, or does it say \u201cNo Signal\u201d?\n- Is there a \u201c4G\u201d, \u201cLTE\u201d, \u201c5G\u201d, or similar icon (not just Wi-Fi)?\n- Is there a mobile data icon, or does it show \u201cData Disabled\u201d?\n\nPlease let me know what you see, or if you\u2019re unsure, I can guide you on how to check these details.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I see an 'Excellent' signal, '5G', and 'Data Enabled' in the status bar. I'm also connected to Wi-Fi (Chestnut-5G).",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the details. Since you have an excellent signal, 5G connectivity, and data is enabled, your phone should be able to use mobile data when Wi-Fi is off. However, since you mentioned that internet and MMS only work on Wi-Fi, let's try the following steps:\n\n1. Please turn off Wi-Fi on your phone temporarily so we can test your mobile data connection directly.\n2. After turning off Wi-Fi, try browsing a website or using an app that requires internet. Let me know if it works or if you get an error.\n\nOnce you\u2019ve done this, please let me know the result. This will help us determine if the issue is with mobile data itself or something else.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Wi-Fi is now off and my phone is disconnected from any wireless network. I tried loading a website but nothing loads\u2014it still says no internet connection.",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_wifi",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for testing that. Since your phone shows an excellent signal and 5G with data enabled, but you still can\u2019t access the internet on mobile data, let\u2019s check a few more things:\n\n1. We should verify your phone\u2019s APN (Access Point Name) settings, as incorrect APN settings are a common cause for both mobile data and MMS issues.\n2. After that, we\u2019ll check if your data plan has reached its limit.\n\nCould you please check your APN settings and let me know if you see anything unusual, or would you like step-by-step instructions on how to check them? If you prefer, I can guide you through resetting your APN settings to default, which often resolves these issues.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I can reset my APN settings if you want. Should I go ahead and do that now?"
+  },
+  {
+   "role": "agent",
+   "content": "Yes, please go ahead and reset your APN settings to the default values. This often resolves issues with both mobile data and MMS.\n\nAfter you reset the APN settings, you\u2019ll need to restart your phone for the changes to take effect. Please let me know once you\u2019ve completed both steps, and then we\u2019ll test your mobile data and MMS again.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I've reset the APN settings to default and rebooted my phone as you asked. What should I do next?",
+   "tool_calls": [
+    {
+     "tool_name": "reset_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Great job completing those steps! Now, please do the following:\n\n1. Make sure Wi-Fi is still turned off.\n2. Try to browse a website or use an app that requires internet to see if mobile data is working.\n3. Try sending a picture message (MMS) to someone.\n\nLet me know if either or both of these functions are now working, or if you still experience issues. This will help determine if the APN reset resolved the problem or if we need to continue troubleshooting.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "With Wi-Fi still off, I tried browsing a website and it still doesn't load. I also tried sending a picture message and it won't send either."
+  },
+  {
+   "role": "agent",
+   "content": "Your current plan, \"Advantage 50GB,\" has a monthly data limit of 50GB. You have already used 50.5GB this cycle, which means you have exceeded your plan\u2019s data allowance. When this happens, mobile data and MMS will stop working until you add more data or your billing cycle resets.\n\nYou have two options to restore your mobile data and MMS:\n1. Add more data (up to 2GB at $5 per GB).\n2. Wait until your billing cycle resets on March 5, 2025.\n\nWould you like to add more data now? If so, please let me know how many GB (up to 2GB) you\u2019d like to add, and I\u2019ll confirm the price before proceeding.",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "PLN-2002"
+     },
+     "params": {
+      "id": "PLN-2002"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "plan_id": "PLN-2002",
+      "name": "Advantage 50GB",
+      "data_limit_gb": 50,
+      "monthly_price": 65.0,
+      "data_refueling_price_per_gb": 5.0,
+      "entity_type": "plan"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I'd like to add 1GB of data for now. Please let me know the total cost and how to proceed."
+  },
+  {
+   "role": "agent",
+   "content": "Adding 1GB of data to your plan will cost $5.00. This additional data will be available immediately after processing.\n\nWould you like to proceed with adding 1GB of data for $5.00 to your line? Please confirm, and I will apply the data refuel for you.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Yes, please go ahead and add 1GB of data for $5.00."
+  },
+  {
+   "role": "agent",
+   "content": "1GB of data has been added to your line for $5.00, and the charge will appear on your current bill. You should now be able to use mobile data and send picture messages (MMS) again.\n\nPlease try browsing a website and sending a picture message with Wi-Fi turned off to confirm everything is working. Let me know if you have any further issues or if everything is now resolved!",
+   "tool_calls": [
+    {
+     "tool_name": "refuel_data",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142",
+      "gb_amount": 1
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142",
+      "gb_amount": 1
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "refuel_data",
+     "response": {
+      "result": "Refueled 1.0GB on line LN-8830142 (+1-617-555-0148). Charge of $5.00 added to bill BILL-4501283-2025-02."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I ran a speed test and the download speed and connection quality are both excellent on cellular 5G. Everything seems to be working perfectly now!",
+   "tool_calls": [
+    {
+     "tool_name": "run_speed_test",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "That\u2019s great to hear! Your mobile data and MMS are now working as expected, and your connection quality is excellent.\n\nIf you have any other questions or need further assistance in the future, feel free to reach out. Thank you for your patience, Sofia, and have a wonderful day!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

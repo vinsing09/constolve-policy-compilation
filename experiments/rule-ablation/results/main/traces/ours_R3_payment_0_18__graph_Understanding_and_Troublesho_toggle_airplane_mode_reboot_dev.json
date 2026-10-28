@@ -1,0 +1,255 @@
+{
+ "case": "18:[graph:Understanding and Troublesho]toggle_airplane_mode|reboot_device",
+ "arm": "R3_payment",
+ "repeat": 0,
+ "solved": false,
+ "actions_done": 2,
+ "actions_required": 3,
+ "turns": 15,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "check_status_bar",
+  "toggle_airplane_mode",
+  "check_sim_status",
+  "check_apn_settings",
+  "reboot_device",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_airplane_mode",
+   "ok": true,
+   "why": "tool 'toggle_airplane_mode' was called"
+  },
+  {
+   "id": "s1_reboot_device",
+   "ok": true,
+   "why": "tool 'reboot_device' was called"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has completely stopped connecting. I have no bars, no internet, and I can't send picture messages. Can you help me fix this?"
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot your phone\u2019s connectivity issues. To get started, I\u2019ll need to identify your account. Could you please provide either your phone number, customer ID, or your full name and date of birth? This will allow me to check your line status and assist you further.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your information. Your line is currently active, so let\u2019s start troubleshooting your phone\u2019s connectivity issues.\n\nCould you please check your phone\u2019s status bar and let me know if you see any of the following:\n- Airplane mode icon (\u2708\ufe0f)\n- No signal icon (\ud83d\udcf5)\n- Signal bars (even if they are empty or low)\n- Network type (e.g., 5G, 4G, LTE)\n\nThis will help me determine the next steps to resolve your issue. If you need instructions on how to check, let me know!",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I see the Airplane Mode icon and 'No Signal' in my status bar. There's also a 'Data Enabled' icon, but still no connection.",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "It looks like Airplane Mode is enabled on your phone, which disables all wireless connections\u2014including cellular service, internet, and picture messaging. To restore your connection, you\u2019ll need to turn Airplane Mode off.\n\nPlease turn off Airplane Mode on your device. Once you\u2019ve done that, check if your signal bars return and if you can access the internet or send messages. Let me know what you see after turning Airplane Mode off, and we\u2019ll continue troubleshooting if needed.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Airplane mode is now off, but I still don't see any signal bars or network type. There's still no connection.",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_airplane_mode",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for turning off Airplane Mode. Since you still don\u2019t see any signal bars or network type, the next step is to check your SIM card status. Sometimes, the SIM card may not be properly seated, which can cause a complete loss of service.\n\nCould you please check your phone\u2019s SIM card status? If you need instructions, let me know. Once you check, tell me if it says the SIM is active, missing, or locked. This will help us determine the next step.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked the SIM card status and it says the SIM is active.",
+   "tool_calls": [
+    {
+     "tool_name": "check_sim_status",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking. Since your SIM card is active but you still have no signal, the next step is to check your phone\u2019s APN (Access Point Name) settings. Incorrect APN settings can prevent your phone from connecting to the network.\n\nCould you please check your APN settings and let me know if they appear correct or if there\u2019s any error message? If you\u2019re unsure, just let me know what you see, especially regarding the APN name and MMSC URL. This will help us decide if a reset is needed.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My APN settings show the APN name as 'internet' and the MMSC URL as 'http://mms.carrier.com/mms'. It says the settings are correct.",
+   "tool_calls": [
+    {
+     "tool_name": "check_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming your APN settings\u2014they appear to be correct. Since your SIM is active, Airplane Mode is off, and your APN settings are correct, but you still have no signal, the next step is to reboot your device. Restarting your phone can often resolve temporary network connection issues.\n\nPlease reboot your device now. After it restarts, check if you have any signal bars or network connection. Let me know what you see after the reboot, and we\u2019ll continue troubleshooting if needed.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My device rebooted successfully, but I still don't see any signal bars or network type, and there's no internet connection.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez has no cellular service: no signal bars, no network type, no internet, and cannot send MMS. Airplane Mode is off, SIM is active, APN settings are correct, and device reboot did not resolve the issue. Needs advanced technical support."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez has no cellular service: no signal bars, no network type, no internet, and cannot send MMS. Airplane Mode is off, SIM is active, APN settings are correct, and device reboot did not resolve the issue. Needs advanced technical support."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

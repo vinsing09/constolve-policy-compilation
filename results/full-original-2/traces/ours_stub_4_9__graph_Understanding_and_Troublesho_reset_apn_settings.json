@@ -1,0 +1,251 @@
+{
+ "case": "9:[graph:Understanding and Troublesho]reset_apn_settings",
+ "arm": "stub",
+ "repeat": 4,
+ "solved": false,
+ "actions_done": 1,
+ "actions_required": 3,
+ "turns": 19,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "reboot_device",
+  "reseat_sim_card",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_reset_apn_settings",
+   "ok": false,
+   "why": "tool 'reset_apn_settings' was never called by the user"
+  },
+  {
+   "id": "s1_reboot_device",
+   "ok": true,
+   "why": "tool 'reboot_device' was called"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, nothing loads on the internet, and I can't send picture messages. It's completely dead for any connection."
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're experiencing this issue. To help you further, could you please provide your phone number or account details? This will allow me to check your line status and see if there are any network or account-related problems affecting your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your phone number. I checked your account, and your line status is currently \"Active,\" which means there are no suspensions or holds on your service from our side.\n\nSince your line appears active but you have no service at all (no bars, no internet, and can't send picture messages), here are a few quick troubleshooting steps you can try:\n\n1. Restart your phone.\n2. Make sure Airplane Mode is turned off.\n3. Remove and reinsert your SIM card.\n4. Check if you have service in a different location.\n\nIf you've already tried these steps or if the issue persists, please let me know. I can assist further, such as checking your device or SIM status, or escalating the issue if needed. Have you noticed any recent changes to your phone or account, or is this the first time this has happened?",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I haven't noticed any recent changes to my phone or account. This is the first time this has happened. What should I do next?"
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming. Since your account and line are active and you haven\u2019t made any recent changes, but you\u2019re experiencing a total loss of service, here are the next steps you should try:\n\n1. **Restart Your Phone:** Power it off completely, wait 30 seconds, then turn it back on.\n2. **Check for Outages:** Are others nearby (friends, family, neighbors) experiencing similar issues? If so, there may be a local network outage.\n3. **SIM Card Check:** Remove your SIM card, gently clean it, and reinsert it. Make sure it\u2019s seated properly.\n4. **Try Another Device:** If possible, insert your SIM card into another compatible phone. If the SIM works in another device, the issue may be with your phone. If it doesn\u2019t, the SIM or line may be the problem.\n5. **Network Settings Reset:** On your phone, you can reset network settings (this will erase saved Wi-Fi passwords and Bluetooth connections, but can resolve network issues).\n\nIf you\u2019ve tried these steps and still have no service, please let me know. I can check your device status or escalate the issue for further technical support. Would you like instructions for resetting your network settings, or have you already tried these steps?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I haven't tried any of those steps yet. Could you walk me through them one at a time, starting with restarting my phone?"
+  },
+  {
+   "role": "agent",
+   "content": "Absolutely! Let\u2019s start with the first step: restarting your phone.\n\nHere\u2019s how to restart your phone:\n\nFor most smartphones:\n1. Press and hold the power button (usually on the side or top of your phone) until you see the power menu appear.\n2. Tap \u201cRestart\u201d or \u201cReboot\u201d if that option is available. If not, tap \u201cPower Off\u201d or \u201cShut Down.\u201d\n3. Wait until the phone completely powers off.\n4. If you powered off, wait about 30 seconds, then press and hold the power button again until the phone turns back on.\n\nPlease go ahead and restart your phone now. Once it\u2019s back on, check if you have service (look for signal bars, try making a call, or use the internet).\n\nLet me know if this step helps or if you still have no service, and I\u2019ll guide you through the next step!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I restarted my phone successfully, but there's still no service\u2014no bars, nothing loads.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying that. Since restarting didn\u2019t resolve the issue, let\u2019s move to the next step: checking your SIM card.\n\nHere\u2019s how to check your SIM card:\n\n1. Power off your phone completely.\n2. Locate the SIM card tray (usually on the side of your phone; you may need a SIM ejector tool or a small paperclip).\n3. Gently eject the SIM card tray and remove the SIM card.\n4. Inspect the SIM card for any visible damage, dirt, or dust. If needed, gently wipe it with a soft, dry cloth.\n5. Reinsert the SIM card securely into the tray and slide it back into your phone.\n6. Power your phone back on.\n\nAfter your phone restarts, check if you have service (look for signal bars, try making a call, or use the internet).\n\nPlease let me know if this step helps or if you still have no service, and I\u2019ll guide you to the next step!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I removed and reinserted the SIM card, and my phone says the SIM status is active, but I still have no service\u2014no bars and nothing loads.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for following those steps. Since your SIM card is recognized as active but you still have no service, let\u2019s try the next troubleshooting step: testing your SIM card in another phone (if you have access to one).\n\nHere\u2019s what to do:\n\n1. Power off your current phone and remove the SIM card.\n2. Insert your SIM card into another compatible, unlocked phone.\n3. Power on the second phone and check if you get any signal bars or service.\n   - Try making a call or using mobile data if possible.\n\nThis test will help us determine if the issue is with your phone or with the SIM card/service itself.\n\n- If your SIM works in another phone, the problem is likely with your original device.\n- If your SIM does not work in another phone (still no service), the issue may be with the SIM card or your line.\n\nDo you have access to another phone to try this? If not, let me know, and I can guide you through resetting your network settings or escalate the issue for further support.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I don't have access to another phone right now. Can you walk me through resetting my network settings?"
+  },
+  {
+   "role": "agent",
+   "content": "Of course! Resetting your network settings can often resolve connectivity issues. Please note that this will erase saved Wi-Fi networks, Bluetooth pairings, and VPN settings, but it won\u2019t delete any personal data like photos or apps.\n\nHere\u2019s how to reset network settings:\n\nFor Android:\n1. Open the Settings app.\n2. Tap on System (or General Management, depending on your device).\n3. Tap on Reset or Reset Options.\n4. Select Reset Wi-Fi, mobile & Bluetooth or Network settings reset.\n5. Confirm by tapping Reset Settings and enter your PIN/password if prompted.\n\nFor iPhone:\n1. Open the Settings app.\n2. Tap on General.\n3. Scroll down and tap Transfer or Reset iPhone.\n4. Tap Reset.\n5. Select Reset Network Settings.\n6. Enter your passcode if prompted, then confirm.\n\nAfter the reset, your phone will restart. Once it\u2019s back on, check if you have service (look for signal bars, try making a call, or use the internet).\n\nPlease let me know once you\u2019ve completed this step and if there\u2019s any change in your service. If the issue persists, I\u2019ll assist you with the next steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I reset my network settings and my phone restarted, but I still have no service\u2014no bars and nothing will load."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying all those steps. Since your line is active, your SIM card is recognized, and resetting network settings didn\u2019t resolve the issue, this suggests a possible SIM card failure, device hardware issue, or a rare network-side problem.\n\nHere\u2019s what we can do next:\n\n1. I can escalate this issue to our technical support team for further investigation.\n2. Alternatively, if you\u2019d like, I can help you with a SIM card replacement process.\n\nWould you like me to escalate your case to a human agent for advanced troubleshooting, or would you prefer to start with a SIM replacement? Please let me know how you\u2019d like to proceed.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Please escalate my case to a human agent for advanced troubleshooting. I\u2019d like to get this resolved as soon as possible."
+  },
+  {
+   "role": "agent",
+   "content": "Your case is being escalated to a human agent for advanced troubleshooting. They will review all the steps you\u2019ve taken and assist you further to resolve your service issue as quickly as possible.\n\nThank you for your patience, and someone will be with you shortly to help you get reconnected.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez (+1-617-555-0148) has an active line and SIM, but is experiencing total loss of service (no bars, no data, no calls, no SMS/MMS). Restart, SIM re-seat, and network reset have not resolved the issue. Customer does not have access to another phone to test the SIM. Needs advanced troubleshooting."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez (+1-617-555-0148) has an active line and SIM, but is experiencing total loss of service (no bars, no data, no calls, no SMS/MMS). Restart, SIM re-seat, and network reset have not resolved the issue. Customer does not have access to another phone to test the SIM. Needs advanced troubleshooting."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

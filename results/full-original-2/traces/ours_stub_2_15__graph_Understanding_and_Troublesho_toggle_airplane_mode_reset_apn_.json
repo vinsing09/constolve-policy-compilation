@@ -1,0 +1,343 @@
+{
+ "case": "15:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data",
+ "arm": "stub",
+ "repeat": 2,
+ "solved": false,
+ "actions_done": 3,
+ "actions_required": 6,
+ "turns": 25,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "resume_line",
+  "reboot_device",
+  "get_details_by_id",
+  "reseat_sim_card",
+  "reboot_device",
+  "reboot_device"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_airplane_mode",
+   "ok": false,
+   "why": "tool 'toggle_airplane_mode' was never called by the user"
+  },
+  {
+   "id": "s1_reset_apn_settings",
+   "ok": false,
+   "why": "tool 'reset_apn_settings' was never called by the user"
+  },
+  {
+   "id": "s2_reboot_device",
+   "ok": true,
+   "why": "tool 'reboot_device' was called"
+  },
+  {
+   "id": "s3_resume_line",
+   "ok": true,
+   "why": "tool 'resume_line' was called with {'customer_id': 'CUS-4501283', 'line_id': 'LN-8830142'}"
+  },
+  {
+   "id": "s4_toggle_data",
+   "ok": false,
+   "why": "tool 'toggle_data' was never called by the user"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was not called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, nothing loads, and I can't send picture messages. Can you help?"
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're experiencing no service on your phone. Let's try to resolve this together. To assist you better, could you please provide your phone number or the name on your account? This will help me check your line status and see if there are any issues affecting your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Your phone line is currently suspended, which is why you have no service and cannot send messages or use data.\n\nWould you like me to resume your line now so you can regain service? If you know the reason for the suspension or if it was a mistake, please let me know.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Suspended",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "2025-02-25",
+      "suspension_reason": 1,
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Yes, please help me get my service back on as soon as possible."
+  },
+  {
+   "role": "agent",
+   "content": "Your line has been resumed and is now active. Your service should be restored shortly. If you still don't see any signal after a few minutes, please try restarting your phone.\n\nLet me know if you need any further assistance!",
+   "tool_calls": [
+    {
+     "tool_name": "resume_line",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "resume_line",
+     "response": {
+      "result": "Line LN-8830142 has been resumed and is now Active."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I restarted my phone after you resumed my line, but I still have no service\u2014no bars and nothing loads.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. Since your line is now active but you still have no service after restarting your phone, let's try a few more troubleshooting steps:\n\n1. Double-check that Airplane Mode is turned off.\n2. Remove your SIM card, wait 30 seconds, and reinsert it.\n3. Try your SIM card in another compatible phone (if available) to see if service returns.\n\nIf you still have no service after these steps, there may be an issue with your SIM card or device. Would you like me to check your device and SIM card status, or would you prefer to be connected to a human agent for further assistance?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I can check my device and SIM card status. Please let me know what to do first."
+  },
+  {
+   "role": "agent",
+   "content": "Here\u2019s what you can do to check your device and SIM card status:\n\n1. Remove your SIM card from your Pixel 8 Pro and inspect it for any visible damage or dirt. If it looks dirty, gently clean it with a soft cloth.\n2. Reinsert the SIM card securely and power your phone back on.\n3. If you have another phone available, try inserting your SIM card into that phone to see if you get service there. This helps determine if the issue is with your SIM card or your device.\n4. If your phone supports eSIM and you\u2019re using a physical SIM, make sure you\u2019re not accidentally set to use eSIM only.\n\nLet me know what you find after these steps, or if you need more detailed instructions for any of them!",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "DEV-55210"
+     },
+     "params": {
+      "id": "DEV-55210"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "device_id": "DEV-55210",
+      "device_type": "phone",
+      "model": "Pixel 8 Pro",
+      "imei": "356938035643809",
+      "esim_capable": true,
+      "activation_status": "Active",
+      "activation_date": "2023-05-18",
+      "last_esim_transfer_date": "2023-05-18",
+      "entity_type": "device"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I've already removed and reinserted the SIM card. The SIM status shows as active, but I still have no service\u2014no bars at all.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking and providing that information. Since your SIM status shows as active but you still have no service, and you\u2019ve already tried reinserting the SIM card and restarting your phone, here are a few more steps to try:\n\n1. **Network Selection:**  \n   Go to Settings > Network & Internet > Mobile Network > Network Operators. Try selecting your carrier manually instead of automatically.\n\n2. **APN Settings:**  \n   Check that your Access Point Name (APN) settings are correct for your carrier. Incorrect APN settings can prevent your phone from connecting to the network.\n\n3. **Test SIM in Another Device:**  \n   If possible, insert your SIM card into another compatible phone. If the SIM still doesn\u2019t work, the issue may be with the SIM card itself.\n\n4. **Check for Carrier or Outage Issues:**  \n   Sometimes, there may be a local network outage. Are others in your area experiencing similar issues?\n\nIf you\u2019ve tried all of the above and still have no service, it\u2019s possible your SIM card is faulty or there\u2019s a deeper technical issue. Would you like me to escalate this to a human agent for further investigation or help you with a SIM replacement?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Can you walk me through checking the APN settings first? I want to make sure they\u2019re correct before trying the other steps."
+  },
+  {
+   "role": "agent",
+   "content": "Absolutely! Here\u2019s how you can check and update your APN settings on your Pixel 8 Pro:\n\n1. **Open Settings:**  \n   Go to your phone\u2019s Settings app.\n\n2. **Go to Network & Internet:**  \n   Tap on \u201cNetwork & Internet.\u201d\n\n3. **Select Mobile Network:**  \n   Tap on \u201cMobile network.\u201d (If you have more than one SIM/eSIM, select the one you\u2019re using.)\n\n4. **Access Advanced Settings:**  \n   Scroll down and tap on \u201cAdvanced.\u201d\n\n5. **Tap on Access Point Names (APN):**  \n   You\u2019ll see a list of APNs. Tap on the one that\u2019s currently selected.\n\n6. **Check the APN Details:**  \n   Compare the APN settings (such as Name, APN, MMSC, MMS Proxy, MCC, MNC, Authentication type, APN type, etc.) with the official settings provided by your carrier.  \n   - If you\u2019re not sure what the correct APN settings are, let me know your carrier and I can provide them for you.\n\n7. **Edit or Add APN:**  \n   - If the settings are incorrect, tap the three dots (\u22ee) in the top right and select \u201cNew APN\u201d to add the correct settings, or edit the existing one.\n   - Save your changes and select the new or updated APN.\n\n8. **Restart Your Phone:**  \n   After updating, restart your phone to apply the changes.\n\nLet me know your carrier if you need the exact APN settings, or if you have any questions about these steps!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I\u2019ve found the APN settings menu, but I\u2019m not sure if the details are correct. My carrier is not listed. Can you provide the correct APN settings for me?"
+  },
+  {
+   "role": "agent",
+   "content": "I can help with that! To provide the correct APN settings, could you please confirm the name of your carrier? Once you provide the carrier name, I\u2019ll give you the exact APN details you should enter.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I\u2019m on AT&T."
+  },
+  {
+   "role": "agent",
+   "content": "Here are the correct APN settings for AT&T:\n\n- **Name:** AT&T\n- **APN:** phone\n- **MMSC:** http://mmsc.mobile.att.net\n- **MMS Proxy:** proxy.mobile.att.net\n- **MMS Port:** 80\n- **MCC:** 310\n- **MNC:** 410\n- **Authentication Type:** None\n- **APN Type:** default,mms,supl,hipri\n- **APN Protocol:** IPv4/IPv6\n- **Bearer:** Unspecified\n\nYou can leave any fields not listed above as their default or blank.\n\n**How to enter:**\n1. Tap the \u201c+\u201d or \u201cAdd\u201d button in the APN menu.\n2. Enter the above details exactly.\n3. Save the APN.\n4. Select the new APN as active.\n5. Restart your phone.\n\nLet me know once you\u2019ve updated these settings or if you need any help with the process!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I tried to enter the AT&T APN settings and save them, but it looks like it didn\u2019t go through correctly. After rebooting, I still have no service and no bars. What should I do next?",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying the APN update. Since you\u2019re still experiencing no service after entering the correct AT&T APN settings and rebooting, here are the next steps:\n\n1. **Manual Network Selection:**  \n   Go to Settings > Network & Internet > Mobile Network > Network Operators.  \n   - Turn off \u201cChoose automatically\u201d and let your phone search for available networks.  \n   - Try selecting \u201cAT&T\u201d manually if it appears.\n\n2. **Test SIM in Another Device:**  \n   If possible, insert your SIM card into another compatible phone.  \n   - If the SIM still doesn\u2019t work in another phone, the issue is likely with the SIM card itself.\n\n3. **Check for Physical SIM Issues:**  \n   - Inspect your SIM card for any visible damage or wear.\n   - If you have an eSIM, make sure your phone is set to use the correct SIM profile.\n\n4. **Check for Local Outages:**  \n   - If you know anyone else on AT&T nearby, ask if they\u2019re experiencing similar issues.\n\nIf you\u2019ve tried all of the above and still have no service, it\u2019s likely that your SIM card is faulty or there\u2019s a deeper technical issue with your account or device.\n\nWould you like me to:\n- Help you with a SIM replacement, or\n- Escalate your issue to a human agent for further troubleshooting?\n\nLet me know how you\u2019d like to proceed!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I tried selecting AT&T manually, but my phone says no networks available. I don\u2019t have another phone to test the SIM. What else can I try?"
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. Since your phone says \u201cno networks available\u201d when trying to select AT&T manually, and you don\u2019t have another phone to test the SIM, this suggests one of the following:\n\n- There may be a problem with your SIM card.\n- There could be a device hardware issue (such as the SIM slot or antenna).\n- There might be a deeper account or network provisioning issue.\n\nHere\u2019s what you can try next:\n\n1. **Double-check SIM Placement:**  \n   Remove the SIM card, inspect it for damage, and reinsert it carefully to ensure it\u2019s seated properly.\n\n2. **Try a Network Reset:**  \n   On your Pixel 8 Pro, go to Settings > System > Reset options > Reset Wi-Fi, mobile & Bluetooth.  \n   This will reset your network settings (you\u2019ll need to re-enter Wi-Fi passwords).\n\n3. **Check for Software Updates:**  \n   Go to Settings > System > System update and make sure your phone is up to date.\n\n4. **Test in Safe Mode:**  \n   - Press and hold the power button.\n   - Tap and hold \u201cPower off\u201d until you see the option to reboot to Safe Mode.\n   - Tap OK.\n   - See if you get service in Safe Mode (this disables third-party apps that might interfere).\n\nIf none of these steps restore service, it\u2019s likely your SIM card needs to be replaced or there\u2019s an account/network issue that requires further investigation.\n\nWould you like me to escalate your case to a human agent for advanced troubleshooting or help you with a SIM replacement?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My device rebooted successfully after the network reset, but I still have no service\u2014there are still no bars showing at the top of my phone and nothing loads.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying the network reset and letting me know the result. Since you still have no service after all these troubleshooting steps\u2014including SIM reinsertion, APN check, manual network selection, and a network reset\u2014it\u2019s likely that the issue is either with your SIM card, your device\u2019s hardware, or a deeper account/network provisioning problem.\n\nAt this point, further troubleshooting will require access to account tools or possibly a SIM replacement, which I can help initiate. Alternatively, a human agent can provide more advanced support and check for any backend issues.\n\nWould you like me to:\n\n- Escalate your case to a human agent for advanced troubleshooting, or\n- Help you start the process for a SIM replacement?\n\nPlease let me know how you\u2019d like to proceed, and I\u2019ll take care of it right away.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

@@ -1,0 +1,216 @@
+{
+ "case": "12:[graph:Understanding and Troublesho]transfer_to_human_agents",
+ "arm": "with_policy",
+ "repeat": 2,
+ "solved": false,
+ "actions_done": 1,
+ "actions_required": 2,
+ "turns": 13,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "check_status_bar",
+  "reseat_sim_card",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_check_sim_status",
+   "ok": false,
+   "why": "tool 'check_sim_status' was never called by the user"
+  },
+  {
+   "id": "s1_transfer_to_human_agents",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, no connection, and I can't get online or send picture messages. Can you help me get my service back?"
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot your service issue. First, I need to identify your account to check your line status and provide the right support.\n\nCould you please provide one of the following:\n- The phone number associated with your account\n- Your customer ID\n- Your full name and date of birth (in YYYY-MM-DD format)\n\nOnce I have this information, I\u2019ll begin diagnosing the problem.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148. What should I do next?"
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your phone number. Your line status is currently listed as Active, which means there are no suspensions on your account.\n\nTo help restore your service, I\u2019ll guide you through some troubleshooting steps. Please let me know if you are able to interact with your phone and follow instructions, so I can walk you through the process step by step. Are you ready to begin?",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Yes, I can follow instructions on my phone. What should I do first?"
+  },
+  {
+   "role": "agent",
+   "content": "Great! Let\u2019s start by checking your phone\u2019s status bar to see if there are any obvious issues like Airplane Mode being enabled or no signal detected.\n\nPlease use the option on your phone to check the status bar and let me know what icons or messages you see at the top of your screen (such as Airplane Mode, signal bars, network type like 4G/5G, or any other relevant icons). If you\u2019re not sure how to check, just let me know what you see at the top of your phone\u2019s screen.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I see a 'No Signal' icon at the top of my screen, but it also says 'Data Enabled' and 'Connected to Chestnut-5G.' However, there are no signal bars showing at all.",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the details. Seeing \u201cNo Signal\u201d with \u201cData Enabled\u201d and being connected to Wi-Fi (\u201cChestnut-5G\u201d) means your phone is not connecting to the cellular network, but Wi-Fi is working.\n\nLet\u2019s proceed step by step:\n\n1. Check if Airplane Mode is ON. If you see an airplane icon at the top, Airplane Mode is enabled, which blocks all cellular service. If it\u2019s ON, please turn it OFF.\n2. If Airplane Mode is OFF, the next step is to check your SIM card. Sometimes, reseating the SIM card can resolve \u201cNo Signal\u201d issues.\n\nPlease let me know:\n- Do you see an airplane icon at the top of your screen?\n- If not, are you comfortable removing and reinserting your SIM card, or would you like instructions on how to do this?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "There\u2019s no airplane icon showing at the top. I\u2019m comfortable removing and reinserting the SIM card\u2014please let me know what to do."
+  },
+  {
+   "role": "agent",
+   "content": "Great! Here\u2019s what to do to reseat your SIM card:\n\n1. Power off your phone completely.\n2. Locate the SIM card tray (usually on the side of your phone).\n3. Use the SIM ejector tool (or a small paperclip) to gently push into the small hole next to the tray until it pops out.\n4. Remove the SIM card from the tray, wait a few seconds, then carefully reinsert it back into the tray.\n5. Push the tray back into your phone.\n6. Power your phone back on.\n\nAfter your phone restarts, check if you now have signal bars or if the \u201cNo Signal\u201d message is gone. Let me know what you see after following these steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I reseated the SIM card, but my phone says the SIM is still locked. Reseating didn't fix the issue, and I still see 'No Signal' at the top.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer's phone shows 'No Signal' and SIM is locked after reseating. Needs assistance with SIM PIN/PUK unlock to restore service."
+     },
+     "params": {
+      "summary": "Customer's phone shows 'No Signal' and SIM is locked after reseating. Needs assistance with SIM PIN/PUK unlock to restore service."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

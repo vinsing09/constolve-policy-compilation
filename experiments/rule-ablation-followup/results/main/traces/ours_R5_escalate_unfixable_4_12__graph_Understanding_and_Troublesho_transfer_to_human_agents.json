@@ -1,0 +1,192 @@
+{
+ "case": "12:[graph:Understanding and Troublesho]transfer_to_human_agents",
+ "arm": "R5_escalate_unfixable",
+ "repeat": 4,
+ "solved": false,
+ "actions_done": 2,
+ "actions_required": 3,
+ "turns": 11,
+ "calls": [
+  "get_customer_by_phone",
+  "check_status_bar",
+  "get_details_by_id",
+  "check_sim_status"
+ ],
+ "criteria": [
+  {
+   "id": "diagnosed_before_handoff",
+   "ok": true,
+   "why": "tool 'check_sim_status' was called"
+  },
+  {
+   "id": "s1_get_data_usage",
+   "ok": true,
+   "why": "tool 'get_data_usage' was called"
+  },
+  {
+   "id": "s4_transfer_to_human_agents",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was never called by the assistant"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone can't connect to the internet at all. Nothing will load or send. Can you help me fix this?"
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot your phone\u2019s internet connection. To get started, I\u2019ll need to identify your account. Could you please provide one of the following:\n\n- The phone number associated with your account\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I can assist you further.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you, Sofia. To help fix your internet connection, I\u2019ll need to check a few things about your line and data usage. Could you please confirm if you are seeing any error messages or icons (like \u201cNo Service\u201d or \u201cAirplane Mode\u201d) on your phone\u2019s status bar? If not, I\u2019ll proceed with troubleshooting your mobile data connection.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I see a 'No Signal' icon in the status bar, but it also says 'Data Enabled' and 'Connected to Chestnut-5G'.",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the details. The 'No Signal' icon means your phone isn\u2019t connecting to the cellular network, which is required for mobile data to work\u2014even if Wi-Fi is enabled. Since you\u2019re also connected to Wi-Fi, your phone may only have internet access when on Wi-Fi, not through mobile data.\n\nLet\u2019s troubleshoot your cellular service first:\n\n1. Is Airplane Mode enabled? If so, please turn it off.\n2. If Airplane Mode is off, your SIM card may not be detected or there could be a network issue.\n\nCould you please check if Airplane Mode is on? If it\u2019s off, let me know, and I\u2019ll guide you through the next steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Airplane Mode is off. What should I do next?"
+  },
+  {
+   "role": "agent",
+   "content": "Since Airplane Mode is off and your line is active, the next step is to check if your SIM card is properly detected by your phone. Sometimes, a SIM card issue can cause the 'No Signal' icon.\n\nPlease check your SIM card status on your phone. If you\u2019re not sure how, let me know, and I can guide you through the process. If your phone reports that the SIM card is missing, locked, or not detected, please let me know what it says.",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "My phone says the SIM card is locked. What should I do?",
+   "tool_calls": [
+    {
+     "tool_name": "check_sim_status",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "A locked SIM card usually means it\u2019s asking for a PIN or PUK code due to too many incorrect attempts or security settings. Here\u2019s what you should do:\n\n1. If your phone is asking for a PIN, enter your SIM PIN if you know it.\n2. If you\u2019ve entered the wrong PIN too many times, your phone will ask for a PUK code. This code is usually found in the original SIM card packaging or provided by your carrier.\n\nIf you don\u2019t have your PUK code, you\u2019ll need to contact customer support to retrieve or reset it. For your security, I\u2019m unable to provide or reset PUK codes directly.\n\nWould you like me to transfer you to a human agent who can assist you with unlocking your SIM card?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

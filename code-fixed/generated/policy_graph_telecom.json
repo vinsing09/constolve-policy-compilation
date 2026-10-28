@@ -1,0 +1,216 @@
+[
+ {
+  "family": "Understanding and Troubleshooting Your Phone's Cellular Service",
+  "steps": [
+   {
+    "issue": "Airplane Mode is ON, disabling all wireless radios including cellular",
+    "check": "check_status_bar",
+    "fix": "toggle_airplane_mode",
+    "by": "user",
+    "requires": []
+   },
+   {
+    "issue": "SIM card status shows \"Missing\" (not inserted or improperly seated)",
+    "check": "check_sim_status",
+    "fix": "reseat_sim_card",
+    "by": "user",
+    "requires": []
+   },
+   {
+    "issue": "SIM card status shows \"Locked\" (due to incorrect PIN or PUK entries) - escalate to technical support for assistance with SIM security",
+    "check": "check_sim_status",
+    "fix": "transfer_to_human_agents",
+    "by": "agent",
+    "requires": []
+   },
+   {
+    "issue": "APN settings show \"Incorrect\"",
+    "check": "check_apn_settings",
+    "fix": "reset_apn_settings",
+    "by": "user",
+    "requires": []
+   },
+   {
+    "issue": "APN reset changes do not apply until the device is rebooted",
+    "check": null,
+    "fix": "reboot_device",
+    "by": "user",
+    "requires": [
+     "check_apn_settings",
+     "reset_apn_settings"
+    ]
+   },
+   {
+    "issue": "The line is suspended and the agent can lift the suspension (per general policy)",
+    "check": null,
+    "fix": "resume_line",
+    "by": "agent",
+    "requires": []
+   },
+   {
+    "issue": "The suspension cannot be lifted by the agent (e.g., due to contract end date, or other reasons not resolvable by the agent) - escalate to technical support",
+    "check": null,
+    "fix": "transfer_to_human_agents",
+    "by": "agent",
+    "requires": []
+   }
+  ],
+  "dropped": []
+ },
+ {
+  "family": "Understanding and Troubleshooting MMS (Picture/Video Messaging)",
+  "steps": [
+   {
+    "issue": "Connected to 2G Network \u2014 MMS requires at least a 3G network connection; 2G networks are generally not suitable",
+    "check": "check_network_status",
+    "fix": "set_network_mode_preference",
+    "by": "user",
+    "requires": []
+   },
+   {
+    "issue": "Incorrect APN Settings: MMSC URL is not set",
+    "check": "check_apn_settings",
+    "fix": "reset_apn_settings",
+    "by": "user",
+    "requires": []
+   },
+   {
+    "issue": "APN settings changes do not take effect until the device is restarted",
+    "check": null,
+    "fix": "reboot_device",
+    "by": "user",
+    "requires": [
+     "check_apn_settings",
+     "reset_apn_settings"
+    ]
+   },
+   {
+    "issue": "Wi-Fi Calling Configuration interfering with MMS \u2014 \"Wi-Fi Calling is ON\"",
+    "check": "check_wifi_calling_status",
+    "fix": "toggle_wifi_calling",
+    "by": "user",
+    "requires": []
+   },
+   {
+    "issue": "Messaging App Lacks Necessary Permissions \u2014 \"storage\" and \"sms\" permissions are not listed as granted",
+    "check": "check_app_permissions",
+    "fix": "grant_app_permission",
+    "by": "user",
+    "requires": []
+   }
+  ],
+  "dropped": []
+ },
+ {
+  "family": "Understanding and Troubleshooting Your Phone's Mobile Data",
+  "steps": [
+   {
+    "issue": "Airplane Mode is ON",
+    "check": null,
+    "fix": "toggle_airplane_mode",
+    "by": "user",
+    "requires": []
+   },
+   {
+    "issue": "Mobile Data is Turned OFF",
+    "check": "check_network_status",
+    "fix": "toggle_data",
+    "by": "user",
+    "requires": []
+   },
+   {
+    "issue": "Data Roaming is turned OFF on the phone.",
+    "check": null,
+    "fix": "toggle_roaming",
+    "by": "user",
+    "requires": []
+   },
+   {
+    "issue": "The line is not roaming enabled.",
+    "check": null,
+    "fix": "enable_roaming",
+    "by": "agent",
+    "requires": []
+   },
+   {
+    "issue": "Data Saver Mode is ON",
+    "check": "check_data_restriction_status",
+    "fix": "toggle_data_saver_mode",
+    "by": "user",
+    "requires": []
+   },
+   {
+    "issue": "VPN is ON and connected and performance level is Poor",
+    "check": "check_vpn_status",
+    "fix": "disconnect_vpn",
+    "by": "user",
+    "requires": []
+   },
+   {
+    "issue": "Data Plan Limits Reached",
+    "check": "get_data_usage",
+    "fix": "refuel_data",
+    "by": "agent",
+    "requires": []
+   },
+   {
+    "issue": "Bad Network Preferences (phone is set to 2G/3G)",
+    "check": "check_network_mode_preference",
+    "fix": "set_network_mode_preference",
+    "by": "user",
+    "requires": []
+   }
+  ],
+  "dropped": []
+ },
+ {
+  "family": "Telecom Agent Policy",
+  "steps": [
+   {
+    "issue": "bill is overdue",
+    "check": "get_bills_for_customer",
+    "fix": "send_payment_request",
+    "alternatives": [],
+    "by": "agent",
+    "requires": []
+   },
+   {
+    "issue": "user has not made the payment after receiving request",
+    "check": "check_payment_request",
+    "fix": "make_payment",
+    "alternatives": [],
+    "by": "agent",
+    "requires": [
+     "send_payment_request"
+    ]
+   },
+   {
+    "issue": "line is suspended because user has overdue bills",
+    "check": null,
+    "fix": "resume_line",
+    "alternatives": [],
+    "by": "agent",
+    "requires": [
+     "make_payment"
+    ]
+   },
+   {
+    "issue": "data usage exceeds the plan's data limit",
+    "check": "get_data_usage",
+    "fix": "refuel_data",
+    "alternatives": [],
+    "by": "agent",
+    "requires": []
+   },
+   {
+    "issue": "user is traveling outside their home network and line is not roaming enabled",
+    "check": null,
+    "fix": "enable_roaming",
+    "alternatives": [],
+    "by": "agent",
+    "requires": []
+   }
+  ],
+  "dropped": []
+ }
+]

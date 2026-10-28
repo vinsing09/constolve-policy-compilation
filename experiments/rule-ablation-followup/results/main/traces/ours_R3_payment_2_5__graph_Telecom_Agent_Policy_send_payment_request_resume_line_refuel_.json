@@ -1,0 +1,436 @@
+{
+ "case": "5:[graph:Telecom Agent Policy]send_payment_request|resume_line|refuel_data|enable_roaming",
+ "arm": "R3_payment",
+ "repeat": 2,
+ "solved": false,
+ "actions_done": 2,
+ "actions_required": 6,
+ "turns": 25,
+ "calls": [
+  "get_customer_by_phone",
+  "check_status_bar",
+  "check_sim_status",
+  "check_apn_settings",
+  "get_details_by_id",
+  "get_bills_for_customer",
+  "get_details_by_id",
+  "send_payment_request",
+  "check_payment_request",
+  "get_details_by_id"
+ ],
+ "criteria": [
+  {
+   "id": "s0_send_payment_request",
+   "ok": true,
+   "why": "tool 'send_payment_request' was called with {'customer_id': 'CUS-4501283', 'bill_id': 'BILL-4501283-2025-01'}"
+  },
+  {
+   "id": "s1_make_payment",
+   "ok": false,
+   "why": "tool 'make_payment' was never called by the user"
+  },
+  {
+   "id": "s2_resume_line",
+   "ok": false,
+   "why": "tool 'resume_line' was never called by the assistant"
+  },
+  {
+   "id": "s3_refuel_data",
+   "ok": false,
+   "why": "tool 'refuel_data' was never called by the assistant"
+  },
+  {
+   "id": "s4_enable_roaming",
+   "ok": false,
+   "why": "tool 'enable_roaming' was never called by the assistant"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was not called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone can\u2019t connect to the internet at all. Nothing is loading and I can\u2019t use mobile data."
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot your mobile data issue. First, I\u2019ll need to identify your account to check your line and plan details. Could you please provide one of the following:\n\n- Your phone number\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I\u2019ll guide you through the next steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you, Sofia. I have identified your account. To help you get your mobile data working again, I\u2019ll need to check a few things about your line and service.\n\nCould you please confirm:\n- Are you seeing any error messages or icons (like \u201cNo Service\u201d or \u201cAirplane Mode\u201d) on your phone\u2019s status bar?\n- Are you currently in your home country or traveling abroad?\n\nThis will help me guide you through the right troubleshooting steps.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I see a 'No Signal' icon on my status bar, but it also says 'Data Enabled' and 'Connected to Chestnut-5G'. My battery is at 87%.",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the details. Seeing a \u201cNo Signal\u201d icon means your phone isn\u2019t connecting to the cellular network, which is required for mobile data to work\u2014even if \u201cData Enabled\u201d is shown. Since you\u2019re also connected to Wi-Fi (\u201cChestnut-5G\u201d), your phone may still access the internet over Wi-Fi, but not via mobile data.\n\nLet\u2019s start troubleshooting your cellular service:\n\n1. Is Airplane Mode enabled on your phone? If so, please turn it off.\n2. If Airplane Mode is off, the next step is to check your SIM card status.\n\nCould you please let me know if Airplane Mode is on? If it\u2019s off, I\u2019ll guide you to check your SIM card status next.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Airplane Mode is off. What should I do next?"
+  },
+  {
+   "role": "agent",
+   "content": "Great, thanks for confirming Airplane Mode is off. The next step is to check your SIM card status, as issues with the SIM can cause a \u201cNo Signal\u201d problem.\n\nPlease check your SIM card status on your phone. Let me know what it says (for example: Active, Missing, or Locked). If you need instructions on how to check, let me know your phone type (Android or iPhone), and I can guide you through the steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My SIM status shows as 'Active'. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "check_sim_status",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking. Since your SIM status is \u201cActive,\u201d the SIM card itself is likely working fine. The next step is to check your network settings, specifically the Access Point Name (APN) settings, as incorrect APN settings can prevent your phone from connecting to the cellular network for data.\n\nPlease check your APN settings on your phone and let me know if anything looks incorrect or if there\u2019s no APN set. If you\u2019re unsure how to check, let me know your phone type (Android or iPhone), and I can provide step-by-step instructions.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My APN is set to 'fast.telecom.net' and the status says it's correct, with the MMSC URL showing as http://mms.telecom.net/mms/wapenc. What should I do next?",
+   "tool_calls": [
+    {
+     "tool_name": "check_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Your line is currently suspended, which is why you\u2019re seeing \u201cNo Signal\u201d and cannot use mobile data. This suspension is preventing your phone from connecting to the cellular network.\n\nWould you like me to check if the suspension can be lifted and help you restore your service? If so, I\u2019ll proceed with the next steps.",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Suspended",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 0,
+      "roaming_enabled": false,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "2025-02-25",
+      "suspension_reason": 1,
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Yes, please check if the suspension can be lifted and help me restore my service."
+  },
+  {
+   "role": "agent",
+   "content": "Your line was suspended because you have an overdue bill from the period 2024-12-06 to 2025-01-05, with an amount due of $65.00.\n\nWould you like to proceed with paying this overdue bill now? Once the payment is made, I can restore your service.",
+   "tool_calls": [
+    {
+     "tool_name": "get_bills_for_customer",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "limit": 3
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "limit": 3
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "BILL-4501283-2025-01"
+     },
+     "params": {
+      "id": "BILL-4501283-2025-01"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_bills_for_customer",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "count": 2,
+      "bills": [
+       {
+        "bill_id": "BILL-4501283-2025-02",
+        "customer_id": "CUS-4501283",
+        "period_start": "2025-01-06",
+        "period_end": "2025-02-05",
+        "issue_date": "2025-02-06",
+        "total_amount_due": 70.0,
+        "due_date": "2025-02-26",
+        "status": "Paid"
+       },
+       {
+        "bill_id": "BILL-4501283-2025-01",
+        "customer_id": "CUS-4501283",
+        "period_start": "2024-12-06",
+        "period_end": "2025-01-05",
+        "issue_date": "2025-01-06",
+        "total_amount_due": 65.0,
+        "due_date": "2025-01-26",
+        "status": "overdue"
+       }
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "bill_id": "BILL-4501283-2025-01",
+      "customer_id": "CUS-4501283",
+      "period_start": "2024-12-06",
+      "period_end": "2025-01-05",
+      "issue_date": "2025-01-06",
+      "total_amount_due": 65.0,
+      "due_date": "2025-01-26",
+      "status": "overdue",
+      "entity_type": "bill",
+      "line_items": [
+       {
+        "line_item_id": "BLI-90001",
+        "bill_id": "BILL-4501283-2025-01",
+        "description": "Advantage 50GB monthly plan charge - line +1-617-555-0148",
+        "amount": 65.0,
+        "item_type": "charge"
+       }
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Yes, I\u2019d like to pay the $65.00 overdue bill now. Please send me the payment request so I can complete it."
+  },
+  {
+   "role": "agent",
+   "content": "The payment request for your $65.00 overdue bill has been sent. Please complete the payment using your preferred method.\n\nOnce you\u2019ve made the payment, let me know, and I\u2019ll check the status and proceed to restore your service.",
+   "tool_calls": [
+    {
+     "tool_name": "send_payment_request",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "bill_id": "BILL-4501283-2025-01"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "bill_id": "BILL-4501283-2025-01"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "send_payment_request",
+     "response": {
+      "result": "Payment request for bill BILL-4501283-2025-01 (amount due $65.0) sent to Sofia Martinez. Bill status is now Awaiting Payment."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I've made the payment, but the status still shows as 'Pending'. What should I do next?",
+   "tool_calls": [
+    {
+     "tool_name": "check_payment_request",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Your payment is still being processed and the bill status is \u201cAwaiting Payment.\u201d Sometimes it may take a few minutes for the payment to be confirmed in the system.\n\nPlease wait a few moments and check again. Once the status updates to \u201cPaid,\u201d let me know and I will immediately restore your service. If the status does not update after a reasonable time, please inform me so I can assist further.",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "BILL-4501283-2025-01"
+     },
+     "params": {
+      "id": "BILL-4501283-2025-01"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "bill_id": "BILL-4501283-2025-01",
+      "customer_id": "CUS-4501283",
+      "period_start": "2024-12-06",
+      "period_end": "2025-01-05",
+      "issue_date": "2025-01-06",
+      "total_amount_due": 65.0,
+      "due_date": "2025-01-26",
+      "status": "Awaiting Payment",
+      "entity_type": "bill",
+      "line_items": [
+       {
+        "line_item_id": "BLI-90001",
+        "bill_id": "BILL-4501283-2025-01",
+        "description": "Advantage 50GB monthly plan charge - line +1-617-555-0148",
+        "amount": 65.0,
+        "item_type": "charge"
+       }
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Okay, I\u2019ll wait a few more minutes and check again. I\u2019ll let you know when the status updates to 'Paid'."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you, Sofia. Please let me know as soon as the bill status updates to \u201cPaid.\u201d Once it does, I\u2019ll proceed to restore your service right away.\n\nIf you have any questions or if the status doesn\u2019t update after some time, just let me know\u2014I\u2019m here to help!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "The bill status still hasn't updated to 'Paid'. Should I keep waiting or is there anything else I should do?"
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for your patience. Since the bill status is still not updated to \u201cPaid,\u201d it\u2019s possible there is a delay in payment processing, or there may be a technical issue.\n\nAt this point, I recommend waiting a little longer (up to 30 minutes is typical for most payment systems). If the status still does not update after that time, please let me know. I can then escalate the issue or transfer you to a human agent for further assistance if needed.\n\nWould you like to wait a bit longer, or would you prefer to be connected to a human agent now for immediate help?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I\u2019ll wait a bit longer and check again. If it still doesn\u2019t update after 30 minutes, I\u2019ll let you know. Thanks for your help."
+  },
+  {
+   "role": "agent",
+   "content": "You\u2019re welcome, Sofia! That sounds like a good plan. If the bill status updates to \u201cPaid,\u201d let me know and I\u2019ll restore your service right away. If it doesn\u2019t update after 30 minutes, just reach out and I\u2019ll assist you further or connect you to a human agent if needed.\n\nIf you have any other questions in the meantime, feel free to ask. I\u2019m here to help!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

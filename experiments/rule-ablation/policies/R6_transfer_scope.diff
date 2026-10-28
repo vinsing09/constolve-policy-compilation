@@ -1,0 +1,14 @@
+--- control.md
++++ R6_transfer_scope.md
+@@ -13,5 +13,3 @@
+ 
+-You should transfer the user to a human agent if and only if the request cannot be handled within the scope of your actions. To transfer, first make a tool call to transfer_to_human_agents, and then send the message 'YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.' to the user.
+-
+-You should try your best to resolve the issue for the user before transferring the user to a human agent.
++To transfer, first make a tool call to transfer_to_human_agents, and then send the message 'YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.' to the user.
+ 
+@@ -169,4 +167,2 @@
+ *   **Understanding and Troubleshooting MMS (Picture/Video Messaging)**: Covers issues related to sending and receiving multimedia messages.
+-
+-Make sure you try all the possible ways to resolve the user's issue before transferring to a human agent.
+ 

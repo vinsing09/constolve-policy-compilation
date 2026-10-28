@@ -1,0 +1,130 @@
+{
+ "case": "14:[graph:Understanding and Troublesho]toggle_airplane_mode",
+ "arm": "R3_payment",
+ "repeat": 0,
+ "solved": false,
+ "actions_done": 0,
+ "actions_required": 2,
+ "turns": 9,
+ "calls": [
+  "get_customer_by_phone",
+  "get_customer_by_name",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_airplane_mode",
+   "ok": false,
+   "why": "tool 'toggle_airplane_mode' was never called by the user"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, nothing loads, and I can't send picture messages. It's completely dead for the network."
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot your service issue. First, I\u2019ll need to verify your account to check for any line or account problems. Could you please provide one of the following:\n\n- Your phone number\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I\u2019ll begin diagnosing the issue.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148 and my name is Sofia Martinez."
+  },
+  {
+   "role": "agent",
+   "content": "It appears that I couldn't find a customer account associated with the phone number +1-617-555-0148. Could you please confirm the number, or provide your date of birth as well? This will help me locate your account using your name and date of birth.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+16175550148"
+     },
+     "params": {
+      "phone_number": "+16175550148"
+     },
+     "failed": true
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {},
+     "latency_ms": 0,
+     "error": "No customer found with phone number +16175550148"
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "The number is correct: +1-617-555-0148. My name is Sofia Martinez. My date of birth is March 14, 1992."
+  },
+  {
+   "role": "agent",
+   "content": "I still couldn't locate an account with the name Sofia Martinez and date of birth March 14, 1992, or with the phone number you provided. \n\nCould you double-check your details or provide any other information (such as a customer ID or an alternate phone number) that might help me find your account? This will allow me to assist you further with your service issue.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_name",
+     "arguments": {
+      "full_name": "Sofia Martinez",
+      "dob": "1992-03-14"
+     },
+     "params": {
+      "full_name": "Sofia Martinez",
+      "dob": "1992-03-14"
+     },
+     "failed": true
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_name",
+     "response": {},
+     "latency_ms": 0,
+     "error": "No customer found with name 'Sofia Martinez' and date of birth '1992-03-14'"
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I'm sorry, but I don't have another phone number or customer ID to provide. The details I gave are correct."
+  },
+  {
+   "role": "agent",
+   "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "User reports no service at all (no bars, nothing loads, can't send picture messages). Unable to locate account using provided phone number, name, and date of birth. User cannot provide alternate details."
+     },
+     "params": {
+      "summary": "User reports no service at all (no bars, nothing loads, can't send picture messages). Unable to locate account using provided phone number, name, and date of birth. User cannot provide alternate details."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

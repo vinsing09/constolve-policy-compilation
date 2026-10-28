@@ -1,0 +1,273 @@
+{
+ "case": "7:[graph:Understanding and Troublesho]toggle_airplane_mode",
+ "arm": "R5_escalate_unfixable",
+ "repeat": 0,
+ "solved": true,
+ "actions_done": 2,
+ "actions_required": 2,
+ "turns": 15,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "check_status_bar",
+  "toggle_airplane_mode",
+  "reseat_sim_card",
+  "reset_apn_settings",
+  "reboot_device",
+  "get_bills_for_customer"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_airplane_mode",
+   "ok": true,
+   "why": "tool 'toggle_airplane_mode' was called"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was not called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, nothing loads, and I can't send picture messages. It's completely dead as far as the network goes."
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot your phone\u2019s service issue. To get started, I\u2019ll need to identify your account. Could you please provide one of the following:\n\n- The phone number associated with your account\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I\u2019ll be able to assist you further.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your information. Your line status is currently active, so let's begin troubleshooting your phone's lack of service.\n\nTo help diagnose the issue, could you please check your phone\u2019s status bar and let me know if you see any of the following:\n\n- Airplane mode icon (\u2708\ufe0f)\n- \"No SIM\" or \"SIM error\" messages\n- Any signal bars at all (even if they are empty)\n- Any network type indicators (like 5G, 4G, LTE, etc.)\n\nIf you\u2019re able, please describe what you see at the top of your phone\u2019s screen. This will help me guide you through the next steps.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "At the top of my phone's screen, I see the Airplane Mode icon, a 'No Signal' icon, and 'Data Enabled.' There are no signal bars or network type indicators.",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "It looks like Airplane Mode is enabled on your phone, which disables all wireless connections\u2014including cellular service. This is why you have no signal and can\u2019t send messages.\n\nPlease turn off Airplane Mode on your device. After you do this, check if your signal bars or network type indicators (like 4G, LTE, or 5G) reappear at the top of your screen. Let me know what you see after turning off Airplane Mode, and if your service returns.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Airplane mode is now off, but there are still no signal bars or network type indicators. The phone still shows 'No Signal.'",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_airplane_mode",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for turning off Airplane Mode. Since you still have no signal, the next step is to check if your SIM card is being detected and working properly.\n\nPlease check your phone for any messages like \u201cNo SIM\u201d or \u201cSIM error.\u201d If you don\u2019t see any, let me know. If you do, please describe the message.\n\nIf there are no such messages, the next step is to reseat your SIM card. This means removing the SIM card from your phone and reinserting it. Would you like instructions on how to do this, or are you comfortable reseating the SIM card yourself?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I removed and reinserted the SIM card. My phone says the SIM status is active, but I still have no signal\u2014no bars or network type indicators at the top.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for reseating your SIM card and confirming its status is active. Since you still have no signal, the next step is to check your phone\u2019s network settings, specifically the Access Point Name (APN) settings, which are essential for connecting to the network.\n\nCould you please check your APN settings and let me know if they appear correct or if there are any error messages? If you\u2019re unsure, I can guide you through resetting your APN settings to default, which often resolves network connection issues. Would you like to proceed with resetting your APN settings?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Yes, please guide me through resetting my APN settings to default."
+  },
+  {
+   "role": "agent",
+   "content": "To reset your APN settings to default, please follow these steps:\n\n1. Go to your phone\u2019s Settings app.\n2. Find the section labeled \u201cNetwork & Internet\u201d or \u201cConnections.\u201d\n3. Tap on \u201cMobile Network\u201d or \u201cCellular Network.\u201d\n4. Select \u201cAccess Point Names\u201d or \u201cAPN.\u201d\n5. Look for an option to \u201cReset to default\u201d or \u201cReset settings\u201d and select it.\n\nAfter resetting your APN settings, you\u2019ll need to restart your phone for the changes to take effect. Please go ahead and reset your APN settings, then restart your device. Let me know once you\u2019ve completed these steps and if your service returns.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I've already reset my APN settings to default and restarted my phone. The device said the changes were applied, but I still have no signal\u2014no bars or network indicators, and nothing is loading.",
+   "tool_calls": [
+    {
+     "tool_name": "reset_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Your account has no overdue bills, and your line is active with no suspensions or contract issues. Since you\u2019ve already tried all standard troubleshooting steps (Airplane Mode, SIM card, APN reset, and reboot), and there are no account-related blocks, this may be a more complex technical issue.\n\nAt this point, I recommend escalating your case to a human agent for advanced troubleshooting. Would you like me to transfer you to a human agent for further assistance?",
+   "tool_calls": [
+    {
+     "tool_name": "get_bills_for_customer",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "limit": 3
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "limit": 3
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_bills_for_customer",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "count": 2,
+      "bills": [
+       {
+        "bill_id": "BILL-4501283-2025-02",
+        "customer_id": "CUS-4501283",
+        "period_start": "2025-01-06",
+        "period_end": "2025-02-05",
+        "issue_date": "2025-02-06",
+        "total_amount_due": 70.0,
+        "due_date": "2025-02-26",
+        "status": "Paid"
+       },
+       {
+        "bill_id": "BILL-4501283-2025-01",
+        "customer_id": "CUS-4501283",
+        "period_start": "2024-12-06",
+        "period_end": "2025-01-05",
+        "issue_date": "2025-01-06",
+        "total_amount_due": 65.0,
+        "due_date": "2025-01-26",
+        "status": "Paid"
+       }
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

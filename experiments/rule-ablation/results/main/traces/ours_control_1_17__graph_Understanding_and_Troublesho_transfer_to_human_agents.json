@@ -1,0 +1,201 @@
+{
+ "case": "17:[graph:Understanding and Troublesho]transfer_to_human_agents",
+ "arm": "control",
+ "repeat": 1,
+ "solved": true,
+ "actions_done": 3,
+ "actions_required": 3,
+ "turns": 9,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "check_status_bar",
+  "check_sim_status",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_check_sim_status",
+   "ok": true,
+   "why": "tool 'check_sim_status' was called"
+  },
+  {
+   "id": "s1_get_data_usage",
+   "ok": true,
+   "why": "tool 'get_data_usage' was called"
+  },
+  {
+   "id": "s2_transfer_to_human_agents",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no signal at all. Nothing loads, I can't get online, and picture messages won't go through. Can you help?"
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot your phone\u2019s signal and connectivity issues. To get started, I\u2019ll need to identify your account. Could you please provide one of the following:\n\n- The phone number associated with your account\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I can assist you further.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your information. Since your line is active, let\u2019s start troubleshooting your phone\u2019s signal and connectivity issues.\n\nTo proceed, could you please check your phone\u2019s status bar and let me know:\n- If you see an airplane icon (\u2708\ufe0f)\n- What the signal bars show (if any)\n- If you see any network type indicator (like 5G, 4G, LTE, etc.)\n\nThis will help me determine the next steps. If you need instructions on how to check, let me know!",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "My status bar says 'No Signal', but it also shows 'Data Enabled' and 'Connected to Chestnut-5G'. There aren't any signal bars, and I don't see an airplane icon.",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the details. Here\u2019s what your status bar indicates:\n- \u201cNo Signal\u201d and no signal bars: Your phone isn\u2019t connecting to the cellular network.\n- \u201cData Enabled\u201d: Mobile data is turned on, but it won\u2019t work without a cellular signal.\n- \u201cConnected to Chestnut-5G\u201d: You\u2019re connected to Wi-Fi, but this doesn\u2019t affect cellular service.\n- No airplane icon: Airplane mode is not enabled.\n\nLet\u2019s check your SIM card status next, as a SIM issue is a common cause for having no signal. Please check your SIM card status on your phone and let me know if it says:\n- Active\n- Missing\n- Locked (PIN or PUK required)\n\nIf you need instructions on how to check your SIM status, let me know!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My SIM status says 'Locked'.",
+   "tool_calls": [
+    {
+     "tool_name": "check_sim_status",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez has no cellular signal. SIM status is 'Locked' (PIN/PUK required). Needs assistance unlocking SIM card."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez has no cellular signal. SIM status is 'Locked' (PIN/PUK required). Needs assistance unlocking SIM card."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

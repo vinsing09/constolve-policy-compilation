@@ -1,0 +1,309 @@
+{
+ "case": "14:[graph:Understanding and Troublesho]toggle_airplane_mode",
+ "arm": "stub",
+ "repeat": 2,
+ "solved": false,
+ "actions_done": 1,
+ "actions_required": 2,
+ "turns": 27,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "reboot_device",
+  "reseat_sim_card",
+  "check_network_mode_preference",
+  "get_details_by_id"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_airplane_mode",
+   "ok": false,
+   "why": "tool 'toggle_airplane_mode' was never called by the user"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was not called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, nothing loads, and I can't send picture messages. It's completely dead as far as the network goes."
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're experiencing this issue. To help you further, could you please provide your phone number or account details? This will allow me to check your line status and see if there are any network or account-related problems affecting your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Sure, my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your phone number. I checked your account, and your line status is currently \"Active,\" which means there are no suspensions or holds on your service from our end.\n\nSince your line appears active but you have no service at all (no bars, nothing loads, and you can't send picture messages), here are a few troubleshooting steps you can try:\n\n1. Restart your phone.\n2. Make sure Airplane Mode is turned off.\n3. Remove and reinsert your SIM card.\n4. Check if you have service in different locations.\n\nIf you've already tried these steps or if the issue persists, please let me know. I can assist further, such as checking for network outages in your area or helping with a SIM replacement if needed. Have you noticed this issue just today, or has it been ongoing?",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "This issue started just today. I haven't tried any of those steps yet. Which one should I start with?"
+  },
+  {
+   "role": "agent",
+   "content": "Since the issue started today and you haven\u2019t tried any troubleshooting yet, here\u2019s the best order to follow:\n\n1. Restart your phone: This is the simplest and often resolves temporary network glitches.\n2. Check Airplane Mode: Make sure it\u2019s turned off. Sometimes it can be accidentally enabled.\n3. Remove and reinsert your SIM card: Power off your phone first, then carefully remove and reinsert the SIM card, and turn your phone back on.\n4. Try a different location: Move to another area to see if you get any signal.\n\nPlease start by restarting your phone. If that doesn\u2019t help, proceed with the next steps in order. Let me know after each step if anything changes, or if you need guidance on how to do any of these steps!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I restarted my phone, and it rebooted successfully, but there's still no service\u2014no bars and nothing is loading.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. Since restarting didn\u2019t resolve the issue, let\u2019s move to the next step:\n\nPlease check if Airplane Mode is turned on. Here\u2019s how:\n\n- On most phones, swipe down from the top of the screen to open the quick settings menu.\n- Look for the airplane icon. If it\u2019s highlighted or turned on, tap it to turn it off.\n- Wait a few seconds to see if your phone reconnects to the network.\n\nLet me know if Airplane Mode was on, and if turning it off restores your service. If it was already off, we\u2019ll proceed to the next step.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Airplane mode was already off. There's still no service."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking. Next, please try removing and reinserting your SIM card:\n\n1. Power off your phone completely.\n2. Locate your SIM card tray (usually on the side or under the back cover).\n3. Use the SIM ejector tool or a small paperclip to gently remove the SIM card.\n4. Wait a few seconds, then carefully reinsert the SIM card.\n5. Power your phone back on.\n\nAfter your phone restarts, check if you have service. Let me know if this step helps or if you still have no signal, and we\u2019ll continue troubleshooting.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I reseated the SIM card as you asked. The phone says the SIM status is active, but I still have no service\u2014no bars and nothing loads.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying those steps and letting me know the results. Since your SIM status is showing as active but you still have no service, this suggests the issue may be related to the network in your area, a SIM card malfunction, or a device issue.\n\nLet\u2019s try one more quick check:\n\n- Are you able to test your SIM card in another phone, if you have one available? This can help determine if the issue is with your SIM card or your device.\n\nMeanwhile, I can check for any known network outages in your area and review your line\u2019s technical status further. Could you please confirm your current location (city or ZIP code), or let me know if you\u2019ve noticed anyone else nearby having similar issues?\n\nIf you don\u2019t have another phone to test with, please let me know, and I can guide you on the next steps, such as arranging a SIM replacement if needed.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I'm at home in Boston. I don't have another phone to test the SIM card with. I haven't heard of anyone else nearby having the same issue."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the information. Since you\u2019re in Boston, haven\u2019t heard of others with the same issue, and your SIM status is active but you still have no service, it\u2019s possible your SIM card may be faulty or there could be a device-specific issue.\n\nHere\u2019s what I recommend next:\n\n1. Double-check that your phone is not set to \u201c2G only\u201d or \u201c3G only\u201d mode in your network settings. Make sure it\u2019s set to automatically select the network (LTE/4G/5G, if supported).\n2. If your phone has a \u201cNetwork Reset\u201d option (usually found in Settings > System > Reset options > Reset Wi-Fi, mobile & Bluetooth), try performing a network reset. This will not erase your personal data but will reset network settings.\n\nIf these steps don\u2019t resolve the issue, the next best step would be to replace your SIM card, as it may have become defective.\n\nWould you like assistance with arranging a SIM replacement, or would you prefer to try the network reset and settings check first? Let me know how you\u2019d like to proceed!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Let\u2019s try checking my network mode setting first. What do I need to do?"
+  },
+  {
+   "role": "agent",
+   "content": "Absolutely! Here\u2019s how you can check and adjust your network mode setting, depending on your phone type:\n\nFor Android:\n1. Open the Settings app.\n2. Tap on Connections or Network & Internet.\n3. Tap on Mobile Networks.\n4. Tap on Network Mode or Preferred Network Type.\n5. Make sure it\u2019s set to \u201cLTE/4G/5G (auto connect)\u201d or \u201cAutomatic.\u201d Avoid selecting \u201c2G only\u201d or \u201c3G only.\u201d\n\nFor iPhone:\n1. Open the Settings app.\n2. Tap on Cellular.\n3. Tap on Cellular Data Options.\n4. Tap on Voice & Data.\n5. Make sure \u201cLTE\u201d or \u201c5G Auto\u201d is selected (depending on your phone model).\n\nAfter making sure your phone is set to the highest available network mode, wait a few moments to see if your service returns.\n\nLet me know what you find, or if you need more specific instructions for your phone model!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My network mode is already set to 4G/5G preferred, so it looks like that's not the issue. Still no signal or service at all.",
+   "tool_calls": [
+    {
+     "tool_name": "check_network_mode_preference",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking your network mode. Since your settings are correct, your SIM status is active, and you\u2019ve already tried restarting and reseating the SIM card, it\u2019s likely that the issue is either with the SIM card itself or a deeper device/network problem.\n\nAt this point, the best next step is to arrange a SIM card replacement, as a faulty SIM can cause exactly the symptoms you\u2019re experiencing\u2014even if it appears \u201cactive\u201d in your phone.\n\nWould you like me to help you arrange a SIM replacement, or would you prefer to try a network settings reset on your device first? If you\u2019d like to proceed with a SIM replacement, I can provide instructions or help you start the process right away. Let me know how you\u2019d like to proceed!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Let\u2019s try the network settings reset first. Can you walk me through how to do that?"
+  },
+  {
+   "role": "agent",
+   "content": "Of course! Here\u2019s how to reset your network settings, depending on your device type. This process will reset your Wi-Fi, Bluetooth, and mobile network settings, but it won\u2019t delete your personal data (photos, apps, etc.).\n\nFor Android:\n1. Open the Settings app.\n2. Scroll down and tap on System (sometimes called General Management).\n3. Tap on Reset or Reset Options.\n4. Tap on Reset Wi-Fi, mobile & Bluetooth or Network Settings Reset.\n5. Confirm the reset and follow any on-screen instructions.\n6. Your phone will restart or briefly disconnect from networks.\n\nFor iPhone:\n1. Open the Settings app.\n2. Tap on General.\n3. Scroll down and tap on Transfer or Reset iPhone.\n4. Tap on Reset.\n5. Tap on Reset Network Settings.\n6. Enter your passcode if prompted, then confirm the reset.\n7. Your iPhone will restart.\n\nAfter your phone restarts, check if you have service. Let me know if this resolves the issue or if you still have no signal, and we\u2019ll proceed with the next steps if needed.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I reset my network settings and the phone restarted, but I still have no service\u2014no bars, nothing is loading."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying the network settings reset. Since you\u2019ve now:\n\n- Restarted your phone\n- Checked Airplane Mode\n- Reseated your SIM card\n- Verified your network mode is correct\n- Reset your network settings\n\n\u2014and you still have no service, it\u2019s very likely that your SIM card is faulty or there\u2019s a deeper technical issue with your line or device.\n\nThe next best step is to arrange a SIM card replacement. This usually resolves issues like yours when all troubleshooting steps have been exhausted.\n\nWould you like me to help you start the SIM replacement process, or would you prefer to visit a store directly? If you\u2019d like, I can also check your line\u2019s technical status one more time or escalate your case to a human agent for further investigation. Please let me know how you\u2019d like to proceed!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Please check my line\u2019s technical status one more time before I go for a SIM replacement."
+  },
+  {
+   "role": "agent",
+   "content": "I\u2019ve checked your line\u2019s technical status again, and here\u2019s what I see:\n\n- Your line status is \u201cActive\u201d (not suspended or pending).\n- There are no recent suspensions or holds.\n- Your plan and contract are current.\n- Roaming is enabled, and there are no restrictions on your account.\n- The last SIM replacement was in May 2023.\n\nFrom the system\u2019s perspective, everything appears normal with your line\u2014there are no blocks, suspensions, or technical flags that would explain the total loss of service.\n\nGiven this, the most likely cause is a faulty SIM card or a device hardware issue. The next step would be to replace your SIM card, as this is the most common solution when all other troubleshooting steps have failed and the account is in good standing.\n\nWould you like instructions on how to request a SIM replacement, or would you prefer to visit a store for immediate assistance? If you\u2019d like, I can also escalate your case to a human agent for further investigation. Let me know how you\u2019d like to proceed!",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I'd like to request a SIM replacement. Can you tell me how to do that online, or do I need to visit a store?"
+  },
+  {
+   "role": "agent",
+   "content": "You can usually request a SIM replacement either online or by visiting a store, depending on your provider\u2019s policies. Here\u2019s how it typically works:\n\n1. Online Request:\n   - Log in to your account on your provider\u2019s website or mobile app.\n   - Look for options like \u201cReplace SIM,\u201d \u201cOrder New SIM,\u201d or \u201cReport SIM Issue.\u201d\n   - Follow the prompts to request a replacement. You may need to verify your identity.\n   - The new SIM will be mailed to your address, and you\u2019ll receive instructions for activation.\n\n2. In-Store Replacement:\n   - Visit an authorized store or service center with a valid photo ID.\n   - Let the staff know you need a SIM replacement due to no service.\n   - They can provide and activate a new SIM for you on the spot.\n\nSince I don\u2019t have the ability to process SIM replacements directly, I recommend checking your provider\u2019s website or app for the online option first. If you don\u2019t see it or need the SIM urgently, visiting a store is the fastest way to get a replacement.\n\nWould you like help finding the nearest store, or do you need guidance on navigating your provider\u2019s website? Let me know how I can assist further!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

@@ -1,0 +1,405 @@
+{
+ "case": "5:[graph:Telecom Agent Policy]send_payment_request|resume_line|refuel_data|enable_roaming",
+ "arm": "R3_payment",
+ "repeat": 4,
+ "solved": false,
+ "actions_done": 1,
+ "actions_required": 6,
+ "turns": 25,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "get_bills_for_customer",
+  "resume_line",
+  "reboot_device",
+  "check_status_bar",
+  "toggle_wifi",
+  "check_apn_settings",
+  "toggle_airplane_mode",
+  "toggle_data",
+  "run_speed_test",
+  "reboot_device",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_send_payment_request",
+   "ok": false,
+   "why": "tool 'send_payment_request' was never called by the assistant"
+  },
+  {
+   "id": "s1_make_payment",
+   "ok": false,
+   "why": "tool 'make_payment' was never called by the user"
+  },
+  {
+   "id": "s2_resume_line",
+   "ok": true,
+   "why": "tool 'resume_line' was called with {'customer_id': 'CUS-4501283', 'line_id': 'LN-8830142'}"
+  },
+  {
+   "id": "s3_refuel_data",
+   "ok": false,
+   "why": "tool 'refuel_data' was never called by the assistant"
+  },
+  {
+   "id": "s4_enable_roaming",
+   "ok": false,
+   "why": "tool 'enable_roaming' was never called by the assistant"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone can\u2019t connect to the internet at all. Nothing is loading and I can\u2019t use mobile data."
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot your mobile data issue. First, I\u2019ll need to identify your account to check your line and plan details. Could you please provide one of the following:\n\n- Your phone number\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I\u2019ll guide you through the steps to resolve your connectivity problem.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Your line was suspended, which is why you couldn\u2019t use mobile data or connect to the internet. I have now resumed your line, and your service should be restored.\n\nPlease reboot your phone to regain connectivity. After restarting, try using your mobile data again. If you still experience issues, let me know and I\u2019ll help you further.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_bills_for_customer",
+     "arguments": {
+      "customer_id": "CUS-4501283"
+     },
+     "params": {
+      "customer_id": "CUS-4501283"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "resume_line",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Suspended",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 0,
+      "roaming_enabled": false,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "2025-02-25",
+      "suspension_reason": 1,
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_bills_for_customer",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "count": 2,
+      "bills": [
+       {
+        "bill_id": "BILL-4501283-2025-02",
+        "customer_id": "CUS-4501283",
+        "period_start": "2025-01-06",
+        "period_end": "2025-02-05",
+        "issue_date": "2025-02-06",
+        "total_amount_due": 70.0,
+        "due_date": "2025-02-26",
+        "status": "Paid"
+       },
+       {
+        "bill_id": "BILL-4501283-2025-01",
+        "customer_id": "CUS-4501283",
+        "period_start": "2024-12-06",
+        "period_end": "2025-01-05",
+        "issue_date": "2025-01-06",
+        "total_amount_due": 65.0,
+        "due_date": "2025-01-26",
+        "status": "overdue"
+       }
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "resume_line",
+     "response": {
+      "result": "Line LN-8830142 has been resumed and is now Active."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I\u2019ve rebooted my phone, but I still can\u2019t connect to the internet and nothing is loading. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for rebooting your phone. Since you still can\u2019t connect to the internet, let\u2019s go through some troubleshooting steps to identify the issue.\n\nCould you please check your phone\u2019s status bar and let me know:\n- Do you see any signal bars?\n- Is there an icon for mobile data (like 4G, LTE, or 5G)?\n- Is Airplane Mode enabled?\n\nIf you\u2019re not sure, I can guide you step-by-step to check these settings on your device. Would you like instructions on how to check your status bar and network status?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My status bar shows excellent signal, 5G, and data enabled. It also says connected to Chestnut-5G. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the details. Since your status bar shows excellent signal, 5G, and data enabled, but you\u2019re also connected to \u201cChestnut-5G\u201d (which appears to be a Wi-Fi network), let\u2019s check if the issue is with mobile data or Wi-Fi:\n\n1. Please turn off Wi-Fi on your phone so that only mobile data is used.\n2. After turning off Wi-Fi, try loading a website or app that requires internet.\n\nLet me know if you\u2019re able to connect to the internet using mobile data only, or if the issue persists. If it still doesn\u2019t work, I\u2019ll guide you through the next troubleshooting steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Wi-Fi is now off and my phone is disconnected from any wireless network, but I still can\u2019t access the internet or use any apps that need data.",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_wifi",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming. Since Wi-Fi is off and you still can\u2019t access the internet with mobile data, let\u2019s continue troubleshooting. Next, I\u2019d like to check your phone\u2019s mobile data settings and network configuration.\n\nCould you please check and let me know:\n- Is mobile data definitely enabled in your phone\u2019s settings?\n- Are you seeing any error messages or warning icons in the status bar?\n\nIf everything looks normal, the next step is to check your phone\u2019s APN (Access Point Name) settings, which are required for mobile data to work. Would you like instructions on how to check your APN settings, or would you prefer to reset them to default?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Mobile data is definitely enabled and there are no error messages or warning icons in the status bar. Please guide me on how to check my APN settings."
+  },
+  {
+   "role": "agent",
+   "content": "Great, let\u2019s check your APN (Access Point Name) settings, as incorrect APN settings are a common cause of mobile data issues.\n\nHere\u2019s how you can check your APN settings:\n\n1. Open your phone\u2019s Settings app.\n2. Tap on \u201cNetwork & Internet\u201d or \u201cConnections.\u201d\n3. Select \u201cMobile Network\u201d or \u201cCellular Networks.\u201d\n4. Tap on \u201cAccess Point Names\u201d or \u201cAPN.\u201d\n5. Look for the APN currently in use and note down the details, especially the APN name and MMSC URL.\n\nPlease let me know what you see for the APN name and MMSC URL, or if anything looks blank or unusual. If you\u2019re unsure, you can also choose to reset your APN settings to default, which often resolves these issues.\n\nWould you like to proceed with checking the details, or would you prefer to reset your APN settings to default?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked my APN settings. The APN name is 'fast.telecom.net' and the MMSC URL is 'http://mms.telecom.net/mms/wapenc'. It says the settings are correct.",
+   "tool_calls": [
+    {
+     "tool_name": "check_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking your APN settings and confirming that both the APN name and MMSC URL are set correctly.\n\nSince your APN settings appear correct, let\u2019s try the following additional troubleshooting steps:\n\n1. Toggle Airplane Mode ON for about 10 seconds, then turn it OFF. This can help reset your network connection.\n2. If that doesn\u2019t work, try toggling mobile data OFF and then ON again.\n3. If you still can\u2019t connect, please let me know so we can proceed with further troubleshooting, such as checking for data restrictions or running a speed test.\n\nWould you like step-by-step instructions for any of these actions, or can you try them now and let me know the result?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "After toggling Airplane Mode, it turned ON. When I toggled mobile data, it turned OFF. Should I turn them back off and on again, or try something else?",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_airplane_mode",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "toggle_data",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Yes, please do the following:\n\n1. Turn Airplane Mode OFF (so your phone can reconnect to the mobile network).\n2. Turn mobile data ON (so your phone can use cellular data).\n\nAfter both are set correctly (Airplane Mode OFF, mobile data ON), wait a few moments for your phone to reconnect. Then, try accessing the internet again.\n\nLet me know if you are able to connect, or if the issue persists. If it still doesn\u2019t work, we\u2019ll continue with the next troubleshooting steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Airplane Mode is now OFF and mobile data is ON. I waited, but I still can\u2019t access the internet\u2014nothing is loading."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming. Since the issue persists, let\u2019s check if there are any data restrictions or saver modes enabled on your phone, as these can block mobile data access.\n\nCould you please check if Data Saver mode is enabled on your device? If you\u2019re not sure how to check, I can guide you through the steps. Would you like instructions on how to check and disable Data Saver mode?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked and Data Saver mode is off. What should I try next?"
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking. Since Data Saver mode is off and you still can\u2019t access the internet, let\u2019s try running a speed test on your phone. This will help determine if your device is able to connect to the mobile network at all or if there\u2019s a deeper connectivity issue.\n\nWould you like instructions on how to run a speed test, or do you already have a speed test app installed? If you can run a speed test, please let me know the result (even if it says \u201cno connection\u201d or fails to start). If you need help, I can guide you through the process.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "The speed test says there is no connection and it couldn\u2019t reach the internet. What should I do next?",
+   "tool_calls": [
+    {
+     "tool_name": "run_speed_test",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for running the speed test. Since it reports \u201cno connection,\u201d even though your status bar shows excellent signal and mobile data is enabled, we\u2019ve ruled out most device-side issues.\n\nAt this point, the problem may be related to your account, line, or network provisioning. I\u2019ve already confirmed your line is active and your APN settings are correct.\n\nTo resolve this, I recommend you reboot your device one more time. If the issue persists after rebooting, it may require advanced technical support.\n\nPlease try rebooting your phone now. If you still cannot connect to the internet after the reboot, let me know and I will escalate your case to a human agent for further investigation.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I rebooted my phone as you asked, but I still can\u2019t connect to the internet. Nothing changed after the reboot.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.\n\nA specialist will assist you further with your mobile data connectivity issue.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez cannot connect to the internet via mobile data despite line being active, correct APN settings, excellent signal, and all standard troubleshooting steps (airplane mode, data toggle, data saver, speed test, reboot) completed. Needs advanced technical support."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez cannot connect to the internet via mobile data despite line being active, correct APN settings, excellent signal, and all standard troubleshooting steps (airplane mode, data toggle, data saver, speed test, reboot) completed. Needs advanced technical support."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

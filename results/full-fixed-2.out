@@ -1,0 +1,93 @@
+/home/vineet/Documents/my_projects/telecom-rerun/code-fixed/models.py:155: UserWarning: Field name "schema_json" in "AgentSchema" shadows an attribute in parent "BaseModel"
+  class AgentSchema(BaseModel):
+2026-10-20 16:43:01.182 | INFO     | tau2.utils.utils:<module>:28 - Using data directory from source: /home/vineet/Documents/my_projects/telecom-rerun/code-fixed/third_party/tau3-bench/data
+2026-10-20 16:43:01.238 | INFO     | tau2.utils.llm_utils:<module>:109 - LiteLLM: Cache is disabled
+2026-10-20 16:43:01.293 | DEBUG    | tau2.registry:<module>:281 - Registering default components...
+2026-10-20 16:43:01.298 | DEBUG    | tau2.registry:<module>:292 - Voice dependencies not installed, skipping voice user registration
+2026-10-20 16:43:01.299 | DEBUG    | tau2.registry:<module>:350 - Default components registered successfully. Registry info: {
+  "domains": [
+    "mock",
+    "airline",
+    "retail",
+    "telecom",
+    "telecom-workflow",
+    "banking_knowledge"
+  ],
+  "agents": [
+    "llm_agent",
+    "llm_agent_gt",
+    "llm_agent_solo",
+    "discrete_time_audio_native_agent"
+  ],
+  "users": [
+    "user_simulator",
+    "dummy_user"
+  ],
+  "task_sets": [
+    "mock",
+    "airline",
+    "retail",
+    "telecom_full",
+    "telecom_small",
+    "telecom",
+    "telecom-workflow",
+    "banking_knowledge"
+  ]
+}
+==============================================================================
+BENCHMARK — ours suite, telecom
+==============================================================================
+  cases 24 | repeats 5 | conversation cap 30
+  required actions per case: {2: 6, 3: 6, 4: 2, 5: 5, 6: 5}
+  traces -> logs/bench/
+
+------------------------------------------------------------------------------
+RESULT
+------------------------------------------------------------------------------
+  with_policy  solved fully  per run [50.0, 29.2, 45.8, 16.7, 33.3]  mean 35.0%
+               solved partly per run [81.9, 66.4, 77.7, 63.9, 69.2]  mean 71.8%
+               runs 120 | hit the conversation cap 0
+  stub         solved fully  per run [12.5, 8.3, 4.2, 0.0, 12.5]  mean 7.5%
+               solved partly per run [47.6, 48.2, 40.7, 36.2, 48.1]  mean 44.2%
+               runs 120 | hit the conversation cap 0
+
+  DIFFERENCE the rulebook makes:
+    solved fully   +27.5 points
+    solved partly  +27.7 points
+
+  errors: 0
+
+written: reports/bench_ours_telecom.json
+{
+ "expected": 240,
+ "trace_files": 240,
+ "report_rows": 240,
+ "report_errors": 0,
+ "conversations_with_no_criteria": 0,
+ "customer_errors": 0,
+ "conversations_with_customer_error": 0,
+ "customer_errors_visible_in_transcript": 0,
+ "model_calls": 6599,
+ "failed_calls": 0,
+ "sdk_retries": 0,
+ "calls_by_caller": {
+  "agent": 3083,
+  "customer": 3516
+ },
+ "requested_models": [
+  "gpt-4.1"
+ ],
+ "returned_models": [
+  "gpt-4.1-2025-04-14"
+ ],
+ "calls_missing_usage_or_cost": 0,
+ "customer_reply_shapes": {
+  "ok": 3516
+ },
+ "customer_response_formats": [
+  "{\"type\": \"json_object\"}"
+ ],
+ "cost_usd": 26.3597,
+ "problems": [],
+ "copy_unchanged": true
+}

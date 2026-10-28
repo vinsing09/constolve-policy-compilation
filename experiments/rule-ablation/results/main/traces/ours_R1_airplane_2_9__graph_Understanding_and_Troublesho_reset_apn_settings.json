@@ -1,0 +1,245 @@
+{
+ "case": "9:[graph:Understanding and Troublesho]reset_apn_settings",
+ "arm": "R1_airplane",
+ "repeat": 2,
+ "solved": false,
+ "actions_done": 2,
+ "actions_required": 3,
+ "turns": 15,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "check_status_bar",
+  "reseat_sim_card",
+  "reset_apn_settings",
+  "reboot_device",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_reset_apn_settings",
+   "ok": true,
+   "why": "tool 'reset_apn_settings' was called"
+  },
+  {
+   "id": "s1_reboot_device",
+   "ok": true,
+   "why": "tool 'reboot_device' was called"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone suddenly has no service at all\u2014no bars, nothing loads, and I can't send picture messages. Can you help?"
+  },
+  {
+   "role": "agent",
+   "content": "I can help you with this issue. To get started, I need to identify your account. Could you please provide one of the following:\n\n- The phone number associated with your account\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I can begin troubleshooting your service problem.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your information. Your line is currently active, so let's begin troubleshooting your service and picture messaging issues.\n\nTo help diagnose the problem, could you please check your phone's status bar and let me know what icons or messages you see at the top of your screen? Specifically, look for:\n\n- Airplane mode icon\n- Signal bars (or \"No Service\" message)\n- Network type (e.g., 5G, 4G, LTE)\n- Any other unusual icons\n\nThis will help me determine the next steps to restore your service.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "At the top of my screen, it shows 'No Signal', but I see the data icon is enabled and it says I'm connected to Chestnut-5G WiFi. My battery is at 87%.",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the details. Since your phone shows \"No Signal,\" this means it is not connecting to the cellular network, which explains why you have no service and cannot send picture messages (MMS).\n\nLet's go through some troubleshooting steps:\n\n1. Is Airplane Mode enabled? If you see an airplane icon, please turn Airplane Mode off.\n2. If Airplane Mode is off, the next step is to check your SIM card status. Please check if your phone displays any messages about the SIM card (such as \"No SIM,\" \"SIM Locked,\" or \"SIM Error\").\n\nCould you confirm if Airplane Mode is off and let me know if there are any SIM-related messages on your phone? If not, I will guide you through reseating your SIM card.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Airplane mode is off. I don't see any messages about the SIM card\u2014no errors or warnings."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming. Since Airplane Mode is off and there are no SIM card error messages, the next step is to reseat your SIM card. This can help resolve issues where the SIM card is not making proper contact.\n\nPlease follow these steps:\n1. Power off your phone.\n2. Remove the SIM card from its slot.\n3. Wait about 10 seconds, then reinsert the SIM card securely.\n4. Power your phone back on.\n\nAfter your phone restarts, check if you now have signal bars and if your service is restored. Let me know if this resolves the issue or if you still see \"No Signal.\"",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I removed and reinserted the SIM card as you asked. The SIM status shows as active, but I still see 'No Signal' and there are no signal bars at the top.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying that. Since the SIM card is active but you still see \"No Signal,\" the next step is to check your phone\u2019s network settings, specifically the Access Point Name (APN) settings, which are crucial for connecting to the cellular network.\n\nCould you please check your APN settings and let me know if anything looks incorrect or if the MMSC URL is missing? If you\u2019re unsure, I can guide you through resetting your APN settings to default, which often resolves network connection issues.\n\nWould you like to proceed with resetting your APN settings?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Yes, please guide me through resetting my APN settings."
+  },
+  {
+   "role": "agent",
+   "content": "Great! Here\u2019s how to reset your APN settings:\n\n1. Go to your phone\u2019s Settings app.\n2. Find and select \u201cNetwork & Internet\u201d or \u201cConnections.\u201d\n3. Tap on \u201cMobile Network\u201d or \u201cCellular Networks.\u201d\n4. Select \u201cAccess Point Names\u201d or \u201cAPN.\u201d\n5. Look for an option to \u201cReset to default\u201d or \u201cReset settings\u201d (usually found in the menu or three-dot icon at the top right).\n6. Confirm the reset if prompted.\n\nAfter resetting your APN settings, please restart your phone to apply the changes. Once your phone is back on, check if you have signal bars and if your service is restored.\n\nLet me know once you\u2019ve completed these steps and if there\u2019s any change in your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I've already reset my APN settings to default and restarted my phone. After doing that, I still see 'No Signal' and there are no signal bars at the top.",
+   "tool_calls": [
+    {
+     "tool_name": "reset_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez has no cellular service ('No Signal') despite line being active, SIM recognized, APN reset, and device restarted. Needs advanced technical support."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez has no cellular service ('No Signal') despite line being active, SIM recognized, APN reset, and device restarted. Needs advanced technical support."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

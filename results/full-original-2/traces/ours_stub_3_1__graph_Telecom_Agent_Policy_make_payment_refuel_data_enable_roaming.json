@@ -1,0 +1,233 @@
+{
+ "case": "1:[graph:Telecom Agent Policy]make_payment|refuel_data|enable_roaming",
+ "arm": "stub",
+ "repeat": 3,
+ "solved": false,
+ "actions_done": 1,
+ "actions_required": 6,
+ "turns": 25,
+ "calls": [
+  "get_customer_by_phone",
+  "get_customer_by_name",
+  "reboot_device",
+  "toggle_roaming",
+  "reseat_sim_card"
+ ],
+ "criteria": [
+  {
+   "id": "s0_send_payment_request",
+   "ok": false,
+   "why": "tool 'send_payment_request' was never called by the assistant"
+  },
+  {
+   "id": "s1_make_payment",
+   "ok": false,
+   "why": "tool 'make_payment' was never called by the user"
+  },
+  {
+   "id": "s2_resume_line",
+   "ok": false,
+   "why": "tool 'resume_line' was never called by the assistant"
+  },
+  {
+   "id": "s3_refuel_data",
+   "ok": false,
+   "why": "tool 'refuel_data' was never called by the assistant"
+  },
+  {
+   "id": "s4_enable_roaming",
+   "ok": false,
+   "why": "tool 'enable_roaming' was never called by the assistant"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was not called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no signal at all. Nothing loads, I can't use the internet, and picture messages won't send. Can you help?"
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're having trouble with your phone signal. Let's try to get this sorted out. To assist you better, could you please provide the following information:\n\n1. Your phone number (or the number associated with the line having issues).\n2. Have you recently traveled abroad or changed your location?\n3. Have you tried restarting your phone or checking if Airplane Mode is on?\n\nOnce I have your phone number, I can check your line status and see if there are any issues on our end.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My number is +1-617-555-0148. Yes, I am currently travelling outside my home network. I haven't checked Airplane Mode yet\u2014can you tell me how to look for that?"
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the information. It looks like I couldn't find your account using the phone number you provided. Could you please double-check the number, or provide your full name and date of birth so I can locate your account another way?\n\nIn the meantime, here\u2019s how to check Airplane Mode on most phones:\n\n- For iPhone: Swipe down from the top-right corner (or up from the bottom on older models) to open Control Center. If the airplane icon is orange, Airplane Mode is on\u2014tap it to turn it off.\n- For Android: Swipe down from the top of the screen to open Quick Settings. Look for the airplane icon\u2014if it\u2019s highlighted, tap it to turn it off.\n\nLet me know if you need more detailed steps for your specific phone model, and please provide your details so I can check your account and help with your signal issue.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+16175550148"
+     },
+     "params": {
+      "phone_number": "+16175550148"
+     },
+     "failed": true
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {},
+     "latency_ms": 0,
+     "error": "No customer found with phone number +16175550148"
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Thanks, I found the Airplane Mode icon and it was already off. My number is correct: +1-617-555-0148. My name is Sofia Martinez. Let me know what to do next."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming your number and providing your name. To help locate your account and assist you further, could you please provide your date of birth (in the format YYYY-MM-DD)? This will help me verify your account securely and check your line status, especially since you are traveling outside your home network.\n\nOnce I have your date of birth, I\u2019ll be able to investigate the issue and see if international roaming needs to be enabled or if there\u2019s another problem affecting your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My date of birth is 1990-03-12. What should I do next?"
+  },
+  {
+   "role": "agent",
+   "content": "It appears I still can't locate your account using your name, date of birth, or phone number. Let's double-check a few things to help resolve this:\n\n1. Is your phone number definitely with our service provider, or could it be with another carrier?\n2. Have you recently changed your name or account details with us?\n3. Are there any alternate spellings or middle names you might use on your account?\n\nIf you have any recent bills, emails, or account numbers from us, sharing one of those details could also help me find your account and assist you with your signal issue while traveling.\n\nLet me know if you have any of this information, and I\u2019ll do my best to help!",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_name",
+     "arguments": {
+      "full_name": "Sofia Martinez",
+      "dob": "1990-03-12"
+     },
+     "params": {
+      "full_name": "Sofia Martinez",
+      "dob": "1990-03-12"
+     },
+     "failed": true
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_name",
+     "response": {},
+     "latency_ms": 0,
+     "error": "No customer found with name 'Sofia Martinez' and date of birth '1990-03-12'"
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Yes, my number is definitely with your service and I haven't changed my name or account details. I don't have an account number handy right now, but my name is Sofia Martinez. Is there anything on my phone I can check to help troubleshoot?"
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming your details. While I continue to try to locate your account, here are some steps you can try on your phone to troubleshoot signal issues while traveling internationally:\n\n1. **Restart Your Phone:** Sometimes a simple restart can help your phone reconnect to available networks.\n2. **Network Selection:**\n   - Go to your phone\u2019s Settings.\n   - Tap on \u201cMobile Network\u201d or \u201cCellular Network.\u201d\n   - Look for \u201cNetwork Operators\u201d or \u201cCarrier.\u201d\n   - Select \u201cSearch Networks\u201d or \u201cManual\u201d and try connecting to a different available network.\n3. **Data Roaming:**\n   - In your phone\u2019s Settings, go to \u201cMobile Network\u201d or \u201cCellular Network.\u201d\n   - Make sure \u201cData Roaming\u201d is turned ON.\n4. **SIM Card:** Remove your SIM card, wait a few seconds, and reinsert it.\n5. **Check for Carrier Updates:** Sometimes, updating your carrier settings can help. On iPhone, go to Settings > General > About and wait for a prompt. On Android, check for updates in Settings > About Phone > System Updates.\n\nSince you\u2019re traveling, it\u2019s possible that international roaming is not enabled on your line. If you can provide any other detail (such as an alternate phone number or email associated with your account), I can try to locate your account and check your roaming status.\n\nLet me know if any of these steps help, or if you have more information for me to look up your account!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I can try those steps. Should I start by restarting my phone, or do you want me to check something else first?"
+  },
+  {
+   "role": "agent",
+   "content": "Restarting your phone is a great first step\u2014it\u2019s quick and often resolves temporary network issues. Here\u2019s what I recommend:\n\n1. Restart your phone and wait a minute after it powers back on.\n2. Check if you have any signal or if your services are restored.\n3. If there\u2019s still no signal, proceed to check if Data Roaming is enabled in your phone\u2019s settings.\n\nLet me know what happens after you restart your phone. If the issue persists, I\u2019ll guide you through the next troubleshooting steps!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I restarted my phone just now and it rebooted successfully, but I still have no signal. The phone still shows no bars and nothing is loading.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. Since restarting didn\u2019t resolve the issue, let\u2019s move to the next step:\n\nPlease check if Data Roaming is enabled on your phone. Here\u2019s how:\n\n**For iPhone:**\n1. Go to Settings.\n2. Tap Cellular (or Mobile Data).\n3. Tap Cellular Data Options.\n4. Make sure Data Roaming is turned ON.\n\n**For Android:**\n1. Go to Settings.\n2. Tap Network & Internet (or Connections).\n3. Tap Mobile Network.\n4. Make sure Data Roaming is turned ON.\n\nAfter enabling Data Roaming, wait a moment to see if your phone connects to a network. If it\u2019s already on, or if turning it on doesn\u2019t help, let me know. I\u2019ll guide you through manually selecting a network next, or continue working to locate your account to check your roaming status from our side.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I just checked and Data Roaming was actually off, so I turned it on. However, after switching it on, I still don't have any signal\u2014still no bars and nothing is loading.",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_roaming",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking and turning on Data Roaming. Since you still have no signal, let\u2019s try manually selecting a network. Sometimes, your phone won\u2019t automatically connect to a partner network when you\u2019re abroad.\n\nHere\u2019s how to manually select a network:\n\n**For iPhone:**\n1. Go to Settings.\n2. Tap Cellular (or Mobile Data).\n3. Tap Network Selection.\n4. Turn OFF \u201cAutomatic.\u201d\n5. Wait for your phone to search for available networks.\n6. When the list appears, try selecting one of the available networks (choose one at a time and wait to see if you get signal).\n\n**For Android:**\n1. Go to Settings.\n2. Tap Network & Internet (or Connections).\n3. Tap Mobile Network.\n4. Tap Network Operators.\n5. Turn OFF \u201cSelect Automatically.\u201d\n6. Wait for your phone to search for available networks.\n7. When the list appears, try selecting one of the available networks.\n\nIf you still don\u2019t get any signal after trying all available networks, please let me know. Also, if you have access to another phone or device, try inserting your SIM card there to see if it works\u2014this can help determine if the issue is with your phone or your line.\n\nMeanwhile, if you remember any other details (such as an alternate email or previous bill), please share them so I can continue trying to locate your account and check your roaming status from our side.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I tried selecting networks manually\u2014my phone found a few, but when I try to connect to any of them, it just says 'unable to connect' and still shows no bars. I don\u2019t have another phone handy to test the SIM. Is there something else I can try on my device?"
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying those steps. Since your phone detects networks but cannot connect to any of them, this often points to one of the following:\n\n- International roaming is not enabled on your account.\n- There is a restriction or suspension on your line.\n- There is an issue with your SIM card or account provisioning.\n\nAt this point, you\u2019ve done all the main troubleshooting steps on your device. The next step is for me to check your account and line status to see if international roaming is enabled or if there are any restrictions.\n\nHowever, I\u2019m still unable to locate your account with the information provided. If you have access to any of the following, it would help me assist you further:\n- An alternate phone number or email address associated with your account.\n- A recent bill or invoice number.\n- The exact name as it appears on your account (including any middle names or initials).\n\nIf you don\u2019t have any of these details right now, you may need to contact our customer support team directly by phone or chat when you have access to another device or internet connection. They can verify your identity and enable roaming or resolve any account issues.\n\nWould you like me to transfer you to a human agent for further assistance, or is there any other detail you can provide to help me locate your account?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I don\u2019t have any other details with me right now, but I\u2019m willing to try anything else you suggest on my phone. Is there a way to check if my SIM card is working properly from the device itself?"
+  },
+  {
+   "role": "agent",
+   "content": "You can try a few things on your phone to check if your SIM card is working properly, even without another device:\n\n1. **SIM Card Status Check:**\n   - Go to your phone\u2019s Settings.\n   - Look for \u201cAbout Phone\u201d or \u201cStatus.\u201d\n   - Find \u201cSIM Status\u201d or \u201cNetwork Status.\u201d\n   - Check if it says \u201cNo SIM,\u201d \u201cSIM not provisioned,\u201d or \u201cNo service.\u201d If it shows your carrier\u2019s name or a signal strength (even if it\u2019s zero bars), the SIM is at least being detected.\n\n2. **SIM Toolkit App:**\n   - Some phones have a \u201cSIM Toolkit\u201d app (sometimes called \u201cCarrier Services\u201d or similar). If you can open it, your SIM is being read by the phone.\n\n3. **Remove and Reinsert SIM:**\n   - Power off your phone.\n   - Remove the SIM card, wait 30 seconds, and reinsert it carefully.\n   - Power your phone back on and see if anything changes.\n\n4. **Check for Error Messages:**\n   - When you restart your phone, do you see any error messages like \u201cSIM card not detected,\u201d \u201cNo SIM,\u201d or \u201cInvalid SIM\u201d?\n\nIf your phone says \u201cNo SIM\u201d or \u201cSIM not provisioned,\u201d it could mean the SIM is damaged or not activated. If it recognizes the SIM but still can\u2019t connect to any network, it\u2019s likely an account or roaming issue.\n\nLet me know what you find in your SIM status or if you see any error messages. This will help narrow down the problem further!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked my SIM status in the settings. It says 'No service' but it does show my carrier\u2019s name. I don\u2019t see any error messages like 'No SIM' or 'SIM not provisioned.' Should I try removing and reinserting the SIM next?"
+  },
+  {
+   "role": "agent",
+   "content": "Yes, since your phone recognizes the SIM and shows your carrier\u2019s name but says \u201cNo service,\u201d it\u2019s a good idea to try removing and reinserting the SIM card. This can help resolve any temporary connection issues between the SIM and your phone.\n\nHere\u2019s what to do:\n\n1. Power off your phone completely.\n2. Remove the SIM card carefully.\n3. Wait about 30 seconds.\n4. Reinsert the SIM card, making sure it\u2019s seated properly.\n5. Power your phone back on.\n\nAfter your phone restarts, check if you have any signal or if the status changes. If you still see \u201cNo service,\u201d let me know. This will help confirm whether the issue is with the SIM card itself or likely related to your account/roaming settings.\n\nIf the problem persists after this step, it\u2019s very likely that international roaming is not enabled or there\u2019s a restriction on your line\u2014which I would need to check from your account. If you\u2019re able to provide any additional account details later, I can assist further. For now, please try reinserting the SIM and let me know what happens!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I removed and reinserted the SIM card as you suggested. The SIM status is active, but I still have no signal\u2014my phone still says 'No service' and nothing loads.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying all those steps. Since your SIM is recognized (status is active and your carrier\u2019s name appears), but you still have \u201cNo service\u201d and can\u2019t connect to any network\u2014even after enabling data roaming and manually searching for networks\u2014the most likely cause is that international roaming is not enabled on your account, or there is a restriction on your line.\n\nUnfortunately, without being able to locate your account, I\u2019m unable to check or enable roaming from my side right now.\n\n**Here\u2019s what you can do next:**\n- When you have access to another device or internet connection, please contact our customer support team directly. They can verify your identity and enable international roaming or resolve any account issues.\n- If you later find a bill, account number, or alternate contact detail, you can provide it here and I\u2019ll be able to assist further.\n\nYou\u2019ve done all the troubleshooting steps possible from your device. The issue is almost certainly related to your account settings or roaming permissions.\n\nWould you like me to transfer you to a human agent for further assistance, or is there anything else you\u2019d like to try?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

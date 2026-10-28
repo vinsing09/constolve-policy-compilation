@@ -1,0 +1,8 @@
+.env
+*.lock
+__pycache__/
+*.pyc
+.venv/
+code-fixed/logs/bench/
+code-fixed/reports/*.json
+code-original-run/

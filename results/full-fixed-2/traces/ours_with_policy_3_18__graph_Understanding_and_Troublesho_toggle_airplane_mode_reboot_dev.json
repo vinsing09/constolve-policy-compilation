@@ -1,0 +1,335 @@
+{
+ "case": "18:[graph:Understanding and Troublesho]toggle_airplane_mode|reboot_device",
+ "arm": "with_policy",
+ "repeat": 3,
+ "solved": false,
+ "actions_done": 2,
+ "actions_required": 3,
+ "turns": 19,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "check_status_bar",
+  "toggle_airplane_mode",
+  "check_sim_status",
+  "check_apn_settings",
+  "get_data_usage",
+  "get_details_by_id",
+  "reboot_device",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_airplane_mode",
+   "ok": true,
+   "why": "tool 'toggle_airplane_mode' was called"
+  },
+  {
+   "id": "s1_reboot_device",
+   "ok": true,
+   "why": "tool 'reboot_device' was called"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has totally stopped connecting\u2014no signal bars, no internet, and I can\u2019t send picture messages. Can you help?"
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot this issue. To get started, I\u2019ll need to identify your account. Could you please provide either your phone number, customer ID, or your full name and date of birth? This will allow me to check your line status and assist you further.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Sure, my name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your information. Your line is currently active, so let\u2019s start troubleshooting your phone\u2019s connectivity issues.\n\nTo proceed, I\u2019ll need you to perform a few quick checks on your device. Are you able to access your phone\u2019s status bar and check for the following:\n\n- Is Airplane Mode enabled?\n- Are there any signal bars showing?\n- Is mobile data enabled?\n- Do you see any unusual icons (like a SIM card with an X or a warning)?\n\nIf you\u2019re not sure, I can guide you step-by-step through some diagnostic actions on your phone. Would you like to proceed with these checks?",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I see that Airplane Mode is on, there are no signal bars, but data is enabled. What should I do next?",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Airplane Mode disables all wireless connections, including cellular service, which is why you have no signal bars and cannot connect to the network.\n\nPlease turn off Airplane Mode on your phone. Once it is off, check if your signal bars return and if you can access the internet and send picture messages. Let me know what you see after turning off Airplane Mode, and we\u2019ll continue troubleshooting if needed.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Airplane mode is now off, but I still don\u2019t see any signal bars and I can\u2019t access the internet or send picture messages.",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_airplane_mode",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for updating me. Since Airplane Mode is off but you still have no signal, the next step is to check your SIM card status. Please check if your phone is showing any messages about the SIM card (such as \u201cNo SIM,\u201d \u201cSIM not detected,\u201d or \u201cSIM locked\u201d). \n\nIf you\u2019re not sure, I can guide you through reseating your SIM card, which often resolves this issue. Would you like instructions on how to do this, or can you check your SIM card status and let me know what it says?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked the SIM card status and it says the SIM is active. There are still no signal bars and no internet.",
+   "tool_calls": [
+    {
+     "tool_name": "check_sim_status",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking the SIM card status. Since your SIM is active but you still have no signal or internet, the next step is to check your phone\u2019s network settings, specifically the APN (Access Point Name) settings, which are essential for connecting to the network.\n\nCould you please check your APN settings and let me know if anything looks incorrect or if there\u2019s no MMSC URL listed? If you\u2019re unsure, I can guide you through resetting your APN settings to default, which often resolves connectivity issues. Would you like to proceed with resetting your APN settings?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My APN settings look correct and there is an MMSC URL listed.",
+   "tool_calls": [
+    {
+     "tool_name": "check_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Your SIM card is active, your APN settings look correct, and you have not exceeded your data limit. The next step is to check your phone\u2019s network mode settings, as being set to an older network type (like 2G/3G) can cause a total loss of service.\n\nCould you please check your phone\u2019s network mode preference and let me know if it\u2019s set to 4G, 5G, or something else? If you\u2019re unsure how to check this, I can guide you through updating your network mode to ensure your phone is set to use the latest available networks. Would you like instructions on how to do this?",
+   "tool_calls": [
+    {
+     "tool_name": "get_data_usage",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "DEV-55210"
+     },
+     "params": {
+      "id": "DEV-55210"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_data_usage",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "plan_name": "Advantage 50GB",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "data_limit_gb": 50,
+      "total_data_available_gb": 50,
+      "cycle_end_date": "2025-03-05"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "device_id": "DEV-55210",
+      "device_type": "phone",
+      "model": "Pixel 8 Pro",
+      "imei": "356938035643809",
+      "esim_capable": true,
+      "activation_status": "Active",
+      "activation_date": "2023-05-18",
+      "last_esim_transfer_date": "2023-05-18",
+      "entity_type": "device"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "My phone is currently set to 5G for the network mode preference."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming your network mode is set to 5G. Since your SIM is active, APN settings are correct, you have not exceeded your data limit, and your device is set to the correct network mode, but you still have no signal, the next step is to try rebooting your device. This can often resolve temporary network connection issues.\n\nPlease restart your phone and let me know if the signal bars return or if you are able to access the internet and send picture messages after the reboot. If the issue persists, we will continue troubleshooting.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone rebooted successfully, but there are still no signal bars and I can\u2019t access the internet or send picture messages.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez has no signal bars, no internet, and cannot send picture messages. SIM is active, APN settings are correct, data limit not exceeded, device is set to 5G, and reboot did not resolve the issue. Further technical investigation is required."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez has no signal bars, no internet, and cannot send picture messages. SIM is active, APN settings are correct, data limit not exceeded, device is set to 5G, and reboot did not resolve the issue. Further technical investigation is required."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Okay, I\u2019ll wait for the human agent. Please let me know if there\u2019s anything else I need to do while I\u2019m on hold."
+  },
+  {
+   "role": "agent",
+   "content": "You don\u2019t need to do anything else at this moment. Please stay by your phone and keep it powered on. The human agent will assist you further as soon as possible. Thank you for your patience!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

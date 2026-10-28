@@ -1,0 +1,343 @@
+{
+ "case": "20:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_roaming",
+ "arm": "stub",
+ "repeat": 1,
+ "solved": false,
+ "actions_done": 3,
+ "actions_required": 6,
+ "turns": 21,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "resume_line",
+  "reboot_device",
+  "get_details_by_id",
+  "get_details_by_id",
+  "reseat_sim_card"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_airplane_mode",
+   "ok": false,
+   "why": "tool 'toggle_airplane_mode' was never called by the user"
+  },
+  {
+   "id": "s1_reset_apn_settings",
+   "ok": false,
+   "why": "tool 'reset_apn_settings' was never called by the user"
+  },
+  {
+   "id": "s2_reboot_device",
+   "ok": true,
+   "why": "tool 'reboot_device' was called"
+  },
+  {
+   "id": "s3_resume_line",
+   "ok": true,
+   "why": "tool 'resume_line' was called with {'customer_id': 'CUS-4501283', 'line_id': 'LN-8830142'}"
+  },
+  {
+   "id": "s4_toggle_roaming",
+   "ok": false,
+   "why": "tool 'toggle_roaming' was never called by the user"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was not called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, nothing loads, and I can't send picture messages. It's completely dead as far as the network goes."
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're experiencing this issue. To help you further, could you please provide your phone number or account details? This will allow me to check your line status and see if there are any network or account-related problems affecting your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Your phone line is currently suspended, which is why you have no service and cannot send or receive messages or calls.\n\nWould you like me to resume your line so your service can be restored? If you know the reason for the suspension or if it was done in error, please let me know.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Suspended",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "2025-02-25",
+      "suspension_reason": 1,
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I wasn't aware my line was suspended. Yes, please resume my line so I can get service back."
+  },
+  {
+   "role": "agent",
+   "content": "Your line has been resumed and is now active. You should regain service shortly\u2014please restart your phone if you don\u2019t see bars or network connectivity within a few minutes.\n\nIf you continue to have issues or have questions about why your line was suspended, let me know and I can investigate further.",
+   "tool_calls": [
+    {
+     "tool_name": "resume_line",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "resume_line",
+     "response": {
+      "result": "Line LN-8830142 has been resumed and is now Active."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I restarted my phone as you suggested, but I still have no service\u2014there are still no bars and nothing is loading.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for restarting your phone. Since your line is now active and your device appears to be properly registered, but you still have no service, let's try a few troubleshooting steps:\n\n1. Double-check that Airplane Mode is turned off.\n2. Try removing and reinserting your SIM card (or, if you use eSIM, toggle the line off and on in your phone\u2019s settings).\n3. Go to your phone\u2019s network settings and manually search for available networks, then select your carrier.\n4. If possible, test your SIM card in another phone to see if service returns.\n\nIf you\u2019ve tried these steps and still have no service, please let me know. I can escalate this issue or check for any network outages in your area. Are you currently in your usual location, or have you traveled recently?",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "DEV-55210"
+     },
+     "params": {
+      "id": "DEV-55210"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "device_id": "DEV-55210",
+      "device_type": "phone",
+      "model": "Pixel 8 Pro",
+      "imei": "356938035643809",
+      "esim_capable": true,
+      "activation_status": "Active",
+      "activation_date": "2023-05-18",
+      "last_esim_transfer_date": "2023-05-18",
+      "entity_type": "device"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I'm currently traveling outside my home network at the moment. I have checked that Airplane Mode is off, but I haven't tried the other steps yet. Which one would you like me to do first?"
+  },
+  {
+   "role": "agent",
+   "content": "Since you are traveling outside your home network, the most likely cause is related to roaming settings or network compatibility. Here\u2019s what I recommend you try first:\n\n1. Manually search for available networks:\n   - Go to your phone\u2019s Settings > Network & Internet > Mobile Network > Network operators (the path may vary slightly depending on your device).\n   - Select \u201cSearch networks\u201d or \u201cManual\u201d and wait for the list to populate.\n   - Try selecting a network from the list, preferably one that your carrier partners with.\n\n2. If you still have no service, please let me know if you are traveling internationally. I can check and ensure that international roaming is enabled on your line.\n\nWould you like to try the manual network search now, or should I check your roaming settings for you?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I'll try the manual network search first. I'll let you know what happens after I do that."
+  },
+  {
+   "role": "agent",
+   "content": "That sounds like a good plan! Please go ahead and try the manual network search. If you\u2019re able to connect to a network, you should see service bars return and be able to use your phone as usual.\n\nIf you still have no service after trying this, let me know right away. I can then check your roaming settings and assist further to get you connected. I\u2019m here to help!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I tried the manual network search, but my phone still has no service and shows no bars. What should I do next?"
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying the manual network search. I\u2019ve checked your account, and international roaming is already enabled on your line, so you should be able to connect while traveling.\n\nSince you still have no service, please try the following next steps:\n\n1. Power off your phone, wait 30 seconds, and power it back on.\n2. If you have a physical SIM card, remove it and reinsert it. If you use an eSIM, toggle the line off and on in your phone\u2019s settings.\n3. If possible, try your SIM card in another phone to see if it works there.\n\nIf you still have no service after these steps, please let me know your current country and city. This will help me check for any known network issues or compatibility problems in your area.",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": null,
+      "suspension_reason": 1,
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I powered off my phone, waited, and powered it back on, but I still have no service\u2014no bars at all. I have a physical SIM card and can try removing and reinserting it next, if you want."
+  },
+  {
+   "role": "agent",
+   "content": "Yes, please go ahead and remove your physical SIM card, wait a few seconds, and then carefully reinsert it. After reinserting, power your phone back on and check if you regain service.\n\nIf you still have no service after this step, please let me know:\n\n- The country and city you are currently in\n- If you have access to another phone to test your SIM card\n\nThis information will help me further diagnose the issue and check for any network compatibility or outage problems in your current location. Let me know how it goes!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I removed and reinserted the SIM card as you asked. The SIM status says it's active, but I still have no service\u2014no bars are showing on my phone here in Montreal.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know and for following all the troubleshooting steps. Since your SIM status is active but you still have no service in Montreal, here\u2019s what we know:\n\n- Your line is active and roaming is enabled.\n- Your device and SIM are both registered as active.\n- Manual network search and SIM reinsertion did not resolve the issue.\n- You are in Montreal, Canada.\n\nAt this point, the issue could be due to one of the following:\n- A network compatibility issue with local carriers in Montreal.\n- A roaming agreement issue between your carrier and Canadian networks.\n- A possible SIM card fault, though this is less likely since your SIM status is active.\n\nNext steps:\n1. If you have access to another unlocked phone, try inserting your SIM card into that device to see if it connects to the network.\n2. If the SIM does not work in another phone, it may need to be replaced.\n3. If the SIM works in another phone, the issue may be with your device\u2019s network settings or compatibility.\n\nWould you like to try your SIM in another phone, or would you prefer that I escalate this issue to our technical support team for further investigation?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I don't have another unlocked phone to test the SIM card with. What else can we try?"
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. Since you don\u2019t have another unlocked phone to test the SIM, and you\u2019ve already tried all standard troubleshooting steps, the issue may be related to network compatibility, a roaming agreement, or a technical problem with your SIM or account that requires deeper investigation.\n\nAt this point, the best course of action is to escalate your case to our technical support team. They can:\n\n- Check for any roaming restrictions or outages in Montreal.\n- Verify network compatibility and roaming agreements.\n- Investigate any account or SIM-specific issues that may not be visible on my end.\n\nWould you like me to escalate this issue to a human agent for further assistance? If so, I\u2019ll provide them with a summary of everything you\u2019ve tried so far to ensure you get the fastest possible help.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

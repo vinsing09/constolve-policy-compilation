@@ -1,0 +1,228 @@
+{
+ "case": "22:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings",
+ "arm": "stub",
+ "repeat": 3,
+ "solved": false,
+ "actions_done": 1,
+ "actions_required": 4,
+ "turns": 13,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "get_data_usage",
+  "reseat_sim_card"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_airplane_mode",
+   "ok": false,
+   "why": "tool 'toggle_airplane_mode' was never called by the user"
+  },
+  {
+   "id": "s1_reset_apn_settings",
+   "ok": false,
+   "why": "tool 'reset_apn_settings' was never called by the user"
+  },
+  {
+   "id": "s2_reboot_device",
+   "ok": false,
+   "why": "tool 'reboot_device' was never called by the user"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was not called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, nothing loads, and I can't send picture messages. Can you help?"
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're experiencing no service on your phone. Let's try to resolve this together. To assist you, I\u2019ll need to check your account and line status.\n\nCould you please provide your phone number or the name and date of birth on your account? This will help me locate your details and investigate the issue further.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your phone number. I checked your account and line status, and your line is currently active with available data remaining in your plan. Since your account and line appear to be in good standing, let's try a few troubleshooting steps:\n\n1. Restart your phone.\n2. Make sure Airplane Mode is turned off.\n3. Remove and reinsert your SIM card.\n4. Check if you have service in different locations.\n\nIf you\u2019ve already tried these steps or the issue persists, please let me know. I can assist further, such as checking for network outages or escalating the issue if needed. Have you noticed this problem just today, or has it been ongoing?",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_data_usage",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_data_usage",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "plan_name": "Advantage 50GB",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "data_limit_gb": 50,
+      "total_data_available_gb": 50,
+      "cycle_end_date": "2025-03-05"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I've already tried restarting my phone and toggling Airplane Mode, but it didn't help. I haven't tried taking out the SIM card yet. Should I do that next?"
+  },
+  {
+   "role": "agent",
+   "content": "Yes, removing and reinserting your SIM card is a good next step. Sometimes, the SIM card can become slightly misaligned or lose contact, which can cause the phone to lose service.\n\nHere\u2019s how to do it safely:\n\n1. Power off your phone.\n2. Locate the SIM card tray (usually on the side or top of your phone).\n3. Use the SIM ejector tool (or a small paperclip) to open the tray.\n4. Carefully remove the SIM card, wait a few seconds, then reinsert it.\n5. Close the tray and power your phone back on.\n\nAfter your phone restarts, check if you have service. If you still have no service after this, please let me know, and I\u2019ll assist you with the next steps or escalate the issue if needed.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I removed and reinserted the SIM card, and my phone says the SIM status is active, but I still have no service. There are still no bars and nothing loads.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying those steps and letting me know the result. Since your SIM status is active but you still have no service, and your account and line are both active with no data or billing issues, this could indicate a possible network issue, SIM card malfunction, or device-related problem.\n\nHere are the next steps:\n\n1. **Check for Network Outages:** Are you aware if others nearby are experiencing similar issues? Sometimes local outages can affect service.\n2. **Test the SIM in Another Phone:** If possible, try inserting your SIM card into a different, compatible phone. This will help determine if the issue is with your phone or the SIM/network.\n3. **Check for Carrier Settings or Software Updates:** Make sure your phone\u2019s software and carrier settings are up to date.\n\nIf you\u2019ve tried these and still have no service, it may be necessary to replace your SIM card or escalate the issue for further technical support.\n\nWould you like to proceed with testing your SIM in another device, or would you prefer I escalate this issue to a specialist for further assistance?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I don't have another phone to test the SIM in. Can you walk me through checking for software or carrier settings updates?"
+  },
+  {
+   "role": "agent",
+   "content": "Absolutely, I can guide you through checking for software and carrier settings updates. The steps depend on whether you\u2019re using an iPhone or an Android device. Please let me know which type of phone you have, or follow the instructions below for your device:\n\n---\n\n**For iPhone:**\n\n1. **Check for iOS Software Updates:**\n   - Go to Settings > General > Software Update.\n   - If an update is available, tap Download and Install.\n\n2. **Check for Carrier Settings Update:**\n   - Connect your iPhone to Wi-Fi.\n   - Go to Settings > General > About.\n   - If a carrier settings update is available, you\u2019ll see a prompt to update.\n\n---\n\n**For Android:**\n\n1. **Check for System Updates:**\n   - Go to Settings > System > System Update (or Settings > Software Update).\n   - Tap Check for updates.\n   - If an update is available, follow the prompts to install.\n\n2. **Check for Carrier Settings Update:**\n   - Go to Settings > About Phone > Carrier (or Network) Settings.\n   - Look for an option to update or check for updates.\n\n---\n\nIf you let me know your phone model, I can provide more specific instructions. Please try these steps and let me know if you see any updates or if the issue persists after updating.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked for updates and my phone says everything is up to date. I still have no service."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking for updates. Since your phone, SIM, and account are all active, you\u2019ve tried all standard troubleshooting steps, and you still have no service, this may indicate a deeper technical issue\u2014possibly with the SIM card, device hardware, or a network problem in your area.\n\nAt this point, I recommend escalating your case to a specialist who can perform advanced diagnostics or arrange a SIM replacement if needed.\n\nWould you like me to connect you with a human support agent for further assistance?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

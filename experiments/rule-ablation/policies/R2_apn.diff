@@ -1,0 +1,12 @@
+--- control.md
++++ R2_apn.md
+@@ -251,4 +251,2 @@
+ Access Point Name (APN) settings are crucial for network connectivity.
+-If `check_apn_settings()` shows "Incorrect", guide the user to use `reset_apn_settings()` to reset the APN settings.
+-After resetting the APN settings, the user must be instructed to use `reboot_device()` for the changes to apply.
+ 
+@@ -358,4 +356,2 @@
+ Those are specified as part of the APN settings. Incorrect MMSC URL, are a very common cause of MMS issues.
+-If `check_apn_settings()` shows MMSC URL is not set, guide the user to use `reset_apn_settings()` to reset the APN settings.
+-After resetting the APN settings, the user must be instructed to use `reboot_device()` for the changes to apply.
+ 

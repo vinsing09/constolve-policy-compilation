@@ -1,0 +1,273 @@
+{
+ "case": "2:[graph:Understanding and Troublesho]toggle_roaming|toggle_data_saver_mode|disconnect_vpn|set_network_mode_preference",
+ "arm": "stub",
+ "repeat": 0,
+ "solved": false,
+ "actions_done": 0,
+ "actions_required": 5,
+ "turns": 11,
+ "calls": [
+  "get_customer_by_phone",
+  "get_data_usage",
+  "check_network_mode_preference",
+  "get_details_by_id",
+  "get_details_by_id",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_roaming",
+   "ok": false,
+   "why": "tool 'toggle_roaming' was never called by the user"
+  },
+  {
+   "id": "s1_toggle_data_saver_mode",
+   "ok": false,
+   "why": "tool 'toggle_data_saver_mode' was never called by the user"
+  },
+  {
+   "id": "s2_disconnect_vpn",
+   "ok": false,
+   "why": "tool 'disconnect_vpn' was never called by the user"
+  },
+  {
+   "id": "s3_set_network_mode_preference",
+   "ok": false,
+   "why": "tool 'set_network_mode_preference' was never called by the user"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "My phone still gets online, but it's really slow compared to my husband's. Pages load very slowly and it doesn't seem to connect to the faster network like his phone does. This happens everywhere I go."
+  },
+  {
+   "role": "agent",
+   "content": "I understand how frustrating slow internet speeds can be, especially when someone else on the same plan is experiencing better performance. To help you, I\u2019d like to check your current data usage and see if you might have reached a data limit or if there are any restrictions on your line.\n\nCould you please provide your phone number or your full name and date of birth? This will help me locate your account and investigate further.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Your line is currently on the \"Advantage 50GB\" plan, and you have used about 12.4GB out of your 50GB data limit for this billing cycle. You still have plenty of high-speed data available, so your slow speeds are not due to reaching your data cap.\n\nSince this issue happens everywhere you go and your husband\u2019s phone is faster, it could be related to your device settings, network mode, or possibly a SIM or device issue.\n\nHere are a few steps you can try:\n1. Restart your phone.\n2. Make sure your phone\u2019s network mode is set to the highest available (e.g., 4G/LTE/5G).\n3. Try swapping SIM cards with your husband to see if the issue follows your SIM or stays with your phone.\n\nIf you\u2019ve already tried these steps or need further assistance, please let me know. I can also check for any network restrictions or help you troubleshoot further. Would you like more detailed troubleshooting or to check for any restrictions on your line?",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_data_usage",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_data_usage",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "plan_name": "Advantage 50GB",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "data_limit_gb": 50,
+      "total_data_available_gb": 50,
+      "cycle_end_date": "2025-03-05"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I checked, and my phone\u2019s network mode is set to '4g_only.' It doesn\u2019t seem to be on 5G at all.",
+   "tool_calls": [
+    {
+     "tool_name": "check_network_mode_preference",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking your network mode. If your phone is set to \"4G only,\" it will not connect to 5G networks, even if 5G is available in your area. This could explain why your husband\u2019s phone is faster if he is using 5G.\n\nHere\u2019s what you can do:\n\n1. Go to your phone\u2019s network settings.\n2. Look for the option labeled \u201cPreferred network type\u201d or \u201cNetwork mode.\u201d\n3. Change it from \u201c4G only\u201d to \u201c5G/4G/3G/2G (Auto)\u201d or \u201c5G preferred,\u201d if available.\n\nThis will allow your phone to connect to 5G networks when they are available, which should improve your speed.\n\nIf you do not see a 5G option, it could mean:\n- Your phone does not support 5G.\n- There is a software or SIM issue.\n- 5G is not enabled on your line.\n\nWould you like me to check if 5G is enabled on your line, or do you need help finding the network mode setting on your device? If you let me know your phone model, I can provide step-by-step instructions.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I tried to change the network mode to '5G/4G/3G/2G (Auto)', but I got an error saying something was missing. It didn't actually change the setting. What should I do next?"
+  },
+  {
+   "role": "agent",
+   "content": "Your device is a Pixel 8 Pro, which fully supports 5G. Since you\u2019re unable to switch to 5G and your plan and device both support it, the issue may be with your line\u2019s network settings or SIM provisioning.\n\nHere\u2019s what you can do next:\n1. Try restarting your phone after attempting to change the network mode.\n2. If you still can\u2019t select 5G, your SIM or line may not be provisioned correctly for 5G access.\n\nWould you like me to escalate this for a network refresh or SIM reprovisioning on your line? This can often resolve issues where 5G is not available despite having a compatible device and plan. Let me know if you\u2019d like to proceed or if you have any other questions!",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "DEV-55210"
+     },
+     "params": {
+      "id": "DEV-55210"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "device_id": "DEV-55210",
+      "device_type": "phone",
+      "model": "Pixel 8 Pro",
+      "imei": "356938035643809",
+      "esim_capable": true,
+      "activation_status": "Active",
+      "activation_date": "2023-05-18",
+      "last_esim_transfer_date": "2023-05-18",
+      "entity_type": "device"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I restarted my phone, but it still won't let me switch to 5G. Yes, please go ahead and escalate it for a network refresh or SIM reprovisioning."
+  },
+  {
+   "role": "agent",
+   "content": "Your request has been escalated to a human agent for a network refresh and SIM reprovisioning. They will ensure your line is properly set up for 5G access and follow up with you if any further information is needed.\n\nThank you for your patience\u2014help is on the way! If you have any other questions in the meantime, feel free to ask.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez (Pixel 8 Pro, Advantage 50GB plan) cannot switch network mode to 5G despite having a compatible device and plan. Error occurs when attempting to change network mode. Customer requests escalation for network refresh and SIM reprovisioning to enable 5G access."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez (Pixel 8 Pro, Advantage 50GB plan) cannot switch network mode to 5G despite having a compatible device and plan. Error occurs when attempting to change network mode. Customer requests escalation for network refresh and SIM reprovisioning to enable 5G access."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

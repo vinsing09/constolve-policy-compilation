@@ -1,0 +1,392 @@
+{
+ "case": "19:[graph:Telecom Agent Policy]refuel_data",
+ "arm": "with_policy",
+ "repeat": 4,
+ "solved": false,
+ "actions_done": 1,
+ "actions_required": 2,
+ "turns": 23,
+ "calls": [
+  "get_customer_by_phone",
+  "check_status_bar",
+  "toggle_wifi",
+  "check_sim_status",
+  "check_apn_settings",
+  "reboot_device",
+  "get_details_by_id",
+  "get_details_by_id",
+  "get_data_usage",
+  "refuel_data",
+  "toggle_wifi",
+  "reset_apn_settings",
+  "reboot_device",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_refuel_data",
+   "ok": true,
+   "why": "tool 'refuel_data' was called with {'customer_id': 'CUS-4501283', 'line_id': 'LN-8830142'}"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no internet at all unless I'm on Wi-Fi, and I can't send picture messages either. Can you help?"
+  },
+  {
+   "role": "agent",
+   "content": "I can help you with this issue. To begin, I\u2019ll need to identify your account. Could you please provide one of the following:\n\n- Your phone number\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I\u2019ll guide you through troubleshooting your mobile data and MMS (picture messaging) issues.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you, Sofia. I have identified your account.\n\nTo help you with your mobile data and picture messaging (MMS) issues, I\u2019ll need to guide you through a few quick checks on your phone. Are you currently able to follow instructions on your device? If so, please let me know, and I\u2019ll walk you through the first steps.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Yes, I can follow instructions on my phone. Please let me know what to do first."
+  },
+  {
+   "role": "agent",
+   "content": "Great! Let\u2019s start by checking your phone\u2019s status bar to see if there are any obvious issues (like Airplane Mode being on, no signal, or mobile data being off).\n\nPlease use the function or method on your phone to check the status bar and let me know what icons or indicators you see at the top of your screen, especially regarding:\n\n- Signal strength (bars or \u201cNo Signal\u201d)\n- Network type (e.g., 5G, 4G, LTE, 3G, E)\n- Airplane mode (an airplane icon)\n- Mobile data (a data icon or \u201cData Off\u201d)\n- Wi-Fi (if connected)\n- Any other unusual icons\n\nOnce you provide this information, I\u2019ll guide you to the next step.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My status bar shows excellent signal strength, 5G, data enabled, and I'm connected to Wi-Fi (Chestnut-5G). Battery is at 87%.",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the details. Since your phone shows excellent signal strength, 5G, and data enabled, your device should be able to use mobile data when Wi-Fi is off. However, since you mentioned you only have internet on Wi-Fi and can\u2019t send picture messages, let\u2019s check a few more things:\n\n1. Please turn off Wi-Fi on your phone temporarily so we can test your mobile data connection directly.\n2. After turning off Wi-Fi, try to browse a website or use an app that requires internet. Let me know if you have any connection at all.\n3. If you still have no internet, please let me know if you see any changes in your status bar (such as the network type or signal strength).\n\nOnce you\u2019ve done this, let me know the results so I can guide you further.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Wi-Fi is now off. The phone is disconnected from any wireless network, but I still don't have any internet access\u2014nothing loads.",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_wifi",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking. Since you have excellent signal and 5G, but no internet access when Wi-Fi is off, let\u2019s proceed with the next troubleshooting steps:\n\n1. We\u2019ll check if your SIM card is active and properly recognized by your phone.\n2. We\u2019ll also check your phone\u2019s APN (Access Point Name) settings, as incorrect APN settings can prevent mobile data and MMS from working.\n\nPlease use your phone to:\n- Check the SIM card status and let me know if it says \u201cActive,\u201d \u201cMissing,\u201d or \u201cLocked.\u201d\n- Check your APN settings and let me know if anything looks unusual, especially if the APN or MMSC fields are empty or incorrect.\n\nLet me know what you find, and I\u2019ll guide you on what to do next.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My SIM card status shows as Active, and the APN settings look correct: APN is fast.telecom.net and the MMSC URL is set. What should I do next?",
+   "tool_calls": [
+    {
+     "tool_name": "check_sim_status",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "check_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming your SIM card is active and your APN settings appear correct. Since you still have no mobile data or MMS, let\u2019s try the following steps:\n\n1. Restart your phone. This can refresh your network connection and apply any recent changes.\n2. After restarting, make sure Wi-Fi is still off, then try to use mobile data again (open a website or app).\n3. Let me know if you have internet access after the restart.\n\nIf you still don\u2019t have mobile data after restarting, please let me know, and we\u2019ll continue troubleshooting.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I restarted my phone as you asked, but there's still no internet access when Wi-Fi is off. Nothing loads on mobile data.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Your current plan, Advantage 50GB, has a monthly data limit of 50GB. You have already used 50.5GB this cycle, which means you have exceeded your data allowance. When this happens, mobile data is cut off until you either refuel (add more data) or your billing cycle resets.\n\nTo restore your mobile data and MMS functionality, you have two options:\n1. Refuel your line by adding up to 2GB of extra data at $5.00 per GB.\n2. Wait until your billing cycle resets on March 5, 2025.\n\nWould you like to refuel your data now? If so, please let me know how many GB (up to 2GB) you\u2019d like to add.",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "PLN-2002"
+     },
+     "params": {
+      "id": "PLN-2002"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_data_usage",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "plan_id": "PLN-2002",
+      "name": "Advantage 50GB",
+      "data_limit_gb": 50,
+      "monthly_price": 65.0,
+      "data_refueling_price_per_gb": 5.0,
+      "entity_type": "plan"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_data_usage",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "plan_name": "Advantage 50GB",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 0,
+      "data_limit_gb": 50,
+      "total_data_available_gb": 50,
+      "cycle_end_date": "2025-03-05"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I'd like to add 2GB of extra data, please."
+  },
+  {
+   "role": "agent",
+   "content": "2GB of extra data has been added to your line, and a $10.00 charge will appear on your current bill. You should now have mobile data access again.\n\nPlease turn off Wi-Fi and try using your mobile data (browse a website or use an app). Also, try sending a picture message (MMS) to confirm both services are working.\n\nLet me know if everything is working as expected or if you need further assistance.",
+   "tool_calls": [
+    {
+     "tool_name": "refuel_data",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142",
+      "gb_amount": 2
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142",
+      "gb_amount": 2
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "refuel_data",
+     "response": {
+      "result": "Refueled 2.0GB on line LN-8830142 (+1-617-555-0148). Charge of $10.00 added to bill BILL-4501283-2025-02."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I turned Wi-Fi back on, but it's not connected to any network right now. I still don't have internet access on mobile data, and my picture message didn't send.",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_wifi",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for testing again. Since you now have extra data and your line is active, but still have no mobile data or MMS, let\u2019s continue troubleshooting:\n\nPlease check and let me know the following:\n1. Is Airplane Mode definitely off?\n2. What network type is displayed (e.g., 5G, 4G, LTE, 3G, E) when Wi-Fi is off?\n3. Is mobile data still shown as enabled in your status bar?\n4. Are you currently in your home country or traveling abroad?\n\nThis information will help me determine the next steps to restore your mobile data and MMS.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Airplane Mode is definitely off. The network type says 5G when Wi-Fi is off. Mobile data is still shown as enabled in the status bar. I'm at home in Boston, so I'm not traveling."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming those details. Since you are at home, have 5G signal, mobile data enabled, and have refueled data, but still have no internet or MMS, let\u2019s try resetting your APN settings to ensure there are no hidden configuration issues.\n\nPlease follow these steps:\n1. Reset your APN settings to default.\n2. After resetting, restart your phone.\n\nOnce your phone has restarted, turn off Wi-Fi and try using mobile data and sending a picture message again. Let me know if this resolves the issue or if you still have problems.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I already reset the APN settings to default and restarted my phone as you asked. After doing that and turning off Wi-Fi, I still don't have any internet on mobile data, and my picture messages still aren't sending.",
+   "tool_calls": [
+    {
+     "tool_name": "reset_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.\n\nA specialist will assist you further, as all standard troubleshooting steps have been completed and the issue persists.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez has no mobile data or MMS despite active line, excellent 5G signal, data enabled, APN settings correct, SIM active, and data refueled. All troubleshooting steps (restart, APN reset, SIM check) have been completed. Issue persists."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez has no mobile data or MMS despite active line, excellent 5G signal, data enabled, APN settings correct, SIM active, and data refueled. All troubleshooting steps (restart, APN reset, SIM check) have been completed. Issue persists."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

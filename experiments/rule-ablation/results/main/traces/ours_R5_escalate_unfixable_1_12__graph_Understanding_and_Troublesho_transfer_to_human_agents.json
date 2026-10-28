@@ -1,0 +1,226 @@
+{
+ "case": "12:[graph:Understanding and Troublesho]transfer_to_human_agents",
+ "arm": "R5_escalate_unfixable",
+ "repeat": 1,
+ "solved": false,
+ "actions_done": 1,
+ "actions_required": 2,
+ "turns": 15,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "check_status_bar",
+  "reseat_sim_card",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_check_sim_status",
+   "ok": false,
+   "why": "tool 'check_sim_status' was never called by the user"
+  },
+  {
+   "id": "s1_transfer_to_human_agents",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone isn't getting any service at all\u2014no bars, no data, and I can't send picture messages. Can you help me figure out what's wrong?"
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot your service issue. First, I need to identify your account to check for any line or account-related problems. Could you please provide one of the following:\n\n- The phone number associated with your account\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I\u2019ll begin the troubleshooting process.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148. My name is Sofia Martinez."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your information. Your line status is currently Active, so there are no suspensions or contract issues on your account.\n\nTo help diagnose your service problem, I\u2019ll need you to perform a few quick checks on your phone. Are you able to access your phone\u2019s status bar or settings? If so, please let me know if you see any of the following:\n\n- Airplane mode icon (\u2708\ufe0f)\n- \u201cNo SIM\u201d or \u201cSIM error\u201d messages\n- Any signal bars at all (even if they\u2019re empty)\n- Network type indicators (like 5G, 4G, LTE, etc.)\n\nIf you\u2019re not sure, I can guide you through some steps to check these. Would you like instructions on how to check your phone\u2019s status bar and SIM status?",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I checked the status bar and it shows 'No Signal' at the top. Data is enabled, and it says I'm connected to 'Chestnut-5G,' but there are no signal bars at all.",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking. Since your status bar shows \u201cNo Signal\u201d and you\u2019re connected to Wi-Fi (\u201cChestnut-5G\u201d), but data is enabled, this suggests a problem with your phone\u2019s connection to the cellular network.\n\nLet\u2019s try the following troubleshooting steps:\n\n1. Check if Airplane Mode is ON. If it is, please turn it OFF.\n2. Reseat your SIM card (remove it and reinsert it). This can often resolve recognition issues.\n3. If the SIM card is still not recognized, we may need to reset your network settings or check for SIM errors.\n\nWould you like step-by-step instructions to reseat your SIM card, or have you already tried this?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I haven't tried reseating the SIM card yet. Please give me step-by-step instructions and I'll do it."
+  },
+  {
+   "role": "agent",
+   "content": "Here are the step-by-step instructions to reseat your SIM card:\n\n1. Power off your phone completely.\n2. Locate the SIM card tray on your phone. This is usually on the side or top edge of your device.\n3. Use the SIM ejector tool (or a small paperclip) to gently push into the small hole next to the SIM tray. The tray should pop out.\n4. Carefully remove the SIM card from the tray.\n5. Wait about 10 seconds, then place the SIM card back into the tray, making sure it\u2019s properly aligned.\n6. Gently push the tray back into your phone until it clicks into place.\n7. Power your phone back on.\n\nAfter your phone restarts, check the status bar to see if you now have signal bars or if the \u201cNo Signal\u201d message is gone.\n\nPlease let me know what you see after completing these steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I reseated the SIM card, but it says the SIM is still Locked. There's still no signal.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. If your phone says the SIM is \u201cLocked,\u201d it usually means it\u2019s asking for a PIN or PUK code due to too many incorrect attempts or security settings.\n\nTo proceed, please check your phone\u2019s screen for a prompt:\n- Is it asking for a SIM PIN or a PUK code?\n- Do you see any option to enter a code, or does it say \u201cSIM locked\u201d with no option?\n\nLet me know what you see, and I\u2019ll guide you through the next steps to unlock your SIM.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "It says 'SIM locked' and is asking me to enter a PIN code."
+  },
+  {
+   "role": "agent",
+   "content": "Your SIM is locked and is requesting a PIN code. If you know your SIM PIN, you can enter it now. If you enter the wrong PIN multiple times, your SIM will become blocked and require a PUK code to unlock.\n\nIf you\u2019re unsure of your SIM PIN:\n- Do not attempt to guess it.\n- The default SIM PIN is often \u201c0000\u201d or \u201c1234,\u201d but it may have been changed.\n\nIf you do not remember your SIM PIN or are unsure, I recommend checking any documentation from when you received your SIM card, or the cardholder itself, as the PIN is sometimes printed there.\n\nWould you like instructions on how to obtain your PUK code if you are unable to unlock your SIM with the PIN?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I don't know my SIM PIN and I don't see it on my SIM card packaging. Can you help me get the PUK code?"
+  },
+  {
+   "role": "agent",
+   "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer's SIM is locked and requesting a PIN code. Customer does not know the SIM PIN and cannot find it on the packaging. Needs PUK code to unlock SIM."
+     },
+     "params": {
+      "summary": "Customer's SIM is locked and requesting a PIN code. Customer does not know the SIM PIN and cannot find it on the packaging. Needs PUK code to unlock SIM."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

@@ -1,0 +1,269 @@
+{
+ "case": "1:[graph:Telecom Agent Policy]make_payment|refuel_data",
+ "arm": "R3_payment",
+ "repeat": 3,
+ "solved": false,
+ "actions_done": 2,
+ "actions_required": 5,
+ "turns": 11,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "get_bills_for_customer",
+  "resume_line",
+  "reboot_device",
+  "check_status_bar",
+  "reseat_sim_card"
+ ],
+ "criteria": [
+  {
+   "id": "s0_send_payment_request",
+   "ok": false,
+   "why": "tool 'send_payment_request' was never called by the assistant"
+  },
+  {
+   "id": "s1_make_payment",
+   "ok": false,
+   "why": "tool 'make_payment' was never called by the user"
+  },
+  {
+   "id": "s2_resume_line",
+   "ok": true,
+   "why": "tool 'resume_line' was called with {'customer_id': 'CUS-4501283', 'line_id': 'LN-8830142'}"
+  },
+  {
+   "id": "s3_refuel_data",
+   "ok": false,
+   "why": "tool 'refuel_data' was never called by the assistant"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was not called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone doesn\u2019t have any signal at all. I can\u2019t make calls or use the internet."
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot your signal issue. First, I\u2019ll need to identify your account to check for any line or account problems. Could you please provide one of the following:\n\n- The phone number associated with your account\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I can assist you further.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Your line was suspended, which is why you had no signal. I have now resumed your service. Please reboot your phone to restore your connection. After restarting, you should be able to make calls and use the internet again.\n\nIf you still experience issues after rebooting, let me know and I can help you further.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_bills_for_customer",
+     "arguments": {
+      "customer_id": "CUS-4501283"
+     },
+     "params": {
+      "customer_id": "CUS-4501283"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "resume_line",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Suspended",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_bills_for_customer",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "count": 2,
+      "bills": [
+       {
+        "bill_id": "BILL-4501283-2025-02",
+        "customer_id": "CUS-4501283",
+        "period_start": "2025-01-06",
+        "period_end": "2025-02-05",
+        "issue_date": "2025-02-06",
+        "total_amount_due": 70.0,
+        "due_date": "2025-02-26",
+        "status": "Paid"
+       },
+       {
+        "bill_id": "BILL-4501283-2025-01",
+        "customer_id": "CUS-4501283",
+        "period_start": "2024-12-06",
+        "period_end": "2025-01-05",
+        "issue_date": "2025-01-06",
+        "total_amount_due": 65.0,
+        "due_date": "2025-01-26",
+        "status": "Overdue"
+       }
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "resume_line",
+     "response": {
+      "result": "Line LN-8830142 has been resumed and is now Active."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I\u2019ve restarted my phone, but I still don\u2019t have any signal. There are no bars showing at the top of my screen.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for restarting your phone. Since you still have no signal and no bars are showing, let\u2019s continue troubleshooting. Please confirm:\n\n- Is Airplane Mode turned off on your phone?\n- Is your SIM card properly inserted?\n\nIf you\u2019re not sure, I can guide you through checking these settings. Would you like step-by-step instructions to check Airplane Mode and your SIM card status?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I\u2019m not sure how to check if Airplane Mode is off or if the SIM is properly inserted. Can you guide me through how to check these?"
+  },
+  {
+   "role": "agent",
+   "content": "Absolutely, I can guide you through both steps:\n\n1. Checking if Airplane Mode is Off:\n   - Look at the top of your phone\u2019s screen (the status bar). If you see an airplane icon, Airplane Mode is ON.\n   - To turn it off: Swipe down from the top of your screen to open the quick settings panel. Look for the airplane icon and tap it if it\u2019s highlighted. The icon should turn gray or disappear when Airplane Mode is OFF.\n\n2. Checking if Your SIM Card is Properly Inserted:\n   - Power off your phone.\n   - Locate the SIM card tray (usually on the side of your phone).\n   - Use the SIM ejector tool (or a small paperclip) to gently open the tray.\n   - Remove the SIM card and reinsert it, making sure it fits snugly.\n   - Push the tray back in and power your phone back on.\n\nAfter you\u2019ve checked both, let me know if you see any change in your signal bars. If not, I can guide you through the next steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "After reseating the SIM and rebooting, my phone now shows excellent signal bars, 5G, and data enabled in the status bar. What should I try next to confirm everything is working?",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "That\u2019s great news! Since your phone now shows excellent signal, 5G, and data enabled, your service appears to be restored.\n\nTo confirm everything is working:\n1. Try making a phone call to any number.\n2. Try sending a text message.\n3. Open your web browser or any app that uses the internet to check if you can access websites or online content.\n\nIf all of these work, your service is fully restored. If you encounter any issues with calls, texts, or data, let me know which one isn\u2019t working and I\u2019ll help you troubleshoot further.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

@@ -1,0 +1,291 @@
+{
+ "case": "7:[graph:Understanding and Troublesho]toggle_airplane_mode",
+ "arm": "R3_payment",
+ "repeat": 2,
+ "solved": true,
+ "actions_done": 2,
+ "actions_required": 2,
+ "turns": 17,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "check_status_bar",
+  "toggle_airplane_mode",
+  "check_sim_status",
+  "check_apn_settings",
+  "reseat_sim_card",
+  "reboot_device",
+  "get_bills_for_customer"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_airplane_mode",
+   "ok": true,
+   "why": "tool 'toggle_airplane_mode' was called"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was not called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, nothing loads, and I can't send picture messages. It's completely dead as far as the network goes."
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot your service issue. First, I need to verify your account to assist you further. Could you please provide one of the following:\n\n- The phone number associated with your account\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I\u2019ll begin diagnosing the problem.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your information. Since your line status is active, let's begin troubleshooting your service issue. I\u2019ll guide you through a few quick checks and steps to help restore your connection.\n\nTo start, could you please check your phone\u2019s status bar and let me know what icons or messages you see at the top of your screen? This will help determine if Airplane Mode is on, if there\u2019s a SIM issue, or if there\u2019s another problem.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I see the Airplane Mode icon at the top of my screen, along with a 'No Signal' icon and 'Data Enabled'.",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "It looks like Airplane Mode is currently enabled on your phone. When Airplane Mode is on, all wireless connections\u2014including cellular service\u2014are disabled, which explains why you have no service.\n\nPlease turn off Airplane Mode on your device. Once you do, check if your signal bars return and if you can use your phone normally. Let me know if this resolves the issue or if you still have no service after turning Airplane Mode off.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Airplane mode is now OFF, but the 'No Signal' icon is still showing and there are no signal bars. My phone still has no service.",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_airplane_mode",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for turning off Airplane Mode. Since you still have no signal, the next step is to check your SIM card status. This will help us determine if your phone is recognizing the SIM card correctly.\n\nPlease check your SIM card status on your device and let me know if it shows as \u201cActive,\u201d \u201cMissing,\u201d or \u201cLocked.\u201d If you need instructions on how to check this, let me know your phone model and I can guide you.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My SIM card status is showing as 'Active'. The phone still shows no signal and I can't use the network.",
+   "tool_calls": [
+    {
+     "tool_name": "check_sim_status",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming your SIM card is active. Since Airplane Mode is off and your SIM is recognized, the next step is to check your phone\u2019s APN (Access Point Name) settings. Incorrect APN settings can prevent your phone from connecting to the network.\n\nPlease check your APN settings and let me know if they appear correct or if there\u2019s any error message, especially regarding the MMSC URL. If you\u2019re unsure, just let me know what you see, and I\u2019ll guide you through the next steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My APN settings show the name as 'fast.telecom.net', and the status says 'correct'. The MMSC URL is 'http://mms.telecom.net/mms/wapenc'.",
+   "tool_calls": [
+    {
+     "tool_name": "check_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Your APN settings and MMSC URL both appear correct, which means your phone should be able to connect to the network and send/receive MMS. Since you still have no signal, let's try reseating your SIM card. This can resolve issues where the phone isn't properly connecting to the network, even if the SIM is recognized.\n\nPlease remove your SIM card from your phone, wait a few seconds, and then reinsert it securely. After doing this, check if your phone regains signal. Let me know if you see any change in your signal bars or if the issue persists.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I reseated the SIM card and it still shows as active, but there's no change\u2014my phone still has no signal and no service.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying that step. Since your SIM card is active, Airplane Mode is off, and your APN settings are correct, but you still have no signal, the next step is to reboot your device. Restarting your phone can often resolve temporary network connection issues.\n\nPlease restart (reboot) your phone now. Once it powers back on, check if you have any signal bars or network service. Let me know if this helps or if the problem continues.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone rebooted successfully, but I still have no signal\u2014there are no bars and no service. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for your patience. Your account and bills are all in good standing, and your SIM card and APN settings are correct. Since you still have no signal after all troubleshooting steps (Airplane Mode off, SIM reseated, APN correct, and device rebooted), this may indicate a deeper technical or network issue.\n\nAt this point, I recommend contacting a human technical support agent who can investigate further or escalate the issue if needed. Would you like me to transfer you to a human agent for advanced assistance?",
+   "tool_calls": [
+    {
+     "tool_name": "get_bills_for_customer",
+     "arguments": {
+      "customer_id": "CUS-4501283"
+     },
+     "params": {
+      "customer_id": "CUS-4501283"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_bills_for_customer",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "count": 2,
+      "bills": [
+       {
+        "bill_id": "BILL-4501283-2025-02",
+        "customer_id": "CUS-4501283",
+        "period_start": "2025-01-06",
+        "period_end": "2025-02-05",
+        "issue_date": "2025-02-06",
+        "total_amount_due": 70.0,
+        "due_date": "2025-02-26",
+        "status": "Paid"
+       },
+       {
+        "bill_id": "BILL-4501283-2025-01",
+        "customer_id": "CUS-4501283",
+        "period_start": "2024-12-06",
+        "period_end": "2025-01-05",
+        "issue_date": "2025-01-06",
+        "total_amount_due": 65.0,
+        "due_date": "2025-01-26",
+        "status": "Paid"
+       }
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

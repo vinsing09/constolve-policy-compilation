@@ -1,0 +1,288 @@
+{
+ "case": "10:[graph:Telecom Agent Policy]resume_line",
+ "arm": "stub",
+ "repeat": 1,
+ "solved": false,
+ "actions_done": 1,
+ "actions_required": 2,
+ "turns": 17,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "resume_line",
+  "reboot_device",
+  "get_details_by_id",
+  "reseat_sim_card",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_resume_line",
+   "ok": true,
+   "why": "tool 'resume_line' was called with {'customer_id': 'CUS-4501283', 'line_id': 'LN-8830142'}"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no signal at all\u2014no bars, no internet, and I can't send picture messages. Can you help?"
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're having trouble with your phone signal. To assist you better, could you please provide your phone number or the name on your account? This will help me check your line status and identify any issues.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Your phone line is currently suspended, which is why you have no signal, internet, or ability to send picture messages. Would you like me to resume (reactivate) your line now? If you know the reason for the suspension or if it was a mistake, please let me know.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Suspended",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "2025-02-25",
+      "suspension_reason": 1,
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I wasn't aware my line was suspended. Yes, please reactivate my line now."
+  },
+  {
+   "role": "agent",
+   "content": "Your line has been reactivated and is now active. Please restart your phone to restore your signal and services. If you continue to experience issues after restarting, let me know and I can assist further.",
+   "tool_calls": [
+    {
+     "tool_name": "resume_line",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "resume_line",
+     "response": {
+      "result": "Line LN-8830142 has been resumed and is now Active."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I restarted my phone, but I still have no signal. There are no bars showing and I can't use the internet.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for restarting your phone. Since your line is now active and your device (Pixel 8 Pro) is also showing as active, but you still have no signal, let's try a few troubleshooting steps:\n\n1. Make sure Airplane Mode is off.\n2. Try removing and reinserting your SIM card (or, if you use eSIM, try toggling the mobile network off and on).\n3. Check if you have signal in a different location, in case it's a local coverage issue.\n\nIf you've tried these steps and still have no signal, please let me know. I can escalate this to our technical team for further investigation. Would you like to proceed with an escalation?",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "DEV-55210"
+     },
+     "params": {
+      "id": "DEV-55210"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "device_id": "DEV-55210",
+      "device_type": "phone",
+      "model": "Pixel 8 Pro",
+      "imei": "356938035643809",
+      "esim_capable": true,
+      "activation_status": "Active",
+      "activation_date": "2023-05-18",
+      "last_esim_transfer_date": "2023-05-18",
+      "entity_type": "device"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I haven't checked Airplane Mode yet. Can you tell me where to look for that on my Pixel 8 Pro?"
+  },
+  {
+   "role": "agent",
+   "content": "Absolutely! Here\u2019s how you can check and turn off Airplane Mode on your Pixel 8 Pro:\n\n1. **Swipe Down from the Top:** Swipe down from the very top of your screen to open the Quick Settings menu.\n2. **Look for the Airplane Icon:** You\u2019ll see an airplane icon labeled \u201cAirplane mode.\u201d\n3. **Check the Status:**\n   - If the icon is highlighted or colored, Airplane Mode is ON.\n   - If it\u2019s grayed out, Airplane Mode is OFF.\n4. **Turn Off Airplane Mode:** If it\u2019s ON, tap the icon once to turn it OFF. Your phone will then try to reconnect to the mobile network.\n\nLet me know if this helps or if you need further assistance!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked Airplane Mode and it's off. Still no signal on my phone."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking. Since Airplane Mode is off and your line and device are both active, but you still have no signal, this may indicate a technical issue with your SIM/eSIM, device, or network in your area.\n\nHere are a couple more quick steps you can try:\n1. If you have a physical SIM card, remove it and reinsert it.\n2. If you use eSIM, try toggling the mobile network off and on in your phone\u2019s settings.\n3. Try your SIM/eSIM in another compatible phone, if possible, to see if the issue persists.\n\nIf you\u2019ve tried these and still have no signal, I can escalate your case to our technical team for further investigation. Would you like me to do that now?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I removed and reinserted my SIM card. The phone says the SIM status is active, but I still have no signal.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying those steps. Since your SIM status is active but you still have no signal, and all basic troubleshooting has been completed, this may be a deeper technical or network issue.\n\nI will escalate your case to our technical team so they can investigate and resolve the problem as soon as possible.\n\nIs there anything else you\u2019d like to add about your situation before I proceed with the escalation (such as recent travel, device damage, or changes to your account)? If not, I\u2019ll move forward right away.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "No, there haven't been any recent changes or damage. Please go ahead and escalate the issue to the technical team."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming. I am escalating your issue to our technical team for further investigation. You will be contacted soon by a specialist who can assist you further.\n\nIf you have any updates or questions in the meantime, please let us know. Thank you for your patience.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez's line was suspended and has now been reactivated, but she still has no signal on her Pixel 8 Pro. Airplane Mode is off, SIM status is active, and she has tried reinserting the SIM card. No recent changes or device damage. Needs technical team investigation."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez's line was suspended and has now been reactivated, but she still has no signal on her Pixel 8 Pro. Airplane Mode is off, SIM status is active, and she has tried reinserting the SIM card. No recent changes or device damage. Needs technical team investigation."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

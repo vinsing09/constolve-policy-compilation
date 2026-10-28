@@ -1,0 +1,187 @@
+{
+ "case": "17:[graph:Understanding and Troublesho]transfer_to_human_agents",
+ "arm": "R3_payment",
+ "repeat": 0,
+ "solved": false,
+ "actions_done": 2,
+ "actions_required": 3,
+ "turns": 13,
+ "calls": [
+  "get_customer_by_phone",
+  "check_status_bar",
+  "check_sim_status",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_check_sim_status",
+   "ok": true,
+   "why": "tool 'check_sim_status' was called"
+  },
+  {
+   "id": "s1_get_data_usage",
+   "ok": false,
+   "why": "tool 'get_data_usage' was never called by the assistant"
+  },
+  {
+   "id": "s2_transfer_to_human_agents",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no signal at all. Nothing loads, I can't get online, and picture messages won't go through. Can you help?"
+  },
+  {
+   "role": "agent",
+   "content": "I can help you with that! To start troubleshooting, I\u2019ll need to identify your account. Could you please provide either your phone number, customer ID, or your full name and date of birth?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you, Sofia. I\u2019ll help you troubleshoot your no signal issue. To begin, could you please check your phone\u2019s status bar and let me know what icons or messages you see at the top of your screen? For example, do you see an airplane icon, \u201cNo Signal,\u201d or anything else unusual?",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "At the top of my screen, it shows a 'No Signal' icon, 'Data Enabled,' and that I'm connected to Chestnut-5G WiFi. The battery is at 87%.",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the details. Since your phone shows \u201cNo Signal,\u201d let\u2019s check a few things to identify the cause:\n\n1. Is Airplane Mode turned on? (Look for an airplane icon in the status bar.)\n2. Has your SIM card been removed or is it possibly loose?\n3. Has your line been suspended or is there a billing issue?\n\nLet\u2019s start by checking your SIM card status. Could you please check if your phone displays any messages about the SIM card, such as \u201cNo SIM,\u201d \u201cSIM Locked,\u201d or similar? If you\u2019re unsure, I can guide you through checking your SIM card status on your device. Would you like instructions for that?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I don't see any messages about the SIM card like 'No SIM' or 'SIM Locked' on the screen. Could you guide me through checking the SIM card status on my device?"
+  },
+  {
+   "role": "agent",
+   "content": "Absolutely! Here\u2019s how you can check your SIM card status:\n\n1. Go to your phone\u2019s Settings app.\n2. Look for a section called \u201cAbout Phone,\u201d \u201cConnections,\u201d or \u201cNetwork & Internet.\u201d\n3. Find and select \u201cSIM Status\u201d or \u201cSIM Card Status.\u201d\n\nOnce you\u2019re there, please let me know what it says about your SIM card (for example: Active, Missing, Locked, etc.). This will help us determine the next steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked the SIM card status, and it says 'Locked.' What should I do next?",
+   "tool_calls": [
+    {
+     "tool_name": "check_sim_status",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez has no signal. SIM card status shows 'Locked.' Needs assistance unlocking SIM card (likely requires PUK code)."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez has no signal. SIM card status shows 'Locked.' Needs assistance unlocking SIM card (likely requires PUK code)."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Okay, I'll wait for the human agent. Please let me know when they're connected."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for your patience. A human agent will be with you shortly to assist with unlocking your SIM card. Please stay connected, and they will notify you once they are available.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

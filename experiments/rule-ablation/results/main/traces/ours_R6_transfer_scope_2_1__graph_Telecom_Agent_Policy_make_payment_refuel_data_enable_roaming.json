@@ -1,0 +1,377 @@
+{
+ "case": "1:[graph:Telecom Agent Policy]make_payment|refuel_data|enable_roaming",
+ "arm": "R6_transfer_scope",
+ "repeat": 2,
+ "solved": false,
+ "actions_done": 4,
+ "actions_required": 6,
+ "turns": 17,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "get_bills_for_customer",
+  "get_details_by_id",
+  "send_payment_request",
+  "check_payment_request",
+  "make_payment",
+  "resume_line",
+  "reboot_device",
+  "check_status_bar"
+ ],
+ "criteria": [
+  {
+   "id": "s0_send_payment_request",
+   "ok": true,
+   "why": "tool 'send_payment_request' was called with {'customer_id': 'CUS-4501283', 'bill_id': 'BILL-4501283-2025-01'}"
+  },
+  {
+   "id": "s1_make_payment",
+   "ok": true,
+   "why": "tool 'make_payment' was called"
+  },
+  {
+   "id": "s2_resume_line",
+   "ok": true,
+   "why": "tool 'resume_line' was called with {'customer_id': 'CUS-4501283', 'line_id': 'LN-8830142'}"
+  },
+  {
+   "id": "s3_refuel_data",
+   "ok": false,
+   "why": "tool 'refuel_data' was never called by the assistant"
+  },
+  {
+   "id": "s4_enable_roaming",
+   "ok": false,
+   "why": "tool 'enable_roaming' was never called by the assistant"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was not called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no signal at all\u2014nothing loads, no internet, and I can't even send a picture message. It's completely dead as far as the network goes."
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot this issue. First, I\u2019ll need to identify your account to check for any line or account problems. Could you please provide one of the following:\n\n- The phone number associated with your account\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I\u2019ll begin diagnosing the problem.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Sure, my name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Your phone line is currently suspended, which is why you have no signal, internet, or ability to send picture messages. The suspension is due to an overdue bill from the billing period ending January 5, 2025, with an amount due of $65.00.\n\nWould you like me to send you a payment request for this overdue bill so you can pay it and restore your service?",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_bills_for_customer",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "limit": 3
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "limit": 3
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "BILL-4501283-2025-01"
+     },
+     "params": {
+      "id": "BILL-4501283-2025-01"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Suspended",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 0,
+      "roaming_enabled": false,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_bills_for_customer",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "count": 2,
+      "bills": [
+       {
+        "bill_id": "BILL-4501283-2025-02",
+        "customer_id": "CUS-4501283",
+        "period_start": "2025-01-06",
+        "period_end": "2025-02-05",
+        "issue_date": "2025-02-06",
+        "total_amount_due": 70.0,
+        "due_date": "2025-02-26",
+        "status": "Paid"
+       },
+       {
+        "bill_id": "BILL-4501283-2025-01",
+        "customer_id": "CUS-4501283",
+        "period_start": "2024-12-06",
+        "period_end": "2025-01-05",
+        "issue_date": "2025-01-06",
+        "total_amount_due": 65.0,
+        "due_date": "2025-01-26",
+        "status": "Overdue"
+       }
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "bill_id": "BILL-4501283-2025-01",
+      "customer_id": "CUS-4501283",
+      "period_start": "2024-12-06",
+      "period_end": "2025-01-05",
+      "issue_date": "2025-01-06",
+      "total_amount_due": 65.0,
+      "due_date": "2025-01-26",
+      "status": "Overdue",
+      "entity_type": "bill",
+      "line_items": [
+       {
+        "line_item_id": "BLI-90001",
+        "bill_id": "BILL-4501283-2025-01",
+        "description": "Advantage 50GB monthly plan charge - line +1-617-555-0148",
+        "amount": 65.0,
+        "item_type": "charge"
+       }
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Yes, please send me the payment request so I can pay the overdue bill and restore my service."
+  },
+  {
+   "role": "agent",
+   "content": "A payment request for your overdue bill of $65.00 has been sent. Please check your payment requests and complete the payment.\n\nOnce you have paid, let me know so I can confirm your payment and help restore your service.",
+   "tool_calls": [
+    {
+     "tool_name": "send_payment_request",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "bill_id": "BILL-4501283-2025-01"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "bill_id": "BILL-4501283-2025-01"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "send_payment_request",
+     "response": {
+      "result": "Payment request for bill BILL-4501283-2025-01 (amount due $65.0) sent to Sofia Martinez. Bill status is now Awaiting Payment."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I see the payment request for $65.00 is showing as pending. Would you like me to go ahead and pay it now?",
+   "tool_calls": [
+    {
+     "tool_name": "check_payment_request",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Yes, please go ahead and pay the $65.00 now. Once you confirm the payment is complete, I will verify it and proceed to restore your service. Let me know when you have finished the payment.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "The payment of $65.00 is complete and the bill now shows as Paid. What should I do next to get my service restored?",
+   "tool_calls": [
+    {
+     "tool_name": "make_payment",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Your service has been restored and your line is now active again. Please reboot your phone to regain network connectivity. After restarting, you should have signal, internet, and be able to send messages as normal.\n\nIf you have any further issues after rebooting, let me know!",
+   "tool_calls": [
+    {
+     "tool_name": "resume_line",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "resume_line",
+     "response": {
+      "result": "Line LN-8830142 has been resumed and is now Active."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I rebooted my phone as you asked, but I still have no signal and nothing is loading. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. Since your line is now active but you still have no signal, let's troubleshoot your phone's connection step by step.\n\nPlease check your phone\u2019s status bar and let me know:\n- Do you see an airplane icon (\u2708\ufe0f) indicating Airplane Mode is on?\n- Is there any signal strength indicator (bars), or does it show \u201cNo Signal\u201d or a similar message?\n- Do you see any network type (like 5G, 4G, LTE, etc.)?\n\nThis information will help determine the next steps. If you\u2019re unsure how to check, let me know and I can guide you.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I just checked again and now my status bar shows excellent signal bars, 5G, data enabled, and it's connected to Chestnut-5G. What should I do next to confirm everything is working?",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Great news! Your phone now shows excellent signal strength, 5G connectivity, and mobile data is enabled. To confirm everything is working:\n\n1. Try making a regular phone call.\n2. Open a web browser or app and check if you can access the internet without Wi-Fi (you can temporarily turn off Wi-Fi to test mobile data).\n3. Try sending a picture message (MMS) to someone.\n\nIf all of these work, your service is fully restored. If you encounter any issues with calls, internet, or sending picture messages, let me know which one isn\u2019t working and I\u2019ll help you troubleshoot further.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I tried all three\u2014calls work, internet loads quickly, and I was able to send a picture message without any issues. Everything looks excellent now. Thanks for your help!"
+  },
+  {
+   "role": "agent",
+   "content": "You\u2019re very welcome! I\u2019m glad to hear that your service is fully restored and everything is working perfectly now.\n\nIf you have any other questions or need assistance in the future, feel free to reach out. Have a great day, Sofia!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

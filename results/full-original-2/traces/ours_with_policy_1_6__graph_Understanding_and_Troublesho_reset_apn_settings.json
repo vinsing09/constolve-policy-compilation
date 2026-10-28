@@ -1,0 +1,331 @@
+{
+ "case": "6:[graph:Understanding and Troublesho]reset_apn_settings",
+ "arm": "with_policy",
+ "repeat": 1,
+ "solved": true,
+ "actions_done": 3,
+ "actions_required": 3,
+ "turns": 15,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "check_status_bar",
+  "get_details_by_id",
+  "reseat_sim_card",
+  "reset_apn_settings",
+  "reboot_device",
+  "get_bills_for_customer",
+  "get_details_by_id"
+ ],
+ "criteria": [
+  {
+   "id": "s0_reset_apn_settings",
+   "ok": true,
+   "why": "tool 'reset_apn_settings' was called"
+  },
+  {
+   "id": "s1_reboot_device",
+   "ok": true,
+   "why": "tool 'reboot_device' was called"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was not called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, nothing loads, and I can't send picture messages. Can you help?"
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot your phone\u2019s service and picture messaging issues. To get started, I\u2019ll need to identify your account. Could you please provide one of the following:\n\n- The phone number associated with your account\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I\u2019ll guide you through the steps to restore your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the information. Your line is currently active, so let\u2019s start troubleshooting your service and picture messaging issues.\n\nTo proceed, I\u2019ll need you to perform a quick check on your phone:\n1. Can you check your phone\u2019s status bar and let me know if you see any icons like Airplane Mode, signal bars, or any error messages?\n2. Are you able to see if your SIM card is detected, or do you see any messages about the SIM?\n\nIf you\u2019re unsure how to check, I can guide you step by step. Let me know what you see, and we\u2019ll continue from there.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I just checked and the status bar shows 'No Signal', even though it says I'm connected to Chestnut-5G and data is enabled. There are still no signal bars.",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking. Since your status bar shows \"No Signal\" even though data is enabled and you\u2019re connected to Wi-Fi, this means your phone is not connecting to the cellular network at all.\n\nLet\u2019s try the following steps to troubleshoot:\n\n1. Please check if Airplane Mode is turned ON. If it is, turn it OFF.\n2. If Airplane Mode is OFF, the next step is to check your SIM card. Please remove your SIM card, wait a few seconds, and reinsert it securely.\n\nAfter you\u2019ve done these steps, let me know if you see any change in your signal bars or if you still see \"No Signal.\" If the issue persists, we\u2019ll continue with further troubleshooting.",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "DEV-55210"
+     },
+     "params": {
+      "id": "DEV-55210"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "device_id": "DEV-55210",
+      "device_type": "phone",
+      "model": "Pixel 8 Pro",
+      "imei": "356938035643809",
+      "esim_capable": true,
+      "activation_status": "Active",
+      "activation_date": "2023-05-18",
+      "last_esim_transfer_date": "2023-05-18",
+      "entity_type": "device"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I already removed and reinserted the SIM card. The phone says the SIM status is active, but I still see 'No Signal' and no bars. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming that the SIM card is active and has been reseated, but you still see \"No Signal.\" The next step is to check your phone\u2019s network settings, specifically the Access Point Name (APN) settings, as incorrect APN settings can cause a complete loss of service.\n\nPlease check your APN settings and let me know if anything looks incorrect or if the MMSC URL is missing. If you\u2019re not sure how to check, I can guide you through resetting your APN settings to default, which often resolves this issue.\n\nWould you like instructions to reset your APN settings?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I'm not sure what the APN settings should look like. Can you walk me through how to check or reset them?"
+  },
+  {
+   "role": "agent",
+   "content": "Absolutely! Here\u2019s how you can reset your APN settings to default, which often resolves service issues:\n\n1. Go to your phone\u2019s Settings app.\n2. Tap on \u201cNetwork & Internet\u201d or \u201cConnections.\u201d\n3. Select \u201cMobile Network\u201d or \u201cCellular Networks.\u201d\n4. Tap on \u201cAccess Point Names\u201d or \u201cAPN.\u201d\n5. Look for an option to \u201cReset to default\u201d or \u201cReset settings.\u201d Tap it to restore the default APN settings.\n\nAfter resetting the APN settings, please restart (reboot) your phone for the changes to take effect.\n\nOnce you\u2019ve done this, check if your phone regains signal bars or service. Let me know if you need step-by-step guidance for your specific phone model, or if you see any changes after these steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I reset the APN settings to default and rebooted my phone as you suggested. After the reboot, there is still no signal and no bars showing at the top. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "reset_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for following those steps. Since resetting the APN and rebooting did not restore your signal, let\u2019s check a few more things:\n\n1. Is Airplane Mode definitely OFF?\n2. Are you able to try your SIM card in another phone, or try a different SIM card in your phone, to see if either device gets a signal?\n3. Have you noticed any recent physical damage to your phone or SIM card?\n\nIf Airplane Mode is off and there\u2019s no physical damage, the next step is to check if your line is suspended or if there are any account or network issues on our end.\n\nWould you like to try your SIM in another phone, or should I check your account for any possible suspensions or issues?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Airplane Mode is definitely off and there\u2019s no physical damage to my phone or SIM. I don\u2019t have another phone or SIM to test with right now. Can you please check my account for any suspensions or issues?"
+  },
+  {
+   "role": "agent",
+   "content": "I\u2019ve checked your account and line status:\n\n- Your account is active.\n- Your bills are paid and up to date.\n- Your line is active and not suspended.\n- Your contract is valid, and there are no restrictions on your account.\n\nSince there are no account or suspension issues, and you\u2019ve already tried SIM reseating and APN reset, this may indicate a deeper technical issue with your line or device that cannot be resolved through standard troubleshooting.\n\nWould you like me to transfer you to a human agent for advanced technical support?",
+   "tool_calls": [
+    {
+     "tool_name": "get_bills_for_customer",
+     "arguments": {
+      "customer_id": "CUS-4501283"
+     },
+     "params": {
+      "customer_id": "CUS-4501283"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_bills_for_customer",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "count": 2,
+      "bills": [
+       {
+        "bill_id": "BILL-4501283-2025-02",
+        "customer_id": "CUS-4501283",
+        "period_start": "2025-01-06",
+        "period_end": "2025-02-05",
+        "issue_date": "2025-02-06",
+        "total_amount_due": 70.0,
+        "due_date": "2025-02-26",
+        "status": "Paid"
+       },
+       {
+        "bill_id": "BILL-4501283-2025-01",
+        "customer_id": "CUS-4501283",
+        "period_start": "2024-12-06",
+        "period_end": "2025-01-05",
+        "issue_date": "2025-01-06",
+        "total_amount_due": 65.0,
+        "due_date": "2025-01-26",
+        "status": "Paid"
+       }
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

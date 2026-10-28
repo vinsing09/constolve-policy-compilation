@@ -1,0 +1,280 @@
+{
+ "case": "14:[graph:Understanding and Troublesho]toggle_airplane_mode",
+ "arm": "with_policy",
+ "repeat": 3,
+ "solved": false,
+ "actions_done": 1,
+ "actions_required": 2,
+ "turns": 21,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "check_status_bar",
+  "toggle_airplane_mode",
+  "check_sim_status",
+  "check_apn_settings",
+  "reseat_sim_card",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_airplane_mode",
+   "ok": true,
+   "why": "tool 'toggle_airplane_mode' was called"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, nothing loads, and I can't send picture messages. It's completely dead as far as the network goes."
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot your service issue. First, I need to identify your account to check for any line or account problems. Could you please provide one of the following:\n\n- Your phone number\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I\u2019ll begin diagnosing the issue.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the information. Your line status is currently \"Active,\" which means there are no suspensions or contract issues on your account.\n\nLet's proceed with troubleshooting your phone's connectivity. I\u2019ll guide you through a few steps to help identify the cause of the \"no service\" issue. Are you able to interact with your phone right now to perform some quick checks?",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Yes, I have my phone with me and can follow your instructions."
+  },
+  {
+   "role": "agent",
+   "content": "Great! Let\u2019s start with some basic checks:\n\n1. Please check your phone\u2019s status bar (the area at the top of your screen) and let me know:\n   - Do you see an airplane icon (\u2708\ufe0f)?\n   - Is there any signal bar icon, or does it show \u201cNo Service\u201d or \u201cNo Signal\u201d?\n   - Do you see any other unusual icons?\n\nThis will help determine if Airplane Mode is on or if there\u2019s a SIM or network issue. Please describe what you see in your status bar.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I actually do see an airplane icon in the status bar, along with 'No Signal' and 'Data Enabled.' Should I try turning off Airplane Mode?",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Yes, please turn off Airplane Mode on your phone. Airplane Mode disables all wireless connections, including cellular service, which is why you\u2019re seeing \u201cNo Signal.\u201d\n\nOnce you turn off Airplane Mode, wait a few moments to see if your signal bars return and if you regain service. Let me know what happens after you turn it off.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I turned off Airplane Mode. The airplane icon disappeared, but I still don't see any signal bars\u2014it's still showing 'No Signal.'",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_airplane_mode",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking. Since Airplane Mode is now off but you still have no signal, the next step is to check your SIM card status. Sometimes, the SIM card may not be properly seated or could have a temporary issue.\n\nPlease check your phone\u2019s SIM card status (usually found in your phone\u2019s settings under \u201cAbout Phone\u201d or \u201cSIM Status\u201d). If you\u2019re not sure how to do this, let me know your phone model and I can guide you.\n\nAlternatively, if you\u2019re comfortable, you can try removing the SIM card and reinserting it, then restart your phone. Let me know if you see any change in the signal after doing this, or if you need step-by-step instructions.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I'm not sure how to check the SIM card status from my settings. Could you guide me through it?"
+  },
+  {
+   "role": "agent",
+   "content": "Of course! Here\u2019s how you can check your SIM card status on most Android and iPhone devices:\n\nFor Android:\n1. Open the Settings app.\n2. Scroll down and tap on About Phone or About Device.\n3. Tap on Status or SIM Status.\n4. Look for information about your SIM card (it may say \u201cActive,\u201d \u201cNot inserted,\u201d \u201cLocked,\u201d or similar).\n\nFor iPhone:\n1. Open the Settings app.\n2. Tap on General.\n3. Tap on About.\n4. Scroll down to find information about your SIM card (look for \u201cNetwork,\u201d \u201cCarrier,\u201d or \u201cICCID\u201d).\n\nPlease let me know what your phone says about the SIM card status, or if you see any messages like \u201cNo SIM,\u201d \u201cSIM not provisioned,\u201d or \u201cSIM locked.\u201d If you\u2019re using a different phone model, let me know which one and I\u2019ll provide specific instructions.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked the SIM status and it says the SIM is active. So it looks like the phone does detect the SIM card, but I still don't have any signal.",
+   "tool_calls": [
+    {
+     "tool_name": "check_sim_status",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking. Since your SIM card is active but you still have no signal, the next step is to check your network settings\u2014specifically, your Access Point Name (APN) settings. Incorrect APN settings can sometimes cause a complete loss of service.\n\nCould you please check your APN settings in your phone\u2019s settings? Here\u2019s how:\n\nFor Android:\n1. Go to Settings.\n2. Tap on Network & Internet or Connections.\n3. Tap on Mobile Network.\n4. Tap on Access Point Names (APN).\n\nFor iPhone:\n1. Go to Settings.\n2. Tap on Cellular.\n3. Tap on Cellular Data Network.\n\nPlease let me know if you see any APN settings listed, or if anything looks unusual (such as missing fields or blank entries). If you\u2019re unsure, you can also let me know what you see, and I\u2019ll guide you further.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My APN settings show 'fast.telecom.net' and it says the settings are correct, with the MMSC URL listed as 'http://mms.telecom.net/mms/wapenc.' What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "check_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming your APN settings\u2014they appear to be correct, including the MMSC URL for MMS.\n\nSince your SIM is active, Airplane Mode is off, and APN settings are correct, but you still have no signal, the next step is to try reseating your SIM card. This can resolve temporary connection issues.\n\nPlease follow these steps:\n1. Power off your phone.\n2. Remove the SIM card from its slot.\n3. Wait about 10 seconds.\n4. Reinsert the SIM card securely.\n5. Power your phone back on.\n\nAfter your phone restarts, check if you have any signal bars or service. Let me know if this resolves the issue or if you still see \u201cNo Signal.\u201d",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I reseated the SIM card and my phone says the SIM status is active, but I still have no signal and no bars at all.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying those steps. Since your SIM card is active, APN settings are correct, Airplane Mode is off, and you\u2019ve reseated the SIM but still have no signal, this suggests a deeper network or device issue.\n\nAt this point, I recommend restarting your device one more time to ensure all settings refresh. If you have already done this and the issue persists, it may require advanced troubleshooting or a possible SIM/device replacement.\n\nWould you like to try restarting your phone again now? If you\u2019ve already done so and there\u2019s still no service, I can transfer you to a human agent for further assistance. Please let me know how you\u2019d like to proceed.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I already restarted my phone and there\u2019s still no service\u2014no bars, nothing loads. What else can I try?"
+  },
+  {
+   "role": "agent",
+   "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez has no cellular service: no signal bars, no network connectivity, and cannot send MMS. Troubleshooting completed: Airplane Mode is off, SIM status is active, APN settings are correct, SIM has been reseated, and device has been restarted. Line/account are active with no suspensions. Further technical investigation is required."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez has no cellular service: no signal bars, no network connectivity, and cannot send MMS. Troubleshooting completed: Airplane Mode is off, SIM status is active, APN settings are correct, SIM has been reseated, and device has been restarted. Line/account are active with no suspensions. Further technical investigation is required."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

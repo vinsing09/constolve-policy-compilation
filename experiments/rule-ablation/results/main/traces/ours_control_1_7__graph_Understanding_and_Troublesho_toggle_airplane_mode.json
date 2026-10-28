@@ -1,0 +1,418 @@
+{
+ "case": "7:[graph:Understanding and Troublesho]toggle_airplane_mode",
+ "arm": "control",
+ "repeat": 1,
+ "solved": false,
+ "actions_done": 1,
+ "actions_required": 2,
+ "turns": 27,
+ "calls": [
+  "get_customer_by_phone",
+  "check_status_bar",
+  "toggle_airplane_mode",
+  "get_details_by_id",
+  "get_details_by_id",
+  "get_details_by_id",
+  "get_details_by_id",
+  "reseat_sim_card",
+  "reboot_device",
+  "check_apn_settings",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_airplane_mode",
+   "ok": true,
+   "why": "tool 'toggle_airplane_mode' was called"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, nothing loads, and I can't send picture messages. Can you help?"
+  },
+  {
+   "role": "agent",
+   "content": "I can help you with this issue. First, I need to identify your account to provide technical support. Could you please provide your phone number, customer ID, or your full name and date of birth?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you, Sofia. I will begin troubleshooting your \"no service\" and picture messaging (MMS) issues. To proceed, could you please check your phone's status bar and let me know what icons or messages you see at the top of your screen? This will help me determine if Airplane Mode is on, if there is a SIM issue, or if there are other network problems.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I see an airplane icon at the top, and it also says 'No Signal.' Data is enabled, and my battery is at 87%.",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "It looks like Airplane Mode is enabled on your phone, which disables all wireless connections\u2014including cellular service. This is why you have no signal and can't send picture messages.\n\nPlease turn off Airplane Mode on your device. Once you do, check if your signal bars return and if you can use your service again. Let me know what you see after turning off Airplane Mode.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Airplane mode is now OFF. I see one bar, but it's not showing 5G and I still can't send picture messages.",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_airplane_mode",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the update. Now that Airplane Mode is off and you have one bar of signal, let's address the remaining issues:\n\n1. You have low signal strength (one bar, not 5G).\n2. You still can't send picture messages (MMS).\n\nTo proceed, could you please check and let me know what network type is displayed (e.g., 4G, LTE, 3G, 2G) at the top of your screen? This will help determine if your phone is connected to a suitable network for MMS and data.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "It just says 'E' next to the signal bar. There\u2019s no 4G, LTE, or 5G showing."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the information. The 'E' stands for EDGE, which is a 2G network. 2G/EDGE is too slow for picture messaging (MMS) and most modern data services.\n\nLet\u2019s try switching your phone\u2019s network mode to prefer 4G or 5G, which should improve your signal and allow MMS to work. Please change your network mode to \u201c4G/5G preferred\u201d in your phone\u2019s settings. After doing this, let me know if you see 4G, LTE, or 5G appear, and if your service improves.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I tried to set the network mode to 4G/5G preferred, but I got an error message saying something about a missing argument. The network mode didn't change, and I still see 'E' at the top with one bar."
+  },
+  {
+   "role": "agent",
+   "content": "Your device (Pixel 8 Pro) is compatible with 4G and 5G networks. \n\nTo proceed, I will guide you step-by-step to set your network mode to \u201c4G/5G preferred\u201d directly from your phone\u2019s settings:\n\n1. Go to Settings > Network & Internet > Mobile Network.\n2. Tap on \u201cPreferred network type\u201d or \u201cNetwork mode.\u201d\n3. Select \u201c4G/5G (Auto)\u201d or \u201c4G/5G preferred.\u201d\n\nIf you encounter any error or the option is missing, please let me know the exact message or what you see. If you are able to change it, let me know if your signal improves and if you see 4G, LTE, or 5G at the top of your screen.",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "DEV-55210"
+     },
+     "params": {
+      "id": "DEV-55210"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "device_id": "DEV-55210",
+      "device_type": "phone",
+      "model": "Pixel 8 Pro",
+      "imei": "356938035643809",
+      "esim_capable": true,
+      "activation_status": "Active",
+      "activation_date": "2023-05-18",
+      "last_esim_transfer_date": "2023-05-18",
+      "entity_type": "device"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "When I tried to set the network mode, I got an error: 'TypeError: set_network_mode_preference() missing 1 required positional argument: mode.' The network mode didn't change, and it's still showing 'E' with one bar."
+  },
+  {
+   "role": "agent",
+   "content": "There was a technical error when trying to change your network mode. Unfortunately, I do not have the ability to directly change your device\u2019s network mode remotely.\n\nSince you are still seeing only 'E' (2G) and cannot switch to 4G/5G, this could indicate a network issue in your area, a SIM card problem, or a device configuration issue.\n\nLet\u2019s try the following steps:\n1. Reseat your SIM card: Remove your SIM card, wait a few seconds, and reinsert it. Then restart your phone.\n2. After rebooting, check if you see 4G, LTE, or 5G and if your service improves.\n\nPlease let me know the results after trying these steps. If the issue persists, I will continue troubleshooting.",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "PLN-2002"
+     },
+     "params": {
+      "id": "PLN-2002"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "CUS-4501283"
+     },
+     "params": {
+      "id": "CUS-4501283"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "plan_id": "PLN-2002",
+      "name": "Advantage 50GB",
+      "data_limit_gb": 50,
+      "monthly_price": 65.0,
+      "data_refueling_price_per_gb": 5.0,
+      "entity_type": "plan"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address_street": "412 Chestnut Street, Apt 5B",
+      "address_city": "Boston",
+      "address_state": "MA",
+      "address_zip_code": "02116",
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "entity_type": "customer",
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "customer_id": "CUS-4501283",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "customer_id": "CUS-4501283",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I already reseated the SIM card and rebooted my phone. The SIM status is active, but after rebooting, I still only see 'E' with one bar. There's still no 4G, LTE, or 5G showing.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming that you have already reseated the SIM card and rebooted your phone, and that the SIM status is active. Since you are still only seeing 'E' (2G) with one bar and cannot access 4G, LTE, or 5G, let's continue troubleshooting:\n\nNext, let's check your phone's APN (Access Point Name) settings. Incorrect APN settings can prevent your device from connecting to higher-speed networks and can also affect MMS (picture messaging).\n\nPlease check your APN settings and let me know if you see any errors or if the MMSC (MMS server) URL is missing or incorrect. If you are unsure how to check, I can guide you through the process. Would you like step-by-step instructions to check your APN settings?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Yes, please guide me step by step to check my APN settings."
+  },
+  {
+   "role": "agent",
+   "content": "Here are the step-by-step instructions to check your APN settings on your Pixel 8 Pro:\n\n1. Open the Settings app on your phone.\n2. Tap on Network & Internet.\n3. Tap on Mobile Network.\n4. Tap on Advanced (if you see this option).\n5. Tap on Access Point Names (APN).\n\nYou should now see a list of APN profiles. Tap on the active APN (the one with a filled-in circle or checkmark).\n\nPlease review the following:\n- The APN field (should usually have your carrier\u2019s name or a specific value).\n- The MMSC field (this is the MMS server URL).\n\nLet me know:\n- What values you see for APN and MMSC.\n- If the MMSC field is empty or looks incorrect.\n\nOnce you provide this information, I\u2019ll advise you on the next steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked the APN settings. The APN name is 'fast.telecom.net' and the MMSC URL is 'http://mms.telecom.net/mms/wapenc'. It says the APN settings are correct.",
+   "tool_calls": [
+    {
+     "tool_name": "check_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking. Your APN name and MMSC URL both appear correct, so your phone should be able to connect to higher-speed networks and send MMS.\n\nSince the APN settings are correct, but you are still only seeing 'E' (2G) and cannot access 4G/5G, the issue may be related to network coverage in your area or a temporary network problem.\n\nLet\u2019s try one more thing:\n- Please try moving to a different location, preferably outdoors or near a window, and see if your signal improves to 4G, LTE, or 5G.\n- If possible, check if other people nearby with the same carrier have 4G/5G service.\n\nIf your signal does not improve after moving, please let me know. If the issue persists, I may need to escalate your case to a human agent for further investigation.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I went outside and moved around, but the signal still says 'E' with one bar. No change to 4G or 5G. I checked with my neighbor who uses the same carrier, and they have 5G service with full bars."
+  },
+  {
+   "role": "agent",
+   "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez has no service except 'E' (2G) with one bar, cannot access 4G/5G, and cannot send MMS. APN and MMSC settings are correct, SIM is active, device is compatible, and neighbor on same carrier has 5G. All troubleshooting steps exhausted."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez has no service except 'E' (2G) with one bar, cannot access 4G/5G, and cannot send MMS. APN and MMSC settings are correct, SIM is active, device is compatible, and neighbor on same carrier has 5G. All troubleshooting steps exhausted."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Okay, I'm holding for the human agent."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for your patience. A human agent will assist you shortly to resolve your issue. Please stay on the line.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Okay, I'll stay on the line and wait for the human agent."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for waiting. A human agent will be with you soon to assist further. If you have any additional details to share, please have them ready for the agent.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

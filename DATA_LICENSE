@@ -1,0 +1,23 @@
+Data licence: Creative Commons Attribution 4.0 International (CC BY 4.0)
+https://creativecommons.org/licenses/by/4.0/legalcode
+
+Copyright (c) 2026 Vineet Singh, Constolve
+
+Applies to the data in this repository: the generated scenario suites and policy graph
+(code-fixed/generated/*.json), the conversation traces, call logs, manifests, reports,
+scores and seals (results/, experiments/*/results/, seals/, experiments/*/seals/), the
+policy variants, selections, certificates and other experiment data files
+(experiments/*/*.json, *.csv, *.jsonl, *.md, experiments/rule-ablation/policies/), and
+deep_policy/.
+
+You are free to share and adapt this material for any purpose, including commercially,
+provided you give appropriate credit (cite "Compiling Operating Policies into Executable
+Test Environments for Tool-Calling Agents", Vineet Singh, Constolve, 2026; see
+CITATION.cff), provide a link to the licence, and indicate if changes were made.
+
+Third-party material keeps its own licence. The telecom operating policy, tool schemas,
+databases and task files come from tau3-bench (c) 2025 Sierra Research, MIT licence; the
+policy texts in deep_policy/ and experiments/rule-ablation/policies/ are that policy and
+edits of it. The conversation traces were produced by OpenAI gpt-4.1 acting as agent and
+simulated customer; all customers, accounts, phone numbers and email addresses in them
+are simulated benchmark data.

@@ -1,0 +1,202 @@
+{
+ "case": "12:[graph:Understanding and Troublesho]transfer_to_human_agents",
+ "arm": "R5_escalate_unfixable",
+ "repeat": 3,
+ "solved": false,
+ "actions_done": 1,
+ "actions_required": 3,
+ "turns": 13,
+ "calls": [
+  "get_customer_by_phone",
+  "check_status_bar",
+  "get_details_by_id",
+  "reseat_sim_card"
+ ],
+ "criteria": [
+  {
+   "id": "diagnosed_before_handoff",
+   "ok": false,
+   "why": "tool 'check_sim_status' was never called"
+  },
+  {
+   "id": "s1_get_data_usage",
+   "ok": true,
+   "why": "tool 'get_data_usage' was called"
+  },
+  {
+   "id": "s4_transfer_to_human_agents",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was never called by the assistant"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone can't connect to the internet at all. Nothing will load or send."
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot your internet connectivity issue. To get started, I\u2019ll need to identify your account. Could you please provide either your phone number, customer ID, or your full name and date of birth?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Sure, my name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you, Sofia. To help you get back online, I\u2019ll guide you through some quick checks and troubleshooting steps. First, could you tell me if you see any signal bars or network icons (like 4G, 5G, LTE) at the top of your phone\u2019s screen? If you\u2019re not sure, I can walk you through how to check this on your device. Would you like instructions?",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "At the top of my screen it shows 'No Signal', but it also says 'Data Enabled' and 'Connected to Chestnut-5G'.",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the details. Since your phone shows \"No Signal,\" this means your device is not connected to the cellular network, which is required for mobile data to work when you\u2019re not on Wi-Fi. Even though \"Data Enabled\" is on and you\u2019re connected to Wi-Fi, you won\u2019t have mobile internet without cellular signal.\n\nLet\u2019s start by checking a few things:\n\n1. Is Airplane Mode turned on? (It would show an airplane icon at the top of your screen.)\n2. Have you recently removed or reinserted your SIM card, or has your phone asked for a SIM PIN or PUK code?\n3. Are you able to make or receive calls?\n\nPlease let me know about these, or if you\u2019d like, I can guide you through steps to check and fix these issues.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "There\u2019s no airplane icon so I don\u2019t think Airplane Mode is on. I haven\u2019t removed or reinserted my SIM card recently, and my phone hasn\u2019t asked for a SIM PIN or PUK code. I can\u2019t make or receive calls either."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the information. Your line status is active, so there are no suspensions or contract issues preventing service. Since you have no signal and can\u2019t make calls, the issue may be with your SIM card or network settings.\n\nLet\u2019s try reseating your SIM card, which can often resolve signal issues. Would you like step-by-step instructions on how to do this, or can you try removing and reinserting your SIM card now? After you do this, please let me know if the signal returns or if anything changes on your phone\u2019s screen.",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I removed and reinserted my SIM card, but it says the SIM is still locked. The signal hasn\u2019t come back.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. If your phone says the SIM is locked, it usually means it\u2019s asking for a PIN or PUK code. This will prevent your phone from connecting to the network and is likely the reason you have no signal.\n\nDo you see a prompt on your phone asking for a SIM PIN or PUK code? If so, please enter the correct code if you know it. If you don\u2019t know the code or have entered it incorrectly multiple times, please let me know, and I\u2019ll guide you on what to do next.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Yes, it\u2019s asking for a SIM PIN. I don\u2019t know the code."
+  },
+  {
+   "role": "agent",
+   "content": "Since you don\u2019t know your SIM PIN, you should not attempt to guess it, as entering the wrong code multiple times will lock your SIM and require a PUK code to unlock it.\n\nThe safest next step is to contact your carrier\u2019s customer service to retrieve or reset your SIM PIN. For your security, I am unable to provide or reset SIM PINs directly.\n\nWould you like me to transfer you to a human agent who can assist you further with your SIM PIN?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

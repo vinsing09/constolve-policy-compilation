@@ -1,0 +1,354 @@
+{
+ "case": "9:[graph:Understanding and Troublesho]reset_apn_settings",
+ "arm": "R5_escalate_unfixable",
+ "repeat": 0,
+ "solved": true,
+ "actions_done": 3,
+ "actions_required": 3,
+ "turns": 17,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "check_status_bar",
+  "check_sim_status",
+  "check_apn_settings",
+  "reset_apn_settings",
+  "reboot_device",
+  "get_details_by_id",
+  "reseat_sim_card",
+  "get_bills_for_customer",
+  "get_data_usage"
+ ],
+ "criteria": [
+  {
+   "id": "s0_reset_apn_settings",
+   "ok": true,
+   "why": "tool 'reset_apn_settings' was called"
+  },
+  {
+   "id": "s1_reboot_device",
+   "ok": true,
+   "why": "tool 'reboot_device' was called"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was not called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, nothing loads, and I can't send picture messages. Can you help me get it working again?"
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot your phone\u2019s service and picture messaging issues. To get started, I\u2019ll need to identify your account. Could you please provide one of the following:\n\n- The phone number associated with your account\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I\u2019ll guide you through the steps to restore your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you, Sofia. I see your line is active, but you have no service and can't send picture messages. Let's start troubleshooting:\n\n1. We'll check if your phone is in Airplane Mode or has any SIM issues.\n2. We'll also check your network and data settings, since MMS (picture messaging) requires both service and mobile data.\n\nCould you please check your phone\u2019s status bar and let me know:\n- Is Airplane Mode enabled?\n- Do you see any signal bars or a \u201cNo Service\u201d message?\n- Is there a mobile data icon (like 4G, LTE, 5G) showing?\n\nIf you\u2019re unsure, I can guide you through checking these on your device. Would you like step-by-step instructions?",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I see a 'No Signal' icon in the status bar. Data is enabled, and it shows I'm connected to 'Chestnut-5G', but I still have no service and can't send or receive anything.",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the details. Since you see a \u2018No Signal\u2019 icon, your phone isn\u2019t connecting to the cellular network, even though Wi-Fi is enabled. Let\u2019s try the following steps to restore your service:\n\n1. Check if Airplane Mode is accidentally enabled.\n2. Check your SIM card status to ensure it\u2019s recognized and active.\n3. Reset your network settings if needed.\n\nWould you like instructions on how to check Airplane Mode and SIM status, or can you confirm if Airplane Mode is off and the SIM card is inserted properly?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My SIM card status shows as active, and Airplane Mode is off, but I still have no service and can't send or receive anything.",
+   "tool_calls": [
+    {
+     "tool_name": "check_sim_status",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming that your SIM card is active and Airplane Mode is off. Since you still have no service, the next step is to check your network settings, specifically your APN (Access Point Name) settings, which are crucial for connecting to the cellular network and for MMS (picture messaging).\n\nCould you please check your APN settings and let me know if they appear correct or if there\u2019s any error message? If you\u2019re unsure how to check, I can guide you through the process. Would you like step-by-step instructions to check your APN settings?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I'm not sure how to check my APN settings. Can you walk me through the steps?"
+  },
+  {
+   "role": "agent",
+   "content": "Absolutely! Here\u2019s how you can check your APN settings:\n\n1. Open the Settings app on your phone.\n2. Tap on \u201cNetwork & Internet\u201d or \u201cConnections\u201d (the exact name may vary).\n3. Select \u201cMobile Network\u201d or \u201cCellular Networks.\u201d\n4. Tap on \u201cAccess Point Names\u201d or \u201cAPN.\u201d\n5. You\u2019ll see a list of APN profiles. Tap on the one that is currently selected.\n\nPlease let me know what you see for the APN name and if there\u2019s an MMSC (Multimedia Messaging Service Center) URL listed. If anything looks blank or incorrect, let me know, and I\u2019ll guide you on how to reset your APN settings.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I see that the APN name is 'fast.telecom.net', but the APN status says 'Not set'. The MMSC URL is 'http://mms.telecom.net/mms/wapenc'.",
+   "tool_calls": [
+    {
+     "tool_name": "check_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking. The APN status showing \u201cNot set\u201d could be the reason you have no service and can\u2019t send or receive anything, even though the MMSC URL is present.\n\nLet\u2019s reset your APN settings to the default, which often resolves this issue. Here\u2019s what to do:\n\n1. In the same APN settings menu, look for an option like \u201cReset to default\u201d or \u201cReset settings.\u201d\n2. Tap that option to reset your APN settings.\n3. After resetting, please restart (reboot) your phone for the changes to take effect.\n\nOnce you\u2019ve done this, let me know if your service returns and if you\u2019re able to send/receive messages. If you need step-by-step instructions for any part of this process, just let me know!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I reset the APN settings to default and rebooted my phone, but I still have no service\u2014there are no signal bars, and I can't send or receive messages.",
+   "tool_calls": [
+    {
+     "tool_name": "reset_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for following those steps. Since your APN settings are now correct, your SIM is active, Airplane Mode is off, and you\u2019ve rebooted your phone, but you still have no service, this suggests a deeper network or account issue.\n\nAt this point, I recommend the following quick check before we proceed further:\n- Try removing your SIM card (if it\u2019s physical), wait a few seconds, and reinsert it. If you have an eSIM, you can skip this step.\n\nIf you\u2019ve already tried this or it doesn\u2019t help, please let me know. I\u2019ll then check your account and line status for any issues on our end that could be affecting your service. Have you already tried reseating your SIM card?",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "DEV-55210"
+     },
+     "params": {
+      "id": "DEV-55210"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "device_id": "DEV-55210",
+      "device_type": "phone",
+      "model": "Pixel 8 Pro",
+      "imei": "356938035643809",
+      "esim_capable": true,
+      "activation_status": "Active",
+      "activation_date": "2023-05-18",
+      "last_esim_transfer_date": "2023-05-18",
+      "entity_type": "device"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I just removed and reinserted my SIM card. The phone says the SIM status is active, but I still have no service and can't send or receive anything.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Your account and line are both active, your bills are paid, and you have not exceeded your data limit. You\u2019ve also confirmed your SIM is active, Airplane Mode is off, and you\u2019ve reset your APN settings and rebooted your phone.\n\nSince all standard troubleshooting steps have been completed and there are no account or billing issues, this may be a deeper technical problem that requires advanced support.\n\nWould you like me to transfer you to a human agent for further assistance?",
+   "tool_calls": [
+    {
+     "tool_name": "get_bills_for_customer",
+     "arguments": {
+      "customer_id": "CUS-4501283"
+     },
+     "params": {
+      "customer_id": "CUS-4501283"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_data_usage",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_bills_for_customer",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "count": 2,
+      "bills": [
+       {
+        "bill_id": "BILL-4501283-2025-02",
+        "customer_id": "CUS-4501283",
+        "period_start": "2025-01-06",
+        "period_end": "2025-02-05",
+        "issue_date": "2025-02-06",
+        "total_amount_due": 70.0,
+        "due_date": "2025-02-26",
+        "status": "Paid"
+       },
+       {
+        "bill_id": "BILL-4501283-2025-01",
+        "customer_id": "CUS-4501283",
+        "period_start": "2024-12-06",
+        "period_end": "2025-01-05",
+        "issue_date": "2025-01-06",
+        "total_amount_due": 65.0,
+        "due_date": "2025-01-26",
+        "status": "Paid"
+       }
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_data_usage",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "plan_name": "Advantage 50GB",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "data_limit_gb": 50,
+      "total_data_available_gb": 50,
+      "cycle_end_date": "2025-03-05"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

@@ -1,0 +1,319 @@
+{
+ "case": "9:[graph:Understanding and Troublesho]reset_apn_settings",
+ "arm": "stub",
+ "repeat": 3,
+ "solved": false,
+ "actions_done": 1,
+ "actions_required": 3,
+ "turns": 15,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "get_data_usage",
+  "reboot_device",
+  "reseat_sim_card",
+  "get_details_by_id",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_reset_apn_settings",
+   "ok": false,
+   "why": "tool 'reset_apn_settings' was never called by the user"
+  },
+  {
+   "id": "s1_reboot_device",
+   "ok": true,
+   "why": "tool 'reboot_device' was called"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, no internet, and I can't send picture messages. Can you help?"
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're experiencing no service on your phone. Let's try to resolve this together. To assist you better, could you please provide your phone number or account details? This will help me check your line status and identify any issues.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Your line is currently active, and you have not exceeded your data limit for this billing cycle. Since your account and line appear to be in good standing, let's try a few troubleshooting steps:\n\n1. Restart your phone.\n2. Make sure Airplane Mode is turned off.\n3. Check if your SIM card is properly inserted.\n4. Try toggling mobile data off and on.\n\nIf you've already tried these steps or the issue persists, please let me know. I can check for network outages in your area or escalate the issue further if needed. Have you noticed any error messages or changes before the service stopped working?",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_data_usage",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_data_usage",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "plan_name": "Advantage 50GB",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "data_limit_gb": 50,
+      "total_data_available_gb": 50,
+      "cycle_end_date": "2025-03-05"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I haven't seen any error messages, it just suddenly lost all service. I haven't restarted the phone or checked the SIM yet. Do you want me to try those steps one at a time?"
+  },
+  {
+   "role": "agent",
+   "content": "Yes, please try the following steps one at a time, and let me know after each step if your service returns:\n\n1. Restart your phone. (This can often resolve temporary network issues.)\n2. If restarting doesn\u2019t help, check that Airplane Mode is off.\n3. If you still have no service, power off your phone, remove the SIM card, wait about 30 seconds, then reinsert the SIM card and power your phone back on.\n\nLet me know after each step if anything changes or if you see any new messages on your phone. If none of these steps work, I\u2019ll help you further or escalate the issue.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I restarted my phone and it rebooted successfully, but I still have no service\u2014no bars, nothing loads.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying that. Next, please check the following:\n\n1. Make sure Airplane Mode is turned off.\n2. If Airplane Mode is off, please power off your phone, remove the SIM card, wait about 30 seconds, then reinsert the SIM card and power your phone back on.\n\nLet me know if you regain service after these steps, or if the issue remains the same. If there\u2019s still no service, I\u2019ll assist you with the next steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I removed and reinserted the SIM card as you suggested. The SIM status shows as active, but I still have no service\u2014no bars, no connection.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying those steps. Since your line is active, your account is in good standing, and you\u2019ve already restarted your phone and reinserted the SIM card, but you still have no service, this could indicate a possible SIM card or device issue, or a network problem in your area.\n\nTo help you further, could you please confirm:\n- Are you experiencing this issue everywhere, or just in a specific location?\n- Do you have another phone available to test your SIM card in, or another SIM card to test in your phone?\n\nIf you don\u2019t have another device or SIM to test with, or if the issue is happening everywhere, I recommend the following next steps:\n- I can check for any known network outages in your area.\n- If there are no outages, you may need a SIM replacement or further technical support.\n\nWould you like me to check for network outages, or would you prefer to be connected to a human agent for more advanced troubleshooting or a possible SIM replacement?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I'm at home in Boston, and the issue is happening here. I don't have another phone or SIM to test with. Could you please check if there are any network outages in my area?"
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming your location. I\u2019ve checked your account and line status, and everything appears active and in good standing. However, I do not have direct access to real-time network outage maps.\n\nSince you\u2019re experiencing a complete loss of service at home and have already tried all basic troubleshooting steps, the issue could be due to a local network outage or a problem with your SIM card or device.\n\nWould you like me to escalate this to a human agent for further investigation and support, including checking for outages and arranging a possible SIM replacement if needed?",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "CUS-4501283"
+     },
+     "params": {
+      "id": "CUS-4501283"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address_street": "412 Chestnut Street, Apt 5B",
+      "address_city": "Boston",
+      "address_state": "MA",
+      "address_zip_code": "02116",
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "entity_type": "customer",
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "customer_id": "CUS-4501283",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "customer_id": "CUS-4501283",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Yes, please escalate this to a human agent so they can check for outages and help with a SIM replacement if necessary."
+  },
+  {
+   "role": "agent",
+   "content": "I've escalated your issue to a human agent who can check for network outages in your area and assist you with a possible SIM replacement if needed. Someone will be with you shortly to provide further support. Thank you for your patience!",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez (+1-617-555-0148) has no service at all (no bars, no internet, cannot send picture messages) despite account and line being active and in good standing. Customer has restarted phone, checked Airplane Mode, and reinserted SIM card with no change. Issue occurs at home in Boston (02116). Customer requests escalation to check for network outages and possible SIM replacement."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez (+1-617-555-0148) has no service at all (no bars, no internet, cannot send picture messages) despite account and line being active and in good standing. Customer has restarted phone, checked Airplane Mode, and reinserted SIM card with no change. Issue occurs at home in Boston (02116). Customer requests escalation to check for network outages and possible SIM replacement."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

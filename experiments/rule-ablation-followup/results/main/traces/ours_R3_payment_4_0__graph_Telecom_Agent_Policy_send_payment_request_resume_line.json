@@ -1,0 +1,442 @@
+{
+ "case": "0:[graph:Telecom Agent Policy]send_payment_request|resume_line",
+ "arm": "R3_payment",
+ "repeat": 4,
+ "solved": false,
+ "actions_done": 3,
+ "actions_required": 4,
+ "turns": 23,
+ "calls": [
+  "get_customer_by_phone",
+  "check_status_bar",
+  "get_details_by_id",
+  "get_bills_for_customer",
+  "get_details_by_id",
+  "send_payment_request",
+  "check_payment_request",
+  "make_payment",
+  "resume_line",
+  "reboot_device",
+  "reseat_sim_card",
+  "reset_apn_settings",
+  "reboot_device",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_send_payment_request",
+   "ok": true,
+   "why": "tool 'send_payment_request' was called with {'customer_id': 'CUS-4501283', 'bill_id': 'BILL-4501283-2025-01'}"
+  },
+  {
+   "id": "s1_make_payment",
+   "ok": true,
+   "why": "tool 'make_payment' was called"
+  },
+  {
+   "id": "s2_resume_line",
+   "ok": true,
+   "why": "tool 'resume_line' was called with {'customer_id': 'CUS-4501283', 'line_id': 'LN-8830142'}"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no signal at all. I can't make any calls or use the internet. Can you help?"
+  },
+  {
+   "role": "agent",
+   "content": "I can help you with that. To begin troubleshooting your signal issue, I\u2019ll need to identify your account. Could you please provide one of the following:\n\n- The phone number associated with your account\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I can assist you further.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148 and my name is Sofia Martinez."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your information. To help resolve your \"no signal\" issue, I\u2019ll need to check a few things about your line and device status.\n\nCan you please confirm:\n- Are you seeing any icons like \"Airplane Mode\" or \"No SIM\" on your phone\u2019s status bar?\n- Did this issue start suddenly, or has it been ongoing?\n\nMeanwhile, I\u2019ll check your line status and account details to assist further.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I'm seeing a 'No Signal' icon at the top of my phone, but it does show 'Data Enabled' and that I'm connected to 'Chestnut-5G'. The issue just started today.",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Your line is currently suspended, which is why you have no signal and cannot make calls or use mobile data. This is likely the cause of your issue.\n\nWould you like me to check if there are any overdue bills or other reasons for the suspension and assist you in resolving it so your service can be restored?",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Suspended",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "2025-02-25",
+      "suspension_reason": 1,
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Yes, please check if there are any overdue bills or other reasons for the suspension and let me know how I can resolve it."
+  },
+  {
+   "role": "agent",
+   "content": "Your line was suspended because you have an overdue bill from the previous billing cycle. The overdue amount is $65.00 for your monthly plan.\n\nTo restore your service, you\u2019ll need to pay this overdue bill. Would you like to proceed with making the payment now? If so, I can guide you through the process.",
+   "tool_calls": [
+    {
+     "tool_name": "get_bills_for_customer",
+     "arguments": {
+      "customer_id": "CUS-4501283"
+     },
+     "params": {
+      "customer_id": "CUS-4501283"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "BILL-4501283-2025-01"
+     },
+     "params": {
+      "id": "BILL-4501283-2025-01"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_bills_for_customer",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "count": 2,
+      "bills": [
+       {
+        "bill_id": "BILL-4501283-2025-02",
+        "customer_id": "CUS-4501283",
+        "period_start": "2025-01-06",
+        "period_end": "2025-02-05",
+        "issue_date": "2025-02-06",
+        "total_amount_due": 70.0,
+        "due_date": "2025-02-26",
+        "status": "Paid"
+       },
+       {
+        "bill_id": "BILL-4501283-2025-01",
+        "customer_id": "CUS-4501283",
+        "period_start": "2024-12-06",
+        "period_end": "2025-01-05",
+        "issue_date": "2025-01-06",
+        "total_amount_due": 65.0,
+        "due_date": "2025-01-26",
+        "status": "overdue"
+       }
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "bill_id": "BILL-4501283-2025-01",
+      "customer_id": "CUS-4501283",
+      "period_start": "2024-12-06",
+      "period_end": "2025-01-05",
+      "issue_date": "2025-01-06",
+      "total_amount_due": 65.0,
+      "due_date": "2025-01-26",
+      "status": "overdue",
+      "entity_type": "bill",
+      "line_items": [
+       {
+        "line_item_id": "BLI-90001",
+        "bill_id": "BILL-4501283-2025-01",
+        "description": "Advantage 50GB monthly plan charge - line +1-617-555-0148",
+        "amount": 65.0,
+        "item_type": "charge"
+       }
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Yes, I'd like to pay the overdue bill now. Please guide me through the payment process."
+  },
+  {
+   "role": "agent",
+   "content": "A payment request for your overdue bill of $65.00 has been sent to you. Please follow the instructions in the payment notification you receive to complete the payment.\n\nOnce you have made the payment, let me know so I can verify it and assist you in restoring your service. If you need help with the payment process, please let me know.",
+   "tool_calls": [
+    {
+     "tool_name": "send_payment_request",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "bill_id": "BILL-4501283-2025-01"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "bill_id": "BILL-4501283-2025-01"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "send_payment_request",
+     "response": {
+      "result": "Payment request for bill BILL-4501283-2025-01 (amount due $65.0) sent to Sofia Martinez. Bill status is now Awaiting Payment."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I see the payment request and the status is showing as pending. What should I do next to complete the payment?",
+   "tool_calls": [
+    {
+     "tool_name": "check_payment_request",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "To complete the payment for your overdue bill, please follow these steps:\n\n1. Open the payment notification you received (via email, SMS, or your account portal).\n2. Click the payment link or follow the instructions provided in the notification.\n3. Choose your preferred payment method (Credit Card or PayPal, as listed on your account).\n4. Enter the required payment details and confirm the payment.\n\nOnce the payment is processed, let me know so I can verify the bill status and assist you in restoring your service. If you encounter any issues during the payment process, please let me know for further assistance.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I completed the payment and it shows as paid now. What should I do next to get my service restored?",
+   "tool_calls": [
+    {
+     "tool_name": "make_payment",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Your payment has been received and your line has been reactivated. To restore your service, please reboot your phone. After restarting, you should regain signal and be able to make calls and use the internet as usual.\n\nIf you still experience any issues after rebooting, let me know and I\u2019ll assist you further.",
+   "tool_calls": [
+    {
+     "tool_name": "resume_line",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "resume_line",
+     "response": {
+      "result": "Line LN-8830142 has been resumed and is now Active."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "My phone rebooted successfully, but I still don't have any signal. The status bar still shows 'No Signal'. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. Since your line is now active but you still see \"No Signal,\" let's try some additional troubleshooting steps:\n\n1. Check if Airplane Mode is enabled. If it is, please turn it off.\n2. Reseat your SIM card. This means removing the SIM card from your phone and reinserting it to ensure it is properly seated.\n\nWould you like step-by-step guidance on how to reseat your SIM card, or can you try this on your own and let me know once it\u2019s done?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I can follow your instructions. Please guide me step by step to reseat my SIM card."
+  },
+  {
+   "role": "agent",
+   "content": "Here are the step-by-step instructions to reseat your SIM card:\n\n1. Power off your phone completely.\n2. Locate the SIM card tray on your phone. This is usually on the side or top edge of your device.\n3. Use the SIM ejector tool (or a small paperclip) to gently push into the small hole next to the SIM tray. The tray should pop out.\n4. Carefully remove the SIM card from the tray.\n5. Wait a few seconds, then place the SIM card back into the tray, making sure it is properly aligned.\n6. Gently push the tray back into your phone until it clicks into place.\n7. Power your phone back on.\n\nOnce your phone has restarted, check if you now have a signal. Please let me know the result.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I already reseated the SIM card and the SIM status is active, but I still have no signal. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for reseating the SIM card and confirming its status is active. Since you still have no signal, let\u2019s try resetting your network settings, specifically the APN (Access Point Name) settings, as incorrect APN settings can cause loss of service.\n\nHere\u2019s what to do next:\n1. Reset your APN settings to default.\n2. After resetting, reboot your device.\n\nWould you like step-by-step instructions on how to reset your APN settings, or can you perform this on your own and let me know once it\u2019s done?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I've already reset the APN settings to default and rebooted my device. The phone says the changes have been applied, but I still have no signal. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "reset_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez has no signal despite line and SIM being active. She has already reseated the SIM, reset APN settings, and rebooted the device. Standard troubleshooting exhausted; advanced technical support required."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez has no signal despite line and SIM being active. She has already reseated the SIM, reset APN settings, and rebooted the device. Standard troubleshooting exhausted; advanced technical support required."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

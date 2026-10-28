@@ -1,0 +1,309 @@
+{
+ "case": "2:[graph:Understanding and Troublesho]toggle_roaming|toggle_data_saver_mode|disconnect_vpn|set_network_mode_preference",
+ "arm": "stub",
+ "repeat": 2,
+ "solved": false,
+ "actions_done": 1,
+ "actions_required": 5,
+ "turns": 23,
+ "calls": [
+  "get_customer_by_phone",
+  "get_data_usage",
+  "toggle_airplane_mode",
+  "get_details_by_id",
+  "get_details_by_id"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_roaming",
+   "ok": false,
+   "why": "tool 'toggle_roaming' was never called by the user"
+  },
+  {
+   "id": "s1_toggle_data_saver_mode",
+   "ok": false,
+   "why": "tool 'toggle_data_saver_mode' was never called by the user"
+  },
+  {
+   "id": "s2_disconnect_vpn",
+   "ok": false,
+   "why": "tool 'disconnect_vpn' was never called by the user"
+  },
+  {
+   "id": "s3_set_network_mode_preference",
+   "ok": false,
+   "why": "tool 'set_network_mode_preference' was never called by the user"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was not called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "My phone feels really slow online, way slower than my husband's, and it's like this everywhere I go. Pages just take forever to load and it's never on the fast network like his."
+  },
+  {
+   "role": "agent",
+   "content": "I understand how frustrating slow internet speeds can be, especially when someone else on the same plan or in the same area is experiencing better performance. To help you, I\u2019ll need to check your data usage and network status to see if there are any issues with your line, such as data throttling or plan limitations.\n\nCould you please provide your phone number or your full name and date of birth? This will help me locate your account and investigate further.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Your line is currently on the \"Advantage 50GB\" plan, and you have used about 12.4GB out of your 50GB data limit for this billing cycle. This means you are well within your data allowance, so your speed should not be throttled due to overuse.\n\nSince your data usage is not the issue, here are a few things that could be causing your slow speeds:\n\n1. Network Mode: Your phone might be set to a slower network mode (like 3G or LTE instead of 5G).\n2. Device Settings: There could be a setting or software issue on your phone affecting speed.\n3. SIM Card: An old or damaged SIM card can sometimes cause connectivity issues.\n4. Plan Differences: If your husband is on a different plan or has a newer device, he might have access to faster networks.\n\nWould you like some troubleshooting steps for your device, or do you want to check if your plan supports the fastest available network (like 5G)? Let me know how you\u2019d like to proceed!",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_data_usage",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_data_usage",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "plan_name": "Advantage 50GB",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "data_limit_gb": 50,
+      "total_data_available_gb": 50,
+      "cycle_end_date": "2025-03-05"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Let's try troubleshooting my device first. What should I check or do?"
+  },
+  {
+   "role": "agent",
+   "content": "Great! Here are some troubleshooting steps you can try to improve your phone\u2019s internet speed:\n\n1. **Restart Your Phone:**  \n   Sometimes a simple restart can resolve temporary network or software glitches.\n\n2. **Check Network Mode:**  \n   - Go to your phone\u2019s Settings > Mobile Network (or Cellular Network).\n   - Ensure your phone is set to use the highest available network (e.g., 4G/LTE or 5G if your device and plan support it).\n   - If it\u2019s set to 3G or a lower mode, switch to 4G/LTE or 5G.\n\n3. **Toggle Airplane Mode:**  \n   - Turn on Airplane Mode for about 10 seconds, then turn it off. This can reset your network connection.\n\n4. **Check for Software Updates:**  \n   - Go to Settings > System > Software Update and make sure your phone\u2019s software is up to date.\n\n5. **Remove and Reinsert SIM Card:**  \n   - Power off your phone, remove the SIM card, wait a few seconds, then reinsert it and power your phone back on.\n\n6. **Reset Network Settings:**  \n   - Go to Settings > System > Reset > Reset Network Settings.  \n   - Note: This will erase saved Wi-Fi networks and Bluetooth connections, so you\u2019ll need to reconnect to Wi-Fi afterward.\n\n7. **Test in Different Locations:**  \n   - Since you mentioned it\u2019s slow everywhere, this is less likely to be the issue, but try testing in a few different places just in case.\n\n8. **Compare with Your Husband\u2019s Settings:**  \n   - Check if your husband\u2019s phone is set to a different network mode or has different APN (Access Point Name) settings.\n\nIf you try these steps and still experience slow speeds, let me know which steps you\u2019ve completed and if anything changed. I can then check your plan\u2019s network access or escalate the issue for further investigation.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Let's start by checking my network mode. Can you guide me through that step?"
+  },
+  {
+   "role": "agent",
+   "content": "Absolutely! Here\u2019s how you can check and change your network mode, depending on whether you have an Android or iPhone:\n\n---\n\n### For Android Phones:\n1. **Open Settings.**\n2. Tap on **Connections** or **Network & Internet** (the exact name may vary).\n3. Tap on **Mobile Network** or **Cellular Network**.\n4. Look for **Preferred Network Type** or **Network Mode**.\n5. Select the highest available option (such as **5G/4G/3G/2G (auto connect)** or **LTE/4G/3G/2G (auto connect)**).\n6. Save or exit the settings.\n\n---\n\n### For iPhones:\n1. **Open Settings.**\n2. Tap on **Cellular**.\n3. Tap on **Cellular Data Options**.\n4. Tap on **Voice & Data**.\n5. Select the highest available option (**5G Auto**, **5G On**, or **LTE**).\n\n---\n\n**Tip:**  \nIf you don\u2019t see 5G as an option, your phone may not support it, or your plan may not include it. In that case, select **LTE/4G** for the fastest available speed.\n\nLet me know what options you see and which one is currently selected! If you need more specific instructions, please tell me your phone\u2019s make and model.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked my phone's network mode settings and it's set to '5G/4G/3G/2G (auto connect)'. So it should be picking the fastest network, but it's still really slow."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking your network mode. Since your phone is set to automatically connect to the fastest available network, but you\u2019re still experiencing slow speeds, let\u2019s try a few more steps:\n\n1. **Check Signal Strength:**  \n   - What is the signal strength showing on your phone (number of bars or dots)?  \n   - Are you seeing a 5G, 4G, or LTE icon next to the signal bars?\n\n2. **Toggle Airplane Mode:**  \n   - Turn on Airplane Mode for about 10 seconds, then turn it off. This can refresh your network connection.\n\n3. **Restart Your Phone:**  \n   - Power off your phone, wait a few seconds, then turn it back on.\n\n4. **Check for Software Updates:**  \n   - Go to Settings > System > Software Update and make sure your phone is up to date.\n\n5. **Compare with Your Husband\u2019s Phone:**  \n   - When you\u2019re side by side, does his phone show a different network type (e.g., 5G vs. 4G) or more signal bars than yours?\n\n6. **SIM Card:**  \n   - If your SIM card is old or damaged, it might not connect to newer networks properly. If possible, try your SIM card in your husband\u2019s phone and see if the speed improves, or try his SIM in your phone.\n\nWould you like to try these steps next, or would you like me to check if your plan or line has any restrictions or issues that could be affecting your speed? Let me know how you\u2019d like to proceed!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Right now, my phone is showing 2 out of 4 bars and an LTE icon next to the signal bars. My husband's phone is showing 5G in the same spot. Should I try toggling Airplane Mode next?"
+  },
+  {
+   "role": "agent",
+   "content": "Yes, toggling Airplane Mode is a good next step. Here\u2019s how to do it:\n\n1. Swipe down from the top of your screen to open the quick settings menu (on most phones).\n2. Tap the **Airplane Mode** icon to turn it on. Wait about 10 seconds.\n3. Tap the **Airplane Mode** icon again to turn it off.\n\nAfter your phone reconnects to the network, check if the network icon changes (for example, from LTE to 5G) and if your signal strength improves.\n\nIf you\u2019re still seeing only LTE while your husband\u2019s phone shows 5G in the same location, let me know. This could indicate a device compatibility issue, a SIM card issue, or a plan/network restriction. I can then check your line and plan details for 5G access or suggest further steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I turned Airplane Mode on, and now everything is disconnected. Should I turn it back off now?",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_airplane_mode",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Yes, please turn Airplane Mode back off now. This will allow your phone to reconnect to the mobile network.\n\nOnce you\u2019ve turned it off, watch your signal bars and network icon for a few moments. Let me know:\n\n- What network icon appears (LTE, 5G, etc.)?\n- How many signal bars do you see?\n\nThis will help determine if toggling Airplane Mode helped your phone connect to a faster network.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I turned Airplane Mode off. My phone reconnected, but it still shows LTE with 2 out of 4 bars. It's not switching to 5G like my husband's phone."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking. Since your phone is still only connecting to LTE while your husband\u2019s phone connects to 5G in the same location, this suggests one of the following:\n\n1. **Device Compatibility:** Your phone may not support 5G, or 5G may be disabled in your device settings.\n2. **SIM Card Issue:** An older or damaged SIM card may not support 5G.\n3. **Plan or Line Restriction:** Your plan or line may not have 5G access enabled.\n\nLet\u2019s narrow this down:\n\n- What is the make and model of your phone? (This will help confirm if it supports 5G.)\n- Do you know if your SIM card is relatively new, or has it been in use for several years?\n- Would you like me to check your plan and line to confirm if 5G access is enabled for you?\n\nIf you provide your phone model, I can guide you on checking 5G settings. I can also check your plan and line status for 5G access right now if you\u2019d like. Let me know how you\u2019d like to proceed!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone is a Samsung Galaxy S21 and I got the SIM card last year, so it should support 5G. Yes, please check my plan and line to make sure 5G access is enabled."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the details. Your Samsung Galaxy S21 definitely supports 5G, and your SIM card is recent, so those are not likely the issue.\n\nI\u2019ve checked your plan (\u201cAdvantage 50GB\u201d) and your line status, and both are active and in good standing. However, the plan details do not specifically mention 5G access. Sometimes, even if the device and SIM are compatible, 5G access must be enabled on your line or included in your plan.\n\nWould you like me to attempt to enable 5G or advanced network access on your line, or would you like to review plan upgrade options if 5G is not included in your current plan? Let me know how you\u2019d like to proceed!",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "PLN-2002"
+     },
+     "params": {
+      "id": "PLN-2002"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "plan_id": "PLN-2002",
+      "name": "Advantage 50GB",
+      "data_limit_gb": 50,
+      "monthly_price": 65.0,
+      "data_refueling_price_per_gb": 5.0,
+      "entity_type": "plan"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "If you can enable 5G on my line, please go ahead and do that. If that\u2019s not possible, let me know what my options are for getting 5G access."
+  },
+  {
+   "role": "agent",
+   "content": "I will check if I can enable 5G or advanced network access on your line. If it\u2019s not possible with your current plan, I\u2019ll provide you with options to upgrade or modify your plan for 5G access.\n\nPlease hold on a moment while I check the available options for your line.\nIt appears that I do not have a direct tool to enable 5G access on your line from my end. Your current plan, \"Advantage 50GB,\" does not specify 5G access, which may be why your phone is only connecting to LTE.\n\nHere\u2019s what you can do next:\n1. Contact customer support (or I can transfer you to a human agent) to confirm if your current plan includes 5G or to request a plan upgrade.\n2. If you\u2019d like, I can provide information about available plans that include 5G access.\n\nWould you like to be connected to a human agent for further assistance, or would you like to see plan upgrade options for 5G? Let me know how you\u2019d like to proceed!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Please show me the plan upgrade options that include 5G access. I\u2019d like to see what\u2019s available before I speak to a human agent."
+  },
+  {
+   "role": "agent",
+   "content": "I currently don\u2019t have direct access to a full list of available plans or their specific features, such as 5G access, from within this system. However, most carriers offer dedicated 5G plans or higher-tier plans that include 5G as a standard feature.\n\nHere\u2019s what you can do next:\n\n1. **Check Your Provider\u2019s Website or App:**  \n   - Visit your carrier\u2019s official website or use their mobile app to view and compare available plans. Look for plans that specifically mention 5G access.\n\n2. **Typical 5G Plan Features:**  \n   - Plans with 5G access are often labeled as \u201c5G Unlimited,\u201d \u201cPremium,\u201d or \u201cElite.\u201d\n   - These plans may offer higher data limits, faster speeds, and additional perks.\n\n3. **Upgrade Process:**  \n   - You can usually upgrade your plan online, through the app, or by contacting customer support.\n\nIf you\u2019d like, I can connect you to a human agent who can provide a detailed list of available 5G plans and help you upgrade directly. Would you like to proceed with speaking to a human agent for personalized plan recommendations and upgrade assistance?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

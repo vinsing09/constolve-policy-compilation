@@ -1,0 +1,286 @@
+{
+ "case": "4:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_wifi_calling|grant_app_permission",
+ "arm": "R5_escalate_unfixable",
+ "repeat": 1,
+ "solved": false,
+ "actions_done": 3,
+ "actions_required": 6,
+ "turns": 17,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "check_status_bar",
+  "toggle_airplane_mode",
+  "reseat_sim_card",
+  "check_apn_settings",
+  "reset_apn_settings",
+  "reboot_device",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_airplane_mode",
+   "ok": true,
+   "why": "tool 'toggle_airplane_mode' was called"
+  },
+  {
+   "id": "s1_reset_apn_settings",
+   "ok": true,
+   "why": "tool 'reset_apn_settings' was called"
+  },
+  {
+   "id": "s2_reboot_device",
+   "ok": true,
+   "why": "tool 'reboot_device' was called"
+  },
+  {
+   "id": "s3_toggle_wifi_calling",
+   "ok": false,
+   "why": "tool 'toggle_wifi_calling' was never called by the user"
+  },
+  {
+   "id": "s4_grant_app_permission",
+   "ok": false,
+   "why": "tool 'grant_app_permission' was never called by the user"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, nothing loads, and I can't send picture messages. It's completely dead as far as the network goes."
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot this issue. First, I need to identify your account to check for any line or account-related problems. Could you please provide your phone number, customer ID, or your full name and date of birth?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148. Do you need my date of birth as well?"
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the information. Your account and line are both active, so there are no suspensions or contract issues causing the loss of service.\n\nLet's proceed with troubleshooting your phone's connection. Could you please check your phone's status bar and let me know if you see any of the following:\n- Airplane mode icon\n- SIM card error or missing SIM message\n- Any signal bars at all (even if very low)\n- Network type indicator (like 5G, 4G, LTE, etc.)\n\nThis will help determine the next steps. If you need guidance on how to check, let me know your phone model and I can assist.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I actually do see the airplane mode icon in the status bar, along with a 'No Signal' indicator. There are no signal bars and no network type showing.",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Airplane mode disables all wireless connections, including cellular service, which explains why you have no signal or network access.\n\nPlease turn off Airplane mode on your phone. You can usually do this by:\n1. Swiping down from the top of your screen to open the quick settings panel.\n2. Tapping the airplane icon to disable it.\n\nOnce you\u2019ve turned off Airplane mode, wait a few seconds and check if your signal bars reappear and if you can use your phone normally. Let me know if this restores your service or if you still have issues.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Airplane mode is now off, but I still don't have any signal bars or network type showing. My phone still says 'No Signal.'",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_airplane_mode",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for turning off Airplane mode. Since you still have no signal, let's check for possible SIM card issues or network settings problems.\n\nPlease check if your phone displays any messages about the SIM card, such as \"No SIM,\" \"SIM error,\" or \"SIM locked.\" If you see any such message, let me know.\n\nIf not, the next step is to reseat your SIM card. This means removing the SIM card from your phone and reinserting it, which can help resolve recognition issues. Would you like instructions on how to do this, or are you comfortable reseating the SIM card yourself?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I just removed and reinserted the SIM card. My phone says the SIM status is active, but I still have no signal bars and it still says 'No Signal.'",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for reseating your SIM card and checking its status. Since the SIM is active but you still have no signal, the next step is to check your network settings, specifically the Access Point Name (APN) settings, which are crucial for network connectivity.\n\nCould you please check your APN settings and let me know if anything looks incorrect or if you see any error messages? If you\u2019re unsure how to check, I can guide you through the process or provide steps for your specific phone model. Let me know how you\u2019d like to proceed.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked my APN settings. The APN name shows as fast.telecom.net, but the status says 'Not set.' The MMSC URL is listed as http://mms.telecom.net/mms/wapenc. What should I do next?",
+   "tool_calls": [
+    {
+     "tool_name": "check_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking your APN settings. Since the APN status says \"Not set,\" this could be causing your network connectivity issues.\n\nThe next step is to reset your APN settings to the default values. After resetting, you will need to restart your phone for the changes to take effect.\n\nPlease reset your APN settings now. Once you\u2019ve done that, restart your phone and let me know if your signal returns or if you still have issues. If you need instructions on how to reset APN settings, let me know your phone model and I can guide you.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I reset the APN settings to default and restarted my phone as you asked. Unfortunately, I still have no signal bars and it still says 'No Signal.' What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "reset_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for resetting your APN settings and restarting your phone. Since you still have no signal, let's try a few more troubleshooting steps:\n\n1. Network Mode: Your phone might be set to use an unsupported network type (like 2G/3G only). Please check your network mode settings and ensure it is set to prefer 4G or 5G networks. If it is not, change it to \u201c4G/5G preferred\u201d or \u201cAuto.\u201d\n\n2. Data Disabled: Check if mobile data is enabled in your phone\u2019s settings. If it is off, turn it on.\n\n3. Data Saver/VPN: If you have Data Saver mode or a VPN enabled, try disabling them temporarily.\n\nIf you need step-by-step instructions for any of these checks, please let me know your phone model. After making these changes, let me know if you see any improvement in your signal or network connectivity.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked my network mode and it's already set to 5G preferred. Mobile data is enabled, and I don't have Data Saver or a VPN turned on. Still no signal bars and still says 'No Signal.'"
+  },
+  {
+   "role": "agent",
+   "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez has no cellular service: no signal bars, 'No Signal' message, and cannot send MMS. Line is active, SIM is active, APN reset, network mode is correct, mobile data is enabled, no Data Saver or VPN. All standard troubleshooting steps have been exhausted."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez has no cellular service: no signal bars, 'No Signal' message, and cannot send MMS. Line is active, SIM is active, APN reset, network mode is correct, mobile data is enabled, no Data Saver or VPN. All standard troubleshooting steps have been exhausted."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

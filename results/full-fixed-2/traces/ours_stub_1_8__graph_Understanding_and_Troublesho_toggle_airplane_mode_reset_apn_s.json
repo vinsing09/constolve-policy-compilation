@@ -1,0 +1,304 @@
+{
+ "case": "8:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line",
+ "arm": "stub",
+ "repeat": 1,
+ "solved": false,
+ "actions_done": 4,
+ "actions_required": 5,
+ "turns": 20,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "resume_line",
+  "reboot_device",
+  "get_details_by_id",
+  "toggle_airplane_mode",
+  "reboot_device"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_airplane_mode",
+   "ok": true,
+   "why": "tool 'toggle_airplane_mode' was called"
+  },
+  {
+   "id": "s1_reset_apn_settings",
+   "ok": false,
+   "why": "tool 'reset_apn_settings' was never called by the user"
+  },
+  {
+   "id": "s2_reboot_device",
+   "ok": true,
+   "why": "tool 'reboot_device' was called"
+  },
+  {
+   "id": "s3_resume_line",
+   "ok": true,
+   "why": "tool 'resume_line' was called with {'customer_id': 'CUS-4501283', 'line_id': 'LN-8830142'}"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was not called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, nothing loads, and I can't send picture messages. It's like the network is completely dead."
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're experiencing this issue. To help you further, could you please provide your phone number or account details? This will allow me to check your line status and see if there are any network or account-related problems affecting your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Your phone line is currently suspended, which is why you have no service and cannot send or receive messages or calls.\n\nWould you like me to help you resume (reactivate) your line so your service can be restored? If you know the reason for the suspension or if it was unintentional, please let me know.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Suspended",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "2025-02-25",
+      "suspension_reason": 1,
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Yes, please help me reactivate my line so I can get my service back. I'm not sure why it was suspended."
+  },
+  {
+   "role": "agent",
+   "content": "Your line has been reactivated and is now active again. You should regain service shortly\u2014please restart your phone if you don't see signal bars within a few minutes.\n\nIf you continue to have issues or need more help, let me know!",
+   "tool_calls": [
+    {
+     "tool_name": "resume_line",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "resume_line",
+     "response": {
+      "result": "Line LN-8830142 has been resumed and is now Active."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I restarted my phone as you suggested, but I still don't see any signal bars and the network is not working.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Your line is now active, and your device (Pixel 8 Pro) is also showing as active in our system. Since you still have no signal after restarting your phone, let's try a few troubleshooting steps:\n\n1. Make sure Airplane Mode is off.\n2. Try toggling Airplane Mode on for 10 seconds, then off again.\n3. Check if your SIM card (or eSIM) is properly installed.\n4. If possible, test your SIM card in another phone to see if it works there.\n\nIf you\u2019ve tried these steps and still have no service, please let me know. I can escalate this issue or check for any network outages in your area. Are you able to try these steps and let me know the results?",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "DEV-55210"
+     },
+     "params": {
+      "id": "DEV-55210"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "device_id": "DEV-55210",
+      "device_type": "phone",
+      "model": "Pixel 8 Pro",
+      "imei": "356938035643809",
+      "esim_capable": true,
+      "activation_status": "Active",
+      "activation_date": "2023-05-18",
+      "last_esim_transfer_date": "2023-05-18",
+      "entity_type": "device"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I can do these steps, but let's go one at a time. Can you tell me how to check if Airplane Mode is off?"
+  },
+  {
+   "role": "agent",
+   "content": "Absolutely! Here\u2019s how you can check if Airplane Mode is off on your Pixel 8 Pro:\n\n1. Unlock your phone and go to the home screen.\n2. Swipe down from the top of the screen to open the Quick Settings panel.\n3. Look for the Airplane Mode icon (it looks like an airplane).\n4. If the icon is highlighted or colored, Airplane Mode is ON. Tap it once to turn it OFF.\n5. If the icon is not highlighted, Airplane Mode is already OFF.\n\nLet me know what you see, and we\u2019ll go to the next step together!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked, and the Airplane Mode icon is not highlighted, so it looks like Airplane Mode is already off."
+  },
+  {
+   "role": "agent",
+   "content": "Great, thank you for checking! Since Airplane Mode is off, let\u2019s move to the next step:\n\nPlease try toggling Airplane Mode on and then off again:\n\n1. Swipe down from the top of your screen to open the Quick Settings panel.\n2. Tap the Airplane Mode icon to turn it ON (it should become highlighted).\n3. Wait about 10 seconds.\n4. Tap the Airplane Mode icon again to turn it OFF.\n\nAfter doing this, give your phone a moment to search for the network. Let me know if you see any signal bars or if anything changes. If not, we\u2019ll continue troubleshooting together.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I already toggled Airplane Mode on and off as you asked, and after waiting, my phone still has no signal bars. Nothing has changed.",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_airplane_mode",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying that step. Since toggling Airplane Mode didn\u2019t restore your signal, let\u2019s check the next possible cause: your SIM card or eSIM.\n\nYour Pixel 8 Pro is eSIM capable, but I need to confirm: Are you using a physical SIM card or an eSIM on your phone? If you\u2019re not sure, you can check by:\n\n- Going to Settings > Network & Internet > SIMs (or Mobile Network).\n- You\u2019ll see either a physical SIM listed or an eSIM profile.\n\nCould you let me know which one you\u2019re using? Once I know, I\u2019ll guide you through the next troubleshooting step.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked in my settings and I\u2019m using an eSIM."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming that you\u2019re using an eSIM. Here\u2019s what we can try next:\n\n1. In your phone\u2019s Settings, go to Network & Internet > SIMs (or Mobile Network).\n2. Find your eSIM profile and check if it shows as \u201cActive\u201d or \u201cEnabled.\u201d\n3. If it\u2019s not enabled, try toggling it on.\n4. If it is enabled but you still have no signal, try removing the eSIM profile and re-adding it (note: you\u2019ll need your eSIM activation details or QR code for this step).\n\nBefore removing your eSIM, do you have your eSIM activation details or QR code available? If not, I can help you get them or guide you through the process.\n\nLet me know what you see for your eSIM status, and if you need help with re-adding your eSIM.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "In my phone\u2019s settings, my eSIM profile shows as enabled. I don\u2019t have my eSIM activation details or QR code handy right now."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking. Since your eSIM profile is enabled but you still have no signal, and you don\u2019t have your activation details or QR code handy, let\u2019s avoid removing the eSIM for now.\n\nHere are a couple more things we can try before considering an eSIM reactivation:\n\n1. Restart your phone one more time, just to be sure.\n2. Check for any carrier or system updates:  \n   - Go to Settings > System > System update and install any available updates.\n   - Also, check Settings > Network & Internet > Mobile Network > Carrier settings (if available) for updates.\n\nIf you still have no service after these steps, it\u2019s possible there\u2019s a deeper issue with your eSIM activation or a network problem in your area. In that case, I can escalate this to a human support agent who can provide your eSIM activation details or investigate further.\n\nWould you like to try these steps, or should I connect you with a human agent for more advanced support?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I restarted my phone again and checked for system and carrier updates\u2014everything is up to date. There's still no signal at all. Please connect me with a human agent for more help.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

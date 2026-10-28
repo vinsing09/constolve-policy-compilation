@@ -1,0 +1,167 @@
+{
+ "case": "11:[graph:Understanding and Troublesho]transfer_to_human_agents",
+ "arm": "R5_escalate_unfixable",
+ "repeat": 3,
+ "solved": false,
+ "actions_done": 0,
+ "actions_required": 2,
+ "turns": 9,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "reseat_sim_card"
+ ],
+ "criteria": [
+  {
+   "id": "diagnosed_before_handoff",
+   "ok": false,
+   "why": "tool 'check_sim_status' was never called"
+  },
+  {
+   "id": "s3_transfer_to_human_agents",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was never called by the assistant"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone isn't getting any signal at all. I can't make calls or use the internet."
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot your signal issue. First, I need to identify your account to check for any line or account problems. Could you please provide one of the following:\n\n- The phone number associated with your account\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I\u2019ll begin diagnosing the issue.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your information. Your line status is currently active, so there are no suspensions or contract issues on your account.\n\nLet\u2019s proceed with troubleshooting your phone\u2019s signal issue. Could you please check and let me know:\n\n1. Is Airplane Mode turned on?\n2. Do you see any signal bars or a \u201cNo Signal\u201d/\u201cNo Service\u201d message in your phone\u2019s status bar?\n3. Have you recently changed your SIM card or had any issues with it?\n\nIf you\u2019re unsure, I can guide you through checking these settings step by step. Would you like to proceed with guided troubleshooting?",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I checked and Airplane Mode is currently off. There are no signal bars showing at the top of my phone, and it says 'No Service.' I haven't changed my SIM card recently or had any issues with it before. Please guide me through the next steps."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking those details. Since Airplane Mode is off and your phone shows \u201cNo Service\u201d with no signal bars, let\u2019s try the following steps to troubleshoot:\n\n1. Reseat your SIM card: This can help if the SIM isn\u2019t making proper contact.\n2. Check if your SIM card is detected or if there are any errors (like SIM locked).\n3. Reset your network settings if needed.\n\nLet\u2019s start by reseating your SIM card. Please follow these steps:\n- Power off your phone.\n- Remove the SIM card from its slot.\n- Wait a few seconds, then reinsert the SIM card securely.\n- Power your phone back on.\n\nAfter you\u2019ve done this, let me know if you still see \u201cNo Service.\u201d If the issue persists, I\u2019ll guide you through checking your SIM status and network settings.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "After reseating the SIM card, my phone shows that the SIM is still locked. It still says 'No Service' with no signal bars. What should I do next?",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Since your phone is showing that the SIM is locked, this usually means it\u2019s asking for a PIN or PUK code. Here\u2019s what you should do next:\n\n1. If your phone is prompting you for a SIM PIN, enter the correct PIN code. If you enter the wrong PIN multiple times, your SIM will become PUK-locked.\n2. If your phone is asking for a PUK code, you\u2019ll need to enter the correct PUK code to unlock your SIM.\n\nDo you know your SIM PIN or PUK code? If not, you may need to contact customer support (your carrier) to retrieve or reset your PUK code. For security reasons, I cannot provide your PUK code directly.\n\nIf you have access to your carrier\u2019s online account portal, you may be able to retrieve your PUK code there. Otherwise, please let me know if you need further assistance or if you\u2019d like to be transferred to a human agent for help with unlocking your SIM.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

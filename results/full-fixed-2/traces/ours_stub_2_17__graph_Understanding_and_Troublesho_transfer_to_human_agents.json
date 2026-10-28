@@ -1,0 +1,308 @@
+{
+ "case": "17:[graph:Understanding and Troublesho]transfer_to_human_agents",
+ "arm": "stub",
+ "repeat": 2,
+ "solved": false,
+ "actions_done": 1,
+ "actions_required": 3,
+ "turns": 21,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "get_data_usage",
+  "check_network_status",
+  "reboot_device",
+  "reseat_sim_card",
+  "get_details_by_id"
+ ],
+ "criteria": [
+  {
+   "id": "s0_check_sim_status",
+   "ok": false,
+   "why": "tool 'check_sim_status' was never called by the user"
+  },
+  {
+   "id": "s1_get_data_usage",
+   "ok": true,
+   "why": "tool 'get_data_usage' was called"
+  },
+  {
+   "id": "s2_transfer_to_human_agents",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was never called by the assistant"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no signal at all. Nothing loads, I can't get online, and picture messages won't go through. Can you help?"
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're having trouble with your phone signal. Let's try to get this sorted out. To assist you better, could you please provide the phone number associated with your line? This will help me check your account and line status for any issues.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Sure, my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Your line is active, but I see that you've used 50.5GB of data, which is over your plan's 50GB limit for this billing cycle. This could be why you have no signal and can't get online or send picture messages.\n\nWould you like to refuel (add more data) to restore your service immediately? If you prefer, I can also provide tips for managing your data usage. Let me know how you'd like to proceed!",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_data_usage",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_data_usage",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "plan_name": "Advantage 50GB",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 0,
+      "data_limit_gb": 50,
+      "total_data_available_gb": 50,
+      "cycle_end_date": "2025-03-05"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I just checked, and my phone shows no signal strength at all and no network type. Airplane mode is off, mobile data is on, and data roaming is enabled. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "check_network_status",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking those settings. Since your phone shows no signal strength and no network type, this could be due to several reasons beyond just data usage, such as:\n\n- Network outage in your area\n- SIM card issues\n- Device hardware problems\n- Account or line issues (though your account and line appear active)\n\nHere are some steps you can try next:\n\n1. Restart your phone: This can often resolve temporary network issues.\n2. Remove and reinsert your SIM card: Make sure it\u2019s seated properly.\n3. Try your SIM card in another phone (if possible): This helps determine if the issue is with your phone or the SIM/network.\n4. Check for network outages: Are others nearby experiencing the same issue?\n\nSince your data is over the limit, you may also need to refuel your data to restore full service, but a total lack of signal usually points to a network or SIM/device issue.\n\nWould you like me to add more data to your plan now, or do you want to try the troubleshooting steps above first? If you\u2019ve already tried these steps or need further help, please let me know!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Let's try troubleshooting first. I haven't rebooted the device or reseated the SIM card yet. Which one should I do first?"
+  },
+  {
+   "role": "agent",
+   "content": "Great! Let\u2019s start with the simplest step first:\n\n1. **Reboot your device:** Power your phone off completely, wait about 10 seconds, and then turn it back on. This can often resolve temporary network or software glitches.\n\nIf rebooting doesn\u2019t restore your signal, then:\n\n2. **Reseat your SIM card:** Power off your phone, carefully remove the SIM card, wait a few seconds, then reinsert it securely and power your phone back on.\n\nPlease try rebooting your device first and let me know if you see any change in your signal. If not, proceed to reseat the SIM card and update me on what happens. I\u2019m here to help every step of the way!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I rebooted my phone successfully, but there is still no signal\u2014no bars or network type showing at all. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. Since rebooting didn\u2019t restore your signal, the next step is to reseat your SIM card:\n\n1. Power off your phone completely.\n2. Remove the SIM card from its slot.\n3. Wait about 10 seconds.\n4. Carefully reinsert the SIM card, making sure it\u2019s properly seated.\n5. Power your phone back on.\n\nAfter your phone restarts, check if you have any signal or network type showing. If you still have no signal after reseating the SIM card, please let me know. I\u2019ll guide you through the next steps or check for possible SIM or network issues on your account.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "After reseating the SIM card, my phone says the SIM is still locked. There's still no signal or network type showing.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the update. If your phone says the SIM is \u201clocked,\u201d this usually means one of the following:\n\n1. **SIM PIN Lock:** The SIM card is protected by a PIN code, and you need to enter it to unlock the SIM.\n2. **Network Lock:** The phone is locked to a different carrier and cannot use your SIM.\n3. **SIM Card Issue:** The SIM may be damaged or malfunctioning.\n\nHere\u2019s what you can do next:\n\n- If prompted, enter your SIM PIN. If you don\u2019t know your SIM PIN, do not guess, as too many incorrect attempts can permanently lock the SIM.\n- If you see a message like \u201cSIM Network Unlock PIN,\u201d your phone may be locked to another carrier.\n- If there\u2019s no prompt or the SIM still isn\u2019t recognized, the SIM card may be faulty.\n\nCould you please tell me exactly what message appears on your phone regarding the SIM? For example, does it say \u201cEnter SIM PIN,\u201d \u201cSIM not provisioned,\u201d \u201cNo SIM,\u201d or something else? This will help me guide you to the right solution.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "The phone says 'SIM locked \u2013 enter SIM PIN'. I haven't tried entering a PIN yet."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for clarifying. Your SIM card is protected by a PIN code, which is a security feature. Here\u2019s what you should do:\n\n1. **Enter your SIM PIN:**  \n   - If you know your SIM PIN, carefully enter it now.\n   - If you\u2019re unsure or don\u2019t remember your SIM PIN, do not guess. Entering the wrong PIN multiple times (usually 3 attempts) will lock your SIM and require a PUK (Personal Unblocking Key) code to unlock it.\n\n2. **If you don\u2019t know your SIM PIN:**  \n   - The default SIM PIN is often \u201c0000\u201d or \u201c1234,\u201d but this can vary by carrier and may have been changed.\n   - If you\u2019re not sure, it\u2019s safest not to try random numbers.\n\nWould you like me to provide your SIM PIN or help you retrieve your PUK code if the SIM becomes locked? Let me know how you\u2019d like to proceed, and I can assist you further.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I'm not sure what my SIM PIN is, so I don't want to risk locking it. Can you help me get the correct PIN or the PUK code if I need it?"
+  },
+  {
+   "role": "agent",
+   "content": "Absolutely, I can help you with that. For your security, I\u2019ll need to verify your identity before providing your SIM PIN or PUK code.\n\nCould you please confirm your date of birth as it appears on your account? Once verified, I\u2019ll provide instructions or the necessary codes to unlock your SIM safely.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My date of birth is January 18, 1990."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your date of birth. However, the date of birth on your account is June 14, 1989. For security reasons, I need you to confirm the correct date of birth as listed on your account to proceed with sharing sensitive information like your SIM PIN or PUK code.\n\nCould you please confirm your date of birth as June 14, 1989, or let me know if there might be a different date on your account? This is to ensure your account\u2019s security.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Yes, June 14, 1989 is correct. Sorry for the confusion."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming your date of birth. For your security, I do not have direct access to your SIM PIN or PUK code, but I can guide you on how to retrieve them:\n\n1. The default SIM PIN is often \u201c0000\u201d or \u201c1234\u201d unless you changed it. If you haven\u2019t changed it, you can try one of these, but please be careful\u2014after 3 incorrect attempts, your SIM will be locked and require a PUK code.\n\n2. If you are unsure or have already tried and failed, you will need your PUK code. The PUK code is usually available:\n   - On the original SIM card packaging.\n   - By logging into your account on your carrier\u2019s website or app.\n   - By contacting customer support directly (which I can help facilitate).\n\nWould you like me to connect you with a human agent who can securely provide your PUK code, or would you prefer to check your SIM packaging or online account first? Let me know how you\u2019d like to proceed!",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "DEV-55210"
+     },
+     "params": {
+      "id": "DEV-55210"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "device_id": "DEV-55210",
+      "device_type": "phone",
+      "model": "Pixel 8 Pro",
+      "imei": "356938035643809",
+      "esim_capable": true,
+      "activation_status": "Active",
+      "activation_date": "2023-05-18",
+      "last_esim_transfer_date": "2023-05-18",
+      "entity_type": "device"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

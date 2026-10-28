@@ -1,0 +1,282 @@
+{
+ "case": "7:[graph:Understanding and Troublesho]toggle_airplane_mode",
+ "arm": "R2_apn",
+ "repeat": 1,
+ "solved": false,
+ "actions_done": 1,
+ "actions_required": 2,
+ "turns": 23,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "check_status_bar",
+  "toggle_airplane_mode",
+  "reseat_sim_card",
+  "reboot_device",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_airplane_mode",
+   "ok": true,
+   "why": "tool 'toggle_airplane_mode' was called"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone isn't getting any service at all\u2014no bars, nothing loads, and I can't send picture messages. Can you help?"
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot your service and picture messaging issues. First, I need to identify your account to check for any line or account-related problems.\n\nCould you please provide one of the following:\n- Your phone number\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I\u2019ll guide you through the steps to restore your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148 and my name is Sofia Martinez."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the information. Your line is currently active, so let's start troubleshooting your service and picture messaging issues.\n\nTo proceed, I\u2019ll need your help to check a few things on your phone. Are you able to interact with your device right now so I can guide you through some quick checks?",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Yes, I have my phone with me and I can follow your instructions."
+  },
+  {
+   "role": "agent",
+   "content": "Great! Let\u2019s start by checking your phone\u2019s status bar to see if there are any indicators for Airplane Mode, signal strength, or other issues.\n\nPlease check your phone\u2019s status bar and let me know:\n- Do you see an airplane icon (\u2708\ufe0f)?\n- Are there any signal bars showing, or does it say \u201cNo Service\u201d or \u201cNo Signal\u201d?\n- Do you see any network type indicators like 5G, 4G, LTE, etc.?\n\nIf you\u2019re unsure, just describe what you see at the top of your screen, and I\u2019ll guide you from there.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I actually do see the airplane icon at the top, along with 'No Signal' and 'Data Enabled.' It looks like Airplane Mode is on.",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "That explains why you\u2019re not getting any service\u2014Airplane Mode disables all wireless connections, including cellular service.\n\nPlease turn off Airplane Mode on your phone. You can usually do this by:\n- Swiping down from the top of your screen to open the quick settings panel.\n- Tapping the airplane icon to turn it off.\n\nOnce you\u2019ve done that, wait a few seconds and check if your signal bars reappear. Let me know if you see any signal or if the \u201cNo Signal\u201d message disappears.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Airplane mode is now off, but I still don't have any signal bars\u2014it's still showing 'No Signal.' What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_airplane_mode",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for turning off Airplane Mode. Since you still have no signal, the next step is to check your SIM card status, as issues with the SIM can also cause a complete loss of service.\n\nPlease check if your phone displays any messages about the SIM card, such as \u201cNo SIM,\u201d \u201cSIM not detected,\u201d or \u201cSIM locked.\u201d If you don\u2019t see any such messages, let me know.\n\nIf you\u2019re unsure, you can try removing your SIM card (using the SIM tray tool or a paperclip), wait a few seconds, and then reinsert it securely. After reinserting, give your phone a moment to detect the SIM and see if the signal returns.\n\nLet me know if you see any changes or if you need step-by-step instructions for reseating your SIM card.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I removed and reinserted the SIM card. The phone says the SIM status is active, but I still don't have any signal or bars showing.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for reseating your SIM card and checking its status. Since your SIM is active but you still have no signal, let\u2019s try a couple more troubleshooting steps:\n\n1. Restart your phone. This can help refresh your connection to the network.\n2. After restarting, check if you see any signal bars or network indicators (like 4G, 5G, LTE).\n\nPlease restart your device now, and let me know if anything changes with your signal after it powers back on.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I already restarted my phone, but I still have no signal and no bars at the top\u2014it's still showing 'No Signal.' What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know you\u2019ve already restarted your phone and still have no signal. Since your line is active, your SIM is recognized, and Airplane Mode is off, the next step is to check your phone\u2019s network mode settings. Sometimes, if your phone is set to use an unsupported network type (like 2G/3G only), it may not connect properly.\n\nCould you please check your phone\u2019s network mode settings and let me know what network type is selected (e.g., 5G, 4G, 3G, 2G)? If you\u2019re unsure how to check this, I can guide you through the process.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I'm not sure what network mode is selected. Can you guide me through how to check it?"
+  },
+  {
+   "role": "agent",
+   "content": "Certainly! Here\u2019s how you can check your network mode settings on most smartphones:\n\nFor Android:\n1. Open the Settings app.\n2. Tap on \u201cConnections\u201d or \u201cNetwork & Internet.\u201d\n3. Tap on \u201cMobile Network.\u201d\n4. Look for an option called \u201cPreferred network type\u201d or \u201cNetwork mode.\u201d\n5. It should display something like \u201c5G/4G/3G/2G (auto connect),\u201d \u201c4G only,\u201d \u201c3G only,\u201d etc.\n\nFor iPhone:\n1. Open the Settings app.\n2. Tap on \u201cCellular.\u201d\n3. Tap on \u201cCellular Data Options.\u201d\n4. Tap on \u201cVoice & Data.\u201d\n5. You\u2019ll see options like \u201c5G Auto,\u201d \u201cLTE,\u201d or \u201c3G.\u201d\n\nPlease let me know what option is currently selected, or if you see something different. If you have trouble finding this setting, let me know your phone model and I can provide more specific instructions.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I found the network mode settings. It looks like it's set to 3G only. Should I change it to something else?"
+  },
+  {
+   "role": "agent",
+   "content": "Yes, please change your network mode to an option that includes 4G or 5G, such as \u201c4G/5G preferred\u201d or \u201cLTE/4G/5G auto.\u201d This will allow your phone to connect to faster and more widely available networks, which should help restore your service.\n\nAfter changing the network mode, wait a few moments and check if your signal bars reappear. Let me know if you see any improvement or if you\u2019re still experiencing \u201cNo Signal.\u201d",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I tried to change the network mode, but I got an error saying something about a missing argument: 'mode.' The network mode didn't actually change, and I still have no signal."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. It seems there was an issue applying the network mode change. Let\u2019s try again with clear instructions:\n\nPlease select the option labeled \u201c4G/5G preferred,\u201d \u201cLTE/4G/5G auto,\u201d or the highest available network mode that includes 4G or 5G. If you see a list, choose the one that mentions both 4G and 5G (or at least 4G/LTE).\n\nIf you\u2019re unable to change the setting or the error persists, please let me know the exact wording of the error message and your phone\u2019s make and model. This will help me provide more targeted assistance.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I tried again, but I still get an error saying 'missing argument: mode.' My phone is a Samsung Galaxy S21. The network mode is still stuck on 3G only, and I have no signal."
+  },
+  {
+   "role": "agent",
+   "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer's Samsung Galaxy S21 is stuck on '3G only' network mode and cannot change to 4G/5G. Error 'missing argument: mode' appears. SIM is active, line is active, Airplane Mode is off, and device restart did not resolve the issue. No signal or service."
+     },
+     "params": {
+      "summary": "Customer's Samsung Galaxy S21 is stuck on '3G only' network mode and cannot change to 4G/5G. Error 'missing argument: mode' appears. SIM is active, line is active, Airplane Mode is off, and device restart did not resolve the issue. No signal or service."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

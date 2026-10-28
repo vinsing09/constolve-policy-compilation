@@ -1,0 +1,205 @@
+{
+ "domain": "telecom",
+ "n_schemas": 43,
+ "n_compiled": 43,
+ "failed": [],
+ "confidence": {
+  "high": 33,
+  "medium": 10
+ },
+ "notes": {
+  "get_customer_by_phone": "Searches customer primary phone first, then line phone numbers. Returns the customer profile with related payment method, line, and bill identifiers; read-only.",
+  "get_customer_by_id": "Assumed the lookup should also return the customer's associated payment methods, line IDs and bill IDs (as described in the Domain Basics customer profile), derived from the related collections. _find raises ValueError when the customer ID does not exist.",
+  "get_customer_by_name": "Assumed name matching is case/whitespace-insensitive exact match and that DOB must match exactly; raises ValueError when no match is found. Returns all matches since similar names may exist.",
+  "get_details_by_id": "Assumed the tool is a read-only lookup; enriched customer results with their payment methods, line IDs and bill IDs, and bill results with their line items, since the policy describes those as part of those objects. An 'entity_type' key is added to the returned dict (return value only, state untouched).",
+  "suspend_line": "Used the policy's current time (2025-02-25 EST) as the suspension start date rather than a runtime clock, to keep behaviour deterministic. Also validated that the line belongs to the supplied customer_id, since that parameter is otherwise unused.",
+  "resume_line": "Assumed the line must belong to the given customer. Enforced the policy rule that a suspension cannot be lifted when the contract end date is in the past (compared against the stated current time 2025-02-25 12:08 EST); did not enforce the overdue-bill rule since that is an agent-flow concern. suspension_start_date is cleared by setting it to None.",
+  "get_bills_for_customer": "\"Most recent first\" is implemented as descending sort on issue_date (falling back to period_end, then bill_id) using string comparison, which works for ISO-formatted dates. limit defaults to None meaning all bills.",
+  "send_payment_request": "Assumed bill status string 'Awaiting Payment' (policy wording) with normalized comparison tolerating 'AWAITING_PAYMENT'; payment_request singleton status set to 'Pending' since the request is not yet accepted.",
+  "get_data_usage": "Assumed the tool is read-only and should verify the line belongs to the given customer. Included plan data limit (from the line's plan) and computed total available data as a convenience field derived from existing fields.",
+  "enable_roaming": "Assumed preconditions: the line must exist and belong to the given customer, must not be Closed, and roaming must not already be enabled (raises ValueError in those cases). Enabling roaming is free per policy, so no charge is recorded.",
+  "disable_roaming": "Assumed ownership verification (line must belong to the given customer) is the precondition; treated an already-disabled line as a no-op returning an informational message rather than an error.",
+  "transfer_to_human_agents": "Assumed a repeated transfer is a precondition failure, and that a blank summary is invalid since the summary parameter is required.",
+  "refuel_data": "Schema has no explicit 'current/open bill' marker, so the charge goes to the customer's Draft bill if one exists, otherwise to the bill with the latest issue_date. Enforced the 2GB max from the policy and required gb_amount > 0.",
+  "check_status_bar": "Assumed airplane mode implies no signal icon and that network technology is only shown when there is signal; icon strings follow the policy's documented formats.",
+  "check_network_status": "Read-only; reports raw phone fields. 'data_roaming_enabled' maps to phone.roaming_enabled.",
+  "check_network_mode_preference": "Read-only tool; returns the phone's current network mode preference as a dict.",
+  "set_network_mode_preference": "Assumed a fixed list of valid network mode strings (the policy only names '4g_5g_preferred' and '4g_only'); anything else raises ValueError. Assumed the reported network_type should follow the new preference when the phone has signal and is not in airplane mode; did not touch download_speed/connection_quality since those are produced by the speed-test tool.",
+  "run_speed_test": "Assumed a speed test reports 'no connection' when airplane mode is on, or when there is no signal / mobile data is off and no Wi-Fi network is connected; otherwise it reports the stored download_speed and connection_quality. Supported activities are derived from the speed level since the schema has no such field.",
+  "toggle_airplane_mode": "No parameters, so the tool flips the current value. Turning airplane mode ON forces the derived radio fields (signal, network type, Wi-Fi, speed, MMS) to a disconnected state; turning it OFF restores cellular signal/network type only when the SIM is active and those fields were cleared, leaving other unrelated fault conditions untouched.",
+  "check_sim_status": "Read-only tool; returns the raw sim_status value (e.g. 'active', 'missing', 'locked_pin', 'locked_puk') from the phone singleton.",
+  "reseat_sim_card": "Assumed reseating recovers a 'Missing' SIM to 'Active', leaves a Locked SIM locked, and leaves an already-Active SIM unchanged. No preconditions are stated in the policy for this action, so only a missing phone record raises.",
+  "toggle_data": "No parameters, so the tool simply flips the current mobile_data_enabled value. No extra preconditions (e.g., airplane mode) were specified, so none are enforced; no derived fields like download_speed are modified since the policy does not state that.",
+  "toggle_roaming": "Tool takes no parameters, so it simply flips the device-level phone.roaming_enabled flag (not the line-level roaming_enabled, which is changed by carrier-side tools).",
+  "check_data_restriction_status": "Read-only tool; also reports background data restriction since the schema and policy mention it.",
+  "toggle_data_saver_mode": "No preconditions specified for this toggle; it simply flips phone.data_saver_enabled and reports the new state. Side effects on download speed are not modelled since the description only says it 'may affect' speed.",
+  "check_apn_settings": "Read-only diagnostic; returns APN name, APN settings status (Correct/Incorrect), and MMSC URL as stored on the phone singleton.",
+  "set_apn_settings": "The tool takes a single opaque string, so it is stored in the closest existing field (phone.apn_name). apn_settings_status is left unchanged since a user-supplied APN cannot be assumed correct; only reset_apn_settings restores known-good settings. pending_reboot is set because the policy requires a reboot after APN changes.",
+  "reset_apn_settings": "Schema has no stored default APN values, so standard defaults ('internet' / an MMSC URL) are assumed. Reset marks apn_settings_status as 'Correct' and flags pending_reboot, since the policy requires a reboot for changes to apply (the reboot tool is assumed to apply the effect on service/MMS).",
+  "check_wifi_status": "Read-only tool. Assumed an empty/absent wifi_ssid means not connected, and that signal strength/SSID are not meaningful when Wi-Fi is off.",
+  "toggle_wifi": "Assumed turning Wi-Fi off clears the connected SSID and sets signal strength to 'none'; turning it on reports the previously stored SSID if any.",
+  "check_wifi_calling_status": "Read-only tool; returns both a boolean and the policy-worded status string ('Wi-Fi Calling is ON'/'OFF').",
+  "toggle_wifi_calling": "No parameters, so the tool simply flips the current Wi-Fi Calling state and returns the new status as a short string.",
+  "check_vpn_status": "Performance level is only reported when a VPN is active and connected, matching the policy wording ('VPN is ON and connected' with performance level 'Poor').",
+  "connect_vpn": "No explicit preconditions were given; I assumed VPN cannot be connected while Airplane Mode is ON (all wireless radios disabled) and made repeat connection idempotent (returns a status message instead of erroring). vpn_performance_level is left untouched since it is a device-determined attribute.",
+  "disconnect_vpn": "Assumed calling the tool with no active/connected VPN is a precondition failure (ValueError). Also assumed that when the VPN was the cause of poor performance, disconnecting restores speed (only if no other blocker such as airplane mode, disabled data, inactive SIM, or no signal is present).",
+  "check_installed_apps": "Read-only; returns only apps whose `installed` flag is true.",
+  "check_app_status": "Assumed the tool errors if the app record is absent (via _find) or if the app is not installed; permissions are reported as a name->granted map plus a convenience list of granted permissions.",
+  "check_app_permissions": "Assumed app name matching is case-insensitive and that an app absent from the apps list (or with installed=False) is a precondition failure. Returns granted and denied permission lists.",
+  "grant_app_permission": "Assumed app must exist and be installed. Permission matching/creation is case-insensitive and stored lowercase; new permission records get an id of '<app>_<permission>'. Granting a permission does not automatically change phone.can_send_mms.",
+  "can_send_mms": "Assumed the check requires an installed default messaging app; raises ValueError if none is configured/installed. Otherwise reports phone.can_send_mms without mutating state.",
+  "reboot_device": "Assumed a reboot clears phone.pending_reboot and that pending APN/MMSC changes only take effect after the reboot; MMS capability is re-evaluated only when a reboot was actually pending and all prerequisites (service, SIM, data, correct APN with MMSC URL) are met.",
+  "check_payment_request": "No preconditions given, so the tool never raises; when nothing was sent it reports sent=False with an explanatory message instead of erroring.",
+  "make_payment": "Assumed the payment request singleton holds the bill being paid; a payment can only be made when a request was sent and the bill is in 'Awaiting Payment' status. After payment the request is cleared (sent=False, status='Paid')."
+ },
+ "predicates": [
+  "has_cellular_service",
+  "sim_card_healthy",
+  "apn_settings_healthy",
+  "mobile_data_working",
+  "mobile_data_fast",
+  "mms_working",
+  "data_allowance_available",
+  "line_active",
+  "no_outstanding_bills",
+  "payment_request_settled",
+  "suspension_liftable",
+  "roaming_ready",
+  "messaging_app_permissions_ready",
+  "escalated_to_human"
+ ],
+ "observables": [
+  "phone.signal_strength",
+  "phone.network_type",
+  "phone.download_speed",
+  "phone.connection_quality",
+  "phone.can_send_mms"
+ ],
+ "seed_failing_predicates": [
+  "suspension_liftable"
+ ],
+ "writes": {
+  "get_customer_by_phone": [],
+  "get_customer_by_id": [],
+  "get_customer_by_name": [],
+  "get_details_by_id": [],
+  "suspend_line": [
+   "lines.status",
+   "lines.suspension_start_date",
+   "lines.suspension_reason"
+  ],
+  "resume_line": [
+   "lines[].status",
+   "lines[].suspension_start_date"
+  ],
+  "get_bills_for_customer": [],
+  "send_payment_request": [
+   "bills[].status",
+   "payment_request.sent",
+   "payment_request.customer_id",
+   "payment_request.bill_id",
+   "payment_request.amount_due",
+   "payment_request.status"
+  ],
+  "get_data_usage": [],
+  "enable_roaming": [
+   "lines[].roaming_enabled"
+  ],
+  "disable_roaming": [
+   "lines.roaming_enabled"
+  ],
+  "transfer_to_human_agents": [
+   "transfer.transferred_to_human",
+   "transfer.summary"
+  ],
+  "refuel_data": [
+   "lines.data_refueling_gb",
+   "bill_line_items",
+   "bills.total_amount_due"
+  ],
+  "check_status_bar": [],
+  "check_network_status": [],
+  "check_network_mode_preference": [],
+  "set_network_mode_preference": [
+   "phone.network_mode_preference",
+   "phone.network_type"
+  ],
+  "run_speed_test": [],
+  "toggle_airplane_mode": [
+   "phone.airplane_mode",
+   "phone.signal_strength",
+   "phone.network_type",
+   "phone.wifi_enabled",
+   "phone.wifi_ssid",
+   "phone.wifi_signal_strength",
+   "phone.download_speed",
+   "phone.connection_quality",
+   "phone.can_send_mms"
+  ],
+  "check_sim_status": [],
+  "reseat_sim_card": [
+   "phone.sim_status"
+  ],
+  "toggle_data": [
+   "phone.mobile_data_enabled"
+  ],
+  "toggle_roaming": [
+   "phone.roaming_enabled"
+  ],
+  "check_data_restriction_status": [],
+  "toggle_data_saver_mode": [
+   "phone.data_saver_enabled"
+  ],
+  "check_apn_settings": [],
+  "set_apn_settings": [
+   "phone.apn_name",
+   "phone.pending_reboot"
+  ],
+  "reset_apn_settings": [
+   "phone.apn_name",
+   "phone.mmsc_url",
+   "phone.apn_settings_status",
+   "phone.pending_reboot"
+  ],
+  "check_wifi_status": [],
+  "toggle_wifi": [
+   "phone.wifi_enabled",
+   "phone.wifi_ssid",
+   "phone.wifi_signal_strength"
+  ],
+  "check_wifi_calling_status": [],
+  "toggle_wifi_calling": [
+   "phone.wifi_calling_enabled"
+  ],
+  "check_vpn_status": [],
+  "connect_vpn": [
+   "phone.vpn_active",
+   "phone.vpn_connected"
+  ],
+  "disconnect_vpn": [
+   "phone.vpn_active",
+   "phone.vpn_connected",
+   "phone.download_speed",
+   "phone.connection_quality"
+  ],
+  "check_installed_apps": [],
+  "check_app_status": [],
+  "check_app_permissions": [],
+  "grant_app_permission": [
+   "app_permissions[].granted",
+   "app_permissions[] (new record)"
+  ],
+  "can_send_mms": [],
+  "reboot_device": [
+   "phone.pending_reboot",
+   "phone.can_send_mms"
+  ],
+  "check_payment_request": [],
+  "make_payment": [
+   "bills.status",
+   "payment_request.status",
+   "payment_request.sent",
+   "payment_request.amount_due"
+  ]
+ }
+}

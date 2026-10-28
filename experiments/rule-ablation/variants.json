@@ -1,0 +1,49 @@
+{
+ "control": {
+  "file": "policies/control.md",
+  "sha256": "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9",
+  "chars": 23318
+ },
+ "R1_airplane": {
+  "file": "policies/R1_airplane.md",
+  "sha256": "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3",
+  "chars": 23242,
+  "chars_removed": 76,
+  "aspect": "cellular service: airplane mode (### Airplane Mode)"
+ },
+ "R2_apn": {
+  "file": "policies/R2_apn.md",
+  "sha256": "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085",
+  "chars": 22850,
+  "chars_removed": 468,
+  "aspect": "network settings: APN reset then reboot (### Incorrect APN Settings, ### Verifying APN (MMSC URL) for MMS)"
+ },
+ "R3_payment": {
+  "file": "policies/R3_payment.md",
+  "sha256": "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64",
+  "chars": 22808,
+  "chars_removed": 510,
+  "aspect": "billing: overdue-bill payment request and payment (## Overdue Bill Payment)"
+ },
+ "R4_suspension": {
+  "file": "policies/R4_suspension.md",
+  "sha256": "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89",
+  "chars": 23230,
+  "chars_removed": 88,
+  "aspect": "line suspension: permission to lift it (## Line Suspension)"
+ },
+ "R5_escalate_unfixable": {
+  "file": "policies/R5_escalate_unfixable.md",
+  "sha256": "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d",
+  "chars": 22766,
+  "chars_removed": 552,
+  "aspect": "escalation, specific: check SIM; escalate a locked SIM or a suspension the agent cannot lift (### SIM Card Issues, ### Line Suspension)"
+ },
+ "R6_transfer_scope": {
+  "file": "policies/R6_transfer_scope.md",
+  "sha256": "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668",
+  "chars": 22979,
+  "chars_removed": 339,
+  "aspect": "escalation, general: transfer only when out of scope, after trying everything (main policy preamble, tech-support introduction)"
+ }
+}

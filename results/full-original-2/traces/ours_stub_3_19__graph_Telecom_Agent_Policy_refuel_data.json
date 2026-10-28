@@ -1,0 +1,332 @@
+{
+ "case": "19:[graph:Telecom Agent Policy]refuel_data",
+ "arm": "stub",
+ "repeat": 3,
+ "solved": true,
+ "actions_done": 2,
+ "actions_required": 2,
+ "turns": 21,
+ "calls": [
+  "get_customer_by_phone",
+  "get_data_usage",
+  "get_details_by_id",
+  "refuel_data",
+  "send_payment_request",
+  "make_payment",
+  "get_details_by_id"
+ ],
+ "criteria": [
+  {
+   "id": "s0_refuel_data",
+   "ok": true,
+   "why": "tool 'refuel_data' was called with {'customer_id': 'CUS-4501283', 'line_id': 'LN-8830142'}"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was not called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no internet at all unless I'm on Wi-Fi, and I can't send picture messages. Can you help me fix this?"
+  },
+  {
+   "role": "agent",
+   "content": "I can help you with that! It sounds like your mobile data might not be working, which can also affect sending picture messages (MMS), as they require a data connection.\n\nTo assist you further, could you please provide your phone number or account details? This will help me check your line status and data usage. Additionally, have you recently changed your phone or SIM card, or made any changes to your account?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148. I haven't changed my phone or SIM card, and I haven't made any changes to my account recently."
+  },
+  {
+   "role": "agent",
+   "content": "Your mobile data is not working because you have used 50.5GB out of your 50GB data limit for this billing cycle, which means you have exceeded your plan's data allowance. When this happens, your mobile data is typically blocked until your next cycle or until you purchase additional data.\n\nWould you like to add more data to your plan so you can use the internet and send picture messages again? If so, please let me know how many GB you would like to add, or I can provide options for you.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_data_usage",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_data_usage",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "plan_name": "Advantage 50GB",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 0,
+      "data_limit_gb": 50,
+      "total_data_available_gb": 50,
+      "cycle_end_date": "2025-03-05"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I don't want to change my plan, but I'm willing to buy a data top-up if that's an option. Can you tell me what top-up options are available?"
+  },
+  {
+   "role": "agent",
+   "content": "You can purchase additional data (a data top-up) for your current plan without changing it. The cost for a data top-up is $5.00 per GB.\n\nPlease let me know how many GB you would like to add, and I can process the top-up for you right away. For example, you can add 1GB, 2GB, or more, depending on your needs.",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "PLN-2002"
+     },
+     "params": {
+      "id": "PLN-2002"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "plan_id": "PLN-2002",
+      "name": "Advantage 50GB",
+      "data_limit_gb": 50,
+      "monthly_price": 65.0,
+      "data_refueling_price_per_gb": 5.0,
+      "entity_type": "plan"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I'll add 1GB for now. Please send me the payment request so I can pay for the top-up."
+  },
+  {
+   "role": "agent",
+   "content": "I have added 1GB of data to your line for $5.00, and a payment request for your current bill (now $75.00) has been sent to you. Once you complete the payment, your mobile data should be restored, and you\u2019ll be able to use the internet and send picture messages again.\n\nIf you need more data or have any other questions, just let me know!",
+   "tool_calls": [
+    {
+     "tool_name": "refuel_data",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142",
+      "gb_amount": 1
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142",
+      "gb_amount": 1
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "send_payment_request",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "bill_id": "BILL-4501283-2025-02"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "bill_id": "BILL-4501283-2025-02"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "refuel_data",
+     "response": {
+      "result": "Refueled 1.0GB on line LN-8830142 (+1-617-555-0148). Charge of $5.00 added to bill BILL-4501283-2025-02."
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "send_payment_request",
+     "response": {
+      "result": "Payment request for bill BILL-4501283-2025-02 (amount due $75.0) sent to Sofia Martinez. Bill status is now Awaiting Payment."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I just completed the payment of $75.00 and the bill status now shows as Paid. What should I do next to get my mobile data working again?",
+   "tool_calls": [
+    {
+     "tool_name": "make_payment",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for your payment! Since your bill is now paid and you have an additional 1GB of data, your mobile data service should be restored automatically within a few minutes.\n\nHere\u2019s what you can do next:\n\n1. Restart your phone: This helps your device reconnect to the network and recognize the new data allowance.\n2. Turn off Wi-Fi and try using mobile data: Open a browser or app to check if you can access the internet.\n3. Try sending a picture message (MMS): This will confirm that your data and MMS services are working.\n\nIf your mobile data still isn\u2019t working after these steps, please let me know so I can check your line status and assist you further.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I restarted my phone and turned off Wi-Fi, but I still can't get any internet on mobile data. Nothing loads, and picture messages still won't send."
+  },
+  {
+   "role": "agent",
+   "content": "Your line is active, and you have 1GB of additional data available, so your mobile data should be working. Since you\u2019ve already restarted your phone and still have no internet or MMS, let\u2019s try a few more troubleshooting steps:\n\n1. Check if mobile data is enabled in your phone\u2019s settings.\n2. Make sure Airplane Mode is off.\n3. Verify your APN (Access Point Name) settings are correct for your carrier. Sometimes, incorrect APN settings can prevent mobile data and MMS from working.\n\nWould you like instructions on how to check or update your APN settings? If you\u2019re still having issues after this, please let me know your phone\u2019s make and model so I can provide more specific guidance.",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 1.0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Can you walk me through checking my APN settings? I'm not sure how to do that."
+  },
+  {
+   "role": "agent",
+   "content": "Absolutely! I can guide you through checking and updating your APN (Access Point Name) settings. The steps depend on whether you have an Android or iPhone. Please let me know which type of phone you have, and I\u2019ll provide the specific instructions.\n\nCould you tell me if you\u2019re using an Android phone or an iPhone? If you know your phone\u2019s model (e.g., Samsung Galaxy S21, iPhone 13), that would be helpful too!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I'm using an Android phone, a Google Pixel 6."
+  },
+  {
+   "role": "agent",
+   "content": "Great! Here\u2019s how you can check and update your APN settings on your Google Pixel 6:\n\n### How to Check & Update APN Settings on Google Pixel 6\n\n1. **Open Settings:**  \n   Go to your phone\u2019s Settings app.\n\n2. **Network & Internet:**  \n   Tap on Network & internet.\n\n3. **Mobile Network:**  \n   Tap on Mobile network.\n\n4. **Advanced:**  \n   Scroll down and tap on Advanced.\n\n5. **Access Point Names (APN):**  \n   Tap on Access Point Names.\n\n6. **Check APN:**  \n   You\u2019ll see a list of APNs. Tap on the one that is currently selected (it should have a dot next to it).\n\n7. **Verify APN Details:**  \n   Make sure the APN settings match those provided by your carrier. If you\u2019re not sure what the correct APN settings are, let me know your carrier\u2019s name and I can provide the exact details.\n\n8. **Edit or Add APN:**  \n   - To edit, tap the APN and update the fields as needed.\n   - To add a new APN, tap the + (plus) icon at the top right, enter the correct details, and save.\n\n9. **Select the Correct APN:**  \n   After editing or adding, make sure the correct APN is selected (the dot should be filled).\n\n10. **Restart Your Phone:**  \n    After updating, restart your phone to apply the changes.\n\n---\n\nIf you tell me your carrier\u2019s name, I can provide the exact APN settings you should use. Would you like those details?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My carrier is T-Mobile. Can you tell me the correct APN settings for T-Mobile?"
+  },
+  {
+   "role": "agent",
+   "content": "Certainly! Here are the correct APN settings for T-Mobile in the United States:\n\n### T-Mobile APN Settings\n\n- **Name:** T-Mobile\n- **APN:** fast.t-mobile.com\n- **Proxy:** Not set\n- **Port:** Not set\n- **Username:** Not set\n- **Password:** Not set\n- **Server:** Not set\n- **MMSC:** http://mms.msg.eng.t-mobile.com/mms/wapenc\n- **MMS Proxy:** Not set\n- **MMS Port:** Not set\n- **MCC:** 310\n- **MNC:** 260\n- **Authentication type:** Not set\n- **APN type:** default,supl,mms\n- **APN protocol:** IPv4/IPv6\n- **APN roaming protocol:** IPv4/IPv6\n- **Bearer:** Unspecified\n- **MVNO type:** None\n\n### Steps to Enter These Settings\n\n1. Go to Settings > Network & internet > Mobile network > Advanced > Access Point Names.\n2. Tap the + (plus) icon to add a new APN.\n3. Enter the details above exactly as shown.\n4. Save the APN (tap the three dots in the upper right and select Save).\n5. Select the new APN by tapping the circle next to it.\n6. Restart your phone.\n\nAfter updating and selecting the correct APN, try using your mobile data and sending a picture message again.\n\nLet me know if you need any help entering these settings or if your data still isn\u2019t working after this!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I entered the T-Mobile APN settings exactly as you listed, saved it, selected it, and restarted my phone. But I still can't get any internet on mobile data, and picture messages still won't send."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for following all the steps and letting me know the outcome. Since your line is active, you have available data, your bill is paid, and your APN settings are correct, but you still have no mobile data or MMS, this suggests there may be a deeper technical issue with your line or account that requires further investigation by technical support.\n\nAt this point, I recommend escalating your case to a human agent who can perform advanced troubleshooting and, if necessary, reset your network services from the backend.\n\nWould you like me to transfer you to a human support agent for further assistance?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

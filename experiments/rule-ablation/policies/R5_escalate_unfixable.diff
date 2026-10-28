@@ -1,0 +1,13 @@
+--- control.md
++++ R5_escalate_unfixable.md
+@@ -244,6 +244,2 @@
+ The most common issue is that the SIM card is not properly seated or the user has entered the wrong PIN or PUK code.
+-Use `check_sim_status()` to check the status of the SIM card.
+-If it shows "Missing", guide the user to use `reseat_sim_card()` to ensure the SIM card is correctly inserted.
+-If it shows "Locked" (due to incorrect PIN or PUK entries), **escalate to technical support for assistance with SIM security**.
+-If it shows "Active", the SIM itself is likely okay.
+ 
+@@ -258,3 +254,2 @@
+ *   If the line is suspended and the agent can lift the suspension (per general policy), verify if service is restored.
+-*   If the suspension cannot be lifted by the agent (e.g., due to contract end date as mentioned in general policy, or other reasons not resolvable by the agent), **escalate to technical support**.
+ 

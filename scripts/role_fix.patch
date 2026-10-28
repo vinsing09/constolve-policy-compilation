@@ -1,0 +1,25 @@
+commit 28cdd7939c4e71e20e86f03e822fb5cea7cf98c7
+Author: vinsing09 (Vineet Singh, Constolve)
+Date:   Sat Aug 29 22:21:31 2026 +0530
+
+    fix runtime user history roles and oracle suite
+
+diff --git a/services/user_sim.py b/services/user_sim.py
+index 35dc24088e..9ac21f0d55 100644
+--- a/services/user_sim.py
++++ b/services/user_sim.py
+@@ -208,9 +208,12 @@ class UserSim:
+             role = getattr(turn, "role", None) if not isinstance(turn, dict) else turn.get("role")
+             content = getattr(turn, "content", "") if not isinstance(turn, dict) else turn.get("content", "")
+             if role == "agent":
+-                messages.append({"role": "assistant", "content": content})
+-            elif role == "user":
++                # The completion model is playing the customer.  Therefore prior
++                # agent utterances are input from its counterparty (`user`) and prior
++                # customer utterances are its own (`assistant`) history.
+                 messages.append({"role": "user", "content": content})
++            elif role == "user":
++                messages.append({"role": "assistant", "content": content})
+         # WHAT THIS TURN HAS ALREADY DONE, as conversation rather than as instructions.
+         #
+         # The observation loop re-asked the model each round with the SAME history and the

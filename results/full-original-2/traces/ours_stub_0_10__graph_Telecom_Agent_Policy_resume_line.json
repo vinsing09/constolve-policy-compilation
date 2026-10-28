@@ -1,0 +1,297 @@
+{
+ "case": "10:[graph:Telecom Agent Policy]resume_line",
+ "arm": "stub",
+ "repeat": 0,
+ "solved": true,
+ "actions_done": 2,
+ "actions_required": 2,
+ "turns": 23,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "resume_line",
+  "reboot_device",
+  "reseat_sim_card",
+  "get_details_by_id"
+ ],
+ "criteria": [
+  {
+   "id": "s0_resume_line",
+   "ok": true,
+   "why": "tool 'resume_line' was called with {'customer_id': 'CUS-4501283', 'line_id': 'LN-8830142'}"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was not called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no signal at all\u2014no calls, texts, or data are coming through. Can you help me get it working again?"
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're having trouble with your phone signal. Let's try to get this resolved for you.\n\nTo assist you better, could you please provide one of the following:\n- The phone number of the affected line\n- Your full name and date of birth (for account verification)\n\nThis will help me locate your account and check the status of your line.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Your phone line is currently suspended, which is why you have no signal and cannot make calls, send texts, or use data.\n\nWould you like me to resume (reactivate) your line now? If you know the reason for the suspension or if it was done in error, please let me know so I can assist you further.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Suspended",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "2025-02-25",
+      "suspension_reason": 1,
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Yes, please reactivate my line. I\u2019m not sure why it was suspended."
+  },
+  {
+   "role": "agent",
+   "content": "Your line has been reactivated and is now active. You should regain signal shortly and be able to make calls, send texts, and use data again.\n\nIf you continue to experience issues or have questions about why your line was suspended, please let me know. I'm here to help!",
+   "tool_calls": [
+    {
+     "tool_name": "resume_line",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "resume_line",
+     "response": {
+      "result": "Line LN-8830142 has been resumed and is now Active."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I still don't have any signal\u2014my phone is showing no bars and I can't use data or send texts yet."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. Since your line is now active but you still have no signal, let's try a few troubleshooting steps:\n\n1. Restart your phone: Power it off completely, wait 30 seconds, then turn it back on.\n2. Check for Airplane Mode: Make sure Airplane Mode is turned off.\n3. Remove and reinsert your SIM card: If possible, take out your SIM card, wait a few seconds, and put it back in securely.\n4. Try your SIM in another phone: If you have access to another compatible phone, insert your SIM card to see if you get a signal there.\n\nCould you please try these steps and let me know if anything changes? If you still have no signal after this, I can check your device and SIM status or escalate the issue for further assistance.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I can only do one thing at a time. Which step would you like me to try first?"
+  },
+  {
+   "role": "agent",
+   "content": "Let\u2019s start with the simplest and most effective step: please restart your phone by powering it off completely, waiting about 30 seconds, and then turning it back on.\n\nOnce your phone has restarted, check if you have signal. Let me know what happens, and I\u2019ll guide you through the next step if needed.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I restarted my phone as you asked, but I still don't have any signal\u2014it's still showing no bars at all.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying that. Next, please check if Airplane Mode is turned on by mistake. Here\u2019s how:\n\n- On most phones, swipe down from the top of the screen to open the quick settings menu.\n- Look for the airplane icon. If it\u2019s highlighted or turned on, tap it to turn Airplane Mode off.\n\nAfter making sure Airplane Mode is off, check if you have signal. Let me know the result, and I\u2019ll guide you to the next step if needed.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Airplane Mode is definitely off, but I still have no signal. What should I do next?"
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming. The next step is to check your SIM card:\n\n1. Power off your phone completely.\n2. Remove the SIM card from your phone.\n3. Wait about 10 seconds.\n4. Reinsert the SIM card securely.\n5. Power your phone back on.\n\nAfter your phone restarts, check if you have any signal. If you\u2019re not sure how to remove the SIM card, let me know your phone model and I can provide specific instructions.\n\nPlease let me know what happens after you try this step.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I already removed and reinserted the SIM card. The SIM status shows as active, but I still have no signal\u2014still no bars on my phone.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know you\u2019ve already checked the SIM card and that your SIM status shows as active. I\u2019ve also checked your device status, and it appears to be active and properly registered.\n\nSince your line and device are both active but you still have no signal, this could indicate a network issue in your area, a SIM card malfunction, or a device hardware problem.\n\nHere are the next steps:\n1. If possible, try inserting your SIM card into another compatible phone. This will help determine if the issue is with your phone or the SIM/network.\n2. If you do not have another phone available, please let me know.\n\nAdditionally, are you experiencing this issue everywhere, or just in a specific location? Sometimes network outages or coverage issues can cause this problem.\n\nLet me know what you find, and I\u2019ll assist you further based on your response.",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "DEV-55210"
+     },
+     "params": {
+      "id": "DEV-55210"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "device_id": "DEV-55210",
+      "device_type": "phone",
+      "model": "Pixel 8 Pro",
+      "imei": "356938035643809",
+      "esim_capable": true,
+      "activation_status": "Active",
+      "activation_date": "2023-05-18",
+      "last_esim_transfer_date": "2023-05-18",
+      "entity_type": "device"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I don't have another phone to test the SIM in, and I'm at home in Boston. I haven't been anywhere else to check if it works elsewhere."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the details. Since you don\u2019t have another phone to test the SIM and you\u2019re experiencing this issue at home, here\u2019s what we can do next:\n\n1. Check for local network outages: Sometimes, there may be a temporary service disruption in your area.\n2. If there\u2019s no known outage, your SIM card or device may need further troubleshooting or replacement.\n\nWould you like me to check for any reported network issues in your area, or would you prefer to be connected to a human support agent for more advanced troubleshooting and possible SIM replacement options? Please let me know how you\u2019d like to proceed.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Please check if there are any network issues in my area first."
+  },
+  {
+   "role": "agent",
+   "content": "I currently don\u2019t have direct access to real-time network outage reports for specific locations. However, you can quickly check for outages in your area by:\n\n- Visiting your carrier\u2019s official website or outage page.\n- Checking their social media channels for updates.\n- Using third-party sites like Downdetector to see if others in Boston are reporting similar issues.\n\nIf there are no reported outages and you\u2019re still without signal, the issue may be specific to your SIM card or device. Would you like me to escalate this to a human support agent for further troubleshooting and possible SIM replacement?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked online and there are no reported outages in my area. What should I do next?"
+  },
+  {
+   "role": "agent",
+   "content": "Since there are no reported outages and you\u2019ve already tried restarting your phone, checking Airplane Mode, and reinserting your SIM card, the issue may be with your SIM card or device hardware. At this point, further troubleshooting or a possible SIM replacement may be needed.\n\nWould you like me to connect you with a human support agent who can assist you further, arrange a SIM replacement if necessary, or provide more advanced troubleshooting? Please let me know how you\u2019d like to proceed.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

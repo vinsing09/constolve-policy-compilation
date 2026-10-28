@@ -1,0 +1,368 @@
+{
+ "case": "0:[graph:Telecom Agent Policy]send_payment_request|resume_line",
+ "arm": "control",
+ "repeat": 4,
+ "solved": false,
+ "actions_done": 3,
+ "actions_required": 4,
+ "turns": 17,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "get_bills_for_customer",
+  "send_payment_request",
+  "check_payment_request",
+  "make_payment",
+  "resume_line",
+  "reboot_device",
+  "check_sim_status",
+  "check_network_mode_preference",
+  "reset_apn_settings",
+  "reboot_device",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_send_payment_request",
+   "ok": true,
+   "why": "tool 'send_payment_request' was called with {'customer_id': 'CUS-4501283', 'bill_id': 'BILL-4501283-2025-01'}"
+  },
+  {
+   "id": "s1_make_payment",
+   "ok": true,
+   "why": "tool 'make_payment' was called"
+  },
+  {
+   "id": "s2_resume_line",
+   "ok": true,
+   "why": "tool 'resume_line' was called with {'customer_id': 'CUS-4501283', 'line_id': 'LN-8830142'}"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no signal at all. I can't make any calls or use the internet."
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot your signal issue. First, I need to identify your account to check for any line or account problems. Could you please provide your phone number, customer ID, or your full name and date of birth?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Your line is currently suspended, which is why you have no signal. This suspension is due to an overdue bill from January 2025.\n\nI have just sent you a payment request for the overdue amount of $65. Please check your payment requests and complete the payment. Once the bill is paid, I can help you restore your service. Let me know once you have made the payment or if you need further assistance with the payment process.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_bills_for_customer",
+     "arguments": {
+      "customer_id": "CUS-4501283"
+     },
+     "params": {
+      "customer_id": "CUS-4501283"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "send_payment_request",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "bill_id": "BILL-4501283-2025-01"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "bill_id": "BILL-4501283-2025-01"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Suspended",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "2025-02-25",
+      "suspension_reason": 1,
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_bills_for_customer",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "count": 2,
+      "bills": [
+       {
+        "bill_id": "BILL-4501283-2025-02",
+        "customer_id": "CUS-4501283",
+        "period_start": "2025-01-06",
+        "period_end": "2025-02-05",
+        "issue_date": "2025-02-06",
+        "total_amount_due": 70.0,
+        "due_date": "2025-02-26",
+        "status": "Paid"
+       },
+       {
+        "bill_id": "BILL-4501283-2025-01",
+        "customer_id": "CUS-4501283",
+        "period_start": "2024-12-06",
+        "period_end": "2025-01-05",
+        "issue_date": "2025-01-06",
+        "total_amount_due": 65.0,
+        "due_date": "2025-01-26",
+        "status": "overdue"
+       }
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "send_payment_request",
+     "response": {
+      "result": "Payment request for bill BILL-4501283-2025-01 (amount due $65.0) sent to Sofia Martinez. Bill status is now Awaiting Payment."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I have completed the payment of $65.00, and the bill now shows as paid. What should I do next to restore my service?",
+   "tool_calls": [
+    {
+     "tool_name": "check_payment_request",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "make_payment",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Your payment has been received, and I have now restored your service. Please reboot your phone to regain signal and resume normal use.\n\nIf you still experience any issues after restarting your device, let me know and I can assist you further.",
+   "tool_calls": [
+    {
+     "tool_name": "resume_line",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "resume_line",
+     "response": {
+      "result": "Line LN-8830142 has been resumed and is now Active."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I already rebooted my phone, but there is still no signal. The status bar still doesn't show any bars or 5G.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. Since your line is now active and you have already rebooted your phone, let's continue troubleshooting your signal issue.\n\nCould you please check your phone\u2019s SIM card status? This will help us determine if there is a SIM card issue. Please use the option on your device to check the SIM card status and let me know what it says (e.g., Active, Missing, or Locked). If you need instructions on how to do this, let me know your phone model or operating system (Android/iPhone).",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My SIM card status shows as Active. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "check_sim_status",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming your SIM card is active. Next, let's check if your phone is in Airplane Mode, as this would prevent any signal.\n\nPlease check your phone\u2019s status bar for an airplane icon or use your device\u2019s settings to see if Airplane Mode is enabled. If it is on, please turn it off. Let me know if Airplane Mode was enabled or if it was already off.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Airplane Mode was already off. There's still no signal on my phone."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking. Since Airplane Mode is off and your SIM card is active, the next step is to check your phone\u2019s network mode settings. Sometimes, if your phone is set to use only older networks (like 2G/3G), it may not connect properly.\n\nPlease check your network mode preference and let me know what it is currently set to (e.g., 5G, 4G, 3G, or 2G). If you need help finding this setting, let me know your phone model or operating system (Android/iPhone).",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My network mode preference is set to '4g_5g_preferred', but I'm still not getting any signal.",
+   "tool_calls": [
+    {
+     "tool_name": "check_network_mode_preference",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming your network mode preference is set correctly. Since your SIM card is active, Airplane Mode is off, and your network mode is set to \"4g_5g_preferred,\" the next step is to check your phone\u2019s APN (Access Point Name) settings. Incorrect APN settings can sometimes cause a complete loss of service.\n\nPlease check your APN settings and let me know if they appear correct or if you see any errors. If you\u2019re unsure, you can reset your APN settings to default and then reboot your device. Would you like instructions on how to reset your APN settings, or can you check and reset them yourself?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I've already reset the APN settings and rebooted the device as instructed. Unfortunately, there is still no signal\u2014no bars or 5G showing in the status bar.",
+   "tool_calls": [
+    {
+     "tool_name": "reset_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.\n\nA specialist will assist you further, as all standard troubleshooting steps have been completed and you still have no signal.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez has an active line that was recently resumed after suspension for overdue payment. Despite payment, line resumption, SIM card showing active, correct network mode, Airplane Mode off, and APN reset with reboot, the customer still has no signal (no bars or 5G) on the phone."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez has an active line that was recently resumed after suspension for overdue payment. Despite payment, line resumption, SIM card showing active, correct network mode, Airplane Mode off, and APN reset with reboot, the customer still has no signal (no bars or 5G) on the phone."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

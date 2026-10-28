@@ -1,0 +1,305 @@
+{
+ "case": "23:[graph:Understanding and Troublesho]transfer_to_human_agents",
+ "arm": "R1_airplane",
+ "repeat": 0,
+ "solved": true,
+ "actions_done": 2,
+ "actions_required": 2,
+ "turns": 15,
+ "calls": [
+  "get_customer_by_phone",
+  "check_status_bar",
+  "toggle_airplane_mode",
+  "check_sim_status",
+  "check_apn_settings",
+  "get_details_by_id",
+  "get_bills_for_customer",
+  "resume_line",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "diagnosed_before_handoff",
+   "ok": true,
+   "why": "tool 'check_status_bar' was called"
+  },
+  {
+   "id": "s2_transfer_to_human_agents",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all. There are no bars, nothing loads, and I can't send picture messages. Can you help?"
+  },
+  {
+   "role": "agent",
+   "content": "I can help you with this issue. First, I need to identify your account to provide technical support. Could you please provide one of the following:\n\n- Your phone number\n- Your customer ID\n- Your full name and date of birth (YYYY-MM-DD)\n\nOnce I have this information, I\u2019ll begin troubleshooting your service problem.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148 and my name is Sofia Martinez."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your information. I\u2019ll start troubleshooting your \u201cno service\u201d issue. To begin, could you please check your phone\u2019s status bar and let me know what icons or messages you see at the top of your screen? This will help determine if Airplane Mode is on, if there\u2019s a SIM issue, or if there\u2019s another problem.\n\nIf you\u2019re not sure how to check, let me know and I can guide you through it.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I see an airplane icon, 'No Signal', and 'Data Enabled' in the status bar. It looks like Airplane Mode might be on.",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "It appears that Airplane Mode is enabled on your phone, which disables all wireless connections, including cellular service. Please turn off Airplane Mode on your device. You can usually do this by:\n\n1. Swiping down from the top of your screen to open the quick settings menu.\n2. Tapping the airplane icon to turn it off.\n\nOnce you\u2019ve turned off Airplane Mode, check if your service returns (look for signal bars). Let me know if you see any changes or if you still have no service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Airplane mode is now off, but I still see 'No Service' in the status bar and there are no signal bars showing. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_airplane_mode",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for turning off Airplane Mode. Since you still see \u201cNo Service,\u201d the next step is to check your SIM card status. Please check your SIM card status on your phone and let me know if it shows as active, missing, or locked. If you need instructions on how to check this, let me know.\n\nOnce you provide the SIM status, I\u2019ll guide you through the next steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My SIM status shows as active, but I still have no service and can't send picture messages.",
+   "tool_calls": [
+    {
+     "tool_name": "check_sim_status",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming your SIM status is active. The next step is to check your phone\u2019s APN (Access Point Name) settings, as incorrect APN settings can cause loss of service and prevent picture messages (MMS) from working.\n\nPlease check your APN settings and let me know if anything looks incorrect or if the MMSC URL is missing. If you\u2019re unsure how to check, I can guide you through the process.\n\nOnce you provide the APN status, I\u2019ll advise you on the next steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Actually, my APN settings look correct. The APN name is 'fast.telecom.net' and the MMSC URL is set to 'http://mms.telecom.net/mms/wapenc.' What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "check_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Your line is currently suspended, which is why you have no service and cannot send picture messages. However, your recent bills are already paid, so the suspension is not due to an overdue bill.\n\nI can attempt to resume your line now. Once I do this, you will need to reboot your device to restore service. Would you like me to proceed and resume your line?",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_bills_for_customer",
+     "arguments": {
+      "customer_id": "CUS-4501283"
+     },
+     "params": {
+      "customer_id": "CUS-4501283"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Suspended",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2024-11-30",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_bills_for_customer",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "count": 2,
+      "bills": [
+       {
+        "bill_id": "BILL-4501283-2025-02",
+        "customer_id": "CUS-4501283",
+        "period_start": "2025-01-06",
+        "period_end": "2025-02-05",
+        "issue_date": "2025-02-06",
+        "total_amount_due": 70.0,
+        "due_date": "2025-02-26",
+        "status": "Paid"
+       },
+       {
+        "bill_id": "BILL-4501283-2025-01",
+        "customer_id": "CUS-4501283",
+        "period_start": "2024-12-06",
+        "period_end": "2025-01-05",
+        "issue_date": "2025-01-06",
+        "total_amount_due": 65.0,
+        "due_date": "2025-01-26",
+        "status": "Paid"
+       }
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Yes, please go ahead and resume my line. Let me know when I should reboot my device."
+  },
+  {
+   "role": "agent",
+   "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.",
+   "tool_calls": [
+    {
+     "tool_name": "resume_line",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": true
+    },
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez has no service because her line is suspended. The contract end date is in the past (2024-11-30), so the line cannot be resumed automatically. All bills are paid. Customer needs assistance with contract renewal or further resolution."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez has no service because her line is suspended. The contract end date is in the past (2024-11-30), so the line cannot be resumed automatically. All bills are paid. Customer needs assistance with contract renewal or further resolution."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "resume_line",
+     "response": {},
+     "latency_ms": 0,
+     "error": "Line LN-8830142 cannot be resumed because its contract end date (2024-11-30) is in the past."
+    },
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

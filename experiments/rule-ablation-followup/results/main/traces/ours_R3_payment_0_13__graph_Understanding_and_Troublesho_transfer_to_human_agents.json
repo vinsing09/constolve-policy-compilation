@@ -1,0 +1,271 @@
+{
+ "case": "13:[graph:Understanding and Troublesho]transfer_to_human_agents",
+ "arm": "R3_payment",
+ "repeat": 0,
+ "solved": false,
+ "actions_done": 2,
+ "actions_required": 3,
+ "turns": 21,
+ "calls": [
+  "get_customer_by_phone",
+  "check_status_bar",
+  "get_details_by_id",
+  "check_network_mode_preference",
+  "reseat_sim_card",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "diagnosed_before_handoff",
+   "ok": false,
+   "why": "tool 'check_sim_status' was never called"
+  },
+  {
+   "id": "s2_get_data_usage",
+   "ok": true,
+   "why": "tool 'get_data_usage' was called"
+  },
+  {
+   "id": "s3_transfer_to_human_agents",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone isn\u2019t getting any signal at all. I can\u2019t make calls or use the internet."
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot your signal issue. First, I\u2019ll need to identify your account to check for any line or account problems. Could you please provide one of the following:\n\n- The phone number associated with your account\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I\u2019ll begin diagnosing the issue.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148 and my name is Sofia Martinez."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your information. To help resolve your signal issue, I\u2019ll need to check a few things about your line and account status.\n\nCould you please confirm if you see any icons like \u201cAirplane Mode\u201d or \u201cNo Signal\u201d in your phone\u2019s status bar? If you\u2019re not sure, I can guide you through checking this on your device. Would you like step-by-step instructions?",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I see a 'No Signal' icon and 'Data Disabled' in the status bar, but it also says 'Connected to Chestnut-5G.' What should I do next?",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the details. Here\u2019s what your status bar indicates:\n\n- \u201cNo Signal\u201d means your phone isn\u2019t connecting to the cellular network.\n- \u201cData Disabled\u201d means mobile data is off.\n- \u201cConnected to Chestnut-5G\u201d means you\u2019re connected to Wi-Fi, but this won\u2019t help with calls or texts.\n\nLet\u2019s start troubleshooting:\n\n1. Is Airplane Mode enabled? If so, please turn it off.\n2. If Airplane Mode is off, the next step is to check your SIM card status. Could you check if your phone shows any messages about the SIM card (like \u201cNo SIM,\u201d \u201cSIM Locked,\u201d or \u201cSIM Error\u201d)? If you\u2019re unsure, I can guide you through checking your SIM card status on your device.\n\nWould you like instructions on how to check your SIM card status?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I don\u2019t see any messages about the SIM card like 'No SIM' or 'SIM Error,' just the 'No Signal' and 'Data Disabled' icons. Airplane mode is off. What should I check next?"
+  },
+  {
+   "role": "agent",
+   "content": "Your line status is active, and there are no suspensions or contract issues. Since Airplane Mode is off and there are no SIM error messages, the next steps are:\n\n1. Check if your SIM card is properly seated (sometimes it can become loose).\n2. Ensure your phone\u2019s network settings are correct.\n\nWould you like instructions on how to reseat your SIM card, or would you prefer to check your network settings first?",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 0,
+      "roaming_enabled": false,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Let's start by checking the network settings first."
+  },
+  {
+   "role": "agent",
+   "content": "Great! Let\u2019s check your network settings step by step:\n\n1. Please check your phone\u2019s network mode preference. This setting determines if your phone is set to use 5G, 4G, 3G, or 2G networks. Sometimes, if it\u2019s set to an older mode (like 2G/3G only), you may not get a signal.\n\nWould you like instructions on how to check your network mode preference on your device? If so, I can guide you through it.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I can check my network mode preference. What do I need to do?"
+  },
+  {
+   "role": "agent",
+   "content": "To check your network mode preference, please follow these steps:\n\n1. Go to your phone\u2019s Settings app.\n2. Look for a section called \u201cNetwork & Internet,\u201d \u201cConnections,\u201d or \u201cMobile Network.\u201d\n3. Find an option labeled \u201cPreferred network type,\u201d \u201cNetwork mode,\u201d or something similar.\n4. Check what it\u2019s currently set to (e.g., 5G, 4G, 3G, 2G).\n\nPlease let me know what network mode is currently selected. If it\u2019s set to 2G or 3G only, try changing it to \u201c4G/5G preferred\u201d or \u201cAuto\u201d if available. Let me know what you find or if you need help with any step!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My network mode preference is set to '4g_5g_preferred.' What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "check_network_mode_preference",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Since your network mode is correctly set to \u201c4G/5G preferred,\u201d the next step is to check your SIM card status to ensure it\u2019s being recognized by your phone.\n\nWould you like instructions on how to check your SIM card status on your device? This will help us determine if the SIM card is active, missing, or locked.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I can check my SIM card status. What steps should I follow?"
+  },
+  {
+   "role": "agent",
+   "content": "To check your SIM card status, please follow these steps:\n\n1. Open your phone\u2019s Settings app.\n2. Look for a section called \u201cAbout phone,\u201d \u201cDevice information,\u201d or \u201cSIM card status.\u201d\n3. Tap on \u201cSIM status\u201d or \u201cSIM card status.\u201d\n4. Review the information shown:\n   - It should say something like \u201cSIM status: Active\u201d or \u201cNetwork: Connected.\u201d\n   - If it says \u201cNo SIM,\u201d \u201cSIM not provisioned,\u201d \u201cSIM locked,\u201d or similar, please note that.\n\nLet me know what your SIM card status says. This will help us determine the next steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My SIM card status says 'Active' but the network says 'Not Connected.'"
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking. Since your SIM card is \u201cActive\u201d but the network says \u201cNot Connected,\u201d let\u2019s try reseating your SIM card. Sometimes, removing and reinserting the SIM can resolve connection issues.\n\nWould you like step-by-step instructions on how to reseat your SIM card, or are you comfortable doing this on your own?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I removed and reinserted the SIM card, but now it says the SIM is Locked. What should I do next?",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer's SIM card is locked after reseating. Needs assistance with SIM PIN/PUK unlock."
+     },
+     "params": {
+      "summary": "Customer's SIM card is locked after reseating. Needs assistance with SIM PIN/PUK unlock."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

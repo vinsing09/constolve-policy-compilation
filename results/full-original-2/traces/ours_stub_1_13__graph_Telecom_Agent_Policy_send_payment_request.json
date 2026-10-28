@@ -1,0 +1,338 @@
+{
+ "case": "13:[graph:Telecom Agent Policy]send_payment_request",
+ "arm": "stub",
+ "repeat": 1,
+ "solved": false,
+ "actions_done": 1,
+ "actions_required": 4,
+ "turns": 17,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "get_details_by_id",
+  "resume_line",
+  "reboot_device",
+  "get_data_usage",
+  "reseat_sim_card",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_send_payment_request",
+   "ok": false,
+   "why": "tool 'send_payment_request' was never called by the assistant"
+  },
+  {
+   "id": "s1_make_payment",
+   "ok": false,
+   "why": "tool 'make_payment' was never called by the user"
+  },
+  {
+   "id": "s2_resume_line",
+   "ok": true,
+   "why": "tool 'resume_line' was called with {'customer_id': 'CUS-4501283', 'line_id': 'LN-8830142'}"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, nothing loads, and I can't send picture messages. Can you help?"
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're experiencing no service on your phone. Let's try to resolve this together. To assist you better, could you please provide your phone number or the name and date of birth on your account? This will help me check your line status and identify any issues.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Your phone line is currently suspended, which is why you have no service and cannot send messages or use data.\n\nWould you like me to resume your line so you can regain service? If you know the reason for the suspension or if it was a mistake, please let me know so I can assist you further.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Suspended",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I didn't know my line was suspended. Can you tell me why it was suspended and what I need to do to get it back on?"
+  },
+  {
+   "role": "agent",
+   "content": "It appears your line is suspended, but there is no recorded reason or suspension start date in our system. This could be due to a system error or an unrecorded action.\n\nTo restore your service, I can resume your line right away. There is no indication of an outstanding issue that would prevent reactivation. Would you like me to proceed and reactivate your line now?",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Suspended",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Yes, please go ahead and reactivate my line."
+  },
+  {
+   "role": "agent",
+   "content": "Your line has been reactivated and is now active. You should regain service shortly\u2014please restart your phone if you don\u2019t see bars or service within a few minutes.\n\nIf you continue to have issues or need further assistance, let me know!",
+   "tool_calls": [
+    {
+     "tool_name": "resume_line",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "resume_line",
+     "response": {
+      "result": "Line LN-8830142 has been resumed and is now Active."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "My phone rebooted successfully, but I still don't see any service bars. Nothing has changed after restarting.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Your line is now active and your data usage is well within your plan limits, so there are no restrictions on your account.\n\nSince you still have no service after a reboot, here are a few steps to try:\n\n1. Check if Airplane Mode is off and cellular data is enabled.\n2. Remove and reinsert your SIM card.\n3. Try your SIM card in another phone (if available) to see if the issue is with the SIM or your device.\n4. Make sure your phone\u2019s network settings are set to automatic.\n\nIf you\u2019ve tried these steps and still have no service, please let me know. I can check for device or SIM issues, or escalate this to a technical specialist if needed. Have you noticed any error messages or SIM card warnings on your phone?",
+   "tool_calls": [
+    {
+     "tool_name": "get_data_usage",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_data_usage",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "plan_name": "Advantage 50GB",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "data_limit_gb": 50,
+      "total_data_available_gb": 50,
+      "cycle_end_date": "2025-03-05"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I haven't seen any error messages or SIM card warnings. Should I try removing and reinserting the SIM card next?"
+  },
+  {
+   "role": "agent",
+   "content": "Yes, removing and reinserting your SIM card is a good next step. Sometimes, the SIM card may not be making proper contact, which can cause a loss of service even if your account and line are active.\n\nHere\u2019s how to do it safely:\n\n1. Power off your phone.\n2. Locate the SIM card tray (usually on the side or under the battery cover).\n3. Use the SIM eject tool or a small paperclip to open the tray.\n4. Remove the SIM card, check for any visible damage or dirt, and gently reinsert it.\n5. Close the tray and power your phone back on.\n\nAfter your phone restarts, check if you have service bars. If you still don\u2019t see any service, let me know, and we can explore further troubleshooting or escalate the issue to a technical specialist.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I already removed and reinserted the SIM card. The SIM status shows as active, but I still don't have any service bars or network connection.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. Since your line is active, your SIM card is recognized, and you\u2019ve already tried the basic troubleshooting steps (reboot, SIM reinsert), but you still have no service bars or network connection, this could indicate:\n\n- A possible issue with your device\u2019s hardware (antenna or SIM reader)\n- A SIM card malfunction that isn\u2019t immediately obvious\n- A network outage or coverage issue in your area (though this is less likely if you haven\u2019t received any alerts)\n\nNext steps:\n1. If possible, try your SIM card in another phone. This will help determine if the issue is with your phone or the SIM card/service itself.\n2. If the SIM card also doesn\u2019t work in another phone, it may need to be replaced.\n3. If the SIM works in another phone, the issue is likely with your device.\n\nWould you like to try your SIM in another phone, or would you prefer I escalate this to a technical specialist for further investigation? Let me know how you\u2019d like to proceed.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I don\u2019t have another phone to test the SIM card in. Can you help me with the next step or escalate this to a technical specialist?"
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the information. Since you\u2019re still experiencing no service and cannot test your SIM card in another device, I\u2019m escalating your case to a technical specialist who can investigate further and provide a solution.\n\nA specialist will reach out to you soon to assist with your issue. If you have any additional details or questions in the meantime, please let me know!",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer's line was suspended but is now active. Despite troubleshooting (reboot, SIM reinsert), the customer still has no service bars or network connection. SIM status shows as active, and there are no error messages. Customer cannot test SIM in another device. Needs technical specialist assistance."
+     },
+     "params": {
+      "summary": "Customer's line was suspended but is now active. Despite troubleshooting (reboot, SIM reinsert), the customer still has no service bars or network connection. SIM status shows as active, and there are no error messages. Customer cannot test SIM in another device. Needs technical specialist assistance."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

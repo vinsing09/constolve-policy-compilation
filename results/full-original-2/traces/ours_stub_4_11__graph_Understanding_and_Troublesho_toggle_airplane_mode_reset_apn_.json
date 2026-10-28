@@ -1,0 +1,363 @@
+{
+ "case": "11:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line",
+ "arm": "stub",
+ "repeat": 4,
+ "solved": false,
+ "actions_done": 3,
+ "actions_required": 5,
+ "turns": 17,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "get_details_by_id",
+  "get_details_by_id",
+  "resume_line",
+  "reboot_device",
+  "get_details_by_id",
+  "reseat_sim_card"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_airplane_mode",
+   "ok": false,
+   "why": "tool 'toggle_airplane_mode' was never called by the user"
+  },
+  {
+   "id": "s1_reset_apn_settings",
+   "ok": false,
+   "why": "tool 'reset_apn_settings' was never called by the user"
+  },
+  {
+   "id": "s2_reboot_device",
+   "ok": true,
+   "why": "tool 'reboot_device' was called"
+  },
+  {
+   "id": "s3_resume_line",
+   "ok": true,
+   "why": "tool 'resume_line' was called with {'customer_id': 'CUS-4501283', 'line_id': 'LN-8830142'}"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was not called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, nothing loads, and I can't send picture messages. Can you help?"
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're experiencing no service on your phone. Let's try to resolve this together. To assist you, I\u2019ll need to check your account and line status.\n\nCould you please provide your phone number or your full name and date of birth? This will help me locate your account and investigate the issue.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Your phone line is currently suspended, which is why you have no service and cannot send messages or use data.\n\nWould you like me to resume your line so you can regain service? If you know the reason for the suspension or if it was a mistake, please let me know.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Suspended",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "2025-02-25",
+      "suspension_reason": 1,
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I didn't know my line was suspended. Can you tell me why? If it needs a payment, I want to pay and get my service back on."
+  },
+  {
+   "role": "agent",
+   "content": "Both of your recent bills are marked as paid, so your line was not suspended due to non-payment. The suspension may have been due to another reason, such as a manual request or an account issue.\n\nWould you like me to immediately resume your line so you can regain service? If you did not request this suspension, I can also make a note for our support team to review the cause. Please let me know how you\u2019d like to proceed.",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "BILL-4501283-2025-02"
+     },
+     "params": {
+      "id": "BILL-4501283-2025-02"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "BILL-4501283-2025-01"
+     },
+     "params": {
+      "id": "BILL-4501283-2025-01"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "bill_id": "BILL-4501283-2025-02",
+      "customer_id": "CUS-4501283",
+      "period_start": "2025-01-06",
+      "period_end": "2025-02-05",
+      "issue_date": "2025-02-06",
+      "total_amount_due": 70.0,
+      "due_date": "2025-02-26",
+      "status": "Paid",
+      "entity_type": "bill",
+      "line_items": [
+       {
+        "line_item_id": "BLI-90002",
+        "bill_id": "BILL-4501283-2025-02",
+        "description": "Advantage 50GB monthly plan charge - line +1-617-555-0148",
+        "amount": 65.0,
+        "item_type": "charge"
+       },
+       {
+        "line_item_id": "BLI-90003",
+        "bill_id": "BILL-4501283-2025-02",
+        "description": "International calling add-on",
+        "amount": 5.0,
+        "item_type": "fee"
+       }
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "bill_id": "BILL-4501283-2025-01",
+      "customer_id": "CUS-4501283",
+      "period_start": "2024-12-06",
+      "period_end": "2025-01-05",
+      "issue_date": "2025-01-06",
+      "total_amount_due": 65.0,
+      "due_date": "2025-01-26",
+      "status": "Paid",
+      "entity_type": "bill",
+      "line_items": [
+       {
+        "line_item_id": "BLI-90001",
+        "bill_id": "BILL-4501283-2025-01",
+        "description": "Advantage 50GB monthly plan charge - line +1-617-555-0148",
+        "amount": 65.0,
+        "item_type": "charge"
+       }
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Yes, please resume my line right away. I didn't request the suspension, so I would appreciate it if you could also have someone look into why this happened."
+  },
+  {
+   "role": "agent",
+   "content": "Your line has been resumed and is now active. You should regain service shortly\u2014please restart your phone if you don\u2019t see service within a few minutes.\n\nSince you did not request the suspension, I will escalate this to our support team to investigate why your line was suspended without your knowledge. If you have any further issues or questions, please let me know!",
+   "tool_calls": [
+    {
+     "tool_name": "resume_line",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "resume_line",
+     "response": {
+      "result": "Line LN-8830142 has been resumed and is now Active."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I restarted my phone as you suggested, but I still have no signal\u2014there are no bars and nothing is loading.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. Since your line is now active but you still have no signal after restarting your phone, let\u2019s try a few more steps:\n\n1. Double-check that Airplane Mode is turned off.\n2. Remove your SIM card, wait 30 seconds, and reinsert it.\n3. Try your SIM card in another compatible phone, if possible, to see if the issue is with your device or the SIM/line.\n\nIf you\u2019ve tried these steps and still have no service, there may be a device or SIM card issue, or a network problem in your area. Would you like me to check your device and SIM status, or would you prefer to be connected to a human agent for further troubleshooting?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I haven't tried removing the SIM yet. If you want me to, I can do it now, but please walk me through it step by step. Otherwise, you can check my device and SIM status first if that's easier."
+  },
+  {
+   "role": "agent",
+   "content": "Your device (Pixel 8 Pro) is showing as active and properly set up in our system. There are no flags or issues reported on your device or SIM from our end.\n\nIf you\u2019re comfortable, I can guide you step by step to remove and reinsert your SIM card. This can often resolve signal issues. Would you like to proceed with these instructions? If so, please confirm whether you\u2019re using a physical SIM card or an eSIM on your Pixel 8 Pro.",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "DEV-55210"
+     },
+     "params": {
+      "id": "DEV-55210"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "device_id": "DEV-55210",
+      "device_type": "phone",
+      "model": "Pixel 8 Pro",
+      "imei": "356938035643809",
+      "esim_capable": true,
+      "activation_status": "Active",
+      "activation_date": "2023-05-18",
+      "last_esim_transfer_date": "2023-05-18",
+      "entity_type": "device"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I'm using a physical SIM card. Please walk me through how to remove and reinsert it."
+  },
+  {
+   "role": "agent",
+   "content": "Great! Here are step-by-step instructions to safely remove and reinsert the physical SIM card in your Pixel 8 Pro:\n\n### What you\u2019ll need:\n- The SIM ejector tool that came with your phone (or a small paperclip).\n\n### Steps:\n\n1. **Turn off your phone**  \n   Press and hold the power button, then tap \u201cPower off.\u201d\n\n2. **Locate the SIM card tray**  \n   The SIM tray is usually on the left side of the Pixel 8 Pro (when looking at the screen).\n\n3. **Insert the SIM ejector tool**  \n   Find the small hole next to the SIM tray. Gently insert the SIM ejector tool (or a straightened paperclip) into the hole until the tray pops out.\n\n4. **Remove the SIM tray**  \n   Carefully pull the tray out of the phone.\n\n5. **Take out the SIM card**  \n   Gently remove the SIM card from the tray.\n\n6. **Wait 30 seconds**  \n   This allows the phone to fully disconnect from the network.\n\n7. **Reinsert the SIM card**  \n   Place the SIM card back into the tray, making sure the gold contacts are facing down and the notched corner matches the tray.\n\n8. **Slide the tray back in**  \n   Carefully push the tray back into the phone until it clicks into place.\n\n9. **Turn your phone back on**  \n   Press and hold the power button to turn your phone on.\n\n10. **Wait for signal**  \n    Give your phone a minute or two to reconnect to the network. You should see signal bars appear.\n\n---\n\nLet me know once you\u2019ve completed these steps, or if you have any questions along the way!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I removed and reinserted the SIM card as you instructed. My phone says the SIM status is active, but I still have no signal\u2014there are no bars and nothing is loading.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for following the steps and letting me know the result. Since your SIM status is active but you still have no signal after all troubleshooting, this could indicate:\n\n- A possible SIM card malfunction\n- A device hardware issue\n- A network outage or coverage problem in your area\n\nAt this point, I recommend escalating your case to a human support agent who can perform advanced diagnostics, check for local outages, and arrange a replacement SIM if needed.\n\nWould you like me to connect you to a human agent now for further assistance?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

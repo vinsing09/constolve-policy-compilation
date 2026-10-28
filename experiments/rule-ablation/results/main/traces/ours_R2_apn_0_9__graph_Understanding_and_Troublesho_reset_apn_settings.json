@@ -1,0 +1,295 @@
+{
+ "case": "9:[graph:Understanding and Troublesho]reset_apn_settings",
+ "arm": "R2_apn",
+ "repeat": 0,
+ "solved": false,
+ "actions_done": 1,
+ "actions_required": 3,
+ "turns": 23,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "check_status_bar",
+  "check_sim_status",
+  "reseat_sim_card",
+  "check_network_mode_preference",
+  "reboot_device",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_reset_apn_settings",
+   "ok": false,
+   "why": "tool 'reset_apn_settings' was never called by the user"
+  },
+  {
+   "id": "s1_reboot_device",
+   "ok": true,
+   "why": "tool 'reboot_device' was called"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, nothing loads, and I can't send picture messages. Can you help?"
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot your phone\u2019s service and picture messaging issues. First, I\u2019ll need to identify your account to check for any line or account-related problems.\n\nCould you please provide one of the following:\n- Your phone number\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I\u2019ll guide you through the necessary steps to restore your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you, Sofia. Your line is currently active, so let\u2019s start troubleshooting your phone\u2019s service and picture messaging issues.\n\nTo proceed, I\u2019ll need you to perform a few quick checks on your device. Are you able to interact with your phone right now so I can guide you through some steps?",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Yes, I have my phone with me and can follow your instructions."
+  },
+  {
+   "role": "agent",
+   "content": "Great! Let\u2019s start by checking your phone\u2019s status bar for any indicators that might explain the lack of service.\n\nPlease check your phone\u2019s status bar and let me know if you see any of the following:\n- An airplane icon (\u2708\ufe0f), which means Airplane Mode is on\n- A \u201cNo Signal\u201d or \u201cX\u201d icon\n- Any signal bars at all (even one bar)\n- The network type (e.g., 5G, 4G, LTE, 3G, E)\n\nIf you\u2019re unsure, I can guide you through how to check this on your device. Would you like step-by-step instructions, or can you describe what you see in your status bar?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My status bar shows 'No Signal', but it also says 'Data Enabled' and that I'm connected to Chestnut-5G WiFi. There's no airplane icon.",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the details. Since your status bar shows \u201cNo Signal,\u201d your phone isn\u2019t connecting to the cellular network, even though mobile data is enabled and WiFi is connected. Let\u2019s proceed step by step:\n\n1. First, let\u2019s check if your SIM card is being detected properly. Please check your SIM card status on your phone and let me know if it says:\n- Active\n- Missing\n- Locked (PIN or PUK required)\n\nIf you need instructions on how to check this, let me know. Otherwise, please tell me what your phone reports for the SIM card status.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I haven't checked the SIM card status yet. Should I do that now?"
+  },
+  {
+   "role": "agent",
+   "content": "Yes, please check your SIM card status now. This will help us determine if your phone is detecting the SIM card correctly, which is essential for cellular service.\n\nIf you need instructions on how to check the SIM card status on your device, let me know your phone\u2019s make and model, and I can guide you through the steps. Otherwise, once you\u2019ve checked, please let me know what it says (Active, Missing, or Locked).",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My SIM card status says 'Active.'",
+   "tool_calls": [
+    {
+     "tool_name": "check_sim_status",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking. Since your SIM card status is \u201cActive,\u201d the SIM itself is working correctly. Next, let\u2019s try a simple step that often resolves network connection issues: reseating the SIM card.\n\nPlease follow these steps:\n1. Power off your phone.\n2. Remove the SIM card from its slot.\n3. Wait about 10 seconds.\n4. Reinsert the SIM card securely.\n5. Power your phone back on.\n\nAfter your phone restarts, check if you now have signal bars or if the \u201cNo Signal\u201d message is gone. Let me know the result. If you\u2019re unsure how to remove and reinsert your SIM card, let me know your phone\u2019s make and model, and I can provide instructions.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I removed and reinserted the SIM card as you asked. My phone powered back on, but it's still showing 'No Signal' and there are no signal bars.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying that. Since your SIM card is active and reseating it didn\u2019t restore service, let\u2019s check your network mode settings. Sometimes, if your phone is set to use an older network type (like 2G or 3G), it may not connect properly.\n\nPlease check your phone\u2019s network mode preference and let me know what it is currently set to (e.g., 5G, 4G, 3G, 2G, or Auto). If you need instructions on how to check this, let me know your phone\u2019s make and model, and I can guide you through the steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I haven't checked my network mode preference yet. Should I do that now?"
+  },
+  {
+   "role": "agent",
+   "content": "Yes, please check your network mode preference now. This setting determines which type of cellular network your phone tries to connect to (such as 5G, 4G, 3G, or 2G).\n\nIf you need instructions on how to find this setting, let me know your phone\u2019s make and model, and I\u2019ll guide you through the steps. Once you\u2019ve checked, please let me know what your network mode preference is currently set to.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My network mode preference is set to '4G/5G preferred.'",
+   "tool_calls": [
+    {
+     "tool_name": "check_network_mode_preference",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming. Since your network mode is set correctly and your SIM card is active, but you still have \u201cNo Signal,\u201d let\u2019s try rebooting your device. This can sometimes resolve temporary network issues.\n\nPlease restart your phone one more time. After it powers back on, check if you have any signal bars or if the \u201cNo Signal\u201d message is gone. Let me know the result.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone rebooted successfully, but it's still showing 'No Signal' and there are no signal bars.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez has no cellular service ('No Signal') despite SIM card being active, correct network mode ('4G/5G preferred'), and after reseating SIM and rebooting device. Needs advanced technical support."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez has no cellular service ('No Signal') despite SIM card being active, correct network mode ('4G/5G preferred'), and after reseating SIM and rebooting device. Needs advanced technical support."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Okay, I\u2019ll wait for the human agent. Please let me know when someone is available."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for your patience. You are now in the queue, and a human agent will assist you as soon as possible. Please stay connected, and someone will be with you shortly.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

@@ -1,0 +1,378 @@
+{
+ "case": "16:[graph:Telecom Agent Policy]send_payment_request|enable_roaming",
+ "arm": "stub",
+ "repeat": 1,
+ "solved": false,
+ "actions_done": 3,
+ "actions_required": 5,
+ "turns": 19,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "get_details_by_id",
+  "resume_line",
+  "reboot_device",
+  "get_details_by_id",
+  "enable_roaming",
+  "reboot_device",
+  "reseat_sim_card",
+  "check_network_status",
+  "can_send_mms"
+ ],
+ "criteria": [
+  {
+   "id": "s0_send_payment_request",
+   "ok": false,
+   "why": "tool 'send_payment_request' was never called by the assistant"
+  },
+  {
+   "id": "s1_make_payment",
+   "ok": false,
+   "why": "tool 'make_payment' was never called by the user"
+  },
+  {
+   "id": "s2_enable_roaming",
+   "ok": true,
+   "why": "tool 'enable_roaming' was called with {'customer_id': 'CUS-4501283', 'line_id': 'LN-8830142'}"
+  },
+  {
+   "id": "s3_resume_line",
+   "ok": true,
+   "why": "tool 'resume_line' was called with {'customer_id': 'CUS-4501283', 'line_id': 'LN-8830142'}"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was not called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone suddenly has no signal at all. I can't get online, can't send picture messages, and it's completely dead. It was working fine earlier."
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're experiencing this issue. To help you further, could you please provide your phone number or the name and date of birth associated with your account? This will allow me to check your line status and see if there are any network or account issues affecting your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Your phone line is currently showing as \"Suspended,\" which is why you have no signal and cannot use any services. This could be due to a billing issue, a requested suspension, or another account-related reason.\n\nWould you like me to check the reason for the suspension and help you resume your service?",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Suspended",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": false,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Yes, please check the reason for the suspension and help me get my service back."
+  },
+  {
+   "role": "agent",
+   "content": "It appears your line is suspended, but there is no specific reason or suspension start date listed in the system. This could be a system error or an automatic suspension.\n\nI can attempt to resume your service now. Would you like me to proceed and reactivate your line?",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Suspended",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": false,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Yes, please go ahead and try to reactivate my line."
+  },
+  {
+   "role": "agent",
+   "content": "Your line has been successfully reactivated and is now active. Please restart your phone to restore your signal and services.\n\nIf you continue to experience issues after restarting, let me know and I can assist you further.",
+   "tool_calls": [
+    {
+     "tool_name": "resume_line",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "resume_line",
+     "response": {
+      "result": "Line LN-8830142 has been resumed and is now Active."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I restarted my phone, but I still have no signal and nothing has changed. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. Since your line is now active but you still have no signal, let's try the following troubleshooting steps:\n\n1. Check SIM Card: Remove your SIM card, wait a few seconds, and reinsert it securely.\n2. Network Settings: Make sure Airplane Mode is off, and try toggling it on and off.\n3. Manual Network Search: Go to your phone\u2019s network settings and try searching for available networks manually, then select your carrier.\n4. Try Another Device: If possible, insert your SIM card into another compatible phone to see if it works there. This helps determine if the issue is with your phone or the SIM/service.\n5. Check for Outages: Are you in a new location or area with known coverage issues? Sometimes local outages can affect service.\n\nIf you\u2019ve tried these steps and still have no signal, please let me know. I can check your device status or escalate the issue for further investigation. Would you like to proceed with a device check or need help with any of the steps above?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I'm currently travelling outside my home network. Should I try reseating the SIM card first, or is there something else I should do since I'm roaming?"
+  },
+  {
+   "role": "agent",
+   "content": "Roaming was previously disabled on your line, which explains why you had no signal while traveling. I have now enabled international roaming for your number at no extra cost.\n\nPlease restart your phone once more. After restarting, your device should be able to connect to a local partner network. If you still don\u2019t get a signal, try manually searching for available networks in your phone\u2019s settings.\n\nLet me know if you need step-by-step instructions for manual network selection or if you continue to have issues after these steps.",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "enable_roaming",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": false,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": null,
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "enable_roaming",
+     "response": {
+      "result": "Roaming has been enabled at no cost on line LN-8830142 (+1-617-555-0148) for customer Sofia Martinez."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I restarted my phone as you suggested, but I still have no signal. What should I do next?",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for updating me. Since roaming is now enabled and you\u2019ve restarted your phone but still have no signal, please try the following steps:\n\n1. Manual Network Selection:\n   - Go to your phone\u2019s Settings > Mobile Networks > Network Operators (the exact path may vary by device).\n   - Select \u201cSearch networks\u201d or \u201cManual\u201d instead of \u201cAutomatic.\u201d\n   - Wait for your phone to display a list of available networks.\n   - Try selecting one of the networks listed (preferably one that is a known partner of your carrier).\n\n2. Check SIM Card:\n   - Remove your SIM card, wait 10 seconds, and reinsert it securely.\n   - Restart your phone again.\n\n3. Try Another Device (if possible):\n   - Insert your SIM card into another unlocked phone to see if it works there. This helps determine if the issue is with your phone or the SIM/service.\n\n4. Confirm Location:\n   - Make sure you are in an area with good coverage (indoors or remote areas may have weaker signals).\n\nIf you still have no signal after these steps, please let me know:\n- What country you are currently in\n- The make and model of your phone\n\nThis information will help me check for compatibility or known issues in your location, or escalate the issue for further investigation. Would you like step-by-step instructions for manual network selection on your specific device?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "After reseating the SIM card and restarting, my phone now shows excellent signal strength and 5G in the status bar. What should I check next to make sure everything is working?",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "check_network_status",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "That\u2019s great news! Since your phone now shows excellent signal strength and 5G, your connection to the network has been restored. To ensure everything is working properly, please check the following:\n\n1. Make a Test Call: Try calling a local or international number to confirm voice service.\n2. Send a Text Message: Send a regular SMS and a picture message (MMS) to verify messaging.\n3. Use Mobile Data: Open a web page or app to confirm you have internet access.\n4. Roaming Data: If you plan to use data while roaming, make sure \u201cData Roaming\u201d is enabled in your phone\u2019s settings.\n\nIf all these functions work, your service is fully restored. If you encounter any issues with calls, texts, or data, let me know which service isn\u2019t working, and I\u2019ll help you troubleshoot further.\n\nWould you like any tips for managing roaming charges or using your phone abroad?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I just tested sending a picture message, and it worked. My signal is excellent, I have 5G, and my internet speed is excellent too. Everything is working perfectly now. Thanks for your help!",
+   "tool_calls": [
+    {
+     "tool_name": "can_send_mms",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "You\u2019re very welcome! I\u2019m glad to hear that everything is working perfectly now\u2014your signal, 5G data, and picture messaging are all back to normal.\n\nIf you have any other questions or need assistance in the future, feel free to reach out. Safe travels and enjoy your time abroad!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

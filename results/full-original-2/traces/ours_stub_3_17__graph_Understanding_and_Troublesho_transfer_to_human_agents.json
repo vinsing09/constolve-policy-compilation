@@ -1,0 +1,418 @@
+{
+ "case": "17:[graph:Understanding and Troublesho]transfer_to_human_agents",
+ "arm": "stub",
+ "repeat": 3,
+ "solved": false,
+ "actions_done": 1,
+ "actions_required": 3,
+ "turns": 27,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "get_data_usage",
+  "get_details_by_id",
+  "refuel_data",
+  "send_payment_request",
+  "check_payment_request",
+  "make_payment",
+  "reboot_device",
+  "reseat_sim_card",
+  "get_details_by_id"
+ ],
+ "criteria": [
+  {
+   "id": "s0_check_sim_status",
+   "ok": false,
+   "why": "tool 'check_sim_status' was never called by the user"
+  },
+  {
+   "id": "s1_get_data_usage",
+   "ok": true,
+   "why": "tool 'get_data_usage' was called"
+  },
+  {
+   "id": "s2_transfer_to_human_agents",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was never called by the assistant"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no signal at all right now. Nothing loads, I can't get online, and picture messages won't go through. Can you help?"
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're having trouble with your phone signal. To assist you, I\u2019ll need to check your account and line status. Could you please provide your phone number or the name and date of birth on your account? This will help me locate your details and investigate the issue.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Your line is active, but I see that you have used 50.5GB of data, which is over your plan\u2019s 50GB monthly limit. This is likely why you have no signal for data and picture messages, as your data access is restricted until your cycle renews or you add more data.\n\nWould you like to purchase additional data (refuel) so you can get back online right away? If so, please let me know how many GB you\u2019d like to add, or if you\u2019d like to know the available options.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_data_usage",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_data_usage",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "plan_name": "Advantage 50GB",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 0,
+      "data_limit_gb": 50,
+      "total_data_available_gb": 50,
+      "cycle_end_date": "2025-03-05"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I didn't realize I was over my data limit. Can you tell me what options I have for adding more data?"
+  },
+  {
+   "role": "agent",
+   "content": "You are on the Advantage 50GB plan. For your plan, you can add (refuel) extra data at a rate of $5.00 per GB. You can choose how many additional gigabytes you\u2019d like to add, and the cost will be added to your next bill.\n\nPlease let me know how many GB you\u2019d like to purchase, and I can process it for you right away. If you\u2019re unsure, I can also recommend a suitable amount based on your usage.",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "PLN-2002"
+     },
+     "params": {
+      "id": "PLN-2002"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "plan_id": "PLN-2002",
+      "name": "Advantage 50GB",
+      "data_limit_gb": 50,
+      "monthly_price": 65.0,
+      "data_refueling_price_per_gb": 5.0,
+      "entity_type": "plan"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Can you recommend how many GB I should add to get my phone working normally again? I just want it to work like before."
+  },
+  {
+   "role": "agent",
+   "content": "Since you have already used 50.5GB and your plan\u2019s monthly limit is 50GB, you are currently 0.5GB over your allowance. To restore your phone\u2019s normal data service, you need to add at least 1GB of data. This will cover your current overage and give you a little extra to use until your billing cycle renews on March 5th.\n\nWould you like me to add 1GB of data for $5.00 to your account, or would you prefer to add more for extra peace of mind? Let me know your preference!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Let's go ahead and add 1GB for now. Please send me the payment request."
+  },
+  {
+   "role": "agent",
+   "content": "1GB of data has been added to your line for $5.00, and a payment request for your current bill (now $75.00) has been sent to you. Once you complete the payment, your data service should be restored and your phone will work normally again.\n\nIf you need more data or have any other questions, just let me know!",
+   "tool_calls": [
+    {
+     "tool_name": "refuel_data",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142",
+      "gb_amount": 1
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142",
+      "gb_amount": 1
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "send_payment_request",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "bill_id": "BILL-4501283-2025-02"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "bill_id": "BILL-4501283-2025-02"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "refuel_data",
+     "response": {
+      "result": "Refueled 1.0GB on line LN-8830142 (+1-617-555-0148). Charge of $5.00 added to bill BILL-4501283-2025-02."
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "send_payment_request",
+     "response": {
+      "result": "Payment request for bill BILL-4501283-2025-02 (amount due $75.0) sent to Sofia Martinez. Bill status is now Awaiting Payment."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I see the payment request for $75.00 is pending on my account. Should I go ahead and make the payment now to restore my data service, or is there something else I need to do first?",
+   "tool_calls": [
+    {
+     "tool_name": "check_payment_request",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Yes, you should go ahead and make the payment for the $75.00 bill. Once the payment is processed, your data service will be restored and your phone should work normally again.\n\nThere\u2019s nothing else you need to do\u2014just complete the payment, and your service will be reactivated automatically. If you have any issues after paying, let me know and I\u2019ll be happy to help further!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I\u2019ve completed the payment and the bill now shows as Paid. What should I do next to get my service working again?",
+   "tool_calls": [
+    {
+     "tool_name": "make_payment",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for completing your payment! Your data service should automatically be restored now that your bill is paid and you have additional data on your account.\n\nIf your phone is still not working, please try the following steps:\n\n1. Restart your phone. This often refreshes your connection to the network.\n2. Make sure mobile data is enabled in your phone\u2019s settings.\n3. If you still have no signal, try toggling Airplane Mode on and off.\n\nIf you follow these steps and your service is still not working, please let me know so I can investigate further or escalate the issue for you.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I already restarted my phone and it rebooted successfully, but I still have no signal. Nothing is loading and picture messages still won't send. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know you\u2019ve already restarted your phone and are still experiencing no signal. Since your account and line are active, your bill is paid, and you have data available, let\u2019s try a few more troubleshooting steps:\n\n1. **Check SIM Card:** Remove your SIM card, wait 30 seconds, and reinsert it securely. Then restart your phone again.\n2. **Check for Network Outages:** Are you aware of any outages in your area? If not, I can check for you if you provide your current location.\n3. **Try Your SIM in Another Phone:** If possible, insert your SIM card into another compatible phone. If it works there, the issue may be with your device.\n4. **Check Network Settings:** Make sure your phone is set to the correct network mode (e.g., LTE/4G/5G) and that mobile data is enabled.\n\nIf you\u2019ve tried these steps and still have no signal, please let me know. I can escalate the issue or check your line and device status further. Would you like to proceed with any of these steps, or should I escalate this to a technical specialist for you?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I'm at home in Boston. I haven't tried reseating the SIM card yet. Would you like me to do that next, or should we check my network settings first?"
+  },
+  {
+   "role": "agent",
+   "content": "Both steps are helpful, but reseating the SIM card is often the quickest way to resolve signal issues, especially if your account and payment are in good standing. Here\u2019s what I recommend:\n\n1. Power off your phone.\n2. Remove the SIM card and wait about 30 seconds.\n3. Reinsert the SIM card securely.\n4. Power your phone back on.\n\nAfter your phone restarts, check if you have signal and can use data or send picture messages.\n\nIf the issue persists, we can then check your network settings together. Please let me know once you\u2019ve tried reseating the SIM card, or if you\u2019d prefer to check your network settings first, I can guide you through that process as well.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I reseated the SIM card, but my phone says the SIM is still locked. It didn't fix the problem. What should I do next?",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying to reseat the SIM card. If your phone is displaying a \u201cSIM locked\u201d message, this usually means one of the following:\n\n1. **SIM PIN Lock:** The SIM card is protected by a PIN code, and it needs to be entered to unlock it.\n2. **Network Lock:** The phone is locked to a different carrier and does not accept your SIM.\n3. **PUK Code Required:** If the wrong SIM PIN was entered too many times, your phone may now require a PUK (Personal Unblocking Key) code.\n\nHere\u2019s what you can do next:\n\n- If your phone is asking for a SIM PIN, enter the correct PIN. If you don\u2019t know it, do not try random numbers, as too many incorrect attempts will require a PUK code.\n- If your phone is asking for a PUK code, you\u2019ll need to obtain this from your carrier (I can help with this if needed).\n- If your phone says \u201cNetwork Locked\u201d or \u201cSIM Not Supported,\u201d it may be locked to another carrier.\n\nCould you please tell me exactly what message appears on your phone\u2019s screen? This will help me guide you to the right solution. If you need your PUK code, let me know and I can retrieve it for you.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone just says 'SIM locked' with a prompt to enter a code. I haven't tried entering anything yet. What should I do?"
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for clarifying. Since your phone says \"SIM locked\" and is prompting you to enter a code, it is likely asking for your SIM PIN. Here\u2019s what you should do:\n\n1. **Enter Your SIM PIN:**  \n   - If you know your SIM PIN, enter it carefully.  \n   - If you have never set a custom SIM PIN, the default is often \u201c0000\u201d or \u201c1234\u201d (but this can vary by carrier).\n\n2. **Important:**  \n   - Do not guess the code. Entering the wrong SIM PIN multiple times (usually 3 attempts) will lock your SIM and require a PUK (Personal Unblocking Key) code to unlock it.\n\n3. **If You Don\u2019t Know Your SIM PIN:**  \n   - Check any documentation that came with your SIM card or account.\n   - If you\u2019re unsure or don\u2019t have the code, let me know. I can help you retrieve your PUK code, which will allow you to unlock your SIM if it becomes locked.\n\nWould you like to try entering your SIM PIN, or would you prefer I help you get your PUK code right away to avoid any risk of locking your SIM?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I\u2019m not sure what my SIM PIN is, so I\u2019d rather not risk locking it. Can you help me get my PUK code instead?"
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. For your security, I will help you retrieve your PUK code so you can safely unlock your SIM without risking a permanent lock.\n\nPlease hold on for a moment while I retrieve your PUK code.",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "DEV-55210"
+     },
+     "params": {
+      "id": "DEV-55210"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "device_id": "DEV-55210",
+      "device_type": "phone",
+      "model": "Pixel 8 Pro",
+      "imei": "356938035643809",
+      "esim_capable": true,
+      "activation_status": "Active",
+      "activation_date": "2023-05-18",
+      "last_esim_transfer_date": "2023-05-18",
+      "entity_type": "device"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Okay, I'll wait for the PUK code. Please let me know when you have it."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for your patience. I am currently unable to retrieve your PUK code directly through this system. For your security and privacy, PUK codes are typically provided only through secure channels or by speaking with a technical support specialist.\n\nTo resolve this quickly, I recommend contacting our customer support hotline or visiting a local store with your ID for immediate assistance. Alternatively, I can escalate your case to a human agent who can securely provide your PUK code and guide you through unlocking your SIM.\n\nWould you like me to connect you with a human agent for further assistance?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

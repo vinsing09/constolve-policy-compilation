@@ -1,0 +1,250 @@
+{
+ "case": "12:[graph:Understanding and Troublesho]transfer_to_human_agents",
+ "arm": "stub",
+ "repeat": 4,
+ "solved": false,
+ "actions_done": 0,
+ "actions_required": 2,
+ "turns": 15,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "get_data_usage",
+  "reboot_device",
+  "toggle_airplane_mode",
+  "toggle_airplane_mode",
+  "reseat_sim_card"
+ ],
+ "criteria": [
+  {
+   "id": "s0_check_sim_status",
+   "ok": false,
+   "why": "tool 'check_sim_status' was never called by the user"
+  },
+  {
+   "id": "s1_transfer_to_human_agents",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was never called by the assistant"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, can't get online, and picture messages won't send. It's like the network is completely dead."
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're experiencing this issue. To help you further, could you please provide your phone number or account details? This will allow me to check your line status and see if there are any network or account-related problems affecting your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Your line is currently active and you have not exceeded your data limit for this billing cycle, so there are no account or data issues that would explain the loss of service.\n\nHere are a few steps you can try to restore your service:\n\n1. Restart your phone.\n2. Toggle Airplane Mode on and off.\n3. Remove and reinsert your SIM card.\n4. Check if other devices in your area have service (to rule out a local network outage).\n\nIf you\u2019ve already tried these steps or if the issue persists, please let me know. I can assist further or escalate the issue for you.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_data_usage",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_data_usage",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "plan_name": "Advantage 50GB",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "data_limit_gb": 50,
+      "total_data_available_gb": 50,
+      "cycle_end_date": "2025-03-05"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I haven't tried those steps yet. Which one would you like me to do first?"
+  },
+  {
+   "role": "agent",
+   "content": "Let\u2019s start with the simplest step:\n\n1. Please restart your phone.  \n   - Power it off completely, wait about 10 seconds, then turn it back on.\n\nAfter your phone restarts, check if you have service (signal bars, ability to make calls, or use data). If the issue remains, let me know and I\u2019ll guide you through the next step.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I restarted my phone as you asked, but I still have no service\u2014no signal bars, can't make calls or use data.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying that. Next, please try toggling Airplane Mode:\n\n1. Turn on Airplane Mode (usually found in your phone\u2019s quick settings or settings menu).\n2. Wait about 10 seconds.\n3. Turn Airplane Mode off.\n\nAfter doing this, check if your phone regains service. If you still have no signal, let me know and we\u2019ll proceed to the next troubleshooting step.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "There's still no signal after toggling Airplane Mode on and off\u2014no bars, nothing changed.",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_airplane_mode",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "toggle_airplane_mode",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. Let\u2019s try the next step:\n\n1. Power off your phone.\n2. Remove your SIM card (you may need a SIM ejector tool or a paperclip).\n3. Wait about 10 seconds.\n4. Reinsert the SIM card securely.\n5. Power your phone back on.\n\nAfter your phone restarts, check if you have service. If you still have no signal, please let me know. I\u2019ll continue to assist you or escalate the issue if needed.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "After reseating the SIM card, my phone says the SIM is still locked and there's still no service.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the update. If your phone is showing \u201cSIM locked\u201d and still has no service after reseating the SIM card, this could indicate an issue with the SIM card itself, your device, or a network provisioning problem.\n\nHere\u2019s what you can try next:\n\n1. If prompted, enter your SIM PIN (if you know it). If you enter the wrong PIN too many times, your SIM may become blocked and require a PUK code.\n2. If you don\u2019t know your SIM PIN or if the phone is asking for a PUK code, please let me know.\n\nAdditionally, have you recently changed devices, updated your phone\u2019s software, or made any changes to your account or SIM card?\n\nIf you\u2019re unable to unlock the SIM or if you haven\u2019t made any recent changes, I can escalate this issue for further investigation or help you obtain your PUK code if needed. Please let me know how you\u2019d like to proceed.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I'm not being prompted for a SIM PIN or PUK code\u2014it just says no service. I haven't changed devices, updated software, or made any account changes recently."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for clarifying. Since you\u2019re not being prompted for a SIM PIN or PUK code, and you haven\u2019t made any recent changes, but your phone still shows \u201cNo Service\u201d after all troubleshooting steps, this may indicate:\n\n- A possible SIM card failure\n- A device hardware issue\n- A network provisioning problem on your account\n\nAt this point, further troubleshooting may require advanced diagnostics or a SIM replacement. I recommend the following:\n\n1. If possible, try inserting your SIM card into another compatible phone to see if it gets service. This can help determine if the issue is with your SIM or your device.\n2. If you don\u2019t have access to another phone, or if the SIM also doesn\u2019t work in another device, it\u2019s likely a SIM or account issue.\n\nWould you like me to escalate this issue to a human support agent for further investigation and assistance, possibly including a SIM replacement or advanced network troubleshooting?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

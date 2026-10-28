@@ -1,0 +1,347 @@
+{
+ "case": "16:[graph:Telecom Agent Policy]send_payment_request|enable_roaming",
+ "arm": "stub",
+ "repeat": 2,
+ "solved": false,
+ "actions_done": 1,
+ "actions_required": 5,
+ "turns": 19,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "get_details_by_id",
+  "resume_line",
+  "reboot_device",
+  "get_details_by_id",
+  "reseat_sim_card",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_send_payment_request",
+   "ok": false,
+   "why": "tool 'send_payment_request' was never called by the assistant"
+  },
+  {
+   "id": "s1_make_payment",
+   "ok": false,
+   "why": "tool 'make_payment' was never called by the user"
+  },
+  {
+   "id": "s2_enable_roaming",
+   "ok": false,
+   "why": "tool 'enable_roaming' was never called by the assistant"
+  },
+  {
+   "id": "s3_resume_line",
+   "ok": true,
+   "why": "tool 'resume_line' was called with {'customer_id': 'CUS-4501283', 'line_id': 'LN-8830142'}"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone suddenly has no signal at all. I can't get online, can't send picture messages, and nothing works. It was fine before but now it's just completely dead."
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're experiencing this issue. To help you further, could you please provide your phone number or the name and date of birth associated with your account? This will allow me to check your line status and see if there are any issues affecting your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Your phone line is currently showing as \"Suspended,\" which is why you have no signal and cannot use any services. This could be due to a billing issue, a requested suspension, or another account-related reason.\n\nWould you like me to check the reason for the suspension or help you reactivate your line? If you did not request this suspension, I can assist you in resuming your service right away. Please let me know how you'd like to proceed.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Suspended",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": false,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I didn't request any suspension. Can you please check the reason for the suspension and help me get my service back?"
+  },
+  {
+   "role": "agent",
+   "content": "Your line was suspended, but there was no specific reason listed for the suspension. I have now reactivated your service, and your line is back to Active status.\n\nPlease restart your phone in a few moments. You should regain signal and be able to use your services as normal. If you continue to have issues, let me know and I\u2019ll assist you further.",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "resume_line",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Suspended",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": false,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "resume_line",
+     "response": {
+      "result": "Line LN-8830142 has been resumed and is now Active."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I've restarted my phone, but I still don't have any signal. There's nothing showing at the top of my screen.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for restarting your phone. Your device (Pixel 8 Pro) is showing as active in our system, so the issue may be related to the SIM card, network settings, or a temporary network outage.\n\nLet\u2019s try the following troubleshooting steps:\n\n1. Double-check that Airplane Mode is turned off.\n2. Remove your SIM card (if you use a physical SIM), wait 30 seconds, and reinsert it.\n3. If you use an eSIM, try toggling your mobile data off and on, or re-enable the eSIM profile.\n4. Go to your phone\u2019s network settings and select your carrier manually.\n5. If possible, test your SIM in another phone to see if it works there.\n\nIf you\u2019ve tried these steps and still have no signal, please let me know. I can escalate this issue or check for any network outages in your area. Would you like to proceed with these steps or need further assistance?",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "DEV-55210"
+     },
+     "params": {
+      "id": "DEV-55210"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "device_id": "DEV-55210",
+      "device_type": "phone",
+      "model": "Pixel 8 Pro",
+      "imei": "356938035643809",
+      "esim_capable": true,
+      "activation_status": "Active",
+      "activation_date": "2023-05-18",
+      "last_esim_transfer_date": "2023-05-18",
+      "entity_type": "device"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I can do one step at a time. Let's start with checking Airplane Mode. Please walk me through it."
+  },
+  {
+   "role": "agent",
+   "content": "Absolutely! Here\u2019s how to check and turn off Airplane Mode on your Pixel 8 Pro:\n\n1. Unlock your phone and go to the home screen.\n2. Swipe down from the very top of your screen to open the Quick Settings panel.\n3. Look for the Airplane Mode icon (it looks like an airplane).\n4. If the icon is highlighted or colored, Airplane Mode is ON. Tap the icon once to turn it OFF.\n5. If the icon is not highlighted, Airplane Mode is already OFF.\n\nAfter making sure Airplane Mode is off, wait a few seconds to see if your signal returns. Let me know what you see, and we\u2019ll move to the next step if needed!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Airplane Mode was already off. There's still no signal showing at the top of my screen."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking. Let\u2019s move to the next step:\n\nPlease remove your SIM card (if you use a physical SIM), wait about 30 seconds, and then reinsert it. Here\u2019s how:\n\n1. Power off your Pixel 8 Pro.\n2. Locate the SIM card tray (usually on the side of the phone).\n3. Use the SIM ejector tool (or a small paperclip) to gently push into the small hole next to the tray until it pops out.\n4. Remove the SIM card, wait 30 seconds, then carefully reinsert it into the tray.\n5. Push the tray back into the phone and power it back on.\n\nIf you use an eSIM instead of a physical SIM, let me know, and I\u2019ll guide you through eSIM troubleshooting steps.\n\nOnce you\u2019ve done this, check if your signal returns. Please let me know the result!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I removed and reinserted the SIM card as you asked. My SIM status says it is active, but I still have no signal showing at the top of my screen.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying that step. Since your SIM status says it is active but you still have no signal, let\u2019s try the next troubleshooting step:\n\nLet\u2019s manually select your carrier network:\n\n1. Open the Settings app on your Pixel 8 Pro.\n2. Tap on Network & Internet.\n3. Tap on Mobile Network.\n4. Tap on \u201cAdvanced\u201d (if you see it), then tap on \u201cChoose network\u201d or \u201cNetwork operators.\u201d\n5. Wait for your phone to search for available networks.\n6. When the list appears, select your carrier from the list.\n\nAfter selecting your carrier, wait a few moments to see if your signal returns.\n\nIf you still have no signal after this, please let me know. We can then check for possible network outages or escalate the issue for further investigation.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I tried manually selecting my carrier, but I still have no signal. There's nothing showing at the top of my screen."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for following all the steps so far. Since your SIM is active, you\u2019ve restarted your phone, reseated the SIM, and manually selected your carrier but still have no signal, this suggests a deeper issue\u2014possibly with the SIM card, your account, or a network problem in your area.\n\nLet\u2019s try one more quick check:\n\n- If possible, insert your SIM card into another phone to see if it gets a signal there.  \n- Alternatively, if you have another SIM card, try inserting it into your Pixel 8 Pro to see if it gets a signal.\n\nThis will help us determine if the issue is with your phone or the SIM card/service itself.\n\nIf you don\u2019t have access to another phone or SIM, or if the SIM also doesn\u2019t work in another device, please let me know. At this point, I can escalate your case to a specialist for further investigation or check for network outages in your area.\n\nWould you like to try the SIM swap test, or should I escalate this issue for you right away?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I don't have another phone or SIM card to test with. Can you please escalate this issue for me or check if there's a network outage in my area?"
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for your patience and for trying all the troubleshooting steps. Since the issue persists and you\u2019re unable to test your SIM in another device, I am escalating your case to a specialist who can investigate further and check for any network outages in your area.\n\nA human agent will assist you shortly to resolve this issue. If you have any additional details or questions, please share them with the specialist when they connect. Thank you for your understanding.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer's line was suspended without a listed reason and has been reactivated, but the customer still has no signal after all standard troubleshooting steps (Airplane Mode, SIM reseat, manual network selection). Customer cannot test SIM in another device. Needs escalation or network outage check."
+     },
+     "params": {
+      "summary": "Customer's line was suspended without a listed reason and has been reactivated, but the customer still has no signal after all standard troubleshooting steps (Airplane Mode, SIM reseat, manual network selection). Customer cannot test SIM in another device. Needs escalation or network outage check."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

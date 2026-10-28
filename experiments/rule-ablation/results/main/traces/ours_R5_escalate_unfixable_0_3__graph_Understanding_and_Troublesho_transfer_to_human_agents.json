@@ -1,0 +1,200 @@
+{
+ "case": "3:[graph:Understanding and Troublesho]transfer_to_human_agents",
+ "arm": "R5_escalate_unfixable",
+ "repeat": 0,
+ "solved": false,
+ "actions_done": 2,
+ "actions_required": 3,
+ "turns": 13,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "check_status_bar",
+  "check_sim_status"
+ ],
+ "criteria": [
+  {
+   "id": "s0_check_sim_status",
+   "ok": true,
+   "why": "tool 'check_sim_status' was called"
+  },
+  {
+   "id": "s1_get_data_usage",
+   "ok": true,
+   "why": "tool 'get_data_usage' was called"
+  },
+  {
+   "id": "s2_transfer_to_human_agents",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was never called by the assistant"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no signal at all. Nothing loads, I can't send picture messages, and it's completely dead as far as the internet goes. It was working fine yesterday, but now there's just nothing."
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot this issue. To get started, I\u2019ll need to identify your account. Could you please provide one of the following:\n\n- The phone number associated with your account\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I can check your account and guide you through the steps to restore your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Sure, my name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your information. Your line status is currently active, so let's begin troubleshooting your phone's lack of signal.\n\nTo proceed, could you please check your phone's status bar and let me know if you see any of the following:\n\n- Airplane mode icon (\u2708\ufe0f)\n- \"No Signal\" or a signal strength indicator (bars)\n- Any network type indicator (e.g., 5G, 4G, LTE)\n\nThis will help determine if the issue is related to your device settings or something else. If you need guidance on how to check, let me know your phone model (Android or iPhone), and I can assist further.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I see a 'No Signal' icon in the status bar, but it says 'Data Enabled' and shows I'm connected to Chestnut-5G WiFi. The battery is at 87%.",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the details. Since you see a \"No Signal\" icon, your phone is not connecting to the cellular network, even though mobile data is enabled and you are connected to WiFi. Let's go through some troubleshooting steps:\n\n1. Check if Airplane Mode is ON. Even if you have WiFi, Airplane Mode will block cellular service. Please confirm if you see an airplane icon (\u2708\ufe0f) in your status bar.\n2. If Airplane Mode is OFF, the next step is to check your SIM card status. Sometimes, the SIM card may not be properly seated or could have a temporary glitch.\n\nCould you please confirm if Airplane Mode is ON or OFF? If it is OFF, I will guide you through checking your SIM card status next.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I do not see an airplane icon, so Airplane Mode is OFF. What should I do next?"
+  },
+  {
+   "role": "agent",
+   "content": "Great, thanks for confirming that Airplane Mode is OFF. The next step is to check your SIM card status, as issues with the SIM card can cause a complete loss of signal.\n\nPlease check your SIM card status on your phone. If you need instructions, let me know your phone model (Android or iPhone), and I can guide you through the process. Once you check, let me know if your phone reports the SIM as active, missing, or locked.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "It says my SIM status is 'Locked'. What should I do next?",
+   "tool_calls": [
+    {
+     "tool_name": "check_sim_status",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "A \u201cLocked\u201d SIM status usually means your SIM card is protected by a PIN or PUK code, and it needs to be unlocked before you can use cellular service.\n\nHere\u2019s what you should do next:\n1. If you know your SIM PIN, enter it when prompted on your phone.\n2. If you have entered the wrong PIN multiple times, your phone may now require a PUK (Personal Unblocking Key) code. This code is usually provided by your carrier.\n\nDo you see a prompt asking for a PIN or PUK code? If so, please let me know which one. If you need your PUK code, I can assist you further.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Yes, my phone is asking for a PUK code. What should I do to get it?"
+  },
+  {
+   "role": "agent",
+   "content": "For your security, I am unable to provide the PUK code directly. You will need to contact customer support to retrieve your PUK code and unlock your SIM.\n\nWould you like me to transfer you to a human agent who can securely assist you with your PUK code?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

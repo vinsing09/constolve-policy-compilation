@@ -1,0 +1,363 @@
+{
+ "case": "10:[graph:Telecom Agent Policy]resume_line",
+ "arm": "control",
+ "repeat": 0,
+ "solved": false,
+ "actions_done": 1,
+ "actions_required": 2,
+ "turns": 21,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "get_bills_for_customer",
+  "resume_line",
+  "reboot_device",
+  "check_status_bar",
+  "check_apn_settings",
+  "toggle_wifi_calling",
+  "toggle_wifi_calling",
+  "reset_apn_settings",
+  "reboot_device",
+  "can_send_mms",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_resume_line",
+   "ok": true,
+   "why": "tool 'resume_line' was called with {'customer_id': 'CUS-4501283', 'line_id': 'LN-8830142'}"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no signal at all\u2014no calls, no internet, and I can't send picture messages. Can you help me get it working again?"
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot your phone\u2019s signal and connectivity issues. To get started, I\u2019ll need to identify your account. Could you please provide one of the following:\n\n- The phone number associated with your account\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I\u2019ll guide you through the steps to restore your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Your line was suspended, which is why you had no signal, calls, internet, or picture messaging. I have now resumed your service.\n\nPlease reboot your phone to restore your connection. After restarting, you should be able to make calls, use the internet, and send picture messages again.\n\nLet me know if you still experience any issues after rebooting your device.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_bills_for_customer",
+     "arguments": {
+      "customer_id": "CUS-4501283"
+     },
+     "params": {
+      "customer_id": "CUS-4501283"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "resume_line",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Suspended",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "2025-02-25",
+      "suspension_reason": 1,
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_bills_for_customer",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "count": 2,
+      "bills": [
+       {
+        "bill_id": "BILL-4501283-2025-02",
+        "customer_id": "CUS-4501283",
+        "period_start": "2025-01-06",
+        "period_end": "2025-02-05",
+        "issue_date": "2025-02-06",
+        "total_amount_due": 70.0,
+        "due_date": "2025-02-26",
+        "status": "Paid"
+       },
+       {
+        "bill_id": "BILL-4501283-2025-01",
+        "customer_id": "CUS-4501283",
+        "period_start": "2024-12-06",
+        "period_end": "2025-01-05",
+        "issue_date": "2025-01-06",
+        "total_amount_due": 65.0,
+        "due_date": "2025-01-26",
+        "status": "Paid"
+       }
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "resume_line",
+     "response": {
+      "result": "Line LN-8830142 has been resumed and is now Active."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I rebooted my phone, but I'm still not getting any signal. There's still no internet or calls.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. Let\u2019s continue troubleshooting your signal issue. I\u2019ll guide you through a few quick checks and steps to help restore your service.\n\nFirst, could you please check your phone\u2019s status bar and let me know if you see any of the following:\n- Airplane mode icon (\u2708\ufe0f)\n- \u201cNo Signal\u201d or any signal bars\n- Network type (e.g., 5G, 4G, LTE)\n\nIf you\u2019re not sure, I can walk you through how to check this on your device. Would you like instructions, or can you tell me what you see?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Actually, now I see 'Excellent' signal bars, 5G, and it says 'Data Enabled' and 'Connected to Chestnut-5G' in the status bar. What should I do next?",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "That\u2019s great news! Your phone is now showing excellent signal strength, 5G connectivity, and mobile data is enabled. You\u2019re also connected to Wi-Fi (\u201cChestnut-5G\u201d).\n\nTo confirm everything is working:\n1. Try making a call to see if voice service is restored.\n2. Turn off Wi-Fi temporarily and try browsing the internet or using an app that requires data.\n3. Try sending a picture message (MMS).\n\nIf all these work, your service is fully restored. If you encounter any issues with calls, mobile data, or picture messaging, please let me know which specific service isn\u2019t working, and I\u2019ll help you further.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I turned off Wi-Fi and tried sending a picture message, but it still won't go through. The call works and I can browse the internet, but picture messages are not sending."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the update. Since calls and internet are working but picture messages (MMS) are not, let\u2019s troubleshoot MMS specifically. Here\u2019s what we\u2019ll check next:\n\n1. Network type: You\u2019re on 5G, which is good.\n2. Mobile data: Enabled, which is required for MMS.\n3. APN settings: Incorrect or missing MMSC URL can cause MMS to fail.\n4. Messaging app permissions: The app needs storage and SMS permissions.\n5. Wi-Fi Calling: Sometimes interferes with MMS.\n\nLet\u2019s start by checking your APN settings and messaging app permissions. Could you please:\n- Check your APN settings and let me know if there\u2019s an MMSC URL listed.\n- Check if your messaging app has storage and SMS permissions enabled.\n\nIf you need instructions on how to check these, let me know!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "The APN settings look correct and there's an MMSC URL listed. I tried to check app permissions, but I got an error saying I need to specify the app name. What should I do next?",
+   "tool_calls": [
+    {
+     "tool_name": "check_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking the APN settings and confirming the MMSC URL is present. For app permissions, you\u2019ll need to check the permissions for your messaging app specifically. The app is usually called \u201cMessages\u201d or \u201cMessaging.\u201d\n\nPlease check the permissions for your messaging app and ensure that both \u201cStorage\u201d and \u201cSMS\u201d permissions are enabled. If you\u2019re unsure of the app name, it\u2019s typically the default app you use to send text and picture messages.\n\nOnce you\u2019ve checked or updated the permissions, try sending a picture message again. Let me know if it works or if you encounter any issues. If you need step-by-step instructions for checking app permissions, just let me know your phone\u2019s make and model.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked the permissions for the Messages app\u2014both Storage and SMS permissions are enabled. I tried sending a picture message again, but it still won't go through."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming the app permissions. Since your APN settings are correct, permissions are enabled, and you have excellent signal and mobile data, the next step is to check if Wi-Fi Calling is enabled, as it can sometimes interfere with MMS.\n\nPlease check if Wi-Fi Calling is currently turned on. If it is, try turning it off and then attempt to send a picture message again.\n\nLet me know if you need instructions on how to check or disable Wi-Fi Calling. Once you\u2019ve tried this, please let me know if MMS works.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I just turned Wi-Fi Calling ON as you asked, but the picture message still isn't sending.",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_wifi_calling",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying that. Actually, to troubleshoot MMS issues, Wi-Fi Calling should be turned OFF, as it can sometimes interfere with sending picture messages.\n\nPlease turn Wi-Fi Calling OFF, then try sending a picture message again. Let me know if it goes through after disabling Wi-Fi Calling.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I turned Wi-Fi Calling OFF as you asked, but the picture message still isn't sending.",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_wifi_calling",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying that. Since you have:\n\n- Excellent signal and 5G connectivity\n- Mobile data enabled\n- Correct APN settings with MMSC URL\n- Messaging app permissions enabled\n- Wi-Fi Calling turned OFF\n\nand MMS is still not working, let\u2019s try one more step: resetting your APN settings to default, as sometimes hidden configuration issues can cause MMS to fail even if the settings look correct.\n\nPlease reset your APN settings to default. After resetting, reboot your device, then try sending a picture message again.\n\nLet me know if you need instructions on how to reset APN settings or reboot your device. Once you\u2019ve completed these steps, please let me know if MMS works.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I already reset my APN settings to default and rebooted the phone. The messaging app says it can send MMS, but my picture messages still won't go through.",
+   "tool_calls": [
+    {
+     "tool_name": "reset_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "can_send_mms",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.\n\nYou\u2019ve completed all recommended troubleshooting steps, but MMS is still not working. A human agent will assist you further with this issue. Thank you for your patience.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez has excellent signal, 5G, mobile data enabled, correct APN settings (with MMSC URL), messaging app permissions enabled, Wi-Fi Calling OFF, and has already reset APN settings and rebooted. MMS (picture messages) still will not send despite all troubleshooting steps. Needs advanced technical support."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez has excellent signal, 5G, mobile data enabled, correct APN settings (with MMSC URL), messaging app permissions enabled, Wi-Fi Calling OFF, and has already reset APN settings and rebooted. MMS (picture messages) still will not send despite all troubleshooting steps. Needs advanced technical support."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

@@ -1,0 +1,319 @@
+{
+ "case": "19:[graph:Telecom Agent Policy]refuel_data",
+ "arm": "R4_suspension",
+ "repeat": 0,
+ "solved": false,
+ "actions_done": 1,
+ "actions_required": 2,
+ "turns": 19,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "get_details_by_id",
+  "refuel_data",
+  "toggle_airplane_mode",
+  "toggle_airplane_mode",
+  "check_status_bar",
+  "reset_apn_settings",
+  "reboot_device",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_refuel_data",
+   "ok": true,
+   "why": "tool 'refuel_data' was called with {'customer_id': 'CUS-4501283', 'line_id': 'LN-8830142'}"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no internet at all unless I'm on Wi-Fi. Nothing loads or downloads, and I can't send picture messages either."
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot your mobile data and MMS issues. To get started, I\u2019ll need to identify your account. Could you please provide one of the following:\n\n- The phone number associated with your account\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I can assist you further.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148 and my name is Sofia Martinez."
+  },
+  {
+   "role": "agent",
+   "content": "Your line is active and you are on the \"Advantage 50GB\" plan, which has a monthly data limit of 50GB. Your current usage is 50.5GB, which means you have exceeded your plan\u2019s data limit. This is why you have no internet access on mobile data and cannot send picture messages (MMS), as both require mobile data.\n\nYou have two options to restore your mobile data:\n1. Add more data to your line (data refueling) at $5.00 per GB (up to 2GB).\n2. Change to a plan with a higher data limit.\n\nWould you like to add more data to your line or explore other plan options? If you want to refuel data, please let me know how many GB (up to 2GB) you\u2019d like to add.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "PLN-2002"
+     },
+     "params": {
+      "id": "PLN-2002"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "plan_id": "PLN-2002",
+      "name": "Advantage 50GB",
+      "data_limit_gb": 50,
+      "monthly_price": 65.0,
+      "data_refueling_price_per_gb": 5.0,
+      "entity_type": "plan"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I don\u2019t want to change my plan, but I\u2019m willing to buy extra data. Please add 1GB to my line."
+  },
+  {
+   "role": "agent",
+   "content": "1GB of extra data has been added to your line for $5.00, and the charge will appear on your current bill. You should now have mobile data access again.\n\nIf your phone still doesn\u2019t connect to the internet, try turning airplane mode on and off, or restarting your device. Let me know if you need further assistance!",
+   "tool_calls": [
+    {
+     "tool_name": "refuel_data",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142",
+      "gb_amount": 1
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142",
+      "gb_amount": 1
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "refuel_data",
+     "response": {
+      "result": "Refueled 1.0GB on line LN-8830142 (+1-617-555-0148). Charge of $5.00 added to bill BILL-4501283-2025-02."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I turned airplane mode on and now my phone shows it's in airplane mode. Should I turn it back off?",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_airplane_mode",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Yes, please turn airplane mode off. When airplane mode is on, all wireless connections\u2014including mobile data\u2014are disabled. Once you turn it off, your phone should reconnect to the mobile network and your internet should work again.\n\nLet me know if you have any issues after turning airplane mode off.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Airplane mode is now off, but my mobile data still isn\u2019t working\u2014nothing is loading.",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_airplane_mode",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the update. Since airplane mode is off and you have extra data, let's continue troubleshooting your mobile data issue.\n\nCould you please check and let me know:\n- Is your phone showing any signal bars or network type (like 4G, LTE, 5G) in the status bar?\n- Do you see any icons indicating mobile data is enabled or disabled?\n\nIf you\u2019re not sure, I can guide you through some steps to check your phone\u2019s status. Would you like instructions on how to check your status bar or network settings?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Actually, I do see 'Excellent' signal, 5G, and a 'Data Enabled' icon in the status bar. But my internet is still not working.",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the details. Since you have excellent signal, 5G connectivity, and data is enabled, but your internet is still not working, the next step is to check if there are any restrictions or settings affecting your data connection.\n\nCould you please check if Data Saver mode is enabled on your phone? Data Saver can restrict background and sometimes foreground data usage, which may cause issues with internet access.\n\nWould you like instructions on how to check and disable Data Saver mode?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I know how to check that. Data Saver mode is off."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming that Data Saver mode is off. Since you have signal, 5G, data enabled, and Data Saver is off, the next step is to check if there are any issues with your phone\u2019s APN (Access Point Name) settings, which are required for mobile data and MMS to work.\n\nCould you please check your APN settings and let me know if anything looks incorrect or if the MMSC URL is missing? If you\u2019re unsure, I can guide you through how to reset your APN settings to default, which often resolves these issues. Would you like instructions on how to reset your APN settings?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I reset my APN settings and saw a message saying they were reset to defaults, and that I should reboot the device for the changes to take effect. Should I restart my phone now?",
+   "tool_calls": [
+    {
+     "tool_name": "reset_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Yes, please restart your phone now. Rebooting is necessary for the new APN settings to take effect. After your phone restarts, check if your mobile data and picture messaging (MMS) are working.\n\nLet me know if you still have any issues after the restart.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone rebooted successfully after resetting the APN settings, but my internet still isn't working and picture messages still won't send.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez (+1-617-555-0148) has no mobile data or MMS despite excellent signal, 5G, data enabled, Data Saver off, sufficient data, and after resetting APN settings and rebooting. Standard troubleshooting exhausted."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez (+1-617-555-0148) has no mobile data or MMS despite excellent signal, 5G, data enabled, Data Saver off, sufficient data, and after resetting APN settings and rebooting. Standard troubleshooting exhausted."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

@@ -1,0 +1,298 @@
+{
+ "case": "20:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_roaming",
+ "arm": "stub",
+ "repeat": 1,
+ "solved": false,
+ "actions_done": 3,
+ "actions_required": 6,
+ "turns": 15,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "resume_line",
+  "reboot_device",
+  "get_details_by_id",
+  "toggle_airplane_mode",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_airplane_mode",
+   "ok": true,
+   "why": "tool 'toggle_airplane_mode' was called"
+  },
+  {
+   "id": "s1_reset_apn_settings",
+   "ok": false,
+   "why": "tool 'reset_apn_settings' was never called by the user"
+  },
+  {
+   "id": "s2_reboot_device",
+   "ok": true,
+   "why": "tool 'reboot_device' was called"
+  },
+  {
+   "id": "s3_resume_line",
+   "ok": true,
+   "why": "tool 'resume_line' was called with {'customer_id': 'CUS-4501283', 'line_id': 'LN-8830142'}"
+  },
+  {
+   "id": "s4_toggle_roaming",
+   "ok": false,
+   "why": "tool 'toggle_roaming' was never called by the user"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, nothing loads, and I can't send picture messages. It seems completely dead as far as the network goes."
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're experiencing this issue. To help you further, could you please provide your phone number or the name and date of birth on your account? This will allow me to check your line status and see if there are any network or account issues affecting your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Sure, my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Your phone line is currently suspended, which is why you have no service and cannot send messages or use data. This suspension started on February 25, 2025.\n\nWould you like me to resume your line so your service can be restored? If you know the reason for the suspension or if it was done in error, please let me know.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Suspended",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "2025-02-25",
+      "suspension_reason": 1,
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I wasn't aware my line was suspended. Yes, please resume my line so I can get my service back."
+  },
+  {
+   "role": "agent",
+   "content": "Your line has been resumed and is now active. You should regain service shortly. If you still experience issues after a few minutes, please restart your phone.\n\nLet me know if you need any further assistance or if you have questions about why your line was suspended.",
+   "tool_calls": [
+    {
+     "tool_name": "resume_line",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "resume_line",
+     "response": {
+      "result": "Line LN-8830142 has been resumed and is now Active."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I restarted my phone as you suggested, but there are still no signal bars and nothing loads. The problem hasn't changed.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. Since your line is now active but you still have no service, let's try a few more steps:\n\n1. Double-check your SIM card: Make sure it is properly inserted in your phone.\n2. Try your SIM card in another phone (if possible): This helps determine if the issue is with your phone or the SIM/network.\n3. Let me check your device and network status on our end for any issues.\n\nWould you like to try the SIM card in another phone, or should I proceed to check your device and network status now? If you have noticed any error messages on your phone, please let me know as well.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I haven't seen any error messages. Please go ahead and check my device and network status now."
+  },
+  {
+   "role": "agent",
+   "content": "Your device (Pixel 8 Pro) is showing as active in our system, and your line is also active. Since there are no error messages and both your device and line are active, the issue may be related to the SIM card, a local network outage, or a device setting.\n\nHere are a few more steps to try:\n1. Toggle Airplane Mode on and off.\n2. Check for any carrier or system updates on your phone.\n3. If you have an eSIM, try reactivating it or deleting and re-adding the eSIM profile.\n4. If possible, test your SIM card in another phone to rule out a device issue.\n\nIf you have already tried these steps or need help with any of them, please let me know. If the problem persists after these checks, I can escalate your case to a technical specialist for further investigation. Would you like me to do that now?",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "DEV-55210"
+     },
+     "params": {
+      "id": "DEV-55210"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "device_id": "DEV-55210",
+      "device_type": "phone",
+      "model": "Pixel 8 Pro",
+      "imei": "356938035643809",
+      "esim_capable": true,
+      "activation_status": "Active",
+      "activation_date": "2023-05-18",
+      "last_esim_transfer_date": "2023-05-18",
+      "entity_type": "device"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I just toggled Airplane Mode, and now it's off, but there's still no signal\u2014no bars or connection.",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_airplane_mode",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying that. Since your line and device are both active, and toggling Airplane Mode did not restore service, this suggests a possible SIM card issue, device hardware problem, or a local network outage.\n\nHere\u2019s what we can do next:\n\n- If you have another phone available, try inserting your SIM card into it to see if you get service.  \n- If you\u2019re using an eSIM, you can try deleting and re-adding the eSIM profile (I can guide you through this if needed).\n- If neither of these options is possible or if you still have no service after trying them, I can escalate your case to a technical specialist for further investigation.\n\nWould you like to try your SIM/eSIM in another device, or should I escalate this issue to our technical team right away?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I don't have another phone to test the SIM with. Please go ahead and escalate the issue to your technical team."
+  },
+  {
+   "role": "agent",
+   "content": "I have escalated your issue to our technical team. A specialist will review your case and contact you to help resolve the problem as soon as possible.\n\nThank you for your patience, and I\u2019m sorry for the inconvenience. If you have any further questions or updates, please let me know.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer's line was suspended but is now active. Despite this, their Pixel 8 Pro still shows no signal (no bars, nothing loads, can't send messages). Airplane Mode toggle did not help. Customer cannot test SIM in another device. No error messages. Needs technical team assistance."
+     },
+     "params": {
+      "summary": "Customer's line was suspended but is now active. Despite this, their Pixel 8 Pro still shows no signal (no bars, nothing loads, can't send messages). Airplane Mode toggle did not help. Customer cannot test SIM in another device. No error messages. Needs technical team assistance."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

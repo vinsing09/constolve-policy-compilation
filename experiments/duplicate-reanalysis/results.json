@@ -1,0 +1,677 @@
+{
+ "clusters": 19,
+ "pairs": {
+  "6=9": {
+   "fields_differing": [
+    "family",
+    "goal",
+    "scenario",
+    "task_instructions"
+   ],
+   "opening_line_same": false
+  },
+  "8=11": {
+   "fields_differing": [
+    "family",
+    "scenario",
+    "task_instructions"
+   ],
+   "opening_line_same": true
+  },
+  "7=14": {
+   "fields_differing": [
+    "family",
+    "scenario",
+    "task_instructions"
+   ],
+   "opening_line_same": true
+  },
+  "0=15": {
+   "fields_differing": [
+    "family",
+    "scenario",
+    "task_instructions"
+   ],
+   "opening_line_same": true
+  },
+  "3=17": {
+   "fields_differing": [
+    "family",
+    "goal",
+    "scenario",
+    "task_instructions"
+   ],
+   "opening_line_same": false
+  }
+ },
+ "separation": {
+  "original_24": {
+   "units": 24,
+   "pooled_gap": 30.0,
+   "gap_over_units": 30.0,
+   "ci95": [
+    24.55696202531646,
+    35.294117647058826
+   ],
+   "signflip_p_mc": 5e-05,
+   "signflip_p_exact": 3.6954879760742188e-06,
+   "per_unit_pp": {
+    "0": 28.0,
+    "10": 0.0,
+    "11": 20.0,
+    "12": 30.0,
+    "13": 66.67,
+    "14": 60.0,
+    "15": 28.0,
+    "16": 40.0,
+    "17": 26.67,
+    "18": 20.0,
+    "19": -20.0,
+    "1": 28.0,
+    "20": 24.0,
+    "21": 30.0,
+    "22": 46.67,
+    "23": -20.0,
+    "2": 25.0,
+    "3": 20.0,
+    "4": 40.0,
+    "5": 33.33,
+    "6": 30.0,
+    "7": 40.0,
+    "8": 40.0,
+    "9": 40.0
+   },
+   "better": 21,
+   "worse": 2,
+   "tied": 1
+  },
+  "clustered_19": {
+   "units": 19,
+   "pooled_gap": 30.0,
+   "gap_over_units": 30.0,
+   "ci95": [
+    24.65753424657534,
+    35.43859649122807
+   ],
+   "signflip_p_mc": 0.00015,
+   "signflip_p_exact": 7.2479248046875e-05,
+   "per_unit_pp": {
+    "0": 28.0,
+    "10": 0.0,
+    "12": 30.0,
+    "13": 66.67,
+    "16": 40.0,
+    "18": 20.0,
+    "19": -20.0,
+    "1": 28.0,
+    "20": 24.0,
+    "21": 30.0,
+    "22": 46.67,
+    "23": -20.0,
+    "2": 25.0,
+    "3": 23.33,
+    "4": 40.0,
+    "5": 33.33,
+    "6": 35.0,
+    "7": 50.0,
+    "8": 30.0
+   },
+   "better": 16,
+   "worse": 2,
+   "tied": 1
+  }
+ },
+ "ablation_main": {
+  "valid_blocks": 63,
+  "original_24": {
+   "R1_airplane": {
+    "tied": {
+     "n_scenarios": 11,
+     "n_control": 28,
+     "n_variant": 28,
+     "control_pct": 85.71428571428571,
+     "variant_pct": 92.85714285714286,
+     "drop": -7.142857142857153,
+     "p": 0.796875,
+     "caught": false,
+     "clusters_with_ties": 11,
+     "min_possible_p": 0.00048828125,
+     "changed_clusters": 6
+    },
+    "untied": {
+     "n_scenarios": 24,
+     "n_control": 215,
+     "n_variant": 215,
+     "control_pct": 76.27906976744185,
+     "variant_pct": 74.88372093023256,
+     "drop": 1.3953488372092977,
+     "p": 0.56439208984375,
+     "caught": false
+    }
+   },
+   "R2_apn": {
+    "tied": {
+     "n_scenarios": 10,
+     "n_control": 52,
+     "n_variant": 52,
+     "control_pct": 100.0,
+     "variant_pct": 65.38461538461539,
+     "drop": 34.61538461538461,
+     "p": 0.001953125,
+     "caught": true,
+     "clusters_with_ties": 10,
+     "min_possible_p": 0.0009765625,
+     "changed_clusters": 9
+    },
+    "untied": {
+     "n_scenarios": 24,
+     "n_control": 191,
+     "n_variant": 191,
+     "control_pct": 71.20418848167539,
+     "variant_pct": 67.53926701570681,
+     "drop": 3.6649214659685754,
+     "p": 0.3148155212402344,
+     "caught": false
+    }
+   },
+   "R3_payment": {
+    "tied": {
+     "n_scenarios": 3,
+     "n_control": 16,
+     "n_variant": 16,
+     "control_pct": 100.0,
+     "variant_pct": 75.0,
+     "drop": 25.0,
+     "p": 0.25,
+     "caught": false,
+     "clusters_with_ties": 3,
+     "min_possible_p": 0.125,
+     "changed_clusters": 2
+    },
+    "untied": {
+     "n_scenarios": 24,
+     "n_control": 227,
+     "n_variant": 227,
+     "control_pct": 75.77092511013215,
+     "variant_pct": 65.63876651982379,
+     "drop": 10.132158590308364,
+     "p": 0.00809478759765625,
+     "caught": false
+    }
+   },
+   "R4_suspension": {
+    "tied": {
+     "n_scenarios": 9,
+     "n_control": 24,
+     "n_variant": 24,
+     "control_pct": 100.0,
+     "variant_pct": 91.66666666666667,
+     "drop": 8.333333333333329,
+     "p": 0.25,
+     "caught": false,
+     "clusters_with_ties": 9,
+     "min_possible_p": 0.001953125,
+     "changed_clusters": 2
+    },
+    "untied": {
+     "n_scenarios": 24,
+     "n_control": 219,
+     "n_variant": 219,
+     "control_pct": 74.88584474885845,
+     "variant_pct": 71.68949771689498,
+     "drop": 3.1963470319634695,
+     "p": 0.2386474609375,
+     "caught": false
+    }
+   },
+   "R5_escalate_unfixable": {
+    "tied": {
+     "n_scenarios": 5,
+     "n_control": 26,
+     "n_variant": 26,
+     "control_pct": 61.53846153846154,
+     "variant_pct": 34.61538461538461,
+     "drop": 26.923076923076927,
+     "p": 0.0625,
+     "caught": false,
+     "clusters_with_ties": 5,
+     "min_possible_p": 0.03125,
+     "changed_clusters": 4
+    },
+    "untied": {
+     "n_scenarios": 22,
+     "n_control": 217,
+     "n_variant": 217,
+     "control_pct": 79.26267281105991,
+     "variant_pct": 77.41935483870968,
+     "drop": 1.8433179723502349,
+     "p": 0.4130859375,
+     "caught": false
+    }
+   },
+   "R6_transfer_scope": {
+    "tied": {
+     "n_scenarios": 24,
+     "n_control": 63,
+     "n_variant": 63,
+     "control_pct": 69.84126984126983,
+     "variant_pct": 53.96825396825397,
+     "drop": 15.873015873015866,
+     "p": 0.036651611328125,
+     "caught": false,
+     "clusters_with_ties": 24,
+     "min_possible_p": 5.960464477539063e-08,
+     "changed_clusters": 15
+    },
+    "untied": {
+     "n_scenarios": 24,
+     "n_control": 180,
+     "n_variant": 180,
+     "control_pct": 80.0,
+     "variant_pct": 79.44444444444444,
+     "drop": 0.5555555555555571,
+     "p": 0.15234375,
+     "caught": false
+    }
+   },
+   "pair": {
+    "R5_escalate_unfixable": {
+     "own_only": {
+      "n_scenarios": 5,
+      "n_control": 13,
+      "n_variant": 13,
+      "control_pct": 76.92307692307692,
+      "variant_pct": 46.15384615384615,
+      "drop": 30.769230769230766,
+      "p": 0.125,
+      "caught": false
+     },
+     "partner_only": {
+      "n_scenarios": 19,
+      "n_control": 50,
+      "n_variant": 50,
+      "control_pct": 76.0,
+      "variant_pct": 64.0,
+      "drop": 12.0,
+      "p": 0.13720703125,
+      "caught": false
+     },
+     "lands_on_right_rule": false
+    },
+    "R6_transfer_scope": {
+     "own_only": {
+      "n_scenarios": 19,
+      "n_control": 50,
+      "n_variant": 50,
+      "control_pct": 76.0,
+      "variant_pct": 54.0,
+      "drop": 22.0,
+      "p": 0.0146484375,
+      "caught": true
+     },
+     "partner_only": {
+      "n_scenarios": 5,
+      "n_control": 13,
+      "n_variant": 13,
+      "control_pct": 76.92307692307692,
+      "variant_pct": 46.15384615384615,
+      "drop": 30.769230769230766,
+      "p": 0.125,
+      "caught": false
+     },
+     "lands_on_right_rule": true
+    }
+   }
+  },
+  "clustered_19": {
+   "R1_airplane": {
+    "tied": {
+     "n_scenarios": 8,
+     "n_control": 28,
+     "n_variant": 28,
+     "control_pct": 85.71428571428571,
+     "variant_pct": 92.85714285714286,
+     "drop": -7.142857142857153,
+     "p": 0.71875,
+     "caught": false,
+     "clusters_with_ties": 8,
+     "min_possible_p": 0.00390625,
+     "changed_clusters": 5
+    },
+    "untied": {
+     "n_scenarios": 19,
+     "n_control": 215,
+     "n_variant": 215,
+     "control_pct": 76.27906976744185,
+     "variant_pct": 74.88372093023256,
+     "drop": 1.3953488372092977,
+     "p": 0.557373046875,
+     "caught": false
+    }
+   },
+   "R2_apn": {
+    "tied": {
+     "n_scenarios": 7,
+     "n_control": 52,
+     "n_variant": 52,
+     "control_pct": 100.0,
+     "variant_pct": 65.38461538461539,
+     "drop": 34.61538461538461,
+     "p": 0.0078125,
+     "caught": true,
+     "clusters_with_ties": 7,
+     "min_possible_p": 0.0078125,
+     "changed_clusters": 7
+    },
+    "untied": {
+     "n_scenarios": 19,
+     "n_control": 191,
+     "n_variant": 191,
+     "control_pct": 71.20418848167539,
+     "variant_pct": 67.53926701570681,
+     "drop": 3.6649214659685754,
+     "p": 0.248779296875,
+     "caught": false
+    }
+   },
+   "R3_payment": {
+    "tied": {
+     "n_scenarios": 3,
+     "n_control": 16,
+     "n_variant": 16,
+     "control_pct": 100.0,
+     "variant_pct": 75.0,
+     "drop": 25.0,
+     "p": 0.25,
+     "caught": false,
+     "clusters_with_ties": 3,
+     "min_possible_p": 0.125,
+     "changed_clusters": 2
+    },
+    "untied": {
+     "n_scenarios": 19,
+     "n_control": 227,
+     "n_variant": 227,
+     "control_pct": 75.77092511013215,
+     "variant_pct": 65.63876651982379,
+     "drop": 10.132158590308364,
+     "p": 0.00799560546875,
+     "caught": false
+    }
+   },
+   "R4_suspension": {
+    "tied": {
+     "n_scenarios": 7,
+     "n_control": 24,
+     "n_variant": 24,
+     "control_pct": 100.0,
+     "variant_pct": 91.66666666666667,
+     "drop": 8.333333333333329,
+     "p": 0.25,
+     "caught": false,
+     "clusters_with_ties": 7,
+     "min_possible_p": 0.0078125,
+     "changed_clusters": 2
+    },
+    "untied": {
+     "n_scenarios": 19,
+     "n_control": 219,
+     "n_variant": 219,
+     "control_pct": 74.88584474885845,
+     "variant_pct": 71.68949771689498,
+     "drop": 3.1963470319634695,
+     "p": 0.230224609375,
+     "caught": false
+    }
+   },
+   "R5_escalate_unfixable": {
+    "tied": {
+     "n_scenarios": 4,
+     "n_control": 26,
+     "n_variant": 26,
+     "control_pct": 61.53846153846154,
+     "variant_pct": 34.61538461538461,
+     "drop": 26.923076923076927,
+     "p": 0.125,
+     "caught": false,
+     "clusters_with_ties": 4,
+     "min_possible_p": 0.0625,
+     "changed_clusters": 3
+    },
+    "untied": {
+     "n_scenarios": 17,
+     "n_control": 217,
+     "n_variant": 217,
+     "control_pct": 79.26267281105991,
+     "variant_pct": 77.41935483870968,
+     "drop": 1.8433179723502349,
+     "p": 0.3583984375,
+     "caught": false
+    }
+   },
+   "R6_transfer_scope": {
+    "tied": {
+     "n_scenarios": 19,
+     "n_control": 63,
+     "n_variant": 63,
+     "control_pct": 69.84126984126983,
+     "variant_pct": 53.96825396825397,
+     "drop": 15.873015873015866,
+     "p": 0.05810546875,
+     "caught": false,
+     "clusters_with_ties": 19,
+     "min_possible_p": 1.9073486328125e-06,
+     "changed_clusters": 12
+    },
+    "untied": {
+     "n_scenarios": 19,
+     "n_control": 180,
+     "n_variant": 180,
+     "control_pct": 80.0,
+     "variant_pct": 79.44444444444444,
+     "drop": 0.5555555555555571,
+     "p": 0.234375,
+     "caught": false
+    }
+   },
+   "pair": {
+    "R5_escalate_unfixable": {
+     "own_only": {
+      "n_scenarios": 4,
+      "n_control": 13,
+      "n_variant": 13,
+      "control_pct": 76.92307692307692,
+      "variant_pct": 46.15384615384615,
+      "drop": 30.769230769230766,
+      "p": 0.25,
+      "caught": false
+     },
+     "partner_only": {
+      "n_scenarios": 15,
+      "n_control": 50,
+      "n_variant": 50,
+      "control_pct": 76.0,
+      "variant_pct": 64.0,
+      "drop": 12.0,
+      "p": 0.125,
+      "caught": false
+     },
+     "lands_on_right_rule": false
+    },
+    "R6_transfer_scope": {
+     "own_only": {
+      "n_scenarios": 15,
+      "n_control": 50,
+      "n_variant": 50,
+      "control_pct": 76.0,
+      "variant_pct": 54.0,
+      "drop": 22.0,
+      "p": 0.0244140625,
+      "caught": true
+     },
+     "partner_only": {
+      "n_scenarios": 4,
+      "n_control": 13,
+      "n_variant": 13,
+      "control_pct": 76.92307692307692,
+      "variant_pct": 46.15384615384615,
+      "drop": 30.769230769230766,
+      "p": 0.25,
+      "caught": false
+     },
+     "lands_on_right_rule": true
+    }
+   }
+  }
+ },
+ "followup_overlap": {
+  "followup_scenarios": 14,
+  "distinct_followup_keys": 14,
+  "functional_key_overlap": 0,
+  "loose_key_overlap": [
+   [
+    16,
+    2
+   ]
+  ],
+  "same_world_as_a_suite_scenario": 1
+ },
+ "followup_primary": {
+  "R3_payment": {
+   "tied": {
+    "n_scenarios": 6,
+    "n_control": 60,
+    "n_variant": 60,
+    "control_pct": 96.66666666666667,
+    "variant_pct": 76.66666666666667,
+    "drop": 20.0,
+    "p": 0.0625,
+    "caught": false
+   },
+   "untied": {
+    "n_scenarios": 14,
+    "n_control": 185,
+    "n_variant": 185,
+    "control_pct": 57.2972972972973,
+    "variant_pct": 56.21621621621622,
+    "drop": 1.0810810810810807,
+    "p": 0.32421875,
+    "caught": false
+   }
+  },
+  "R5_escalate_unfixable": {
+   "tied": {
+    "n_scenarios": 8,
+    "n_control": 40,
+    "n_variant": 40,
+    "control_pct": 42.5,
+    "variant_pct": 37.5,
+    "drop": 5.0,
+    "p": 0.421875,
+    "caught": false
+   },
+   "untied": {
+    "n_scenarios": 14,
+    "n_control": 205,
+    "n_variant": 205,
+    "control_pct": 71.70731707317073,
+    "variant_pct": 69.26829268292683,
+    "drop": 2.439024390243901,
+    "p": 0.037109375,
+    "caught": false
+   }
+  }
+ },
+ "pooled_secondary": {
+  "R3_payment": {
+   "tied": {
+    "n_scenarios": 9,
+    "n_control": 76,
+    "n_variant": 76,
+    "control_pct": 97.36842105263158,
+    "variant_pct": 76.3157894736842,
+    "drop": 21.05263157894737,
+    "p": 0.015625,
+    "caught": true
+   },
+   "untied": {
+    "n_scenarios": 33,
+    "n_control": 412,
+    "n_variant": 412,
+    "control_pct": 67.47572815533981,
+    "variant_pct": 61.407766990291265,
+    "drop": 6.067961165048544,
+    "p": 0.008434957825210873,
+    "caught": false
+   }
+  },
+  "R5_escalate_unfixable": {
+   "tied": {
+    "n_scenarios": 12,
+    "n_control": 61,
+    "n_variant": 61,
+    "control_pct": 49.18032786885246,
+    "variant_pct": 34.42622950819672,
+    "drop": 14.754098360655739,
+    "p": 0.087890625,
+    "caught": false
+   },
+   "untied": {
+    "n_scenarios": 32,
+    "n_control": 427,
+    "n_variant": 427,
+    "control_pct": 75.40983606557377,
+    "variant_pct": 73.30210772833723,
+    "drop": 2.107728337236537,
+    "p": 0.06366157531738281,
+    "caught": false
+   }
+  }
+ },
+ "pooled_secondary_loose": {
+  "R3_payment": {
+   "tied": {
+    "n_scenarios": 8,
+    "n_control": 76,
+    "n_variant": 76,
+    "control_pct": 97.36842105263158,
+    "variant_pct": 76.3157894736842,
+    "drop": 21.05263157894737,
+    "p": 0.015625,
+    "caught": true
+   },
+   "untied": {
+    "n_scenarios": 32,
+    "n_control": 412,
+    "n_variant": 412,
+    "control_pct": 67.47572815533981,
+    "variant_pct": 61.407766990291265,
+    "drop": 6.067961165048544,
+    "p": 0.008434957825210873,
+    "caught": false
+   }
+  },
+  "R5_escalate_unfixable": {
+   "tied": {
+    "n_scenarios": 12,
+    "n_control": 61,
+    "n_variant": 61,
+    "control_pct": 49.18032786885246,
+    "variant_pct": 34.42622950819672,
+    "drop": 14.754098360655739,
+    "p": 0.087890625,
+    "caught": false
+   },
+   "untied": {
+    "n_scenarios": 31,
+    "n_control": 427,
+    "n_variant": 427,
+    "control_pct": 75.40983606557377,
+    "variant_pct": 73.30210772833723,
+    "drop": 2.107728337236537,
+    "p": 0.06366157531738281,
+    "caught": false
+   }
+  }
+ }
+}

@@ -1,0 +1,381 @@
+{
+ "case": "19:[graph:Telecom Agent Policy]refuel_data",
+ "arm": "stub",
+ "repeat": 3,
+ "solved": false,
+ "actions_done": 1,
+ "actions_required": 2,
+ "turns": 21,
+ "calls": [
+  "get_customer_by_phone",
+  "get_data_usage",
+  "get_details_by_id",
+  "refuel_data",
+  "reboot_device",
+  "get_details_by_id",
+  "get_details_by_id",
+  "check_apn_settings",
+  "toggle_data",
+  "toggle_data",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_refuel_data",
+   "ok": true,
+   "why": "tool 'refuel_data' was called with {'customer_id': 'CUS-4501283', 'line_id': 'LN-8830142'}"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone suddenly has no internet at all unless I'm on Wi-Fi, and I can't send picture messages either. Can you help?"
+  },
+  {
+   "role": "agent",
+   "content": "I\u2019m sorry to hear you\u2019re having trouble with your mobile data and picture messaging (MMS). To help you, I\u2019ll need to check your line\u2019s status and data usage. Could you please provide your phone number or account details? This will help me look into your account and identify the issue.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "It looks like you\u2019ve used 50.5GB of data this billing cycle, which is over your plan\u2019s 50GB limit. When you exceed your data limit, mobile internet and picture messaging (MMS) may stop working until your next cycle or until you add more data.\n\nWould you like to refuel (add more data) to restore your internet and MMS service right away? If so, please let me know how many GB you\u2019d like to add, or I can provide the available options for your plan.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_data_usage",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_data_usage",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "plan_name": "Advantage 50GB",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 0,
+      "data_limit_gb": 50,
+      "total_data_available_gb": 50,
+      "cycle_end_date": "2025-03-05"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Can you tell me what data top-up options are available?"
+  },
+  {
+   "role": "agent",
+   "content": "For your Advantage 50GB plan, you can top up your data at a rate of $5.00 per additional GB. You can choose how many extra GB you\u2019d like to add, and the cost will be added to your next bill.\n\nWould you like to proceed with a data top-up? If so, please let me know how many GB you\u2019d like to add.",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "PLN-2002"
+     },
+     "params": {
+      "id": "PLN-2002"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "plan_id": "PLN-2002",
+      "name": "Advantage 50GB",
+      "data_limit_gb": 50,
+      "monthly_price": 65.0,
+      "data_refueling_price_per_gb": 5.0,
+      "entity_type": "plan"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Let's add 1GB for now. What do I need to do next?"
+  },
+  {
+   "role": "agent",
+   "content": "You don\u2019t need to do anything else\u2014I've added 1GB of data to your line. A $5.00 charge will be added to your next bill. Your mobile internet and picture messaging (MMS) should start working again shortly.\n\nIf you still experience issues after a few minutes, try restarting your phone. Let me know if you need any more help!",
+   "tool_calls": [
+    {
+     "tool_name": "refuel_data",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142",
+      "gb_amount": 1
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142",
+      "gb_amount": 1
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "refuel_data",
+     "response": {
+      "result": "Refueled 1.0GB on line LN-8830142 (+1-617-555-0148). Charge of $5.00 added to bill BILL-4501283-2025-02."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Okay, I\u2019ll wait a moment and then restart my phone if needed. I\u2019ll let you know if it\u2019s still not working."
+  },
+  {
+   "role": "agent",
+   "content": "That sounds perfect! Please give it a few minutes for the new data to activate, and a restart usually helps if it doesn\u2019t work right away.\n\nIf you have any further issues or questions, just let me know\u2014I\u2019m here to help!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I restarted my phone, but I still don't have any mobile internet and picture messages still won't send. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for your patience. Your line and device both appear to be active, and your data top-up was successful. Since you\u2019ve restarted your phone and the issue persists, here are a few steps you can try next:\n\n1. Check Mobile Data Settings:\n   - Make sure mobile data is turned on in your phone\u2019s settings.\n   - Ensure Airplane Mode is off.\n\n2. Check APN Settings:\n   - Sometimes, incorrect Access Point Name (APN) settings can cause issues with mobile data and MMS. Would you like instructions on how to check or reset your APN settings for your Pixel 8 Pro?\n\n3. Remove and Reinsert SIM (if using a physical SIM):\n   - If you have a physical SIM card, try removing it and reinserting it.\n\n4. Network Reset:\n   - You can reset your network settings (this will erase saved Wi-Fi networks and Bluetooth pairings).\n\nWould you like step-by-step instructions for any of these steps, or would you prefer to be connected to a human agent for further troubleshooting?",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "DEV-55210"
+     },
+     "params": {
+      "id": "DEV-55210"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 1.0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "device_id": "DEV-55210",
+      "device_type": "phone",
+      "model": "Pixel 8 Pro",
+      "imei": "356938035643809",
+      "esim_capable": true,
+      "activation_status": "Active",
+      "activation_date": "2023-05-18",
+      "last_esim_transfer_date": "2023-05-18",
+      "entity_type": "device"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I checked my APN settings, and they look correct: the APN is 'fast.telecom.net' and the MMSC URL is set. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "check_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming your APN settings. Since your APN is set to fast.telecom.net and the MMSC URL is configured, let\u2019s try a few more troubleshooting steps:\n\n1. Toggle Mobile Data Off and On:\n   - Turn off mobile data for 10 seconds, then turn it back on.\n\n2. Check Data Roaming:\n   - Make sure data roaming is enabled, especially if you\u2019re near a state or country border.\n\n3. Reset Network Settings:\n   - On your Pixel 8 Pro, go to Settings > System > Reset options > Reset Wi-Fi, mobile & Bluetooth. This will reset all network settings (you\u2019ll need to reconnect to Wi-Fi networks afterward).\n\n4. Test Your SIM in Another Phone (if possible):\n   - If you have access to another unlocked phone, try your SIM card in that device to see if mobile data works.\n\nIf you\u2019ve tried these steps and still have no mobile data or MMS, there may be a deeper technical issue with your line or device provisioning. Would you like to proceed with the network reset, or would you prefer I connect you to a human agent for advanced troubleshooting?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I turned mobile data off and then back on, but I still don't have any internet and can't send picture messages.",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_data",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "toggle_data",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying that step. Since your APN settings are correct, your line and device are active, and toggling mobile data didn\u2019t resolve the issue, the next recommended step is to reset your network settings. This often resolves persistent connectivity issues.\n\nHere\u2019s how to reset network settings on your Pixel 8 Pro:\n\n1. Go to Settings.\n2. Tap System.\n3. Tap Reset options.\n4. Select Reset Wi-Fi, mobile & Bluetooth.\n5. Confirm the reset.\n\nPlease note: This will erase all saved Wi-Fi networks and Bluetooth pairings, so you\u2019ll need to reconnect to Wi-Fi networks afterward.\n\nWould you like to try this network reset now? If you\u2019ve already done this or would prefer not to, I can connect you to a human agent for further assistance. Let me know how you\u2019d like to proceed!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Okay, I'll go ahead and reset my network settings now."
+  },
+  {
+   "role": "agent",
+   "content": "Great! Please follow the steps to reset your network settings. After the reset, your phone will restart or briefly disconnect from networks. Once it\u2019s back on, try turning on mobile data and sending a picture message again.\n\nIf your mobile internet and MMS start working, you\u2019re all set! If you still have issues after the reset, please let me know, and I can connect you to a human agent for more advanced troubleshooting.\n\nTake your time, and let me know how it goes!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I've reset my network settings and my phone has restarted, but I still can't get online with mobile data and picture messages aren't sending."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying all the troubleshooting steps. Since the issue still persists after a network reset and all standard checks, I\u2019m transferring you to a human agent who can provide advanced support and investigate further.\n\nPlease stay connected\u2014a specialist will assist you shortly.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez (+1-617-555-0148) has no mobile data or MMS despite active line, correct APN, successful data top-up, and network reset on Pixel 8 Pro. Issue persists after all standard troubleshooting steps."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez (+1-617-555-0148) has no mobile data or MMS despite active line, correct APN, successful data top-up, and network reset on Pixel 8 Pro. Issue persists after all standard troubleshooting steps."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

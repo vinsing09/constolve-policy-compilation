@@ -1,0 +1,389 @@
+{
+ "case": "15:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data",
+ "arm": "with_policy",
+ "repeat": 4,
+ "solved": false,
+ "actions_done": 4,
+ "actions_required": 6,
+ "turns": 23,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "get_bills_for_customer",
+  "resume_line",
+  "reboot_device",
+  "check_status_bar",
+  "toggle_airplane_mode",
+  "reset_apn_settings",
+  "reboot_device",
+  "check_network_mode_preference",
+  "check_data_restriction_status",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_airplane_mode",
+   "ok": true,
+   "why": "tool 'toggle_airplane_mode' was called"
+  },
+  {
+   "id": "s1_reset_apn_settings",
+   "ok": true,
+   "why": "tool 'reset_apn_settings' was called"
+  },
+  {
+   "id": "s2_reboot_device",
+   "ok": true,
+   "why": "tool 'reboot_device' was called"
+  },
+  {
+   "id": "s3_resume_line",
+   "ok": true,
+   "why": "tool 'resume_line' was called with {'customer_id': 'CUS-4501283', 'line_id': 'LN-8830142'}"
+  },
+  {
+   "id": "s4_toggle_data",
+   "ok": false,
+   "why": "tool 'toggle_data' was never called by the user"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, nothing loads, and I can't send picture messages. It's like the network is completely dead."
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot this issue. First, I\u2019ll need to identify your account to check for any line or account-related problems. Could you please provide one of the following:\n\n- The phone number associated with your account\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I\u2019ll begin diagnosing the issue.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Sure, my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Your line is currently suspended, which is why you have no service and cannot send picture messages. However, your recent bills are paid, and your contract is still active.\n\nSince your bills are up to date and your contract hasn't ended, I can help you resume your service. Once your line is reactivated, you may need to reboot your device to restore connectivity.\n\nWould you like me to proceed with resuming your line now?",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_bills_for_customer",
+     "arguments": {
+      "customer_id": "CUS-4501283"
+     },
+     "params": {
+      "customer_id": "CUS-4501283"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Suspended",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "2025-02-25",
+      "suspension_reason": 1,
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_bills_for_customer",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "count": 2,
+      "bills": [
+       {
+        "bill_id": "BILL-4501283-2025-02",
+        "customer_id": "CUS-4501283",
+        "period_start": "2025-01-06",
+        "period_end": "2025-02-05",
+        "issue_date": "2025-02-06",
+        "total_amount_due": 70.0,
+        "due_date": "2025-02-26",
+        "status": "Paid"
+       },
+       {
+        "bill_id": "BILL-4501283-2025-01",
+        "customer_id": "CUS-4501283",
+        "period_start": "2024-12-06",
+        "period_end": "2025-01-05",
+        "issue_date": "2025-01-06",
+        "total_amount_due": 65.0,
+        "due_date": "2025-01-26",
+        "status": "Paid"
+       }
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Yes, please go ahead and resume my line."
+  },
+  {
+   "role": "agent",
+   "content": "Your line has been resumed and is now active. Please reboot your device to restore your service. After restarting, you should regain network connectivity and be able to send picture messages again.\n\nIf you still experience issues after rebooting, let me know and I can help you further troubleshoot.",
+   "tool_calls": [
+    {
+     "tool_name": "resume_line",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "resume_line",
+     "response": {
+      "result": "Line LN-8830142 has been resumed and is now Active."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "My phone rebooted successfully, but I still have no service\u2014no signal bars, and I can't send picture messages.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. Since your line is now active but you still have no service or ability to send picture messages, let's proceed with some troubleshooting steps to identify the cause.\n\nCould you please check your phone\u2019s status bar and let me know if you see any of the following:\n- Airplane mode icon\n- SIM card error or missing SIM icon\n- Any signal bars at all (even if very low)\n- Network type indicator (e.g., 5G, 4G, LTE, etc.)\n\nThis information will help me guide you through the next steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Actually, I do see the airplane mode icon, a 'no signal' icon, and a 'data disabled' icon in the status bar. There are no signal bars or network type indicators showing at all.",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the details. Here\u2019s what we should do next:\n\n1. Airplane mode is ON, which disables all wireless connections, including cellular service. This is why you have no signal and data is disabled.\n2. To restore service, please turn OFF airplane mode on your phone. You can usually do this by:\n   - Swiping down from the top of your screen to open the quick settings panel.\n   - Tapping the airplane icon so it is no longer highlighted.\n\nOnce airplane mode is off, check if your signal bars and network indicators return. Let me know what you see after turning off airplane mode.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Airplane mode is now OFF. I see one bar of signal and it says '4G' at the top, but it's not 5G or excellent yet. I still can't send picture messages.",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_airplane_mode",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Great, turning off airplane mode restored some service. Here\u2019s what we\u2019ll do next to address the weak signal and MMS (picture message) issue:\n\n1. Since you have only one bar of signal (\u201cpoor\u201d) and 4G, let\u2019s try to improve your connection:\n   - If possible, move to a location with better signal (near a window or outside).\n2. For MMS, it requires both mobile data and correct settings. Let\u2019s check:\n   - Is mobile data enabled? (You should see a \u201c4G\u201d or \u201cLTE\u201d icon, and not a \u201cdata disabled\u201d icon.)\n   - If mobile data is ON and you still can\u2019t send MMS, the issue may be with your phone\u2019s APN (network) settings.\n\nPlease confirm:\n- Do you still see a \u201cdata disabled\u201d icon, or is it gone?\n- Are you able to browse the internet using mobile data (not Wi-Fi)?\n\nOnce you confirm, I\u2019ll guide you through the next troubleshooting steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "The 'data disabled' icon is gone now, and I do see the '4G' icon. However, I still can't browse the internet using mobile data, and picture messages still won't send."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the update. Since mobile data appears enabled but you cannot browse the internet or send picture messages, the issue may be with your phone\u2019s APN (Access Point Name) settings, which are required for both internet and MMS.\n\nLet\u2019s check your APN settings:\n- Please check your phone\u2019s APN settings and let me know if you see any errors or if the MMSC (MMS server) URL is missing or incorrect.\n\nIf you\u2019re unsure how to check, I can guide you through resetting your APN settings to default, which often resolves these issues. Would you like instructions to reset your APN settings?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I just checked my APN settings, and I'm not sure if anything looks wrong. Could you guide me through resetting the APN settings to default?"
+  },
+  {
+   "role": "agent",
+   "content": "Absolutely! Here\u2019s how you can reset your APN settings to default:\n\n1. Go to your phone\u2019s Settings app.\n2. Tap on \u201cNetwork & Internet\u201d or \u201cConnections.\u201d\n3. Select \u201cMobile Network\u201d or \u201cCellular Networks.\u201d\n4. Tap on \u201cAccess Point Names\u201d or \u201cAPN.\u201d\n5. Look for an option like \u201cReset to default\u201d or \u201cReset settings\u201d (usually found in the menu or three-dot icon at the top right).\n6. Confirm the reset if prompted.\n\nAfter resetting your APN settings, please reboot your device to apply the changes. Once your phone restarts, try browsing the internet and sending a picture message again.\n\nLet me know once you\u2019ve completed these steps and if your service is working!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I already reset my APN settings to default and rebooted my phone. After doing that, I still have only one bar of signal, it's showing 4G (not 5G), and I'm still unable to browse the internet or send picture messages.",
+   "tool_calls": [
+    {
+     "tool_name": "reset_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for following those steps. Since you have already reset your APN settings and rebooted, but still cannot use mobile data or send MMS, let\u2019s try a few more troubleshooting steps:\n\n1. Let\u2019s check if your phone is set to prefer the best available network mode (4G/5G). Sometimes, being set to an older mode (like 2G/3G) can cause issues.\n2. Also, let\u2019s check if Data Saver mode is enabled, as it can restrict data usage.\n\nCould you please:\n- Check your phone\u2019s network mode preference and confirm if it\u2019s set to 4G/5G preferred.\n- Check if Data Saver mode is ON, and if so, turn it OFF.\n\nIf you need instructions for either of these steps, let me know your phone model (Android or iPhone), and I can guide you through the process.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My network mode preference is already set to '4g_5g_preferred'. Would you like me to check Data Saver mode next?",
+   "tool_calls": [
+    {
+     "tool_name": "check_network_mode_preference",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Yes, please check if Data Saver mode is enabled on your phone. If it is ON, turn it OFF, as Data Saver can restrict mobile data and affect your ability to browse the internet or send picture messages.\n\nAfter turning Data Saver mode OFF, try browsing the internet and sending a picture message again. Let me know if this resolves the issue or if you still experience problems.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Data Saver mode is OFF and background data is not restricted. I still can't browse the internet or send picture messages.",
+   "tool_calls": [
+    {
+     "tool_name": "check_data_restriction_status",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer's line is active and not suspended. Airplane mode is off, mobile data is on, network mode is set to 4G/5G preferred, APN settings have been reset and device rebooted, Data Saver is off, but customer still cannot browse the internet or send MMS. Signal is poor (1 bar, 4G). Needs advanced technical support."
+     },
+     "params": {
+      "summary": "Customer's line is active and not suspended. Airplane mode is off, mobile data is on, network mode is set to 4G/5G preferred, APN settings have been reset and device rebooted, Data Saver is off, but customer still cannot browse the internet or send MMS. Signal is poor (1 bar, 4G). Needs advanced technical support."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

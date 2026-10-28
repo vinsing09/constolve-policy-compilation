@@ -1,0 +1,189 @@
+{
+ "run": "main",
+ "valid_blocks": 63,
+ "blocks": 72,
+ "cost_usd": 54.3454,
+ "rules": {
+  "R1_airplane": {
+   "tied": {
+    "n_scenarios": 11,
+    "n_control": 28,
+    "n_variant": 28,
+    "control_pct": 85.71428571428571,
+    "variant_pct": 92.85714285714286,
+    "drop": -7.142857142857153,
+    "p": 0.796875,
+    "caught": false
+   },
+   "untied": {
+    "n_scenarios": 24,
+    "n_control": 215,
+    "n_variant": 215,
+    "control_pct": 76.27906976744185,
+    "variant_pct": 74.88372093023256,
+    "drop": 1.3953488372092977,
+    "p": 0.56439208984375,
+    "caught": false
+   }
+  },
+  "R2_apn": {
+   "tied": {
+    "n_scenarios": 10,
+    "n_control": 52,
+    "n_variant": 52,
+    "control_pct": 100.0,
+    "variant_pct": 65.38461538461539,
+    "drop": 34.61538461538461,
+    "p": 0.001953125,
+    "caught": true
+   },
+   "untied": {
+    "n_scenarios": 24,
+    "n_control": 191,
+    "n_variant": 191,
+    "control_pct": 71.20418848167539,
+    "variant_pct": 67.53926701570681,
+    "drop": 3.6649214659685754,
+    "p": 0.3148155212402344,
+    "caught": false
+   }
+  },
+  "R3_payment": {
+   "tied": {
+    "n_scenarios": 3,
+    "n_control": 16,
+    "n_variant": 16,
+    "control_pct": 100.0,
+    "variant_pct": 75.0,
+    "drop": 25.0,
+    "p": 0.25,
+    "caught": false
+   },
+   "untied": {
+    "n_scenarios": 24,
+    "n_control": 227,
+    "n_variant": 227,
+    "control_pct": 75.77092511013215,
+    "variant_pct": 65.63876651982379,
+    "drop": 10.132158590308364,
+    "p": 0.00809478759765625,
+    "caught": false
+   }
+  },
+  "R4_suspension": {
+   "tied": {
+    "n_scenarios": 9,
+    "n_control": 24,
+    "n_variant": 24,
+    "control_pct": 100.0,
+    "variant_pct": 91.66666666666667,
+    "drop": 8.333333333333329,
+    "p": 0.25,
+    "caught": false
+   },
+   "untied": {
+    "n_scenarios": 24,
+    "n_control": 219,
+    "n_variant": 219,
+    "control_pct": 74.88584474885845,
+    "variant_pct": 71.68949771689498,
+    "drop": 3.1963470319634695,
+    "p": 0.2386474609375,
+    "caught": false
+   }
+  },
+  "R5_escalate_unfixable": {
+   "tied": {
+    "n_scenarios": 5,
+    "n_control": 26,
+    "n_variant": 26,
+    "control_pct": 61.53846153846154,
+    "variant_pct": 34.61538461538461,
+    "drop": 26.923076923076927,
+    "p": 0.0625,
+    "caught": false
+   },
+   "untied": {
+    "n_scenarios": 22,
+    "n_control": 217,
+    "n_variant": 217,
+    "control_pct": 79.26267281105991,
+    "variant_pct": 77.41935483870968,
+    "drop": 1.8433179723502349,
+    "p": 0.4130859375,
+    "caught": false
+   }
+  },
+  "R6_transfer_scope": {
+   "tied": {
+    "n_scenarios": 24,
+    "n_control": 63,
+    "n_variant": 63,
+    "control_pct": 69.84126984126983,
+    "variant_pct": 53.96825396825397,
+    "drop": 15.873015873015866,
+    "p": 0.036651611328125,
+    "caught": false
+   },
+   "untied": {
+    "n_scenarios": 24,
+    "n_control": 180,
+    "n_variant": 180,
+    "control_pct": 80.0,
+    "variant_pct": 79.44444444444444,
+    "drop": 0.5555555555555571,
+    "p": 0.15234375,
+    "caught": false
+   }
+  },
+  "pair": {
+   "R5_escalate_unfixable": {
+    "own_only": {
+     "n_scenarios": 5,
+     "n_control": 13,
+     "n_variant": 13,
+     "control_pct": 76.92307692307692,
+     "variant_pct": 46.15384615384615,
+     "drop": 30.769230769230766,
+     "p": 0.125,
+     "caught": false
+    },
+    "partner_only": {
+     "n_scenarios": 19,
+     "n_control": 50,
+     "n_variant": 50,
+     "control_pct": 76.0,
+     "variant_pct": 64.0,
+     "drop": 12.0,
+     "p": 0.13720703125,
+     "caught": false
+    },
+    "lands_on_right_rule": false
+   },
+   "R6_transfer_scope": {
+    "own_only": {
+     "n_scenarios": 19,
+     "n_control": 50,
+     "n_variant": 50,
+     "control_pct": 76.0,
+     "variant_pct": 54.0,
+     "drop": 22.0,
+     "p": 0.0146484375,
+     "caught": true
+    },
+    "partner_only": {
+     "n_scenarios": 5,
+     "n_control": 13,
+     "n_variant": 13,
+     "control_pct": 76.92307692307692,
+     "variant_pct": 46.15384615384615,
+     "drop": 30.769230769230766,
+     "p": 0.125,
+     "caught": false
+    },
+    "lands_on_right_rule": true
+   }
+  }
+ },
+ "scorer_commit": "dc122fde8b680ee210753c5cf2bbe43b7e97453a"
+}

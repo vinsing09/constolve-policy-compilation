@@ -1,0 +1,325 @@
+{
+ "case": "20:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_roaming",
+ "arm": "stub",
+ "repeat": 3,
+ "solved": false,
+ "actions_done": 3,
+ "actions_required": 6,
+ "turns": 23,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "resume_line",
+  "reboot_device",
+  "get_details_by_id",
+  "check_apn_settings",
+  "reboot_device"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_airplane_mode",
+   "ok": false,
+   "why": "tool 'toggle_airplane_mode' was never called by the user"
+  },
+  {
+   "id": "s1_reset_apn_settings",
+   "ok": false,
+   "why": "tool 'reset_apn_settings' was never called by the user"
+  },
+  {
+   "id": "s2_reboot_device",
+   "ok": true,
+   "why": "tool 'reboot_device' was called"
+  },
+  {
+   "id": "s3_resume_line",
+   "ok": true,
+   "why": "tool 'resume_line' was called with {'customer_id': 'CUS-4501283', 'line_id': 'LN-8830142'}"
+  },
+  {
+   "id": "s4_toggle_roaming",
+   "ok": false,
+   "why": "tool 'toggle_roaming' was never called by the user"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was not called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, nothing loads, and I can't send picture messages. It's completely dead as far as the network goes."
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're experiencing this issue. To help you further, could you please provide your phone number or the name and date of birth on your account? This will allow me to check your line status and see if there are any network or account issues affecting your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Your phone line is currently suspended, which is why you have no service and cannot send or receive messages or calls.\n\nIf you would like, I can help you resume your line so your service is restored. Would you like me to proceed with reactivating your line?",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Suspended",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "2025-02-25",
+      "suspension_reason": 1,
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Yes, please help me reactivate my line so I can get service again."
+  },
+  {
+   "role": "agent",
+   "content": "Your line has been reactivated and is now active. You should regain service shortly. If you still don't see any signal after a few minutes, please try restarting your phone.\n\nLet me know if you need any further assistance!",
+   "tool_calls": [
+    {
+     "tool_name": "resume_line",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "resume_line",
+     "response": {
+      "result": "Line LN-8830142 has been resumed and is now Active."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "My phone rebooted successfully, but I still have no service\u2014there are no signal bars and nothing loads.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. Since your line is now active but you still have no service, let's try a few more troubleshooting steps:\n\n1. Double-check your SIM card: Remove your SIM card, wait a few seconds, and reinsert it securely.\n2. Try your SIM card in another phone (if possible): This helps determine if the issue is with your phone or the SIM/network.\n3. Check for \u201cNo Service\u201d or \u201cSIM Not Provisioned\u201d messages: Let me know if you see any error messages on your phone.\n\nMeanwhile, I can also check your device and network status on our end. Would you like me to check for any device or network issues linked to your account? If yes, please let me know if you\u2019ve recently changed devices or had any physical damage to your phone.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I haven't changed devices or had any physical damage to my phone. Can you check for any device or network issues on your end?"
+  },
+  {
+   "role": "agent",
+   "content": "I've checked your device status, and your Pixel 8 Pro is showing as active and properly linked to your account. There are no device activation issues on our end.\n\nSince your line is active and your device is correctly registered, but you still have no service, this could indicate a network issue in your area or a problem with your SIM card.\n\nCould you please let me know your current location (city or ZIP code)? This will help me check for any known network outages in your area. Additionally, have you noticed if anyone else nearby is experiencing similar issues?",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "DEV-55210"
+     },
+     "params": {
+      "id": "DEV-55210"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "device_id": "DEV-55210",
+      "device_type": "phone",
+      "model": "Pixel 8 Pro",
+      "imei": "356938035643809",
+      "esim_capable": true,
+      "activation_status": "Active",
+      "activation_date": "2023-05-18",
+      "last_esim_transfer_date": "2023-05-18",
+      "entity_type": "device"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I'm at home in Boston. I haven't asked anyone else if they're having issues."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the information. Since your line and device are both active and there\u2019s no recent change or damage, but you still have no service at home in Boston, this could be due to a local network outage or a SIM card issue.\n\nHere\u2019s what you can do next:\n\n1. If possible, try your SIM card in another phone to see if it works there. This helps determine if the issue is with your phone or the SIM/network.\n2. If your SIM doesn\u2019t work in another phone, it may need to be replaced.\n3. If your SIM works in another phone, the issue may be with your device\u2019s network settings.\n\nWould you like me to escalate this to a technical support specialist who can check for local network outages and provide further troubleshooting or arrange a SIM replacement if needed?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Before escalating, can you help me check if it's a network setting issue on my device? What should I check next?"
+  },
+  {
+   "role": "agent",
+   "content": "Absolutely! Here are some steps you can try to troubleshoot network settings on your Pixel 8 Pro:\n\n1. Toggle Airplane Mode:\n   - Turn Airplane Mode on for 10 seconds, then turn it off. This can reset your phone\u2019s connection to the network.\n\n2. Check Network Selection:\n   - Go to Settings > Network & Internet > SIMs > [Your SIM] > Automatically select network. Make sure this is enabled.\n\n3. Reset Network Settings:\n   - Go to Settings > System > Reset options > Reset Wi-Fi, mobile & Bluetooth. This will reset all network settings (you\u2019ll need to reconnect to Wi-Fi networks afterward).\n\n4. Check for Carrier Updates:\n   - Go to Settings > Network & Internet > SIMs > [Your SIM] > Carrier settings. If there\u2019s an update available, install it.\n\n5. Confirm Mobile Data is Enabled:\n   - Go to Settings > Network & Internet > Mobile network and ensure Mobile data is turned on.\n\n6. Check APN Settings:\n   - Go to Settings > Network & Internet > Mobile network > Access Point Names (APN). Make sure the APN matches what your carrier requires. If you\u2019re unsure, I can provide the correct APN settings.\n\nPlease try these steps and let me know if anything changes or if you see any error messages during the process. If the issue persists after these checks, I can escalate the case for further investigation.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Can you walk me through checking my APN settings? I'm not sure if they're correct."
+  },
+  {
+   "role": "agent",
+   "content": "Of course! Here\u2019s how to check and update your APN (Access Point Name) settings on your Pixel 8 Pro:\n\n1. Open the Settings app on your phone.\n2. Tap on Network & Internet.\n3. Tap on Mobile network.\n4. Tap on Access Point Names (APN).\n\nYou\u2019ll see a list of APNs. The correct APN settings depend on your carrier. Could you please confirm your carrier\u2019s name, or would you like me to provide the standard APN settings for your service?\n\nOnce you have the correct APN details, here\u2019s how to update or add a new APN:\n\n1. If you see your carrier\u2019s APN, tap it to review the details and compare them to the correct settings.\n2. If the APN is missing or incorrect, tap the + (plus) icon or \u201cAdd\u201d to create a new APN.\n3. Enter the correct APN information (I can provide these details if you confirm your carrier).\n4. Save the new APN (usually by tapping the three dots in the upper right and selecting Save).\n5. Select the new APN to activate it.\n\nLet me know your carrier, and I\u2019ll provide the exact APN settings you should use!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked my APN settings and it shows 'fast.telecom.net' as the APN name, but the status says 'Not set.' The MMSC URL is 'http://mms.telecom.net/mms/wapenc.' What should I do next?",
+   "tool_calls": [
+    {
+     "tool_name": "check_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking your APN settings. Here\u2019s what you should do next:\n\n1. APN Status \u201cNot set\u201d usually means the APN is not active or not fully configured. This can prevent your phone from connecting to the network.\n2. Let\u2019s make sure your APN is correctly set up and selected as active.\n\nPlease follow these steps:\n\n1. Tap on the APN entry ('fast.telecom.net') to open and review its details.\n2. Make sure the following fields are filled in as below (these are typical settings for many telecom providers, but let me know if your carrier is different):\n\n   - Name: Fast Telecom\n   - APN: fast.telecom.net\n   - MMSC: http://mms.telecom.net/mms/wapenc\n   - MCC: 310 (or as specified by your carrier)\n   - MNC: 260 (or as specified by your carrier)\n   - APN type: default,mms,supl\n   - Authentication type: None\n   - APN protocol: IPv4/IPv6\n\n3. After confirming or updating these fields, tap the three dots in the upper right corner and select Save.\n4. Make sure to select this APN as active (there should be a radio button or checkmark next to it).\n5. Restart your phone.\n\nIf the APN is still showing as \u201cNot set\u201d or you cannot select it, try deleting the APN and adding it again manually with the above details.\n\nLet me know if you\u2019re able to save and select the APN, and if your service returns after these steps. If not, I\u2019ll escalate your case for further technical support.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked, and the APN is listed but it's not active and I can't select it. Should I try deleting it and adding it again with the details you provided?"
+  },
+  {
+   "role": "agent",
+   "content": "Yes, that\u2019s the right next step. If the APN is listed but not active and you can\u2019t select it, it may be corrupted or incomplete. Please follow these steps:\n\n1. Delete the existing APN entry ('fast.telecom.net').\n2. Tap the + (plus) icon or \u201cAdd\u201d to create a new APN.\n3. Enter the following details:\n\n   - Name: Fast Telecom\n   - APN: fast.telecom.net\n   - MMSC: http://mms.telecom.net/mms/wapenc\n   - MCC: 310 (unless your carrier uses a different code)\n   - MNC: 260 (unless your carrier uses a different code)\n   - APN type: default,mms,supl\n   - Authentication type: None\n   - APN protocol: IPv4/IPv6\n\n4. Save the new APN (tap the three dots in the upper right and select Save).\n5. Select the new APN to make it active (there should be a radio button or checkmark next to it).\n6. Restart your phone.\n\nAfter doing this, check if your phone regains service. If you still have no service or cannot select the APN, please let me know so I can escalate your case to technical support for further assistance.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I tried to set the APN settings, but I got an error saying something was missing. Then I restarted my phone successfully, but I still have no service\u2014no signal bars and nothing loads.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying those steps and letting me know what happened. Since you received an error when setting the APN and still have no service after restarting, this suggests there may be a deeper issue\u2014possibly with your SIM card, device provisioning, or a network problem in your area.\n\nAt this point, I recommend escalating your case to a technical support specialist who can:\n\n- Check for any network outages in your area,\n- Verify your SIM card and device provisioning on the network,\n- Guide you through advanced troubleshooting or arrange a SIM replacement if needed.\n\nWould you like me to escalate your case now and provide a summary to our technical support team?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

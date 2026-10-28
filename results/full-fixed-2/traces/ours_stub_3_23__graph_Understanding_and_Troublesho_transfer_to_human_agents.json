@@ -1,0 +1,326 @@
+{
+ "case": "23:[graph:Understanding and Troublesho]transfer_to_human_agents",
+ "arm": "stub",
+ "repeat": 3,
+ "solved": false,
+ "actions_done": 0,
+ "actions_required": 2,
+ "turns": 13,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "resume_line",
+  "get_details_by_id",
+  "get_details_by_id",
+  "get_details_by_id",
+  "get_details_by_id"
+ ],
+ "criteria": [
+  {
+   "id": "diagnosed_before_handoff",
+   "ok": false,
+   "why": "tool 'check_status_bar' was never called"
+  },
+  {
+   "id": "s2_transfer_to_human_agents",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was never called by the assistant"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone isn't getting any service at all\u2014no bars, nothing loads, and I can't send picture messages. Can you help me fix this?"
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're having trouble with your phone service. Let's try to get this resolved for you.\n\nTo assist you better, could you please provide one of the following:\n- The phone number associated with your line\n- Your full name and date of birth (for verification)\n\nThis will help me check your account and line status to identify the issue.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "It looks like your phone line is currently suspended, which is why you're not getting any service or able to send messages.\n\nWould you like me to resume (reactivate) your line now? If you know the reason for the suspension or if it was a mistake, please let me know so I can assist you further.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Suspended",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2024-11-30",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I wasn't aware my line was suspended\u2014I'm not sure why that would be. Yes, please go ahead and reactivate my line."
+  },
+  {
+   "role": "agent",
+   "content": "It appears I cannot reactivate your line because the contract for your service ended on 2024-11-30. This is likely why your line was suspended.\n\nTo restore your service, you may need to renew your contract or select a new plan. Would you like information on renewing your contract or exploring new plans? Let me know how you\u2019d like to proceed, and I\u2019ll guide you through the next steps.",
+   "tool_calls": [
+    {
+     "tool_name": "resume_line",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": true
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "resume_line",
+     "response": {},
+     "latency_ms": 0,
+     "error": "Line LN-8830142 cannot be resumed because its contract end date (2024-11-30) is in the past."
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Oh, I see. Yes, please send me information about renewing my contract and the available new plans."
+  },
+  {
+   "role": "agent",
+   "content": "Your previous plan was the \"Advantage 50GB\" plan, which included 50GB of data per month for $65/month, with additional data available at $5 per GB.\n\nTo proceed, I can provide you with options to:\n1. Renew your previous \"Advantage 50GB\" plan.\n2. Explore other available plans (if you\u2019d like to see more options, please let me know your typical data usage or any preferences).\n\nWould you like to renew your previous plan, or would you prefer to see a list of all available plans? Let me know your preference, and I\u2019ll provide the details and next steps.",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "PLN-2002"
+     },
+     "params": {
+      "id": "PLN-2002"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "plan_id": "PLN-2002",
+      "name": "Advantage 50GB",
+      "data_limit_gb": 50,
+      "monthly_price": 65.0,
+      "data_refueling_price_per_gb": 5.0,
+      "entity_type": "plan"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I'd like to see a list of all available plans, please. I usually use about 40-50GB of data per month but I'm open to different options."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for sharing your data usage preferences. I am gathering a list of all available plans for you. \n\nCould you please confirm if you have any other preferences, such as:\n- Unlimited data\n- Lower monthly cost (even if it means less data)\n- International calling or roaming features\n\nThis will help me recommend the best options for your needs. In the meantime, I am retrieving the available plans and will share them with you shortly.",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "CUS-4501283"
+     },
+     "params": {
+      "id": "CUS-4501283"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address_street": "412 Chestnut Street, Apt 5B",
+      "address_city": "Boston",
+      "address_state": "MA",
+      "address_zip_code": "02116",
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "entity_type": "customer",
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "customer_id": "CUS-4501283",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "customer_id": "CUS-4501283",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I'd prefer unlimited data if it's not too expensive. International calling isn't a priority, but lower monthly cost would be nice if possible."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for your preferences. Currently, I have details for your previous plan, \"Advantage 50GB,\" which offers 50GB of data for $65/month, with extra data at $5 per GB. However, I don't have direct access to a full list of all available plans at this moment.\n\nTo ensure you get the most up-to-date options, I recommend checking your provider's website or contacting their sales team for the latest unlimited and budget-friendly plans. If you\u2019d like, I can connect you with a human agent who can provide a comprehensive list of all current plans and help you choose the best one for your needs.\n\nWould you like to be connected to a human agent for personalized plan recommendations and renewal assistance?",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "PLN-ALL"
+     },
+     "params": {
+      "id": "PLN-ALL"
+     },
+     "failed": true
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "PLN-2002"
+     },
+     "params": {
+      "id": "PLN-2002"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {},
+     "latency_ms": 0,
+     "error": "No Customer, Line, Device, Bill, or Plan found with ID 'PLN-ALL'."
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "plan_id": "PLN-2002",
+      "name": "Advantage 50GB",
+      "data_limit_gb": 50,
+      "monthly_price": 65.0,
+      "data_refueling_price_per_gb": 5.0,
+      "entity_type": "plan"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

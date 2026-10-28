@@ -1,0 +1,114 @@
+{
+ "0fe5699da48a4be92ed6bbd996d6bdfb248df94d": {
+  "files": {
+   "experiments/rule-ablation/policies/R1_airplane.diff": "65ed73d6069c500677467d698779f492f283ecb8fd2b42df53e11dbf7a2cc47b",
+   "experiments/rule-ablation/policies/R1_airplane.md": "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3",
+   "experiments/rule-ablation/policies/R2_apn.diff": "85a536167a7444e49321708d0c24c0720df31b501fc8a0977e501f75fa04d6d2",
+   "experiments/rule-ablation/policies/R2_apn.md": "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085",
+   "experiments/rule-ablation/policies/R3_payment.diff": "10f663aa3936fcc39268859b61c7a7e1b80f2cdc576217d25d69ad50f9364781",
+   "experiments/rule-ablation/policies/R3_payment.md": "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64",
+   "experiments/rule-ablation/policies/R4_suspension.diff": "ea0dcf008aab8f8daa84cf77dac5b27332b3cb33f451aa2cd3b5b02dae34bcd7",
+   "experiments/rule-ablation/policies/R4_suspension.md": "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89",
+   "experiments/rule-ablation/policies/R5_escalate_unfixable.diff": "6d8d30c582f6e476bde0dfd1c496b8acf986c775ce1d4dec183529ab4178f05b",
+   "experiments/rule-ablation/policies/R5_escalate_unfixable.md": "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d",
+   "experiments/rule-ablation/policies/R6_transfer_scope.diff": "2d2b3b10fe7ed50a39bb6a9c936aa89159090017379710d0b77dcffcd8bd0b34",
+   "experiments/rule-ablation/policies/R6_transfer_scope.md": "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668",
+   "experiments/rule-ablation/policies/control.md": "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9",
+   "experiments/rule-ablation/prereg.md": "197a82ed99c9b88047aa5a423da4ad95d19db6177cb12dd8e2ba8a2caff1ff3d",
+   "experiments/rule-ablation/rules.py": "dbcee35a5cb4eecc2a52c80a97fb916ef5f7d98d49e8d8293cb812cc4deb80b6",
+   "experiments/rule-ablation/run_ablation.py": "63fc203e2d7567d3298bf3b5cf0ce622dc74a27124d7abcde4c1b27ef85773e6",
+   "experiments/rule-ablation/score_ablation.py": "f929a772fe26f331ef693d0f5eeb9549a1ad5f1493373218b3ee451d74422857",
+   "experiments/rule-ablation/ties.json": "3b9cd00e45ebd2aa336f5d35408facdc4a2c30a8635749d46e1cbe2d73861a59",
+   "experiments/rule-ablation/variants.json": "8cd0151d1ac9d4a3d0c5e182997af89ec006414bbbdd3e68eba4d2238a19e4c9",
+   "scripts/checksum-fixed.txt": "b84d00190b00fe4b475c84cebbd669938b6194c7b7824eb5da95c1d8a6ab5dd7",
+   "scripts/run_manifest.py": "5a7e89d315a894a7a6775116fa1137fcfdad19a8627d6aac1f9d14878b2ab511",
+   "scripts/runlog.py": "4cdabbfc62a5463ec3e56678be63060280ad187d5dfcc7919c9fcc2b54255221",
+   "scripts/score.py": "c1dda75c2a24aea11bbe0befb80f9abb17f6aec0c5dbaa81fe2ab76b2a39213c",
+   "scripts/tree-fixed.txt": "87639ee1f888f94b215fa6e5a1a4259b084f6b1a9e643f60a45c5d2f749896ce"
+  },
+  "run": "experiments/rule-ablation/results/main",
+  "stored": {
+   "checksum-fixed": "684554a5be984056d2bb6b2222189de548cf50f205049c91f31f71f82a2cc02c",
+   "checksum-original": "522eaebaa7031d4435801dc650a62b657212638407a6b893ddae90540005a5ec",
+   "tree-fixed": "e83f11aaf7d0bddf4c48443de9ab55851f95d348df1086ac2015f3fbc9263db9",
+   "tree-original": "92d28f9a28dd94a5280857d16313e3793f92b0ac2de506c61499fbf76051e935"
+  }
+ },
+ "532dd9db1077b3fc3106fa96a040fffe7ca03929": {
+  "files": {
+   "experiments/rule-ablation-followup/certificate.json": "83547f7a32d92c32ec796cfb711a93083ed0289264e0be6a1f9aa1e0f5631426",
+   "experiments/rule-ablation-followup/design.py": "7730d1449663c3e7cf8007ac260fd954b242157de13a92b2b9c034ca16f30340",
+   "experiments/rule-ablation-followup/ledger.py": "f0728e1f3aa2049d348e333b40355b57dbf09550ca63ef4c09e4936d5b9d702e",
+   "experiments/rule-ablation-followup/prereg.md": "7970d115720f8a6a4a3dab56eb83dd7b028328010bc42913a21e8d18890157b1",
+   "experiments/rule-ablation-followup/run_followup.py": "878a4cdd82d5c68b416f7031e7f51fb837cb82b5e9e12802c351cfa20f1e762e",
+   "experiments/rule-ablation-followup/score_followup.py": "3ad30b629b0a1db5a64b2832afee545b1294295fb9d504238f79f3217ea0e27f",
+   "experiments/rule-ablation-followup/selection.json": "9892b7b260e49687d66a0494705b39a03bcbfc3d6b8d8f529931a749f6506582",
+   "experiments/rule-ablation-followup/suite_followup.json": "8885530081d4516dd5a311146a64dc3366c947479f7be1f9913445ddd0937e47",
+   "experiments/rule-ablation-followup/suite_followup_16.json": "6253fd033ab336ca152b920ba0413e7dbca11ca81793f2c6626e3f2269a3db20",
+   "experiments/rule-ablation/policies/R1_airplane.diff": "65ed73d6069c500677467d698779f492f283ecb8fd2b42df53e11dbf7a2cc47b",
+   "experiments/rule-ablation/policies/R1_airplane.md": "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3",
+   "experiments/rule-ablation/policies/R2_apn.diff": "85a536167a7444e49321708d0c24c0720df31b501fc8a0977e501f75fa04d6d2",
+   "experiments/rule-ablation/policies/R2_apn.md": "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085",
+   "experiments/rule-ablation/policies/R3_payment.diff": "10f663aa3936fcc39268859b61c7a7e1b80f2cdc576217d25d69ad50f9364781",
+   "experiments/rule-ablation/policies/R3_payment.md": "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64",
+   "experiments/rule-ablation/policies/R4_suspension.diff": "ea0dcf008aab8f8daa84cf77dac5b27332b3cb33f451aa2cd3b5b02dae34bcd7",
+   "experiments/rule-ablation/policies/R4_suspension.md": "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89",
+   "experiments/rule-ablation/policies/R5_escalate_unfixable.diff": "6d8d30c582f6e476bde0dfd1c496b8acf986c775ce1d4dec183529ab4178f05b",
+   "experiments/rule-ablation/policies/R5_escalate_unfixable.md": "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d",
+   "experiments/rule-ablation/policies/R6_transfer_scope.diff": "2d2b3b10fe7ed50a39bb6a9c936aa89159090017379710d0b77dcffcd8bd0b34",
+   "experiments/rule-ablation/policies/R6_transfer_scope.md": "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668",
+   "experiments/rule-ablation/policies/control.md": "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9",
+   "experiments/rule-ablation/prereg.md": "197a82ed99c9b88047aa5a423da4ad95d19db6177cb12dd8e2ba8a2caff1ff3d",
+   "experiments/rule-ablation/rules.py": "dbcee35a5cb4eecc2a52c80a97fb916ef5f7d98d49e8d8293cb812cc4deb80b6",
+   "experiments/rule-ablation/run_ablation.py": "63fc203e2d7567d3298bf3b5cf0ce622dc74a27124d7abcde4c1b27ef85773e6",
+   "experiments/rule-ablation/score_ablation.py": "f929a772fe26f331ef693d0f5eeb9549a1ad5f1493373218b3ee451d74422857",
+   "experiments/rule-ablation/ties.json": "3b9cd00e45ebd2aa336f5d35408facdc4a2c30a8635749d46e1cbe2d73861a59",
+   "experiments/rule-ablation/variants.json": "8cd0151d1ac9d4a3d0c5e182997af89ec006414bbbdd3e68eba4d2238a19e4c9",
+   "experiments/rule-coverage/coverage.py": "affe1c45b7d87531efc4d43e536cbc438fb77507ab63ac1a24fd1aefa279a5cb",
+   "scripts/checksum-fixed.txt": "b84d00190b00fe4b475c84cebbd669938b6194c7b7824eb5da95c1d8a6ab5dd7",
+   "scripts/run_manifest.py": "5a7e89d315a894a7a6775116fa1137fcfdad19a8627d6aac1f9d14878b2ab511",
+   "scripts/runlog.py": "4cdabbfc62a5463ec3e56678be63060280ad187d5dfcc7919c9fcc2b54255221",
+   "scripts/score.py": "c1dda75c2a24aea11bbe0befb80f9abb17f6aec0c5dbaa81fe2ab76b2a39213c",
+   "scripts/tree-fixed.txt": "87639ee1f888f94b215fa6e5a1a4259b084f6b1a9e643f60a45c5d2f749896ce"
+  },
+  "run": "experiments/rule-ablation-followup/results/main",
+  "stored": {
+   "checksum-fixed": "684554a5be984056d2bb6b2222189de548cf50f205049c91f31f71f82a2cc02c",
+   "checksum-original": "522eaebaa7031d4435801dc650a62b657212638407a6b893ddae90540005a5ec",
+   "tree-fixed": "e83f11aaf7d0bddf4c48443de9ab55851f95d348df1086ac2015f3fbc9263db9",
+   "tree-original": "92d28f9a28dd94a5280857d16313e3793f92b0ac2de506c61499fbf76051e935"
+  }
+ },
+ "644c3668fd92c055ed1de6fb972b1aea387e431d": {
+  "files": {
+   "scripts/checksum-fixed.txt": "b84d00190b00fe4b475c84cebbd669938b6194c7b7824eb5da95c1d8a6ab5dd7",
+   "scripts/run_manifest.py": "5a7e89d315a894a7a6775116fa1137fcfdad19a8627d6aac1f9d14878b2ab511",
+   "scripts/runlog.py": "4cdabbfc62a5463ec3e56678be63060280ad187d5dfcc7919c9fcc2b54255221",
+   "scripts/score.py": "11296beb2897a372edaa5b7a540f705de74fcb4b9a3dd7e31033bc58749948c0",
+   "scripts/tree-fixed.txt": "45e6d49e336687f743fe5f258b8b67d7d75b8f04d7a22b9d6f1db72ccfb63972"
+  },
+  "run": "results/full-original-2",
+  "stored": {
+   "checksum-fixed": "684554a5be984056d2bb6b2222189de548cf50f205049c91f31f71f82a2cc02c",
+   "checksum-original": "522eaebaa7031d4435801dc650a62b657212638407a6b893ddae90540005a5ec",
+   "tree-fixed": "35d1fbb92a3a96624fa3b1c8596d25e5a889f00b5790231b153f53b2713544bf",
+   "tree-original": "72103141b42e17b82d778046eb9db7cf5a099e7aa91959a21832f31244d89eeb"
+  }
+ },
+ "7221d2fd9480466e8ace97ed9d369b3a2d9d76b9": {
+  "files": {
+   "scripts/checksum-fixed.txt": "b84d00190b00fe4b475c84cebbd669938b6194c7b7824eb5da95c1d8a6ab5dd7",
+   "scripts/run_manifest.py": "5a7e89d315a894a7a6775116fa1137fcfdad19a8627d6aac1f9d14878b2ab511",
+   "scripts/runlog.py": "4cdabbfc62a5463ec3e56678be63060280ad187d5dfcc7919c9fcc2b54255221",
+   "scripts/score.py": "11296beb2897a372edaa5b7a540f705de74fcb4b9a3dd7e31033bc58749948c0",
+   "scripts/tree-fixed.txt": "45e6d49e336687f743fe5f258b8b67d7d75b8f04d7a22b9d6f1db72ccfb63972"
+  },
+  "run": "results/full-fixed-2",
+  "stored": {
+   "checksum-fixed": "684554a5be984056d2bb6b2222189de548cf50f205049c91f31f71f82a2cc02c",
+   "checksum-original": "522eaebaa7031d4435801dc650a62b657212638407a6b893ddae90540005a5ec",
+   "tree-fixed": "35d1fbb92a3a96624fa3b1c8596d25e5a889f00b5790231b153f53b2713544bf",
+   "tree-original": "72103141b42e17b82d778046eb9db7cf5a099e7aa91959a21832f31244d89eeb"
+  }
+ }
+}

@@ -1,0 +1,303 @@
+{
+ "case": "22:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings",
+ "arm": "stub",
+ "repeat": 3,
+ "solved": false,
+ "actions_done": 1,
+ "actions_required": 4,
+ "turns": 21,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "get_data_usage",
+  "reseat_sim_card",
+  "reboot_device",
+  "check_sim_status",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_airplane_mode",
+   "ok": false,
+   "why": "tool 'toggle_airplane_mode' was never called by the user"
+  },
+  {
+   "id": "s1_reset_apn_settings",
+   "ok": false,
+   "why": "tool 'reset_apn_settings' was never called by the user"
+  },
+  {
+   "id": "s2_reboot_device",
+   "ok": true,
+   "why": "tool 'reboot_device' was called"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, nothing loads, and I can't send picture messages. Can you help?"
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're experiencing no service on your phone. Let's try to resolve this together. To assist you better, could you please provide your phone number or the name on your account? This will help me check your line status and identify any issues.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Your line is currently active and you have not exceeded your data limit for this billing cycle, so there are no issues with your account or data usage.\n\nHere are a few steps you can try to restore service:\n\n1. Restart your phone.\n2. Toggle Airplane Mode on and off.\n3. Remove and reinsert your SIM card.\n4. Check if you are in an area with known service outages or poor coverage.\n\nIf you have already tried these steps or if the issue persists, please let me know. I can assist further or escalate the issue if needed.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_data_usage",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_data_usage",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "plan_name": "Advantage 50GB",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "data_limit_gb": 50,
+      "total_data_available_gb": 50,
+      "cycle_end_date": "2025-03-05"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I've already tried restarting my phone and toggling Airplane Mode, but it didn't help. I haven't removed and reinserted my SIM card yet. Would you like me to do that now?"
+  },
+  {
+   "role": "agent",
+   "content": "Yes, please try removing your SIM card, wait about 30 seconds, and then reinsert it securely into your phone. After doing this, restart your phone once more.\n\nThis can often resolve issues where the phone is not connecting to the network. Please let me know if you see any improvement in your service after trying this step. If the problem continues, I\u2019ll help you with the next steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I removed and reinserted the SIM card and then restarted my phone. It said the SIM status is active, but I still have no service\u2014no bars and nothing loads.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying those steps. Since your SIM status is active and your account is in good standing, but you still have no service, this could indicate a possible issue with your SIM card, device, or a network problem in your area.\n\nTo help you further, could you please let me know:\n\n1. Are you seeing any error messages on your phone (e.g., \u201cNo SIM,\u201d \u201cEmergency Calls Only,\u201d etc.)?\n2. Have you recently traveled to a different area or country?\n3. Is anyone else nearby (on the same network) experiencing similar issues?\n\nIf you\u2019re not seeing any error messages and haven\u2019t traveled, the next step may be to check for local outages or consider a SIM replacement. Please let me know your answers, and I\u2019ll guide you accordingly.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I'm not seeing any error messages\u2014just no bars at all at the top of the screen. I haven't traveled anywhere, I'm at home in Boston. I don't know if anyone else nearby has the same issue."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the details. Since your account and SIM are active, you haven\u2019t traveled, and there are no error messages, but you still have no signal, this could be due to:\n\n- A local network outage in your area.\n- A hardware issue with your phone or SIM card.\n\nHere\u2019s what you can do next:\n\n1. If possible, try inserting your SIM card into another compatible phone. This will help determine if the issue is with your phone or the SIM/network.\n2. If another phone also shows no service, it\u2019s likely a SIM or network issue. If the SIM works in another phone, the problem may be with your device.\n\nWould you be able to try your SIM card in another phone? If not, or if you try this and still have no service, I can escalate your issue for further investigation or help arrange a SIM replacement if needed. Please let me know how you\u2019d like to proceed.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I don't have another phone to test the SIM card with. Is there something else I can check on my phone?"
+  },
+  {
+   "role": "agent",
+   "content": "Absolutely, here are a few more things you can check directly on your phone:\n\n1. **Network Selection:**  \n   Go to your phone\u2019s settings and check if it\u2019s set to automatically select a network. If not, try switching to automatic network selection.\n\n2. **Carrier Settings Update:**  \n   Check if there are any carrier or system updates available for your phone. Sometimes, updating these can resolve connectivity issues.\n\n3. **Reset Network Settings:**  \n   You can reset your network settings (this will remove saved Wi-Fi networks and Bluetooth pairings, but won\u2019t delete your personal data).  \n   - On iPhone: Settings > General > Transfer or Reset iPhone > Reset > Reset Network Settings  \n   - On Android: Settings > System > Reset options > Reset Wi-Fi, mobile & Bluetooth\n\n4. **SIM Card Status:**  \n   In your phone\u2019s settings, look for SIM card status or information. Confirm that it shows as \u201cactive\u201d or \u201cconnected\u201d and not \u201cdisconnected\u201d or \u201cunknown.\u201d\n\n5. **Airplane Mode:**  \n   Double-check that Airplane Mode is off.\n\nIf you try these steps and still have no service, it\u2019s likely a SIM or network issue that requires further support. Please let me know the results, and if needed, I can escalate your case or help arrange a SIM replacement.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My SIM card status shows as active, and Airplane mode is off. I haven't tried updating carrier settings or resetting network settings yet. Which one should I try first?",
+   "tool_calls": [
+    {
+     "tool_name": "check_sim_status",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Great questions! Here\u2019s the recommended order:\n\n1. **Update Carrier Settings:**  \n   Start by checking for carrier or system updates. These updates can resolve many connectivity issues without affecting your personal settings or data.  \n   - On iPhone: Go to Settings > General > About. If an update is available, you\u2019ll see a prompt to update your carrier settings.  \n   - On Android: Go to Settings > About phone > System updates or Settings > Connections > Mobile networks > Carrier settings.\n\n2. **Reset Network Settings:**  \n   If updating carrier settings doesn\u2019t help, then try resetting your network settings. This will remove saved Wi-Fi networks and Bluetooth pairings, but it often resolves stubborn network issues.\n\nPlease try updating your carrier settings first. If you don\u2019t see an update or if the issue persists after updating, then proceed to reset your network settings. Let me know how it goes or if you need step-by-step instructions for your specific phone model!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked for carrier updates, but there were none available. Should I go ahead and reset my network settings next?"
+  },
+  {
+   "role": "agent",
+   "content": "Yes, please go ahead and reset your network settings next. This step often resolves connectivity issues like the one you\u2019re experiencing.\n\nHere\u2019s how to do it:\n\n- **On iPhone:**  \n  Go to Settings > General > Transfer or Reset iPhone > Reset > Reset Network Settings.  \n  (You may need to enter your passcode and confirm.)\n\n- **On Android:**  \n  Go to Settings > System > Reset options > Reset Wi-Fi, mobile & Bluetooth.  \n  (The exact path may vary slightly depending on your device.)\n\nAfter resetting, your phone will restart. You\u2019ll need to reconnect to Wi-Fi networks and re-pair Bluetooth devices, but your personal data will remain safe.\n\nOnce you\u2019ve completed the reset, check if your phone regains service. Please let me know the result, and if the issue persists, I\u2019ll assist you with the next steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I reset my network settings and my phone restarted, but I still don't have any service\u2014no bars and nothing loads."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying all those steps. Since your SIM card and account are active, you\u2019ve reset your network settings, and you\u2019re still not getting any service, this suggests a possible issue with your SIM card, a hardware problem with your phone, or a rare network issue in your area.\n\nAt this point, the best next steps are:\n\n- Arranging a SIM card replacement (since you don\u2019t have another phone to test your SIM).\n- Escalating your case to technical support for further investigation.\n\nWould you like me to escalate your issue to a specialist who can assist with advanced troubleshooting or help arrange a SIM replacement? Please let me know how you\u2019d like to proceed.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Yes, please escalate my issue to a specialist so I can get this fixed. I still have no service at all."
+  },
+  {
+   "role": "agent",
+   "content": "Your issue has been escalated to a specialist for advanced troubleshooting and support. They will assist you further and help arrange a SIM replacement if needed.\n\nThank you for your patience and for trying all the recommended steps. A specialist will be in touch with you soon to resolve this issue. If you have any other questions in the meantime, please let me know!",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez (+1-617-555-0148) has an active account and SIM, but is experiencing no service (no bars, nothing loads, cannot send picture messages). Customer has already restarted phone, toggled Airplane Mode, removed/reinserted SIM, checked SIM status (active), checked for carrier updates (none available), and reset network settings. Issue persists. Customer does not have another phone to test SIM. Needs escalation for advanced troubleshooting or SIM replacement."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez (+1-617-555-0148) has an active account and SIM, but is experiencing no service (no bars, nothing loads, cannot send picture messages). Customer has already restarted phone, toggled Airplane Mode, removed/reinserted SIM, checked SIM status (active), checked for carrier updates (none available), and reset network settings. Issue persists. Customer does not have another phone to test SIM. Needs escalation for advanced troubleshooting or SIM replacement."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

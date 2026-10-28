@@ -1,0 +1,359 @@
+{
+ "case": "8:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line",
+ "arm": "stub",
+ "repeat": 0,
+ "solved": false,
+ "actions_done": 2,
+ "actions_required": 5,
+ "turns": 25,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "resume_line",
+  "reboot_device",
+  "get_details_by_id",
+  "check_sim_status",
+  "check_apn_settings",
+  "reboot_device",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_airplane_mode",
+   "ok": false,
+   "why": "tool 'toggle_airplane_mode' was never called by the user"
+  },
+  {
+   "id": "s1_reset_apn_settings",
+   "ok": false,
+   "why": "tool 'reset_apn_settings' was never called by the user"
+  },
+  {
+   "id": "s2_reboot_device",
+   "ok": true,
+   "why": "tool 'reboot_device' was called"
+  },
+  {
+   "id": "s3_resume_line",
+   "ok": true,
+   "why": "tool 'resume_line' was called with {'customer_id': 'CUS-4501283', 'line_id': 'LN-8830142'}"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, nothing loads, and I can't send picture messages. Can you help me get it working again?"
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're experiencing no service on your phone. Let's try to get this resolved for you!\n\nTo assist you, I\u2019ll need to check your account and line status. Could you please provide one of the following:\n\n- The phone number of the affected line\n- Your full name and date of birth (for verification)\n\nOnce I have this information, I can look into your account and help restore your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Your phone line is currently suspended, which is why you have no service and cannot send messages or use data.\n\nWould you like me to resume (reactivate) your line now? Once resumed, your service should be restored within a few minutes. Please confirm if you'd like to proceed.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Suspended",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "2025-02-25",
+      "suspension_reason": 1,
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Yes, please go ahead and reactivate my line."
+  },
+  {
+   "role": "agent",
+   "content": "Your line has been reactivated and is now active. Service should be restored within a few minutes. If you still experience issues after 10 minutes, please restart your phone.\n\nLet me know if you need any further assistance!",
+   "tool_calls": [
+    {
+     "tool_name": "resume_line",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "resume_line",
+     "response": {
+      "result": "Line LN-8830142 has been resumed and is now Active."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Thanks, I\u2019ll wait a few minutes and see if anything changes. I\u2019ll let you know if it\u2019s still not working after that."
+  },
+  {
+   "role": "agent",
+   "content": "You're very welcome! That sounds like a good plan. If your service doesn\u2019t return after a few minutes and a restart, just let me know\u2014I\u2019m here to help further if needed.\n\nThank you for your patience!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "It's been more than 10 minutes and I still have no service. Should I restart my phone now?"
+  },
+  {
+   "role": "agent",
+   "content": "Yes, please go ahead and restart your phone now. Restarting often helps your device reconnect to the network after a line has been reactivated.\n\nIf you still have no service after restarting, please let me know so I can assist you further or check for any additional issues.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I just restarted my phone, but I still have no service\u2014no bars and nothing is loading.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. Since your line is active and a restart didn\u2019t resolve the issue, let\u2019s try a few more troubleshooting steps:\n\n1. Check if your phone is in Airplane Mode. If it is, turn it off.\n2. Remove your SIM card, wait 30 seconds, and reinsert it securely.\n3. Make sure your device\u2019s software is up to date.\n4. Try toggling mobile data off and on.\n\nIf you\u2019ve tried these steps and still have no service, there may be an issue with your SIM card, device, or network in your area.\n\nWould you like me to check for device or SIM issues on your account, or would you prefer to be connected to a human agent for further troubleshooting? Please let me know how you\u2019d like to proceed.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Can you help me check for SIM issues? What should I do next?"
+  },
+  {
+   "role": "agent",
+   "content": "Your device (Pixel 8 Pro) is showing as active in our system, and your line is also active. Here are some steps to check for SIM issues:\n\n1. Remove your SIM card and inspect it for any visible damage or dirt. If it looks damaged, it may need to be replaced.\n2. Gently clean the SIM card with a soft, dry cloth and reinsert it securely.\n3. If your phone supports eSIM and you\u2019re using a physical SIM, try switching to eSIM (if you have the activation details).\n4. If possible, try inserting your SIM card into another compatible phone. If the other phone also shows no service, the SIM card is likely the issue.\n\nIf you find damage or the SIM doesn\u2019t work in another phone, you\u2019ll likely need a replacement SIM. If you need help with an eSIM setup or ordering a replacement SIM, let me know and I can guide you through the process or connect you to a human agent for further assistance.\n\nPlease let me know what you find or if you\u2019d like to proceed with a replacement SIM or eSIM activation.",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "DEV-55210"
+     },
+     "params": {
+      "id": "DEV-55210"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "device_id": "DEV-55210",
+      "device_type": "phone",
+      "model": "Pixel 8 Pro",
+      "imei": "356938035643809",
+      "esim_capable": true,
+      "activation_status": "Active",
+      "activation_date": "2023-05-18",
+      "last_esim_transfer_date": "2023-05-18",
+      "entity_type": "device"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I checked my SIM status, and it shows as active, but I still have no service on my phone. What should I do next?",
+   "tool_calls": [
+    {
+     "tool_name": "check_sim_status",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking your SIM status. Since your SIM is active, your line is active, and you\u2019ve already restarted your phone and checked for physical SIM issues, the problem may be related to:\n\n- A network outage in your area\n- Device configuration issues (such as APN settings)\n- A deeper account or provisioning issue\n\nHere\u2019s what you can try next:\n\n1. **Check for Network Outages:** Are other people nearby experiencing similar issues? If so, it could be a local network problem.\n2. **Check APN Settings:** Go to your phone\u2019s network settings and ensure the Access Point Name (APN) is set correctly for your carrier. Incorrect APN settings can prevent your phone from connecting to the network.\n3. **Try a Network Reset:** On your Pixel 8 Pro, go to Settings > System > Reset options > Reset Wi-Fi, mobile & Bluetooth. This will reset your network settings (you may need to re-enter Wi-Fi passwords).\n\nIf you\u2019ve tried these steps and still have no service, it\u2019s likely an issue that requires deeper technical support or account re-provisioning.\n\nWould you like me to connect you to a human agent for advanced troubleshooting and possible re-provisioning of your line?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I\u2019m not sure how to check my APN settings. Can you walk me through how to do that or what to look for?"
+  },
+  {
+   "role": "agent",
+   "content": "Absolutely, I can guide you through checking and updating your APN settings on your Pixel 8 Pro:\n\n### How to Check and Edit APN Settings (Pixel 8 Pro)\n\n1. **Open Settings:** Tap the Settings app on your phone.\n2. **Go to Network & Internet:** Tap \u201cNetwork & internet.\u201d\n3. **Select SIMs:** Tap on \u201cSIMs\u201d (or \u201cMobile network\u201d if you see that instead).\n4. **Choose Your SIM:** Select your active SIM (your phone number should be listed).\n5. **Access APN Settings:** Scroll down and tap on \u201cAccess Point Names\u201d or \u201cAPN.\u201d\n6. **View/Edit APN:** You\u2019ll see a list of APNs. Tap on the active one to view its details.\n\n### What to Look For\n\n- The APN name should match your carrier\u2019s recommended settings. If you\u2019re not sure what these are, let me know your carrier name and I can provide the correct APN details.\n- Common fields include: Name, APN, MMSC, MMS Proxy, MCC, MNC, Authentication type, and APN type.\n\n### If the APN is Missing or Incorrect\n\n- Tap the \u201c+\u201d or \u201cAdd\u201d button to create a new APN.\n- Enter the correct details for your carrier.\n- Save the new APN and select it as active.\n- Restart your phone.\n\nIf you tell me your carrier name, I can provide the exact APN settings you should use. Let me know if you need those details or if you have any trouble finding the APN menu!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked my APN settings. It shows the APN name as fast.telecom.net, but the status says 'Not set.' The MMSC URL is http://mms.telecom.net/mms/wapenc. What should I do next?",
+   "tool_calls": [
+    {
+     "tool_name": "check_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking your APN settings. The APN name \u201cfast.telecom.net\u201d and the MMSC URL look correct, but the status saying \u201cNot set\u201d suggests the APN may not be properly configured or selected as active.\n\nHere\u2019s what you should do next:\n\n1. **Select the APN as Active:**\n   - In the APN list, tap on \u201cfast.telecom.net\u201d to select it as the active APN. There should be a radio button or checkmark next to it when it\u2019s active.\n\n2. **Edit or Re-Enter the APN:**\n   - If you can\u2019t select it or it still says \u201cNot set,\u201d try editing the APN:\n     - Tap on the APN to open its details.\n     - Make sure all required fields are filled in (especially \u201cAPN\u201d and \u201cMMSC\u201d).\n     - If any fields are blank or incorrect, fill them in with the correct values.\n   - If you\u2019re unsure, you can delete the current APN and add a new one with the following settings (based on your info):\n\n     - Name: Fast Telecom\n     - APN: fast.telecom.net\n     - MMSC: http://mms.telecom.net/mms/wapenc\n     - MCC: (usually auto-filled, e.g., 310 or 311 for US)\n     - MNC: (usually auto-filled)\n     - APN type: default,mms,supl\n\n3. **Save and Select the New APN:**\n   - After entering the details, tap the three dots (menu) and select \u201cSave.\u201d\n   - Then, tap the new APN to make it active.\n\n4. **Restart Your Phone:**\n   - After saving and selecting the APN, restart your phone to apply the changes.\n\nIf you still have no service after these steps, please let me know. I can escalate your issue to a human agent for advanced troubleshooting or further account checks.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I tried to update the APN settings, but it looks like something went wrong\u2014there was an error about missing required information. The phone did reboot successfully, but I still have no service.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying those steps and letting me know what happened. Since you received an error about missing required information when updating the APN, and you still have no service after a reboot, it\u2019s likely there\u2019s a deeper configuration or account issue that needs advanced troubleshooting.\n\nAt this point, I recommend connecting you to a human agent who can:\n\n- Verify and provision your APN settings directly from the network side\n- Check for any hidden account or provisioning issues\n- Guide you through any device-specific fixes or, if needed, arrange a replacement SIM/eSIM\n\nWould you like me to transfer you to a human agent for further assistance?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Yes, please connect me to a human agent for more help. I still have no service and nothing seems to be working."
+  },
+  {
+   "role": "agent",
+   "content": "You will now be connected to a human agent for further assistance. They will be able to perform advanced troubleshooting and help resolve your service issue.\n\nThank you for your patience, and I\u2019m sorry for the inconvenience you\u2019ve experienced. Please stay on the line for the next available agent.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer's line was suspended and has been reactivated, but they still have no service (no bars, nothing loads, can't send messages). Customer has restarted phone, checked SIM, and attempted to update APN settings but received an error. Further troubleshooting and possible account re-provisioning or SIM replacement needed."
+     },
+     "params": {
+      "summary": "Customer's line was suspended and has been reactivated, but they still have no service (no bars, nothing loads, can't send messages). Customer has restarted phone, checked SIM, and attempted to update APN settings but received an error. Further troubleshooting and possible account re-provisioning or SIM replacement needed."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

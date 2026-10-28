@@ -1,0 +1,264 @@
+{
+ "case": "4:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_wifi_calling|grant_app_permission",
+ "arm": "stub",
+ "repeat": 3,
+ "solved": false,
+ "actions_done": 1,
+ "actions_required": 6,
+ "turns": 17,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "reseat_sim_card",
+  "check_apn_settings",
+  "reboot_device",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_airplane_mode",
+   "ok": false,
+   "why": "tool 'toggle_airplane_mode' was never called by the user"
+  },
+  {
+   "id": "s1_reset_apn_settings",
+   "ok": false,
+   "why": "tool 'reset_apn_settings' was never called by the user"
+  },
+  {
+   "id": "s2_reboot_device",
+   "ok": true,
+   "why": "tool 'reboot_device' was called"
+  },
+  {
+   "id": "s3_toggle_wifi_calling",
+   "ok": false,
+   "why": "tool 'toggle_wifi_calling' was never called by the user"
+  },
+  {
+   "id": "s4_grant_app_permission",
+   "ok": false,
+   "why": "tool 'grant_app_permission' was never called by the user"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, nothing loads, and I can't send picture messages. It's completely dead as far as the network goes."
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're experiencing this issue. To help you further, could you please provide your phone number or account details? This will allow me to check your line status and see if there are any network or account-related problems affecting your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your phone number. I checked your account, and your line status is currently \"Active,\" which means there are no suspensions or holds on your service from our end.\n\nSince your line appears active but you have no service at all (no bars, nothing loads, and you can't send picture messages), here are a few steps you can try:\n\n1. Restart your phone.\n2. Make sure Airplane Mode is turned off.\n3. Remove and reinsert your SIM card.\n4. Check if you have service in a different location.\n\nIf you've already tried these steps or the issue persists, please let me know. I can assist further or escalate the issue for technical support. Have you noticed this problem just today, or has it been ongoing?",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I've tried restarting my phone and toggling Airplane Mode, but it didn't help. I haven't tried removing the SIM card yet. The problem started today\u2014I've had no service since I woke up. What should I do next?"
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know what you\u2019ve already tried. Since restarting and toggling Airplane Mode didn\u2019t help, the next step is to remove and reinsert your SIM card. Here\u2019s how:\n\n1. Power off your phone.\n2. Remove the SIM card carefully.\n3. Wait about 30 seconds, then reinsert the SIM card.\n4. Power your phone back on.\n\nAfter your phone restarts, check if you have service. If you still have no service, please let me know:\n\n- If you see any error messages (like \u201cNo SIM\u201d or \u201cEmergency Calls Only\u201d).\n- If your phone shows any bars or network name at all.\n- If you have access to another phone, try your SIM card in that device to see if it works.\n\nThis will help determine if the issue is with your SIM card, your device, or the network. If the problem continues after trying these steps, I can escalate your case for further technical support. Please let me know what happens after you try reinserting the SIM card.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I removed and reinserted my SIM card, and my phone says the SIM status is active, but I still have no service\u2014no bars, and it just says 'No Service' at the top.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying those steps and providing an update. Since your SIM status is active but your phone still shows \"No Service\" with no bars, and your account and line are both active on our end, this could indicate:\n\n- A network outage or issue in your area.\n- A problem with your SIM card or device hardware.\n- A technical issue with your line that needs further investigation.\n\nTo help you further, could you let me know:\n- Are other people around you (on the same network) experiencing similar issues?\n- Have you recently traveled or changed locations?\n- Do you have access to another phone to test your SIM card in?\n\nIf you\u2019ve already checked these or don\u2019t have another device to test with, I recommend we escalate your case to our technical support team for a deeper investigation, as your line and account appear normal in our system.\n\nWould you like me to escalate this issue to a human agent for further troubleshooting?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I haven't traveled, and I don't have another device to test my SIM card with. I don't know if anyone else nearby is having problems\u2014I'm at home alone right now. What else can I check on my phone?"
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the details. Here are a few more things you can check on your phone before we escalate the issue:\n\n1. Network Selection:\n   - Go to your phone\u2019s Settings > Mobile Network > Network Operators.\n   - Make sure it\u2019s set to \u201cAutomatic.\u201d If it already is, try switching to \u201cManual,\u201d wait for available networks to appear, and then select your carrier.\n\n2. Carrier Settings Update:\n   - Check if there are any carrier or system updates available for your phone. Sometimes, updating these can resolve network issues.\n\n3. APN Settings:\n   - Go to Settings > Mobile Network > Access Point Names (APN).\n   - Make sure the APN settings match those provided by your carrier. If you\u2019re unsure, I can provide the correct APN settings for your plan.\n\n4. SIM Card Status:\n   - In Settings > About Phone > SIM Status, check if it says \u201cConnected\u201d or \u201cRegistered\u201d to the network, or if it shows any errors.\n\n5. Try a Network Reset:\n   - Go to Settings > System > Reset > Reset Network Settings. (Note: This will erase saved Wi-Fi networks and Bluetooth pairings, but not your personal data.)\n\nIf you try these steps and still have no service, or if you\u2019re unsure how to check any of these, let me know your phone\u2019s make and model (e.g., iPhone 13, Samsung Galaxy S21), and I can provide step-by-step instructions or escalate your case to a human agent for further help.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I'm not sure what the APN settings are supposed to be. Should I check those? My phone is an Android."
+  },
+  {
+   "role": "agent",
+   "content": "Yes, checking your APN (Access Point Name) settings is a good idea, as incorrect APN settings can sometimes cause issues with network connectivity, including no service or problems sending picture messages.\n\nHere\u2019s how you can check and update your APN settings on Android:\n\n1. Go to Settings.\n2. Tap on Network & Internet (or Connections).\n3. Tap on Mobile Network.\n4. Tap on Access Point Names (APN).\n\nPlease let me know the name of your carrier or the plan you\u2019re on, and I\u2019ll provide the correct APN settings for you to compare and update if needed. If you see multiple APNs, let me know what\u2019s currently selected.\n\nOnce you have the correct APN settings, you can edit or add a new APN and save it, then select it as active. After updating, restart your phone and check if you have service.\n\nWould you like me to provide the APN settings for your plan? If so, please confirm your carrier name (if different from the one on your account).",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked my APN settings. The APN name says 'fast.telecom.net', but the status says 'Not set'. There's also an MMSC URL listed as 'http://mms.telecom.net/mms/wapenc'. What should I do next?",
+   "tool_calls": [
+    {
+     "tool_name": "check_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking your APN settings. The APN name \"fast.telecom.net\" and the MMSC URL look correct for many standard plans, but the status saying \"Not set\" could indicate an incomplete or inactive APN configuration, which may cause your phone to have no service.\n\nHere\u2019s what you should do next:\n\n1. Edit or Add a New APN:\n   - In the APN settings menu, tap the existing APN (\"fast.telecom.net\") to edit, or tap \u201cAdd\u201d (+) to create a new one.\n\n2. Enter the following recommended settings (if your carrier is Fast Telecom):\n\n   - Name: Fast Telecom\n   - APN: fast.telecom.net\n   - MMSC: http://mms.telecom.net/mms/wapenc\n   - MCC: 310 (if not already set)\n   - MNC: 260 (if not already set)\n   - APN type: default,mms,supl\n   - Authentication type: None\n   - APN protocol: IPv4/IPv6\n\n   (Leave other fields blank or as default unless specified by your carrier.)\n\n3. Save the APN.\n4. Select the new or edited APN as active.\n5. Restart your phone.\n\nAfter restarting, check if you have service. If you still see \"No Service,\" please let me know. If you receive any error messages or if the APN won\u2019t save, please mention that as well.\n\nIf this does not resolve the issue, I can escalate your case to a human agent for further technical support. Let me know how it goes!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I tried to update the APN settings, but it looks like there was an error and they didn't actually save. The phone rebooted successfully, but I still have no service\u2014'No Service' at the top and no bars.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Your issue has been escalated to a human technical support agent for further investigation. They will be able to provide advanced troubleshooting and help resolve the problem, including checking for network issues or arranging a replacement SIM if necessary.\n\nThank you for your patience and for trying all the recommended steps. A support agent will contact you soon to assist further. If you have any additional details or questions, please let them know when they reach out.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez has no service on her phone (no bars, 'No Service' displayed). Line is active in the system. Customer has tried restarting, toggling Airplane Mode, removing/reinserting SIM, and checking APN settings (unable to save changes). Issue started today. Needs advanced technical support."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez has no service on her phone (no bars, 'No Service' displayed). Line is active in the system. Customer has tried restarting, toggling Airplane Mode, removing/reinserting SIM, and checking APN settings (unable to save changes). Issue started today. Needs advanced technical support."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

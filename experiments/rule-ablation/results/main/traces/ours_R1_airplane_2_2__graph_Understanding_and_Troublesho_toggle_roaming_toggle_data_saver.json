@@ -1,0 +1,278 @@
+{
+ "case": "2:[graph:Understanding and Troublesho]toggle_roaming|toggle_data_saver_mode|disconnect_vpn|set_network_mode_preference",
+ "arm": "R1_airplane",
+ "repeat": 2,
+ "solved": false,
+ "actions_done": 1,
+ "actions_required": 5,
+ "turns": 17,
+ "calls": [
+  "get_customer_by_phone",
+  "check_network_mode_preference",
+  "check_network_status",
+  "run_speed_test",
+  "get_details_by_id",
+  "get_details_by_id",
+  "reboot_device",
+  "check_apn_settings"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_roaming",
+   "ok": false,
+   "why": "tool 'toggle_roaming' was never called by the user"
+  },
+  {
+   "id": "s1_toggle_data_saver_mode",
+   "ok": false,
+   "why": "tool 'toggle_data_saver_mode' was never called by the user"
+  },
+  {
+   "id": "s2_disconnect_vpn",
+   "ok": false,
+   "why": "tool 'disconnect_vpn' was never called by the user"
+  },
+  {
+   "id": "s3_set_network_mode_preference",
+   "ok": false,
+   "why": "tool 'set_network_mode_preference' was never called by the user"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was not called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone is still really slow online compared to my husband's. Pages take forever to load and it never seems to get on the faster network like his does, no matter where I am."
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot your slow mobile data issue. To get started, I\u2019ll need to identify your account. Could you please provide either your phone number, customer ID, or your full name and date of birth? This will help me access your account details and assist you further.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Sure, my name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you, Sofia. I have your account details. To help diagnose why your mobile data is slow and not connecting to faster networks, I\u2019ll need to check a few things on your device, such as your current network mode and data connection status.\n\nCould you please let me know if you\u2019re currently using your phone and able to follow some quick steps? If so, I\u2019ll guide you through checking your network settings and connection.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Yes, I have my phone with me and can follow your steps."
+  },
+  {
+   "role": "agent",
+   "content": "Great! Let\u2019s start by checking your phone\u2019s current network mode and data connection status. This will help us see if your phone is set to use the fastest available network (like 4G or 5G) and if mobile data is enabled.\n\nPlease use the following steps on your phone:\n\n1. Check your network mode preference (to see if it\u2019s set to 5G/4G or an older mode).\n2. Check your network status (to see if mobile data is enabled and what type of network you\u2019re connected to).\n\nLet me know the results, or if you need instructions on how to check these settings on your device. If you\u2019re unsure how to do this, I can guide you step by step.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked, and my network mode is set to '4g_only.' My signal strength is excellent, I'm on 4G, mobile data is enabled, airplane mode is off, and data roaming is off.",
+   "tool_calls": [
+    {
+     "tool_name": "check_network_mode_preference",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "check_network_status",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking those details. Since your phone is set to \"4g_only,\" has excellent signal strength, and mobile data is enabled, but you\u2019re still experiencing slow speeds, let\u2019s try a few more troubleshooting steps:\n\n1. Run a speed test on your phone to check your current internet speed.\n2. Check if Data Saver mode is enabled, as this can slow down your connection.\n3. Check if you are connected to a VPN, which can sometimes reduce speed.\n\nCould you please:\n- Run a speed test and let me know the result (download speed and quality).\n- Check if Data Saver mode is on.\n- Check if a VPN is active.\n\nIf you need help with any of these steps, let me know and I can guide you through them.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I ran the speed test and it says my download speed is very poor, the connection quality is poor, and I'm only able to do basic messaging on 4G cellular. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "run_speed_test",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for running the speed test. Since your download speed is very poor even with excellent 4G signal, let\u2019s check for a few common causes:\n\n1. Data Saver mode: If enabled, it can restrict your data speed.\n2. VPN connection: If active, it can slow down your connection.\n3. Data usage: If you\u2019ve reached your monthly data limit, your speed may be throttled.\n\nPlease check the following on your phone:\n- Is Data Saver mode enabled?\n- Is a VPN currently connected?\n- Do you know if you\u2019ve used up your monthly data allowance, or would you like me to check your data usage for you?\n\nLet me know what you find, or if you\u2019d like me to check your data usage on your account.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Data Saver mode is off, and I just checked\u2014VPN is not connected. I\u2019m not sure about my data usage, could you check that for me?"
+  },
+  {
+   "role": "agent",
+   "content": "You are currently on the \"Advantage 50GB\" plan, which includes 50GB of data per month. So far this cycle, you have used 12.4GB, which means you are well within your data limit and should not be experiencing any speed throttling due to data overuse.\n\nSince Data Saver and VPN are both off, and your data usage is within limits, the next steps are:\n1. Try rebooting your device, as this can sometimes resolve temporary network issues.\n2. If the issue persists after rebooting, let me know so we can explore further options.\n\nWould you please reboot your phone now and let me know if your data speed improves afterward?",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "PLN-2002"
+     },
+     "params": {
+      "id": "PLN-2002"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "plan_id": "PLN-2002",
+      "name": "Advantage 50GB",
+      "data_limit_gb": 50,
+      "monthly_price": 65.0,
+      "data_refueling_price_per_gb": 5.0,
+      "entity_type": "plan"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "My phone rebooted successfully, but after restarting, the mobile data speed is still just as slow and I'm still only getting 4G. What should I do next?",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for rebooting your phone and letting me know the result. Since your data speed is still very poor on 4G, and you are not connecting to 5G even though your plan should support it, let\u2019s try the following:\n\n1. Check your APN settings to ensure they are correct, as incorrect APN settings can cause slow data speeds.\n2. If the APN settings are incorrect, we will reset them and reboot your device again.\n\nCould you please check your APN settings and let me know if anything looks unusual or if you see any errors? If you\u2019re unsure, I can guide you through resetting your APN settings. Let me know how you\u2019d like to proceed.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My APN settings look correct. The APN name is 'fast.telecom.net' and there are no errors showing.",
+   "tool_calls": [
+    {
+     "tool_name": "check_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming your APN settings. Since your APN appears correct, your data usage is within limits, Data Saver and VPN are off, and you have excellent 4G signal but still experience very poor speeds and cannot access 5G, this may indicate a network provisioning or technical issue beyond standard troubleshooting.\n\nAt this point, I recommend escalating your case to a human technical support agent who can investigate your line and network provisioning in more detail.\n\nWould you like me to transfer you to a human agent for further assistance?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

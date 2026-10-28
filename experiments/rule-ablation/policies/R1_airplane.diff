@@ -1,0 +1,6 @@
+--- control.md
++++ R1_airplane.md
+@@ -238,3 +238,2 @@
+ You can check if Airplane Mode is ON by using `check_status_bar()` or `check_network_status()`.
+-If it is ON, guide the user to use `toggle_airplane_mode()` to turn it OFF.
+ 

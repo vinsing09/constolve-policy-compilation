@@ -1,0 +1,358 @@
+{
+ "case": "13:[graph:Telecom Agent Policy]send_payment_request",
+ "arm": "stub",
+ "repeat": 1,
+ "solved": false,
+ "actions_done": 2,
+ "actions_required": 4,
+ "turns": 21,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "resume_line",
+  "reboot_device",
+  "get_data_usage",
+  "get_details_by_id",
+  "check_status_bar",
+  "can_send_mms",
+  "check_apn_settings",
+  "reboot_device",
+  "check_data_restriction_status"
+ ],
+ "criteria": [
+  {
+   "id": "s0_send_payment_request",
+   "ok": false,
+   "why": "tool 'send_payment_request' was never called by the assistant"
+  },
+  {
+   "id": "s1_make_payment",
+   "ok": false,
+   "why": "tool 'make_payment' was never called by the user"
+  },
+  {
+   "id": "s2_resume_line",
+   "ok": true,
+   "why": "tool 'resume_line' was called with {'customer_id': 'CUS-4501283', 'line_id': 'LN-8830142'}"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was not called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, nothing loads, and I can't send picture messages. It's completely dead as far as the network goes."
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're experiencing this issue. To help you further, could you please provide your phone number or account details? This will allow me to check your line status and see if there are any network or account-related problems affecting your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Your phone line is currently suspended, which is why you have no service and cannot send or receive messages or calls.\n\nIf you were not expecting your line to be suspended, I can help you resume your service right away. Would you like me to reactivate your line now? If you know the reason for the suspension or have any additional details, please let me know.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Suspended",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I wasn't expecting my line to be suspended. Yes, please help me reactivate my line now."
+  },
+  {
+   "role": "agent",
+   "content": "Your line has been reactivated and is now active. Please restart your phone to restore your service. You should soon see network bars and be able to make calls, use data, and send messages again.\n\nIf you continue to experience issues after restarting your phone, please let me know so I can assist you further.",
+   "tool_calls": [
+    {
+     "tool_name": "resume_line",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "resume_line",
+     "response": {
+      "result": "Line LN-8830142 has been resumed and is now Active."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "My phone rebooted successfully, but I still don't see any service bars and nothing is loading.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Your line is now active, and your data usage is well within your plan limits. Your device (Pixel 8 Pro) is also showing as active in our system.\n\nSince you still have no service after a reboot, please try the following troubleshooting steps:\n\n1. Check if Airplane Mode is turned off.\n2. Remove and reinsert your SIM card (or, if using eSIM, try toggling the mobile network off and on).\n3. Go to your phone\u2019s network settings and manually search for available networks, then select your carrier.\n4. If possible, test your SIM card in another phone to see if service returns.\n\nIf you\u2019ve tried these steps and still have no service, please let me know. There may be a deeper network or SIM issue, and I can escalate this for further investigation. Have you already tried any of these steps?",
+   "tool_calls": [
+    {
+     "tool_name": "get_data_usage",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "DEV-55210"
+     },
+     "params": {
+      "id": "DEV-55210"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_data_usage",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "plan_name": "Advantage 50GB",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "data_limit_gb": 50,
+      "total_data_available_gb": 50,
+      "cycle_end_date": "2025-03-05"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "device_id": "DEV-55210",
+      "device_type": "phone",
+      "model": "Pixel 8 Pro",
+      "imei": "356938035643809",
+      "esim_capable": true,
+      "activation_status": "Active",
+      "activation_date": "2023-05-18",
+      "last_esim_transfer_date": "2023-05-18",
+      "entity_type": "device"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I haven't tried those steps yet. Which one would you like me to do first?"
+  },
+  {
+   "role": "agent",
+   "content": "Let\u2019s start with the simplest step first:\n\n1. Please check if Airplane Mode is turned off on your phone. Sometimes it can be accidentally enabled, which will block all network service.\n\nIf Airplane Mode is off and you still have no service, let me know, and I\u2019ll guide you through the next step.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I just checked my status bar, and it shows excellent signal, 5G, data enabled, and connected to Chestnut-5G. What should I do next?",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking. Since your phone now shows excellent signal, 5G, and data enabled, it appears your network connection has been restored.\n\nTo confirm everything is working:\n\n1. Try making a phone call.\n2. Send a text message (SMS and MMS/picture message).\n3. Open a website or app that uses mobile data (not Wi-Fi) to check internet access.\n\nIf all these functions work, your service is fully restored. If you encounter any issues with calls, texts, or data, please let me know which specific function isn\u2019t working, and I\u2019ll assist you further.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My messaging app says it can send MMS messages, but when I try to send a picture message, it just stays stuck and doesn't actually send.",
+   "tool_calls": [
+    {
+     "tool_name": "can_send_mms",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the update. Since your phone shows a strong signal and data is enabled, but MMS (picture messages) are not sending, let\u2019s try the following steps:\n\n1. **Turn off Wi-Fi:** MMS often requires mobile data, not Wi-Fi. Please turn off Wi-Fi and try sending the picture message again.\n2. **Check Mobile Data:** Ensure mobile data is turned on in your phone\u2019s settings.\n3. **Restart Messaging App:** Close and reopen your messaging app, then try sending the MMS again.\n4. **Check APN Settings:** Sometimes, incorrect Access Point Name (APN) settings can prevent MMS from working. Go to Settings > Network & Internet > Mobile Network > Access Point Names, and make sure the APN matches your carrier\u2019s recommended settings.\n\nIf you\u2019re still unable to send MMS after these steps, please let me know. I can provide the correct APN settings or escalate the issue for further investigation. Let me know how it goes!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I turned off Wi-Fi and made sure mobile data is on, but the picture message still won't send. Should I check the APN settings next?"
+  },
+  {
+   "role": "agent",
+   "content": "Yes, checking your APN (Access Point Name) settings is the next best step. Incorrect APN settings are a common cause of MMS issues, even when you have a strong signal and mobile data is enabled.\n\nHere\u2019s how to check your APN settings on your Pixel 8 Pro:\n\n1. Go to Settings > Network & Internet > Mobile Network.\n2. Tap on Access Point Names (APN).\n3. Select your carrier\u2019s APN. If you see multiple, choose the one that is currently active.\n\nPlease compare the APN settings with your carrier\u2019s official MMS and data settings. If you\u2019re unsure what the correct APN values should be, let me know your carrier name, and I can provide the recommended settings for you.\n\nOnce you\u2019ve checked or updated the APN, try sending a picture message again. Let me know if you need the APN details or if you run into any issues during this process!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My APN settings say 'fast.telecom.net' and the status shows as correct, with the MMSC URL set to http://mms.telecom.net/mms/wapenc. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "check_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your APN details. Your APN and MMSC settings appear correct for most standard configurations. Since you still can\u2019t send MMS, let\u2019s try a few more troubleshooting steps:\n\n1. **Restart Your Phone Again:** Sometimes, changes or network updates require a second reboot to fully take effect.\n2. **Clear Messaging App Cache:**\n   - Go to Settings > Apps > See all apps > [Your Messaging App].\n   - Tap Storage & cache.\n   - Tap Clear cache (and optionally Clear storage, but note this may delete message history).\n3. **Check MMS Settings in Messaging App:**\n   - Open your messaging app\u2019s settings.\n   - Ensure \u201cAuto-retrieve MMS\u201d or similar options are enabled.\n   - Make sure the app is set as your default SMS/MMS app.\n4. **Test with a Different Messaging App:** If possible, try sending an MMS using another messaging app (such as Google Messages) to see if the issue is app-specific.\n5. **Check Data Connection:** Try browsing the internet with Wi-Fi off to confirm mobile data is working for other apps.\n\nIf you\u2019ve tried all these steps and MMS still won\u2019t send, there may be a deeper network or provisioning issue. Please let me know the results, and if needed, I can escalate this to our technical team for further investigation.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I already restarted my phone and cleared the cache for my messaging app. Data Saver is off and background data isn't restricted. The picture message still won't send. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "check_data_restriction_status",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know what you\u2019ve already tried. Since your APN settings are correct, your line is active, mobile data works, and you\u2019ve cleared the app cache and restarted your phone, but MMS still won\u2019t send, this suggests a possible network or provisioning issue on your account.\n\nAt this point, I recommend escalating your case to our technical team for a deeper investigation, as all standard troubleshooting steps have been completed.\n\nWould you like me to escalate this issue to a human agent who can further investigate and resolve your MMS problem?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

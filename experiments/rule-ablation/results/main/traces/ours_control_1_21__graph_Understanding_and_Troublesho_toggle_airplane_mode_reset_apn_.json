@@ -1,0 +1,291 @@
+{
+ "case": "21:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_data",
+ "arm": "control",
+ "repeat": 1,
+ "solved": false,
+ "actions_done": 4,
+ "actions_required": 5,
+ "turns": 19,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "check_status_bar",
+  "toggle_airplane_mode",
+  "reseat_sim_card",
+  "reset_apn_settings",
+  "reboot_device",
+  "get_details_by_id"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_airplane_mode",
+   "ok": true,
+   "why": "tool 'toggle_airplane_mode' was called"
+  },
+  {
+   "id": "s1_reset_apn_settings",
+   "ok": true,
+   "why": "tool 'reset_apn_settings' was called"
+  },
+  {
+   "id": "s2_reboot_device",
+   "ok": true,
+   "why": "tool 'reboot_device' was called"
+  },
+  {
+   "id": "s3_toggle_data",
+   "ok": false,
+   "why": "tool 'toggle_data' was never called by the user"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was not called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone isn't getting any service at all. I have no bars, nothing loads, and I can't send picture messages. Can you help?"
+  },
+  {
+   "role": "agent",
+   "content": "I can help you with this issue. First, I need to identify your account to check your line status and provide accurate support. Could you please provide your phone number, customer ID, or your full name and date of birth?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your information. Your line status is currently active, so let's start troubleshooting your service issue.\n\nTo proceed, I\u2019ll need you to perform a few quick checks on your phone. Are you able to see if Airplane Mode is enabled, or if there are any error messages about your SIM card? If you\u2019re not sure, I can guide you through some steps to check your phone\u2019s status. Would you like to continue with these troubleshooting steps?",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Yes, please guide me through the steps to check my phone's status."
+  },
+  {
+   "role": "agent",
+   "content": "Great! Let\u2019s start by checking your phone\u2019s status bar for important indicators. Please follow these steps:\n\n1. Look at the top of your phone\u2019s screen (the status bar).\n2. Tell me if you see any of these icons:\n   - An airplane icon (\u2708\ufe0f), which means Airplane Mode is on.\n   - A signal strength indicator (bars or dots).\n   - A \u201cNo SIM\u201d or \u201cSIM error\u201d message.\n   - Any other unusual icons or warnings.\n\nIf you\u2019re unsure, I can walk you through a more detailed check using your phone\u2019s settings. Would you like to proceed with a step-by-step guide for that?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I see an airplane icon, 'No Signal,' and 'Data Disabled' in my status bar.",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the details. The airplane icon means Airplane Mode is enabled, which turns off all wireless connections\u2014including cellular service and mobile data. That\u2019s why you\u2019re seeing \u201cNo Signal\u201d and \u201cData Disabled.\u201d\n\nTo restore service, please turn off Airplane Mode on your phone. You can usually do this by:\n\n1. Swiping down from the top of your screen to open the quick settings panel.\n2. Tapping the airplane icon to turn it off.\n\nOnce Airplane Mode is off, check if your signal bars return and if you can use your phone normally. Let me know what you see after turning off Airplane Mode.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Airplane mode is now OFF, but I still don't see any signal bars. It still says 'No Signal' and 'Data Disabled' at the top.",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_airplane_mode",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for turning off Airplane Mode. Since you still have no signal and data is disabled, the next step is to check your SIM card status. Sometimes, the SIM card may not be properly seated or recognized, which can cause a complete loss of service.\n\nPlease check if your phone displays any messages about the SIM card (such as \u201cNo SIM\u201d or \u201cSIM error\u201d). If not, I\u2019ll guide you through reseating your SIM card, which can often resolve this issue.\n\nWould you like instructions on how to reseat your SIM card, or do you see any SIM-related error messages on your phone?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I don't see any specific SIM error messages, just 'No Signal' and 'Data Disabled.' Please guide me through reseating the SIM card."
+  },
+  {
+   "role": "agent",
+   "content": "Let\u2019s proceed with reseating your SIM card. This process involves removing the SIM card from your phone and reinserting it to ensure it\u2019s properly connected. Here\u2019s how you can do it:\n\n1. Power off your phone completely.\n2. Locate the SIM card tray (usually on the side of your phone).\n3. Use the SIM ejector tool (or a small paperclip) to gently push into the small hole next to the tray until it pops out.\n4. Carefully remove the SIM card from the tray.\n5. Wait a few seconds, then place the SIM card back into the tray, making sure it\u2019s properly aligned.\n6. Reinsert the tray into your phone.\n7. Power your phone back on.\n\nAfter your phone restarts, check if you now have signal bars and if \u201cData Disabled\u201d is gone. Let me know the result once you\u2019ve completed these steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I removed and reinserted the SIM card as you instructed. My phone powered back on, and the SIM status says it's active, but I still see 'No Signal' and 'Data Disabled' at the top. There's no change in my service.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for reseating your SIM card and checking the SIM status. Since your SIM is active but you still have no signal or data, the next step is to check your phone\u2019s network settings\u2014specifically the Access Point Name (APN) settings, which are essential for connecting to the network.\n\nWould you like instructions on how to check your APN settings, or would you prefer to reset them to default? Resetting APN settings is often the quickest way to resolve network connection issues. Please let me know how you\u2019d like to proceed.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Let's go ahead and reset the APN settings to default. Please let me know what to do next."
+  },
+  {
+   "role": "agent",
+   "content": "Great choice. Here\u2019s how to reset your APN settings to default:\n\n1. Open your phone\u2019s Settings app.\n2. Go to \u201cNetwork & Internet\u201d or \u201cConnections.\u201d\n3. Tap on \u201cMobile Network\u201d or \u201cCellular Networks.\u201d\n4. Select \u201cAccess Point Names\u201d or \u201cAPN.\u201d\n5. Look for an option like \u201cReset to default\u201d or \u201cReset settings\u201d (usually found in the menu or three-dot icon in the corner).\n6. Confirm the reset if prompted.\n\nAfter resetting your APN settings, please restart your phone to apply the changes. Once your phone powers back on, check if you have signal bars and if mobile data is working.\n\nLet me know if you see any improvement after completing these steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I followed your instructions and reset the APN settings, then restarted my phone. The APN shows as 'internet' now, but I still have no signal bars\u2014it's still saying 'No Signal' and 'Data Disabled.' What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "reset_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming the steps you\u2019ve taken. Since your SIM is active, APN settings are correct, and your device is showing as active, but you still have no signal or data, this suggests a deeper network or hardware issue.\n\nAt this point, you\u2019ve tried all standard troubleshooting steps:\n- Airplane Mode is off\n- SIM card is properly seated and active\n- APN settings are reset and correct\n- Device is active and compatible\n\nThe next step is to escalate your issue to a human technical support agent who can investigate further, possibly checking for network outages, provisioning issues, or hardware faults.\n\nWould you like me to transfer you to a human agent for advanced troubleshooting?",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "DEV-55210"
+     },
+     "params": {
+      "id": "DEV-55210"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "device_id": "DEV-55210",
+      "device_type": "phone",
+      "model": "Pixel 8 Pro",
+      "imei": "356938035643809",
+      "esim_capable": true,
+      "activation_status": "Active",
+      "activation_date": "2023-05-18",
+      "last_esim_transfer_date": "2023-05-18",
+      "entity_type": "device"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

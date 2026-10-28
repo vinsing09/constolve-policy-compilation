@@ -1,0 +1,424 @@
+{
+ "case": "19:[graph:Telecom Agent Policy]refuel_data",
+ "arm": "with_policy",
+ "repeat": 0,
+ "solved": false,
+ "actions_done": 1,
+ "actions_required": 2,
+ "turns": 29,
+ "calls": [
+  "get_customer_by_phone",
+  "toggle_wifi",
+  "toggle_data",
+  "toggle_data",
+  "get_details_by_id",
+  "reset_apn_settings",
+  "reboot_device",
+  "get_data_usage",
+  "get_details_by_id",
+  "refuel_data",
+  "check_sim_status",
+  "check_network_mode_preference",
+  "reseat_sim_card",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_refuel_data",
+   "ok": true,
+   "why": "tool 'refuel_data' was called with {'customer_id': 'CUS-4501283', 'line_id': 'LN-8830142'}"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no internet at all unless I'm on Wi-Fi, and I can't send picture messages. Can you help me get my mobile data working again?"
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot your mobile data and MMS (picture messaging) issues. First, I need to identify your account to check your line and plan details. Could you please provide one of the following:\n\n- Your phone number\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I\u2019ll guide you through the steps to restore your mobile data and MMS.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your phone number. I\u2019ll help you get your mobile data and MMS working again.\n\nTo troubleshoot effectively, I\u2019ll need you to perform a few checks on your phone. Are you ready to follow some step-by-step instructions? If so, please let me know what type of phone you are using (Android or iPhone), or if you\u2019re not sure, just let me know and I\u2019ll guide you accordingly.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I'm using an Android phone. Let me know what to do next."
+  },
+  {
+   "role": "agent",
+   "content": "Great, thank you! Let\u2019s start by checking a few things on your Android phone to diagnose why your mobile data and MMS aren\u2019t working.\n\n1. Please check your phone\u2019s status bar (the top of your screen) and let me know:\n   - Do you see any signal bars, or does it say \u201cNo Service\u201d or show an airplane icon?\n   - Is there a \u201c4G\u201d, \u201cLTE\u201d, \u201c5G\u201d, or similar icon, or does it only show Wi-Fi?\n\n2. Can you confirm if mobile data is turned on? (You can usually check this by swiping down from the top of your screen and looking for the \u201cMobile Data\u201d icon.)\n\n3. Are you currently in your home country, or are you traveling abroad?\n\nOnce you provide this information, I\u2019ll guide you through the next steps to restore your mobile data and MMS.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I see signal bars and no 'No Service' or airplane icon. There's no '4G', 'LTE', or '5G' symbol\u2014just the Wi-Fi icon when I'm connected to Wi-Fi. I am at home, not traveling."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the details. Since you have signal bars but no mobile data icon (like 4G, LTE, or 5G), it suggests that mobile data may be turned off or there could be a settings issue.\n\nLet\u2019s proceed step by step:\n\n1. Please turn off Wi-Fi temporarily so we can focus on your mobile data connection.\n2. After turning off Wi-Fi, check if you see any mobile data icon (4G, LTE, 5G, H+, or E) appear in the status bar.\n3. If you still don\u2019t see a mobile data icon, please check if mobile data is enabled:\n   - Swipe down from the top of your screen to open Quick Settings.\n   - Look for the \u201cMobile Data\u201d icon and make sure it is turned ON.\n\nAfter you\u2019ve done this, let me know:\n- If you now see a mobile data icon in the status bar.\n- If not, please confirm that mobile data is definitely turned ON.\n\nOnce you reply, I\u2019ll guide you through the next troubleshooting steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I turned off Wi-Fi and then checked mobile data, but I noticed that mobile data is now OFF. I don't see any mobile data icon in the status bar, and my phone isn't connecting to the internet at all.",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_wifi",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "toggle_data",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking. Please turn your mobile data ON using the Quick Settings menu (swipe down from the top and tap the \u201cMobile Data\u201d icon so it is enabled).\n\nOnce you have turned mobile data ON, let me know if you see any mobile data icon (such as 4G, LTE, 5G, H+, or E) in your status bar, and if your internet connection starts working. If not, please let me know, and we\u2019ll continue troubleshooting.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I turned mobile data ON, but I still don't see any mobile data icon in the status bar and my internet is still not working.",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_data",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Your line is active, so let\u2019s check if your phone\u2019s network settings might be causing the issue. The next step is to check your phone\u2019s APN (Access Point Name) settings, which are required for mobile data and MMS to work.\n\nPlease follow these steps:\n1. Go to your phone\u2019s Settings.\n2. Tap on \u201cNetwork & Internet\u201d or \u201cConnections.\u201d\n3. Tap on \u201cMobile Network.\u201d\n4. Tap on \u201cAccess Point Names\u201d (APN).\n\nLet me know if you see any APN listed, and if so, what its name is. If you\u2019re unsure, just let me know what you see on that screen. This will help me guide you to reset your APN settings if needed.",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I see one APN listed. The name is 'internet'. What should I do next?"
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking. Sometimes, even if an APN is listed, its settings may be incorrect or incomplete, which can prevent mobile data and MMS from working.\n\nThe next step is to reset your APN settings to the default values provided by your carrier. Here\u2019s how:\n\n1. In the APN screen, look for an option like \u201cReset to default\u201d or \u201cReset settings.\u201d (This is usually found by tapping the three dots in the upper right corner or at the bottom of the screen.)\n2. Select \u201cReset to default.\u201d\n\nAfter you reset your APN settings, please restart (reboot) your phone to apply the changes.\n\nOnce your phone has restarted, turn off Wi-Fi and check if your mobile data icon (4G, LTE, 5G, etc.) appears in the status bar and if you can access the internet. Let me know the results, and we\u2019ll continue from there if needed.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I already reset the APN settings to default and rebooted my phone. After restarting and turning off Wi-Fi, I still don't see any mobile data icon in the status bar, and my internet is still not working.",
+   "tool_calls": [
+    {
+     "tool_name": "reset_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know you\u2019ve already reset the APN settings and rebooted your phone, but the issue persists. Let\u2019s check a few more things to narrow down the cause:\n\n1. Can you confirm if you have used a lot of data this month or if you might have reached your plan\u2019s data limit? Sometimes, if the data limit is reached, mobile data will stop working.\n2. Have you recently changed your SIM card or had any issues with your SIM?\n\nOnce you confirm these, I\u2019ll check your data usage and SIM status to see if either could be causing the problem.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I don't think I've used a lot of data and I haven't changed my SIM card recently. What should I do next?"
+  },
+  {
+   "role": "agent",
+   "content": "Your plan, Advantage 50GB, has a monthly data limit of 50GB. You have already used 50.5GB this cycle, which means you have exceeded your data limit. When this happens, your mobile data is cut off until your next billing cycle or until you add more data.\n\nYou have two options to restore your mobile data:\n1. Refuel (add) more data to your line for this month (up to 2GB at a per-GB price).\n2. Wait until your billing cycle resets on March 5, 2025.\n\nWould you like to add more data to your line now? If so, please let me know how much (up to 2GB) you\u2019d like to add, and I\u2019ll confirm the price before proceeding.",
+   "tool_calls": [
+    {
+     "tool_name": "get_data_usage",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_data_usage",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "plan_name": "Advantage 50GB",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 0,
+      "data_limit_gb": 50,
+      "total_data_available_gb": 50,
+      "cycle_end_date": "2025-03-05"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I'd like to add 1GB of data. Please let me know the price before we continue."
+  },
+  {
+   "role": "agent",
+   "content": "The price to add 1GB of data to your Advantage 50GB plan is $5.00.\n\nWould you like to proceed with adding 1GB of data for $5.00? Please confirm, and I\u2019ll apply the data refuel to your line right away.",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "PLN-2002"
+     },
+     "params": {
+      "id": "PLN-2002"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "plan_id": "PLN-2002",
+      "name": "Advantage 50GB",
+      "data_limit_gb": 50,
+      "monthly_price": 65.0,
+      "data_refueling_price_per_gb": 5.0,
+      "entity_type": "plan"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Yes, please go ahead and add 1GB of data for $5.00."
+  },
+  {
+   "role": "agent",
+   "content": "1GB of data has been added to your line for $5.00, and the charge will appear on your current bill.\n\nPlease restart your phone once more, turn off Wi-Fi, and check if your mobile data icon (4G, LTE, 5G, etc.) appears in the status bar and if you can access the internet. This should restore your mobile data and allow you to send picture messages (MMS) again.\n\nLet me know if your internet and MMS are now working, or if you need any further assistance!",
+   "tool_calls": [
+    {
+     "tool_name": "refuel_data",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142",
+      "gb_amount": 1
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142",
+      "gb_amount": 1
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "refuel_data",
+     "response": {
+      "result": "Refueled 1.0GB on line LN-8830142 (+1-617-555-0148). Charge of $5.00 added to bill BILL-4501283-2025-02."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I restarted my phone again, turned off Wi-Fi, but I still don't see any mobile data icon in the status bar and internet is still not working. What should I try next?"
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for following the steps and letting me know the result. Since you have refueled data, reset APN settings, and rebooted your phone, but still have no mobile data icon or internet, let\u2019s check your SIM card status and network mode settings next.\n\nPlease do the following on your Android phone:\n\n1. Check SIM Card Status:\n   - Go to Settings > About Phone > Status > SIM Status (or similar path).\n   - Let me know if it says the SIM is active, missing, or locked.\n\n2. Check Network Mode:\n   - Go to Settings > Network & Internet > Mobile Network > Preferred Network Type.\n   - Let me know what network mode is selected (e.g., 5G/4G/3G/2G, LTE only, etc.).\n\nOnce you provide this information, I\u2019ll guide you through the next troubleshooting steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My SIM status says 'active' and my preferred network mode is set to '4G/5G preferred.' What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "check_sim_status",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "check_network_mode_preference",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming your SIM is active and your network mode is set correctly. Since you still have no mobile data icon or internet after all these steps, let\u2019s try reseating your SIM card, as a physical connection issue can sometimes cause this problem.\n\nPlease follow these steps:\n1. Power off your phone.\n2. Remove your SIM card.\n3. Wait about 30 seconds, then reinsert the SIM card securely.\n4. Power your phone back on.\n5. Turn off Wi-Fi and check if the mobile data icon appears and if you have internet access.\n\nLet me know if this resolves the issue or if you still have no mobile data. If the problem persists after reseating the SIM, please let me know, and I\u2019ll assist you further.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I already reseated the SIM card as you suggested, and my phone says the SIM status is active. After turning my phone back on and turning off Wi-Fi, I still don't see any mobile data icon and the internet is not working.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.\n\nA specialist will assist you further, as all standard troubleshooting steps have been completed and your issue persists. Thank you for your patience.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez (+1-617-555-0148) has no mobile data or MMS. Troubleshooting completed: data refueled, APN reset, SIM status active, correct network mode, SIM reseated, and device rebooted. Issue persists\u2014no mobile data icon or internet access."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez (+1-617-555-0148) has no mobile data or MMS. Troubleshooting completed: data refueled, APN reset, SIM status active, correct network mode, SIM reseated, and device rebooted. Issue persists\u2014no mobile data icon or internet access."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

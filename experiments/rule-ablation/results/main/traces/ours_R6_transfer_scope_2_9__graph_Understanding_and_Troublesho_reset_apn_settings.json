@@ -1,0 +1,263 @@
+{
+ "case": "9:[graph:Understanding and Troublesho]reset_apn_settings",
+ "arm": "R6_transfer_scope",
+ "repeat": 2,
+ "solved": false,
+ "actions_done": 2,
+ "actions_required": 3,
+ "turns": 17,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "check_status_bar",
+  "check_sim_status",
+  "check_apn_settings",
+  "reset_apn_settings",
+  "reboot_device",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_reset_apn_settings",
+   "ok": true,
+   "why": "tool 'reset_apn_settings' was called"
+  },
+  {
+   "id": "s1_reboot_device",
+   "ok": true,
+   "why": "tool 'reboot_device' was called"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, nothing loads, and I can't send picture messages. It's completely dead as far as any connection goes."
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot this issue. First, I need to identify your account to check for any line or account problems. Could you please provide your phone number, customer ID, or your full name and date of birth?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the information. Your line status is currently active, so there are no suspensions or contract issues on your account.\n\nLet\u2019s start troubleshooting your phone\u2019s connectivity. Could you please check your phone\u2019s status bar and let me know if you see any of the following:\n- Airplane mode icon\n- SIM card error or missing SIM message\n- Any signal bars at all (even if they\u2019re empty)\n- Network type (like 5G, 4G, LTE, etc.)\n\nThis will help me determine the next steps. If you need instructions on how to check, let me know your phone model or operating system (iPhone, Android, etc.).",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I see a 'No Signal' icon, data is enabled, and it says I'm connected to Chestnut-5G WiFi. My battery is at 87%. There are no signal bars at all.",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking. Since you see a \u201cNo Signal\u201d icon and no bars, this means your phone is not connecting to the cellular network at all, even though WiFi and data are enabled. Let\u2019s go through some key troubleshooting steps:\n\n1. Airplane Mode: Please check if Airplane Mode is ON. If it is, turn it OFF.\n2. SIM Card: There could be a SIM card issue. Please check if your phone is showing any SIM card errors or if it says \u201cNo SIM\u201d or \u201cSIM not detected.\u201d\n3. Restart: If neither of the above applies, try restarting your phone.\n\nCould you confirm if Airplane Mode is off and if your phone recognizes the SIM card (no SIM errors)? If you\u2019re unsure, I can guide you through checking your SIM card status.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Airplane Mode is off and I don't see any SIM card errors or messages like 'No SIM' on the screen. Would you like me to check the SIM card status directly?"
+  },
+  {
+   "role": "agent",
+   "content": "Yes, please check your SIM card status directly in your phone\u2019s settings. This will help us confirm if the SIM card is being detected and is active.\n\nIf you\u2019re not sure how to do this, let me know your phone\u2019s make and model (e.g., iPhone 13, Samsung Galaxy S21), and I can provide step-by-step instructions. Once you check, let me know what it says about the SIM card status (e.g., Active, Missing, Locked, etc.).",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked the SIM card status, and it says the SIM is active. There are still no signal bars showing.",
+   "tool_calls": [
+    {
+     "tool_name": "check_sim_status",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming that your SIM card is active and recognized by your phone. Since Airplane Mode is off, the SIM is active, and your line is not suspended, the next step is to check your network settings\u2014specifically, the Access Point Name (APN) settings, which are crucial for connecting to the cellular network.\n\nCould you please check your APN settings and let me know if anything looks incorrect or if there\u2019s a message about missing or invalid APN/MMSC settings? If you\u2019re unsure how to check, let me know your phone\u2019s make and model, and I can guide you through the process.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked my APN settings. It says the APN is 'fast.telecom.net', but the status says 'Not set'. The MMSC URL is listed as 'http://mms.telecom.net/mms/wapenc'.",
+   "tool_calls": [
+    {
+     "tool_name": "check_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing the APN details. The APN status showing \u201cNot set\u201d could indicate a configuration issue, even though the MMSC URL is present. This can prevent your phone from connecting to the cellular network and affect both service and MMS.\n\nThe next step is to reset your APN settings to the default values. After resetting, you\u2019ll need to restart your phone for the changes to take effect.\n\nWould you like instructions on how to reset your APN settings, or do you know how to do this on your device? Once you\u2019ve reset the APN, please reboot your phone and let me know if you see any signal bars or if service is restored.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I've reset the APN settings to default and rebooted my phone. The APN is now set to 'internet' and the MMSC URL is 'http://mms.carrier.com/mms'. What should I try next? There are still no signal bars showing.",
+   "tool_calls": [
+    {
+     "tool_name": "reset_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez has no cellular service (no signal bars, 'No Signal' icon). SIM is active, Airplane Mode is off, line is active, APN reset and reboot done, but still no service. Needs advanced technical support."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez has no cellular service (no signal bars, 'No Signal' icon). SIM is active, Airplane Mode is off, line is active, APN reset and reboot done, but still no service. Needs advanced technical support."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Okay, I'll hold on for the human agent. Please let me know when someone is available."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for your patience. You are now in the queue for a human agent. Someone will assist you as soon as they are available. Please stay connected.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

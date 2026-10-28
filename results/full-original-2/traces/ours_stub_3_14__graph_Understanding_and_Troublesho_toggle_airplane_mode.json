@@ -1,0 +1,277 @@
+{
+ "case": "14:[graph:Understanding and Troublesho]toggle_airplane_mode",
+ "arm": "stub",
+ "repeat": 3,
+ "solved": false,
+ "actions_done": 0,
+ "actions_required": 2,
+ "turns": 19,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "get_data_usage",
+  "reboot_device",
+  "reseat_sim_card",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_airplane_mode",
+   "ok": false,
+   "why": "tool 'toggle_airplane_mode' was never called by the user"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, nothing loads, and I can't send picture messages. Can you help?"
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're experiencing no service on your phone. To help you, I\u2019ll need to check your account and line status. Could you please provide your phone number or your full name and date of birth for verification? This will help me look up your account and assist you further.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your information. I checked your account and your line is currently active, with no suspensions or data overages. You still have plenty of data left in your plan.\n\nSince your account and line appear to be in good standing, here are a few troubleshooting steps you can try:\n\n1. Restart your phone.\n2. Make sure Airplane Mode is turned off.\n3. Remove and reinsert your SIM card.\n4. Check if your phone is set to the correct network mode (e.g., LTE/4G/5G).\n5. Try your SIM card in another phone, if possible, to see if the issue persists.\n\nIf you\u2019ve already tried these steps or if the problem continues, please let me know. I can assist further or escalate the issue if needed.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_data_usage",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_data_usage",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "plan_name": "Advantage 50GB",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "data_limit_gb": 50,
+      "total_data_available_gb": 50,
+      "cycle_end_date": "2025-03-05"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I haven't tried any of those steps yet. Where should I start?"
+  },
+  {
+   "role": "agent",
+   "content": "Great question! Here\u2019s the best order to try the troubleshooting steps:\n\n1. **Restart Your Phone:**  \n   Simply power off your phone, wait about 10 seconds, and turn it back on. This can often resolve temporary network issues.\n\n2. **Check Airplane Mode:**  \n   Make sure Airplane Mode is turned off. Sometimes it can be accidentally enabled, which will block all service.\n\n3. **Remove and Reinsert Your SIM Card:**  \n   Power off your phone, carefully remove the SIM card, wait a few seconds, and reinsert it. Then turn your phone back on. This can help your phone reconnect to the network.\n\n4. **Check Network Settings:**  \n   Go to your phone\u2019s settings and ensure it\u2019s set to use the correct network mode (usually LTE/4G/5G, depending on your device and plan).\n\n5. **Test Your SIM in Another Phone (if possible):**  \n   If you have access to another compatible phone, insert your SIM card into it. If the SIM works in the other phone, the issue may be with your original device.\n\nPlease try these steps one at a time, starting from the top. Let me know after each step if your service returns, or if you need more guidance at any point!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I just restarted my phone, but I still have no service\u2014no bars and nothing loads.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. Since restarting didn\u2019t resolve the issue, let\u2019s move to the next steps:\n\n1. **Check Airplane Mode:**  \n   - Make sure Airplane Mode is turned off.  \n   - On most phones, you can swipe down from the top of the screen to access quick settings and see if the airplane icon is highlighted. If it is, tap it to turn it off.\n\n2. **Remove and Reinsert Your SIM Card:**  \n   - Power off your phone.\n   - Remove the SIM card (you may need a SIM tool or paperclip).\n   - Wait about 10 seconds, then reinsert the SIM card.\n   - Power your phone back on.\n\nPlease try these two steps and let me know if you see any change in your service. If there\u2019s still no service, we\u2019ll continue troubleshooting together.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I removed and reinserted the SIM card as you suggested. My phone says the SIM status is active, but I still have no service\u2014no bars and nothing loads.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying those steps and letting me know the result. Since your SIM status is active but you still have no service, let\u2019s continue troubleshooting:\n\n1. **Check Network Settings:**  \n   - Go to your phone\u2019s Settings > Mobile Network (or Cellular Network).\n   - Ensure your phone is set to use the correct network mode (preferably LTE/4G/5G, not 2G/3G only).\n   - Make sure \u201cAutomatically select network\u201d is enabled.\n\n2. **Test Your SIM in Another Phone (if possible):**  \n   - If you have access to another unlocked phone, insert your SIM card into it.\n   - See if you get service on the other device.\n\n3. **Check for Outages:**  \n   - Are you in an area where you usually have service, or are you traveling?\n   - If you\u2019re in a new location, there could be a local network outage or weak coverage.\n\nPlease try these steps and let me know:\n- If your SIM works in another phone.\n- If your phone is set to the correct network mode.\n- If you\u2019re in your usual coverage area.\n\nIf none of these resolve the issue, I can escalate this to our technical team for further investigation.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I'm at home in Boston where I usually have good service. I haven't tried my SIM in another phone yet. How do I check if my phone is set to the correct network mode?"
+  },
+  {
+   "role": "agent",
+   "content": "I can guide you through checking your network mode! The steps depend on whether you have an Android or iPhone. Here\u2019s how to check on both:\n\n**For Android:**\n1. Open the Settings app.\n2. Tap on \u201cConnections\u201d or \u201cNetwork & Internet.\u201d\n3. Tap on \u201cMobile networks.\u201d\n4. Look for \u201cPreferred network type\u201d or \u201cNetwork mode.\u201d\n5. Make sure it\u2019s set to LTE/4G/5G (not 2G/3G only).\n\n**For iPhone:**\n1. Open the Settings app.\n2. Tap on \u201cCellular.\u201d\n3. Tap on \u201cCellular Data Options.\u201d\n4. Tap on \u201cVoice & Data.\u201d\n5. Make sure LTE or 5G is selected.\n\nIf you see an option for \u201cAutomatic\u201d network selection, make sure it\u2019s enabled.\n\nPlease check your settings and let me know what you find. If everything looks correct and you still have no service, let me know your phone model, and I can provide more specific instructions or escalate the issue for you.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked my network mode and it's set to 5G auto. Still no service at all."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming your network mode is set correctly. Since you\u2019re in your usual coverage area, your SIM status is active, and your network settings are correct, but you still have no service, this could indicate a deeper issue with your SIM card, device, or a possible network problem in your area.\n\nHere\u2019s what we can do next:\n\n1. **If possible, try your SIM card in another unlocked phone.**  \n   - This will help determine if the issue is with your phone or the SIM/service itself.\n\n2. **Let me know your phone model.**  \n   - I can provide device-specific troubleshooting or check for known issues.\n\n3. **Would you like me to escalate this to our technical team for further investigation?**  \n   - If you\u2019re unable to test your SIM in another phone, or if you prefer, I can escalate your case right away.\n\nPlease let me know how you\u2019d like to proceed, or if you need instructions for testing your SIM in another device. I\u2019m here to help!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I don't have another phone to test the SIM in. My phone is a Samsung Galaxy S21. What should I try next?"
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your phone model. Since you have a Samsung Galaxy S21 and no other phone to test the SIM in, let\u2019s try a few device-specific troubleshooting steps:\n\n1. **Reset Network Settings:**\n   - Go to Settings > General Management > Reset > Reset network settings.\n   - Confirm the reset. (This will erase saved Wi-Fi networks and Bluetooth pairings, but not your personal data.)\n   - After the reset, your phone will restart. Check if you have service.\n\n2. **Check for Carrier Settings or Software Updates:**\n   - Go to Settings > Software update > Download and install.\n   - Install any available updates and restart your phone.\n\n3. **Manually Select Network:**\n   - Go to Settings > Connections > Mobile networks > Network operators.\n   - Turn off \u201cSelect automatically.\u201d\n   - Wait for your phone to search for available networks.\n   - When the list appears, select your carrier manually.\n\nPlease try these steps in order. If you still have no service after this, let me know, and I will escalate your issue to our technical team for further investigation.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I reset my network settings and checked for software updates\u2014there were none. I tried manually selecting my carrier, but it just says 'unable to connect, try again later.' I still have no service at all."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying all the troubleshooting steps. Since your line and SIM are active, your settings are correct, and manual network selection fails, this issue requires further investigation by our technical team.\n\nI am escalating your case to a human agent who can assist you further and check for any deeper network or SIM issues. You will be connected shortly\u2014please stay on the line or monitor your chat for the next steps from our support team. Thank you for your patience!",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez (Samsung Galaxy S21, Boston) has no service: no bars, nothing loads, can't send messages. Line is active, SIM status is active, network mode is correct, network settings reset, and manual carrier selection fails. Customer cannot test SIM in another phone. Needs technical escalation."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez (Samsung Galaxy S21, Boston) has no service: no bars, nothing loads, can't send messages. Line is active, SIM status is active, network mode is correct, network settings reset, and manual carrier selection fails. Customer cannot test SIM in another phone. Needs technical escalation."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

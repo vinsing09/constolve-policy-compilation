@@ -1,0 +1,393 @@
+{
+ "case": "4:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_wifi_calling|grant_app_permission",
+ "arm": "with_policy",
+ "repeat": 1,
+ "solved": false,
+ "actions_done": 3,
+ "actions_required": 6,
+ "turns": 23,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "check_status_bar",
+  "toggle_airplane_mode",
+  "reseat_sim_card",
+  "reboot_device",
+  "check_apn_settings",
+  "reset_apn_settings",
+  "reboot_device",
+  "get_details_by_id",
+  "get_bills_for_customer",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_airplane_mode",
+   "ok": true,
+   "why": "tool 'toggle_airplane_mode' was called"
+  },
+  {
+   "id": "s1_reset_apn_settings",
+   "ok": true,
+   "why": "tool 'reset_apn_settings' was called"
+  },
+  {
+   "id": "s2_reboot_device",
+   "ok": true,
+   "why": "tool 'reboot_device' was called"
+  },
+  {
+   "id": "s3_toggle_wifi_calling",
+   "ok": false,
+   "why": "tool 'toggle_wifi_calling' was never called by the user"
+  },
+  {
+   "id": "s4_grant_app_permission",
+   "ok": false,
+   "why": "tool 'grant_app_permission' was never called by the user"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, nothing loads, and I can't send picture messages. It's completely dead as far as the network goes."
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot this issue. To get started, I\u2019ll need to identify your account. Could you please provide one of the following:\n\n- The phone number associated with your account\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I can check your line status and assist you further.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148 and my name is Sofia Martinez."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the information. Your line status is currently Active, which means there are no suspensions or contract issues on your account.\n\nLet\u2019s proceed with troubleshooting your phone\u2019s lack of service and inability to send picture messages. I\u2019ll guide you through a few steps to help identify the cause.\n\nFirst, could you please check your phone\u2019s status bar and let me know if you see any of the following:\n- Airplane mode icon\n- SIM card error or missing SIM icon\n- Any signal bars at all (even if they are empty)\n- Network type indicator (like 5G, 4G, LTE, etc.)\n\nThis will help narrow down the issue. If you\u2019re not sure how to check, let me know and I can guide you.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I see the airplane mode icon, no signal icon, and data enabled icon in the status bar. There are no signal bars or network type indicators showing at all.",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "It looks like Airplane Mode is enabled on your phone. When Airplane Mode is on, all wireless connections\u2014including cellular service\u2014are disabled, which explains why you have no service or signal bars.\n\nTo restore your service, please turn off Airplane Mode. You can usually do this by:\n\n1. Swiping down from the top of your screen to open the quick settings panel.\n2. Tapping the airplane icon to turn it off.\n\nOnce Airplane Mode is off, your phone should reconnect to the network, and you should see signal bars and a network type indicator (like 4G or 5G) appear.\n\nAfter you turn off Airplane Mode, please let me know if your service returns or if you still have issues.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Airplane mode is now off, but I still don't see any signal bars or network type indicator. My phone still has no service.",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_airplane_mode",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for turning off Airplane Mode. Since you still have no service, the next step is to check your SIM card status. Sometimes, the SIM card may not be properly seated or could have an issue, which can prevent your phone from connecting to the network.\n\nPlease check your SIM card status on your phone. If you see any messages about the SIM being missing, locked, or needing a PIN/PUK code, let me know. If you\u2019re unsure how to check, I can guide you through the process.\n\nIf your phone indicates the SIM is missing or not detected, try removing the SIM card and reinserting it securely. After reseating the SIM card, restart your phone and check if service is restored.\n\nLet me know what you find or if you need step-by-step instructions.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked the SIM card status and it says the SIM is not detected. Should I try removing and reinserting the SIM card now?"
+  },
+  {
+   "role": "agent",
+   "content": "Yes, please remove the SIM card from your phone and then carefully reinsert it. This can often resolve issues where the SIM is not detected.\n\nAfter you have reinserted the SIM card, restart your phone. Once your phone powers back on, check if the SIM is now detected and if you have regained service (signal bars and network type indicator).\n\nLet me know the results after you complete these steps. If the SIM is still not detected, we can try additional troubleshooting.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I reseated the SIM card and restarted my phone. Now the SIM status is active, and the phone rebooted successfully, but I still don't have any signal bars or a network type indicator. The phone still has no service.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for reseating the SIM card and restarting your phone. Since the SIM status is now active but you still have no signal bars or network type indicator, the next step is to check your phone\u2019s network settings\u2014specifically the Access Point Name (APN) settings, which are essential for connecting to the network.\n\nPlease check your APN settings and let me know if you see any errors or if the APN/MMSC fields are empty or incorrect. If you\u2019re unsure how to check, I can guide you through the process.\n\nIf the APN settings appear incorrect or missing, you should reset them to default and then restart your phone again. Let me know what you find, and I\u2019ll guide you through the next steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My APN settings show the APN name as fast.telecom.net, but the status says 'Not set.' The MMSC URL is filled in. What should I do next?",
+   "tool_calls": [
+    {
+     "tool_name": "check_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Since your APN status says \"Not set,\" even though the APN name and MMSC URL are present, this could indicate a configuration issue. The best next step is to reset your APN settings to the default values.\n\nPlease reset your APN settings on your phone. After resetting, restart your device to ensure the new settings take effect.\n\nOnce your phone has restarted, check if you now have signal bars or a network type indicator. Let me know if your service is restored or if you still have no service, and we\u2019ll continue troubleshooting if needed.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I already reset the APN settings and restarted my phone. The APN is now set to 'internet' and the MMSC URL is 'http://mms.carrier.com/mms', but I still have no signal bars or network type indicator\u2014there's still no service.",
+   "tool_calls": [
+    {
+     "tool_name": "reset_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the update. Your device and SIM are both active, your APN settings are correct, and your account and bills are all in good standing. Since you still have no signal bars or network type indicator after all standard troubleshooting steps, this suggests a deeper technical issue\u2014possibly with the network in your area or a hardware problem.\n\nAt this point, I recommend escalating your case to a human technical support agent who can investigate further and provide advanced assistance.\n\nWould you like me to transfer you to a human agent now?",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "DEV-55210"
+     },
+     "params": {
+      "id": "DEV-55210"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_bills_for_customer",
+     "arguments": {
+      "customer_id": "CUS-4501283"
+     },
+     "params": {
+      "customer_id": "CUS-4501283"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "device_id": "DEV-55210",
+      "device_type": "phone",
+      "model": "Pixel 8 Pro",
+      "imei": "356938035643809",
+      "esim_capable": true,
+      "activation_status": "Active",
+      "activation_date": "2023-05-18",
+      "last_esim_transfer_date": "2023-05-18",
+      "entity_type": "device"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_bills_for_customer",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "count": 2,
+      "bills": [
+       {
+        "bill_id": "BILL-4501283-2025-02",
+        "customer_id": "CUS-4501283",
+        "period_start": "2025-01-06",
+        "period_end": "2025-02-05",
+        "issue_date": "2025-02-06",
+        "total_amount_due": 70.0,
+        "due_date": "2025-02-26",
+        "status": "Paid"
+       },
+       {
+        "bill_id": "BILL-4501283-2025-01",
+        "customer_id": "CUS-4501283",
+        "period_start": "2024-12-06",
+        "period_end": "2025-01-05",
+        "issue_date": "2025-01-06",
+        "total_amount_due": 65.0,
+        "due_date": "2025-01-26",
+        "status": "Paid"
+       }
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Yes, please transfer me to a human agent. I still don't have any service."
+  },
+  {
+   "role": "agent",
+   "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez has no cellular service: no signal bars, no network type indicator, and cannot send MMS. SIM is now detected and active, device is active, APN settings are correct, account and bills are in good standing. All standard troubleshooting steps (airplane mode, SIM reseat, APN reset, reboot) have been completed. Issue persists."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez has no cellular service: no signal bars, no network type indicator, and cannot send MMS. SIM is now detected and active, device is active, APN settings are correct, account and bills are in good standing. All standard troubleshooting steps (airplane mode, SIM reseat, APN reset, reboot) have been completed. Issue persists."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Okay, I'm holding. Please let me know when someone is available."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for your patience. A human agent will be with you shortly to assist further. Please continue to hold, and they will update you as soon as they are available.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Okay, I'll keep holding. Please let me know when the agent is ready."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for your patience. I do not have real-time updates on the human agent\u2019s availability, but your case has been transferred and is in the queue. An agent will assist you as soon as possible. Please continue to hold, and they will notify you when they are ready.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

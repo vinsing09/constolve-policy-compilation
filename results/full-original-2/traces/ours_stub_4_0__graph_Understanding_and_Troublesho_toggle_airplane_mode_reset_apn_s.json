@@ -1,0 +1,328 @@
+{
+ "case": "0:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data",
+ "arm": "stub",
+ "repeat": 4,
+ "solved": false,
+ "actions_done": 2,
+ "actions_required": 6,
+ "turns": 21,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "resume_line",
+  "reboot_device",
+  "reseat_sim_card",
+  "get_details_by_id",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_airplane_mode",
+   "ok": false,
+   "why": "tool 'toggle_airplane_mode' was never called by the user"
+  },
+  {
+   "id": "s1_reset_apn_settings",
+   "ok": false,
+   "why": "tool 'reset_apn_settings' was never called by the user"
+  },
+  {
+   "id": "s2_reboot_device",
+   "ok": true,
+   "why": "tool 'reboot_device' was called"
+  },
+  {
+   "id": "s3_resume_line",
+   "ok": true,
+   "why": "tool 'resume_line' was called with {'customer_id': 'CUS-4501283', 'line_id': 'LN-8830142'}"
+  },
+  {
+   "id": "s4_toggle_data",
+   "ok": false,
+   "why": "tool 'toggle_data' was never called by the user"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all. There are no bars, nothing loads, and I can't send picture messages. Can you help?"
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're experiencing no service on your phone. Let's try to resolve this together. To assist you better, could you please provide your phone number or the name on your account? This will help me check your line status and see if there are any issues affecting your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Your phone line is currently suspended, which is why you have no service and cannot send messages or use data.\n\nWould you like me to resume your line so you can regain service? If you know the reason for the suspension or if it was accidental, please let me know so I can assist you further.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Suspended",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "2025-02-25",
+      "suspension_reason": 1,
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I didn't know my line was suspended. Can you please help me get it turned back on?"
+  },
+  {
+   "role": "agent",
+   "content": "Your line has been reactivated and should be back to normal shortly. Please restart your phone to refresh the connection. If you still experience issues after restarting, let me know and I\u2019ll help you further.\n\nIs there anything else I can assist you with today?",
+   "tool_calls": [
+    {
+     "tool_name": "resume_line",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "resume_line",
+     "response": {
+      "result": "Line LN-8830142 has been resumed and is now Active."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I've restarted my phone, but I still have no service\u2014there are no bars and nothing loads.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. Since your line is now active but you still have no service after restarting your phone, let's try a few more troubleshooting steps:\n\n1. Check if your phone is in Airplane Mode. If it is, turn it off.\n2. Remove your SIM card, wait 30 seconds, and reinsert it.\n3. Make sure your device software is up to date.\n4. Try your SIM card in another compatible phone (if available) to see if the issue is with the SIM or the device.\n\nCould you let me know if any of these steps help? If not, I can check your device details and see if there are any issues with your SIM or device registration. Would you like me to check your device status now?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked and my phone is not in Airplane Mode. I haven't tried removing the SIM card yet. If you want me to do that, can you walk me through it step by step?"
+  },
+  {
+   "role": "agent",
+   "content": "Absolutely, I can guide you through removing and reinserting your SIM card. Here are the general steps:\n\n1. **Turn Off Your Phone:** Power off your device completely to avoid any potential damage.\n\n2. **Locate the SIM Card Tray:**  \n   - Most phones have a small tray on the side or top edge.\n   - Look for a tiny pinhole next to the tray.\n\n3. **Eject the SIM Card Tray:**  \n   - Use the SIM eject tool that came with your phone (or a small paperclip).\n   - Gently insert the tool into the pinhole until the tray pops out.\n\n4. **Remove the SIM Card:**  \n   - Carefully take the SIM card out of the tray.\n   - Wait about 30 seconds.\n\n5. **Reinsert the SIM Card:**  \n   - Place the SIM card back into the tray, making sure it\u2019s aligned correctly (the tray and SIM card usually have a corner cut to help with alignment).\n   - Gently push the tray back into the phone.\n\n6. **Turn Your Phone Back On:**  \n   - Power your device back on and wait for it to reconnect to the network.\n\nLet me know once you\u2019ve completed these steps, or if you need instructions specific to your phone model. If you encounter any issues or still have no service after this, please let me know!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I removed and reinserted the SIM card, then turned my phone back on. The SIM status shows as active, but I still have no service and there are no bars on my phone.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for following the steps. Your SIM status is active, and your device (Pixel 8 Pro) is also showing as active in our system. Since you still have no service and no signal bars, this could indicate a possible SIM card issue, device hardware problem, or a network issue in your area.\n\nHere are the next steps you can try:\n\n1. **Network Reset:**  \n   Go to your phone\u2019s Settings > System > Reset options > Reset Wi-Fi, mobile & Bluetooth. This will reset your network settings (you may need to re-enter Wi-Fi passwords afterward).\n\n2. **Check for Carrier Settings Update:**  \n   Go to Settings > About phone > Carrier settings. If an update is available, install it.\n\n3. **Try the SIM in Another Phone:**  \n   If possible, insert your SIM card into another compatible phone. If the SIM still doesn\u2019t get service, the issue is likely with the SIM card or your account. If it works, the issue may be with your phone.\n\nIf you\u2019ve tried these steps and still have no service, please let me know. I can escalate this to a specialist or help arrange a SIM replacement if needed. Would you like to proceed with these steps or need further assistance?",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "DEV-55210"
+     },
+     "params": {
+      "id": "DEV-55210"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "device_id": "DEV-55210",
+      "device_type": "phone",
+      "model": "Pixel 8 Pro",
+      "imei": "356938035643809",
+      "esim_capable": true,
+      "activation_status": "Active",
+      "activation_date": "2023-05-18",
+      "last_esim_transfer_date": "2023-05-18",
+      "entity_type": "device"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I haven't tried the network reset or putting my SIM in another phone yet. Do you want me to try the network reset first?"
+  },
+  {
+   "role": "agent",
+   "content": "Yes, please try the network reset first, as it\u2019s a quick step that often resolves connectivity issues. Here\u2019s how to do it on your Pixel 8 Pro:\n\n1. Open the **Settings** app.\n2. Scroll down and tap on **System**.\n3. Tap on **Reset options**.\n4. Select **Reset Wi-Fi, mobile & Bluetooth**.\n5. Confirm by tapping **Reset settings**.\n\nYour phone will reset its network settings. After it\u2019s done, your device will restart or briefly disconnect from networks. Once it\u2019s back on, check if you have service.\n\nLet me know if this helps or if you still have no service after the reset. If the issue persists, we can try the SIM in another phone or explore further solutions.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I did the network reset and my phone restarted, but I still have no service\u2014there are no signal bars showing."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying the network reset. Since your line and device are both active in our system, and the network reset did not resolve the issue, the next best step is to test your SIM card in another compatible phone (if you have access to one). This will help determine if the problem is with your SIM card/account or with your phone\u2019s hardware.\n\n- If the SIM card works in another phone and gets service, the issue is likely with your Pixel 8 Pro.\n- If the SIM card does not work in another phone (still no service or bars), the issue is likely with the SIM card itself or your account.\n\nIf you do not have another phone to test with, or if the SIM card does not work in another phone, please let me know. I can assist you with arranging a SIM replacement or escalate the issue to a specialist for further investigation.\n\nWould you like to try your SIM in another phone, or would you prefer to proceed with a SIM replacement or further support?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I don't have another phone to test the SIM card in. What should I do next?"
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. Since you don\u2019t have another phone to test the SIM card, the next best step is to arrange a SIM replacement, as this is often the quickest way to resolve issues like yours when the line and device are both active but there\u2019s still no service.\n\nHere\u2019s what I recommend:\n\n1. I can initiate a SIM replacement request for you, or\n2. If you prefer, I can escalate your case to a specialist for further investigation before proceeding with a replacement.\n\nWould you like me to start the SIM replacement process for you, or would you prefer to have a specialist review your case first? Please let me know how you\u2019d like to proceed.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Let's try the SIM replacement. Please go ahead and start that process for me."
+  },
+  {
+   "role": "agent",
+   "content": "I am transferring your request to a specialist who will assist you with the SIM replacement process. They will guide you through the next steps and ensure you receive a new SIM card as soon as possible.\n\nThank you for your patience, and help is on the way! If you have any other questions in the meantime, please let me know.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez (Pixel 8 Pro, line recently resumed) has no service despite active line and device, network reset, and SIM reinsertion. Customer cannot test SIM in another phone and requests a SIM replacement. Please assist with SIM replacement process."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez (Pixel 8 Pro, line recently resumed) has no service despite active line and device, network reset, and SIM reinsertion. Customer cannot test SIM in another phone and requests a SIM replacement. Please assist with SIM replacement process."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

@@ -1,0 +1,309 @@
+{
+ "case": "7:[graph:Understanding and Troublesho]toggle_airplane_mode",
+ "arm": "stub",
+ "repeat": 3,
+ "solved": false,
+ "actions_done": 1,
+ "actions_required": 2,
+ "turns": 21,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "reboot_device",
+  "toggle_airplane_mode",
+  "reseat_sim_card",
+  "get_details_by_id",
+  "check_network_status",
+  "check_apn_settings",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_airplane_mode",
+   "ok": true,
+   "why": "tool 'toggle_airplane_mode' was called"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, nothing loads, and I can't send picture messages. It's completely dead as far as the network goes."
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're experiencing this issue. To help you further, could you please provide your phone number or account details? This will allow me to check your line status and see if there are any network or account-related problems affecting your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your phone number. I checked your account, and your line status is currently \"Active,\" which means there are no suspensions or holds on your service from our end.\n\nSince your line appears active but you have no service at all (no bars, nothing loads, and you can't send messages), here are a few quick troubleshooting steps you can try:\n\n1. Restart your phone.\n2. Toggle Airplane Mode on and off.\n3. Remove and reinsert your SIM card.\n4. Check if you have service in a different location.\n\nIf you've already tried these steps or if the issue persists, please let me know. I can assist further, such as checking for outages in your area or helping with a SIM replacement if needed. Have you noticed this issue only in certain locations, or is it everywhere?",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "The issue is happening everywhere, not just in one location. I can try the steps you mentioned, but can you walk me through one at a time? Which should I start with?"
+  },
+  {
+   "role": "agent",
+   "content": "Absolutely, I can guide you step by step. Let\u2019s start with the simplest and most effective step:\n\nStep 1: Restart Your Phone\n\n- Power off your phone completely.\n- Wait about 10 seconds.\n- Turn your phone back on.\n\nAfter your phone restarts, check if you have any signal bars or if you can send a message or use data.\n\nPlease let me know once you\u2019ve tried this, and if the issue remains, I\u2019ll guide you to the next step.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I restarted my phone successfully, but there are still no signal bars and nothing is loading. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. Let\u2019s move to the next step:\n\nStep 2: Toggle Airplane Mode\n\n1. Turn on Airplane Mode:\n   - On most phones, swipe down from the top of the screen to open the quick settings menu.\n   - Tap the airplane icon to enable Airplane Mode. Wait about 10 seconds.\n\n2. Turn off Airplane Mode:\n   - Tap the airplane icon again to disable Airplane Mode.\n\nAfter turning Airplane Mode off, check if your phone regains signal or if you can send messages or use data.\n\nPlease let me know the result, and if there\u2019s still no service, we\u2019ll proceed to the next step.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I turned Airplane Mode on and off. After turning it off, there's still no signal at all\u2014no bars and nothing is working. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_airplane_mode",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying that. Let\u2019s proceed to the next step:\n\nStep 3: Remove and Reinsert Your SIM Card\n\n1. Power off your phone completely.\n2. Locate your SIM card tray (usually on the side or top of your phone).\n3. Use the SIM ejector tool (or a small paperclip) to gently eject the SIM card tray.\n4. Carefully remove the SIM card, check for any visible damage or dirt, and then reinsert it securely into the tray.\n5. Push the tray back into your phone.\n6. Power your phone back on.\n\nOnce your phone is back on, check if you have any signal bars or if you can use your phone normally.\n\nPlease let me know if this step helps or if the issue persists. If there\u2019s still no service, I\u2019ll assist you with the next steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I reseated the SIM card and powered my phone back on. The SIM status shows as active, but I still have no signal\u2014no bars and nothing loads. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Your device (Pixel 8 Pro) and SIM are both showing as active in our system, and there are no suspensions or holds on your account. \n\nTo further isolate the issue:\n- If you can, please try inserting your SIM card into another unlocked phone to see if it gets a signal there. This will help us determine if the problem is with your phone or the SIM/network.\n\nIf your SIM does not work in another phone, it may need to be replaced. If it does work, the issue could be with your device\u2019s hardware or settings.\n\nPlease let me know the result of this test, or if you need help arranging a SIM replacement or further troubleshooting.",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "DEV-55210"
+     },
+     "params": {
+      "id": "DEV-55210"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "device_id": "DEV-55210",
+      "device_type": "phone",
+      "model": "Pixel 8 Pro",
+      "imei": "356938035643809",
+      "esim_capable": true,
+      "activation_status": "Active",
+      "activation_date": "2023-05-18",
+      "last_esim_transfer_date": "2023-05-18",
+      "entity_type": "device"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I don't have another unlocked phone available to test the SIM card right now. Is there something else I can try on this phone?"
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. Since you don\u2019t have another phone to test the SIM, here are a few more things you can try on your current device:\n\n1. Network Settings Reset:\n   - Go to Settings > System > Reset options > Reset Wi-Fi, mobile & Bluetooth.\n   - Confirm the reset (this will not erase your personal data, but you\u2019ll need to reconnect to Wi-Fi networks afterward).\n   - After the reset, your phone will restart. Check if you have signal bars.\n\n2. Check for Carrier Settings or System Updates:\n   - Go to Settings > System > System update and check for any available updates.\n   - Also, check Settings > About phone > SIM status or Carrier settings update.\n\n3. Manually Select Network:\n   - Go to Settings > Network & internet > Mobile network > Advanced > Choose network.\n   - Try selecting your carrier manually instead of \u201cAutomatic.\u201d\n\nIf none of these steps restore your service, it\u2019s likely that your SIM card may be faulty or there\u2019s a deeper network issue. In that case, I can help arrange a SIM replacement or escalate your case for further investigation.\n\nPlease try these steps and let me know the results. If you prefer, I can also connect you with a human agent for more advanced troubleshooting or to arrange a replacement SIM.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "After checking the network status, it shows that airplane mode is off, signal strength is excellent, and the network type is 5G. What should I do next?",
+   "tool_calls": [
+    {
+     "tool_name": "check_network_status",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for sharing those details. If your phone shows:\n\n- Airplane mode: Off\n- Signal strength: Excellent\n- Network type: 5G\n\nBut you still have no bars, can\u2019t make calls, send texts, or use data, this is unusual. Here are a few more things to check:\n\n1. Check for Service Outages:\n   - Are you aware of any service outages in your area? (You can check your carrier\u2019s website or social media for outage reports.)\n\n2. Test Calling and Messaging:\n   - Try making a call to a known working number.\n   - Try sending a regular SMS (not a picture message).\n\n3. Check for SIM Restrictions or Errors:\n   - Go to Settings > About phone > SIM status. Look for any error messages (e.g., \u201cNo service,\u201d \u201cEmergency calls only,\u201d or \u201cSIM not provisioned\u201d).\n\n4. Confirm APN Settings:\n   - Go to Settings > Network & internet > Mobile network > Access Point Names (APN).\n   - Make sure the APN matches your carrier\u2019s recommended settings.\n\nIf everything appears normal but you still can\u2019t use your phone, it may be a deeper network or provisioning issue.\n\nWould you like me to escalate this to a human agent for advanced troubleshooting or to arrange a replacement SIM? Or would you like to try checking your APN settings first? Let me know how you\u2019d like to proceed.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked the APN settings, and everything looks correct. The APN name is 'fast.telecom.net' and the status says it's correct. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "check_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming your APN settings are correct. Since:\n\n- Your line and device are active in our system,\n- You have excellent signal strength and the correct network type,\n- Airplane mode is off,\n- APN settings are correct,\n- And you still have no service (calls, texts, or data don\u2019t work),\n\nThis suggests a deeper network provisioning issue or a possible SIM card fault that cannot be resolved with standard troubleshooting.\n\nAt this point, the best next step is to escalate your case to a human agent. They can perform advanced diagnostics, re-provision your line, or arrange a replacement SIM if needed.\n\nWould you like me to connect you with a human agent now for further assistance?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Yes, please connect me with a human agent so I can get this fixed. Thank you."
+  },
+  {
+   "role": "agent",
+   "content": "You will now be connected with a human agent who can perform advanced diagnostics and help resolve your issue, including arranging a replacement SIM if necessary. Thank you for your patience and for trying all the troubleshooting steps. Help is on the way!",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer's phone shows excellent signal and correct APN, but has no service\u2014cannot make calls, send texts, or use data. Line and device are active in the system. Standard troubleshooting (restart, airplane mode, SIM reseat, APN check) has not resolved the issue. Needs advanced diagnostics or SIM replacement."
+     },
+     "params": {
+      "summary": "Customer's phone shows excellent signal and correct APN, but has no service\u2014cannot make calls, send texts, or use data. Line and device are active in the system. Standard troubleshooting (restart, airplane mode, SIM reseat, APN check) has not resolved the issue. Needs advanced diagnostics or SIM replacement."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

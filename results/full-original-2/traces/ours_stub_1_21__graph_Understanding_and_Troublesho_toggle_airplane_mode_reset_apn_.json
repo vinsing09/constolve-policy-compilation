@@ -1,0 +1,330 @@
+{
+ "case": "21:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_data",
+ "arm": "stub",
+ "repeat": 1,
+ "solved": false,
+ "actions_done": 1,
+ "actions_required": 5,
+ "turns": 25,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "get_data_usage",
+  "reseat_sim_card",
+  "check_network_mode_preference",
+  "get_details_by_id"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_airplane_mode",
+   "ok": false,
+   "why": "tool 'toggle_airplane_mode' was never called by the user"
+  },
+  {
+   "id": "s1_reset_apn_settings",
+   "ok": false,
+   "why": "tool 'reset_apn_settings' was never called by the user"
+  },
+  {
+   "id": "s2_reboot_device",
+   "ok": false,
+   "why": "tool 'reboot_device' was never called by the user"
+  },
+  {
+   "id": "s3_toggle_data",
+   "ok": false,
+   "why": "tool 'toggle_data' was never called by the user"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was not called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no signal at all\u2014no bars, nothing loads, and I can\u2019t send picture messages. Can you help me fix this?"
+  },
+  {
+   "role": "agent",
+   "content": "I\u2019m sorry to hear you\u2019re having trouble with your phone signal. To help you further, could you please provide your phone number or the name on your account? This will allow me to check your line status and see if there are any issues affecting your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your phone number. I checked your account and your line is currently active, with no data limit issues\u2014your plan still has plenty of data available.\n\nHere are a few quick steps you can try to restore your signal:\n1. Restart your phone.\n2. Toggle Airplane Mode on and off.\n3. Remove and reinsert your SIM card.\n4. Make sure you\u2019re in an area with coverage.\n\nIf you\u2019ve already tried these steps or if the issue persists, please let me know. I can check for network outages in your area or help you further troubleshoot your device. Have you noticed this issue everywhere, or just in a specific location?",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_data_usage",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_data_usage",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "plan_name": "Advantage 50GB",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "data_limit_gb": 50,
+      "total_data_available_gb": 50,
+      "cycle_end_date": "2025-03-05"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I\u2019m at home in Boston, and the problem is happening here. I\u2019ve already tried restarting my phone and toggling Airplane Mode, but it didn\u2019t help. What should I try next?"
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. Since restarting and toggling Airplane Mode didn\u2019t help, let\u2019s try the following steps:\n\n1. Remove your SIM card, wait about 30 seconds, and reinsert it. Sometimes, reseating the SIM can resolve signal issues.\n2. Check if your phone is set to the correct network mode (e.g., LTE/4G/5G). If it\u2019s set to \u201c2G only\u201d or \u201c3G only,\u201d try switching to \u201cAuto\u201d or \u201cLTE/5G.\u201d\n3. If possible, test your SIM card in another phone. This helps determine if the issue is with your phone or the SIM/service itself.\n4. Make sure your phone\u2019s software is up to date.\n\nIf you\u2019ve tried these steps and still have no signal, please let me know. I can check for any network outages in your area or help you with a SIM replacement if needed. Would you like instructions for any of the steps above, or have you already tried some of them?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I haven\u2019t tried reseating the SIM card or checking the network mode yet. Can you walk me through those steps one at a time?"
+  },
+  {
+   "role": "agent",
+   "content": "Absolutely! Let\u2019s start with reseating your SIM card:\n\nStep 1: Reseat Your SIM Card\n\n1. Power off your phone completely.\n2. Locate the SIM card tray. This is usually on the side of your phone. You may need a SIM ejector tool or a small paperclip to open the tray.\n3. Gently remove the SIM card from the tray.\n4. Wait about 30 seconds.\n5. Carefully reinsert the SIM card into the tray, making sure it\u2019s properly aligned.\n6. Push the tray back into your phone.\n7. Power your phone back on.\n\nAfter your phone restarts, check if you have signal bars. Please let me know if this step helps or if you\u2019d like to proceed to checking your network mode settings. If you need instructions specific to your phone model, let me know the make and model of your device!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I removed and reinserted the SIM card. My phone restarted, and the SIM status is showing as active, but I still have no signal bars at all.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying that step. Since your SIM status is showing as active but you still have no signal bars, let\u2019s move on to checking your network mode settings.\n\nCould you please let me know the make and model of your phone (e.g., iPhone 13, Samsung Galaxy S22, etc.)? This will help me provide step-by-step instructions tailored to your device for checking and adjusting the network mode.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I have a Samsung Galaxy S21."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you! Here\u2019s how to check and adjust the network mode on your Samsung Galaxy S21:\n\n1. Open the Settings app on your phone.\n2. Tap on Connections.\n3. Tap on Mobile networks.\n4. Tap on Network mode.\n5. You\u2019ll see options like 5G/4G/3G/2G (auto connect), 4G/3G/2G (auto connect), etc.  \n   - Make sure it\u2019s set to the highest available option, usually 5G/4G/3G/2G (auto connect) or LTE/3G/2G (auto connect).\n6. Select the auto-connect option if it\u2019s not already selected.\n\nAfter making this change, wait a few moments to see if your signal returns. If you still have no signal, please let me know. I can check for network outages in your area or help you with further troubleshooting, such as a possible SIM replacement or device issue. Let me know how it goes!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My network mode is already set to 4G/5G preferred, but I still have no signal bars at all.",
+   "tool_calls": [
+    {
+     "tool_name": "check_network_mode_preference",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "It appears that the device registered to your line is a Pixel 8 Pro, but you mentioned you are using a Samsung Galaxy S21. This mismatch could be the reason you\u2019re experiencing no signal, as your SIM or eSIM may not be properly activated for your current device.\n\nDid you recently switch phones or SIM cards? If so, your line may still be linked to your previous device, which can cause connectivity issues.\n\nTo resolve this, you may need to update your device information or activate your SIM/eSIM on your Samsung Galaxy S21. Please let me know if you recently changed devices, and I can guide you through the next steps to get your service working.",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "DEV-55210"
+     },
+     "params": {
+      "id": "DEV-55210"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "device_id": "DEV-55210",
+      "device_type": "phone",
+      "model": "Pixel 8 Pro",
+      "imei": "356938035643809",
+      "esim_capable": true,
+      "activation_status": "Active",
+      "activation_date": "2023-05-18",
+      "last_esim_transfer_date": "2023-05-18",
+      "entity_type": "device"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I haven\u2019t switched devices recently, and I\u2019m definitely using the SIM card that came with this phone. What else can I try?"
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for clarifying. Since you haven\u2019t switched devices and are using the original SIM, but your account shows a different device (Pixel 8 Pro), this could indicate a provisioning or SIM registration issue on your account.\n\nHere\u2019s what we can try next:\n\n1. Test your SIM card in another phone (if available). This will help determine if the issue is with your SIM/service or your Samsung Galaxy S21 hardware.\n2. If your SIM also doesn\u2019t work in another phone, it\u2019s likely a SIM or account provisioning issue.\n3. If your SIM works in another phone, the issue may be with your Samsung Galaxy S21\u2019s hardware or settings.\n\nSince your SIM status is showing as active but you have no signal, and there\u2019s a device mismatch on your account, I recommend we escalate this to our technical support team. They can:\n- Re-provision your SIM card on the network\n- Correct any device/account mismatches\n- Arrange a replacement SIM if needed\n\nWould you like me to connect you with a human agent for further assistance and a resolution?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I don\u2019t have another phone to test the SIM card in. Can we try anything else before escalating? I\u2019d like to keep troubleshooting if possible."
+  },
+  {
+   "role": "agent",
+   "content": "Absolutely, I understand wanting to try all possible options before escalating. Here are a few more troubleshooting steps you can try on your Samsung Galaxy S21:\n\n1. **Network Operator Selection**\n   - Go to Settings > Connections > Mobile networks > Network operators.\n   - Turn off \u201cSelect automatically\u201d and let your phone search for available networks.\n   - When the list appears, select your carrier manually.\n   - If you get an error or no networks appear, turn \u201cSelect automatically\u201d back on.\n\n2. **Reset Network Settings**\n   - Go to Settings > General management > Reset > Reset network settings.\n   - Confirm the reset. This will erase saved Wi-Fi networks and Bluetooth pairings, but it can resolve many signal issues.\n   - Your phone will restart\u2014check if you have signal bars after the reset.\n\n3. **Check for Carrier Settings Update**\n   - Go to Settings > About phone > Software information.\n   - If there\u2019s an option for \u201cCarrier settings\u201d or \u201cSIM card status,\u201d tap it and check for updates.\n\n4. **Check Airplane Mode Again**\n   - Toggle Airplane Mode on for 30 seconds, then off.\n\nPlease try these steps one at a time and let me know if any of them restore your signal. If none of these work, it\u2019s likely an account or SIM provisioning issue, and I can escalate your case to a human agent for further assistance. Let me know how it goes!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Let\u2019s start with the network operator selection. I went to Network operators, turned off 'Select automatically,' and let it search, but it didn\u2019t find any available networks. What should I try next?"
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying the manual network search. If your phone cannot find any available networks, this usually points to one of the following:\n\n- A SIM card issue or deactivation\n- A provisioning problem on your account\n- A hardware issue with your phone\u2019s antenna (less likely if Wi-Fi and Bluetooth work fine)\n\nLet\u2019s proceed with the next step:\n\nStep 2: Reset Network Settings\n\n1. Go to Settings > General management > Reset > Reset network settings.\n2. Confirm the reset. (This will not delete your personal data, but it will erase saved Wi-Fi networks and Bluetooth pairings.)\n3. Your phone will restart automatically.\n\nAfter your phone restarts, check if you have any signal bars. Please let me know the result. If this does not resolve the issue, we\u2019ll try checking for carrier settings updates next.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I reset my network settings and my phone restarted, but I still have no signal bars. What should I try next?"
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying the network reset. Since you still have no signal bars, let\u2019s try checking for carrier settings updates:\n\n1. Go to Settings > About phone.\n2. Tap on Software information.\n3. Look for any options related to \u201cCarrier settings\u201d or \u201cSIM card status.\u201d  \n   - If you see an option to update or refresh carrier settings, tap it and follow any prompts.\n4. If there\u2019s no specific carrier update option, go back to Settings > Software update and check for any available updates for your phone.\n\nAfter checking for and applying any updates, restart your phone and see if the signal returns.\n\nIf you still have no signal after this, it\u2019s very likely that there is a SIM provisioning or account issue, especially since your device information on file does not match your actual phone. At this point, the best next step is to escalate your case to a human agent who can:\n\n- Re-provision your SIM card on the network\n- Correct any device/account mismatches\n- Arrange a replacement SIM if needed\n\nWould you like me to connect you with a human agent now, or do you have any other questions or steps you\u2019d like to try first?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked for carrier settings and software updates, but there were no updates available. After restarting, I still have no signal bars. Is there anything else I can try before being connected to a human agent?"
+  },
+  {
+   "role": "agent",
+   "content": "You\u2019ve done a thorough job troubleshooting\u2014thank you for your patience. At this point, you have:\n\n- Restarted your phone and toggled Airplane Mode\n- Reseated your SIM card\n- Checked and set the correct network mode\n- Attempted manual network selection (no networks found)\n- Reset network settings\n- Checked for carrier and software updates\n\nGiven all these steps and the fact that your SIM status is active but your phone still shows no signal bars, the issue is likely related to your SIM card\u2019s provisioning or a mismatch on your account (especially since your account lists a different device than the one you\u2019re using).\n\nUnfortunately, there are no further troubleshooting steps you can perform from your end. The next step requires account-level intervention, such as re-provisioning your SIM or correcting the device information, which only a human agent can do.\n\nWould you like me to connect you with a human agent now to resolve this issue?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

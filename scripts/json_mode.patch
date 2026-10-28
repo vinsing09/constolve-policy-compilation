@@ -1,0 +1,10 @@
+--- a/services/user_sim.py
++++ b/services/user_sim.py
+@@ -255,6 +255,7 @@
+                 model=self.model,
+                 temperature=self.temperature,
+                 messages=messages,
++                response_format={"type": "json_object"},
+             )
+             raw = (response.choices[0].message.content or "").strip()
+             if raw.startswith("```"):

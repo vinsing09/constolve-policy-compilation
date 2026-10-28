@@ -1,0 +1,343 @@
+{
+ "case": "14:[graph:Understanding and Troublesho]toggle_airplane_mode",
+ "arm": "stub",
+ "repeat": 1,
+ "solved": false,
+ "actions_done": 1,
+ "actions_required": 2,
+ "turns": 19,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "reboot_device",
+  "toggle_airplane_mode",
+  "reseat_sim_card",
+  "get_details_by_id",
+  "get_details_by_id",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_airplane_mode",
+   "ok": true,
+   "why": "tool 'toggle_airplane_mode' was called"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014there are no bars, nothing loads, and I can't send picture messages. It's completely dead as far as the network goes."
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're experiencing this issue. To help you further, could you please provide your phone number or account details? This will allow me to check your line status and see if there are any network or account-related problems affecting your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your phone number. I checked your account and your line status is currently \"Active,\" which means there are no suspensions or holds on your service from our end.\n\nSince your line appears active but you have no service at all (no bars, nothing loads, and you can't send picture messages), here are a few quick troubleshooting steps you can try:\n\n1. Restart your phone.\n2. Toggle Airplane Mode on and off.\n3. Remove and reinsert your SIM card.\n4. Check if you have coverage in your current location or try moving to a different area.\n\nIf you've already tried these steps or if the issue persists, please let me know. I can check further for network outages or escalate your case for technical support. Have you noticed this issue only today, or has it been ongoing?",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I haven't tried any of those steps yet. Should I start by restarting my phone, or do you want me to try something else first?"
+  },
+  {
+   "role": "agent",
+   "content": "Yes, please start by restarting your phone. This simple step often resolves many network issues by refreshing your device\u2019s connection to the network.\n\nIf restarting doesn\u2019t help, you can then try the following steps in order:\n\n1. Toggle Airplane Mode on for about 10 seconds, then turn it off.\n2. Remove your SIM card, wait a few seconds, and reinsert it.\n3. Check if you have service in a different location, if possible.\n\nLet me know what happens after you restart your phone. If the issue continues, I\u2019ll guide you through the next steps or investigate further.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I just restarted my phone and it rebooted successfully, but I still have no service\u2014no bars and nothing loads.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying that. Since restarting didn\u2019t resolve the issue, let\u2019s continue with the next troubleshooting steps:\n\n1. Turn on Airplane Mode, wait about 10 seconds, then turn it off.\n2. Remove your SIM card, wait a few seconds, and reinsert it. Make sure it\u2019s seated properly.\n3. If possible, check if you have service in a different location (even just stepping outside or moving to another room).\n\nPlease let me know the results after you try these steps. If you still have no service, I can check for network outages in your area or escalate your case for further technical support.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I turned Airplane Mode off after 10 seconds, but my phone still shows no bars and nothing is loading.",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_airplane_mode",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. Next, please try removing your SIM card, waiting a few seconds, and then reinserting it securely. After reinserting, check if your phone detects any signal.\n\nIf you still have no service after this step, please let me know:\n\n- Have you recently changed your device or SIM card?\n- Are other people around you (on the same network) experiencing similar issues?\n- Have you noticed any physical damage to your SIM card or phone?\n\nIf the SIM card step doesn\u2019t resolve the issue, I can check for network outages in your area or escalate your case for further technical support. Please let me know the results or if you need guidance on removing the SIM card.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I removed and reinserted the SIM card. It said the SIM status is active, but I still have no service\u2014no bars and nothing loads.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying those steps and providing the update. Since your SIM status is active but you still have no service, this suggests the issue may be related to a network outage in your area, a SIM card malfunction, or a device issue.\n\nTo help you further, could you please let me know:\n\n1. Are you using a new device or SIM card, or have you made any recent changes to your phone or account?\n2. Are other people nearby (on the same network) experiencing similar issues?\n3. Have you noticed any physical damage to your SIM card or phone?\n\nIf none of these apply, I recommend the following next steps:\n\n- Try your SIM card in another compatible phone, if possible. This will help determine if the issue is with your phone or the SIM/network.\n- Let me know your current location (just the city or neighborhood is fine) so I can check for any reported network outages in your area.\n\nIf you prefer, I can escalate your case to our technical support team for a deeper investigation. Please let me know how you\u2019d like to proceed.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I'm using the same phone and SIM card as always, and I haven't made any changes to my phone or account. I don't know if anyone else nearby is having the same issue. My phone and SIM card look fine\u2014no physical damage. I'm currently at home in Boston."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the details. Since you haven\u2019t made any changes to your phone or SIM card, and there\u2019s no visible damage, the issue could be related to a local network outage or a technical problem with your line or SIM.\n\nHere\u2019s what I can do next:\n\n- Check for any network outages or issues affecting your line in your area.\n- If no outage is found, escalate your case to our technical support team for further investigation.\n\nWould you like me to proceed with checking for network issues and, if needed, escalate your case to technical support? Please confirm, and I\u2019ll take care of it right away.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Yes, please check for network outages in my area and escalate to technical support if needed."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for your patience. I\u2019ve reviewed your account and line status, and since the issue persists after all troubleshooting steps, I am escalating your case to our technical support team for a deeper investigation. They will also check for any network outages in your area.\n\nA specialist will reach out to you soon to assist further. If you have any additional details or questions in the meantime, please let me know.",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "CUS-4501283"
+     },
+     "params": {
+      "id": "CUS-4501283"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez (+1-617-555-0148) reports no service (no bars, nothing loads, can't send picture messages) despite line status being active. She has tried restarting the phone, toggling Airplane Mode, and reinserting the SIM card. No recent changes to device or SIM, no visible damage, and issue persists at home in Boston. Needs technical support and network outage check."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez (+1-617-555-0148) reports no service (no bars, nothing loads, can't send picture messages) despite line status being active. She has tried restarting the phone, toggling Airplane Mode, and reinserting the SIM card. No recent changes to device or SIM, no visible damage, and issue persists at home in Boston. Needs technical support and network outage check."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address_street": "412 Chestnut Street, Apt 5B",
+      "address_city": "Boston",
+      "address_state": "MA",
+      "address_zip_code": "02116",
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "entity_type": "customer",
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "customer_id": "CUS-4501283",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "customer_id": "CUS-4501283",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Okay, I'll wait to hear from the specialist. Please let me know if there's anything else I should try while I wait."
+  },
+  {
+   "role": "agent",
+   "content": "You\u2019ve already completed the most important troubleshooting steps, so there\u2019s nothing else you need to do right now. Here\u2019s a quick summary of what you can try while waiting for the specialist, just in case:\n\n- Keep your phone powered on so you don\u2019t miss any updates or service restoration.\n- If you have access to another phone, you could try your SIM card in that device to see if it gets service (optional).\n- If you notice your service returns or changes, please let us know.\n\nOtherwise, please wait for our technical support team to contact you. They\u2019ll be able to investigate further and resolve the issue. Thank you for your patience!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

@@ -1,0 +1,311 @@
+{
+ "case": "8:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line",
+ "arm": "stub",
+ "repeat": 4,
+ "solved": false,
+ "actions_done": 3,
+ "actions_required": 5,
+ "turns": 17,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "resume_line",
+  "reboot_device",
+  "get_details_by_id",
+  "toggle_airplane_mode",
+  "reseat_sim_card",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_airplane_mode",
+   "ok": true,
+   "why": "tool 'toggle_airplane_mode' was called"
+  },
+  {
+   "id": "s1_reset_apn_settings",
+   "ok": false,
+   "why": "tool 'reset_apn_settings' was never called by the user"
+  },
+  {
+   "id": "s2_reboot_device",
+   "ok": true,
+   "why": "tool 'reboot_device' was called"
+  },
+  {
+   "id": "s3_resume_line",
+   "ok": true,
+   "why": "tool 'resume_line' was called with {'customer_id': 'CUS-4501283', 'line_id': 'LN-8830142'}"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, nothing loads, and I can't send picture messages. Can you help?"
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're experiencing no service on your phone. Let's try to resolve this together. To assist you better, could you please provide your phone number or the name on your account? This will help me check your line status and identify any issues.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Your phone line is currently suspended, which is why you have no service and cannot send messages or use data.\n\nWould you like me to resume your line now so you can regain service? If you know the reason for the suspension or if it was a mistake, please let me know.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Suspended",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "2025-02-25",
+      "suspension_reason": 1,
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Yes, please resume my line now. I\u2019m not sure why it was suspended."
+  },
+  {
+   "role": "agent",
+   "content": "Your line has been resumed and is now active. You should regain service shortly\u2014please restart your phone if you don\u2019t see bars or service within a few minutes.\n\nIf you continue to have issues or want to know more about why your line was suspended, let me know and I can investigate further.",
+   "tool_calls": [
+    {
+     "tool_name": "resume_line",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "resume_line",
+     "response": {
+      "result": "Line LN-8830142 has been resumed and is now Active."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "My phone rebooted successfully, but I still don't have any service\u2014no bars are showing.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Your line is now active and your device (Pixel 8 Pro) is also showing as active in our system. Since you still have no service after a reboot, let's try a few troubleshooting steps:\n\n1. Make sure Airplane Mode is off.\n2. Try toggling Airplane Mode on for 10 seconds, then off again.\n3. Check if your SIM card (or eSIM) is properly installed.\n4. If possible, try your SIM in another phone to see if it works there.\n\nIf you\u2019ve tried these steps and still have no service, please let me know. I can check for network outages in your area or escalate the issue further. Would you like to continue troubleshooting or speak with a human agent?",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "DEV-55210"
+     },
+     "params": {
+      "id": "DEV-55210"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "device_id": "DEV-55210",
+      "device_type": "phone",
+      "model": "Pixel 8 Pro",
+      "imei": "356938035643809",
+      "esim_capable": true,
+      "activation_status": "Active",
+      "activation_date": "2023-05-18",
+      "last_esim_transfer_date": "2023-05-18",
+      "entity_type": "device"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I can do one step at a time. Let's start with checking Airplane Mode. What should I do first?"
+  },
+  {
+   "role": "agent",
+   "content": "Great! Let\u2019s start with Airplane Mode:\n\n1. Unlock your phone and go to the home screen.\n2. Swipe down from the top of the screen to open the Quick Settings menu.\n3. Look for the Airplane Mode icon (it looks like an airplane).\n4. If Airplane Mode is ON (the icon is highlighted), tap it once to turn it OFF.\n5. If Airplane Mode is already OFF, tap it ON, wait about 10 seconds, then tap it OFF again.\n\nAfter doing this, check if your phone shows any signal bars. Let me know what you see, and we\u2019ll move to the next step if needed!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I turned Airplane Mode on and then off. Airplane mode is now OFF, but I still don't see any signal bars.",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_airplane_mode",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying that step. Since you still don\u2019t see any signal bars, let\u2019s move to the next troubleshooting step:\n\nPlease check if your SIM card (or eSIM) is properly installed:\n\n1. If you have a physical SIM card:\n   - Power off your phone.\n   - Use the SIM ejector tool (or a paperclip) to gently remove the SIM tray.\n   - Take out the SIM card, check for any visible damage or dust, and reinsert it securely.\n   - Put the SIM tray back in and power your phone back on.\n\n2. If you use an eSIM:\n   - Go to Settings > Network & Internet > SIMs (or Mobile Network).\n   - Make sure your eSIM profile is listed and active.\n\nAfter checking and reseating your SIM (or confirming your eSIM is active), restart your phone and see if you get any signal bars.\n\nLet me know what you find, and we\u2019ll continue from there!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I reseated the SIM card and the SIM status shows as active, but I still have no signal bars.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking your SIM card and confirming its status. Since your SIM is active and properly seated, but you still have no signal bars, let\u2019s try one more step:\n\nPlease try your SIM card in another phone (if you have access to one). This will help us determine if the issue is with your phone or the SIM/service itself.\n\n- If the SIM works in another phone and gets signal bars, the issue may be with your device.\n- If the SIM does not work in another phone, the issue is likely with the SIM or your service.\n\nIf you don\u2019t have another phone to test with, or if the SIM still doesn\u2019t work in another device, please let me know. I can check for network outages in your area or escalate this to a human agent for further investigation. What would you like to do next?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I don\u2019t have another phone to test the SIM with. What should I do next?"
+  },
+  {
+   "role": "agent",
+   "content": "I\u2019m transferring you to a human agent who can assist you further with your no service issue. They\u2019ll be able to check for network problems in your area or arrange a replacement SIM if needed. Thank you for your patience\u2014help is on the way!",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez has no service on her phone (no signal bars, cannot send messages or use data). Line was previously suspended but is now active. Device and SIM are both showing as active, and basic troubleshooting (Airplane Mode, SIM reseating) has been completed. Customer does not have another phone to test the SIM. Needs further investigation or possible SIM replacement."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez has no service on her phone (no signal bars, cannot send messages or use data). Line was previously suspended but is now active. Device and SIM are both showing as active, and basic troubleshooting (Airplane Mode, SIM reseating) has been completed. Customer does not have another phone to test the SIM. Needs further investigation or possible SIM replacement."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

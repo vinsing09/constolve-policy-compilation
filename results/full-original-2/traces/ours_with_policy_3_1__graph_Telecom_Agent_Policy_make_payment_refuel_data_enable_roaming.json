@@ -1,0 +1,252 @@
+{
+ "case": "1:[graph:Telecom Agent Policy]make_payment|refuel_data|enable_roaming",
+ "arm": "with_policy",
+ "repeat": 3,
+ "solved": false,
+ "actions_done": 0,
+ "actions_required": 6,
+ "turns": 23,
+ "calls": [
+  "get_customer_by_phone",
+  "get_customer_by_name",
+  "check_status_bar",
+  "reboot_device",
+  "reseat_sim_card",
+  "check_network_mode_preference",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_send_payment_request",
+   "ok": false,
+   "why": "tool 'send_payment_request' was never called by the assistant"
+  },
+  {
+   "id": "s1_make_payment",
+   "ok": false,
+   "why": "tool 'make_payment' was never called by the user"
+  },
+  {
+   "id": "s2_resume_line",
+   "ok": false,
+   "why": "tool 'resume_line' was never called by the assistant"
+  },
+  {
+   "id": "s3_refuel_data",
+   "ok": false,
+   "why": "tool 'refuel_data' was never called by the assistant"
+  },
+  {
+   "id": "s4_enable_roaming",
+   "ok": false,
+   "why": "tool 'enable_roaming' was never called by the assistant"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no signal at all right now. Nothing loads, I can't use the internet, and I can't send picture messages. Can you help?"
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot your phone\u2019s signal and connectivity issues. First, I\u2019ll need to identify your account to check for any line or account-related problems.\n\nCould you please provide one of the following:\n- Your phone number\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I\u2019ll guide you through the steps to restore your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "It appears that I couldn't find a customer account associated with the phone number you provided. To assist you further, could you please confirm your date of birth? This will help me look up your account using your full name and date of birth.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+16175550148"
+     },
+     "params": {
+      "phone_number": "+16175550148"
+     },
+     "failed": true
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {},
+     "latency_ms": 0,
+     "error": "No customer found with phone number +16175550148"
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "My date of birth is May 14, 1990."
+  },
+  {
+   "role": "agent",
+   "content": "I was unable to locate an account with the name Sofia Martinez and the date of birth May 14, 1990. Could you please double-check the information provided or let me know if you have another phone number, customer ID, or if your name might be listed differently on your account? This will help me assist you more effectively.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_name",
+     "arguments": {
+      "full_name": "Sofia Martinez",
+      "dob": "1990-05-14"
+     },
+     "params": {
+      "full_name": "Sofia Martinez",
+      "dob": "1990-05-14"
+     },
+     "failed": true
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_name",
+     "response": {},
+     "latency_ms": 0,
+     "error": "No customer found with name 'Sofia Martinez' and date of birth '1990-05-14'"
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "That\u2019s the only number I have, and my name is definitely Sofia Martinez. Is there anything else you can check, or can we try some troubleshooting steps on my phone?"
+  },
+  {
+   "role": "agent",
+   "content": "I need to identify your account to check for any line suspensions, account issues, or plan limits that could be causing your loss of signal. Without access to your account, I can only provide general troubleshooting steps for your device.\n\nWould you like to proceed with basic troubleshooting steps on your phone, or do you have any other details (such as an alternate email, address, or customer ID) that might help me locate your account? Let me know how you\u2019d like to proceed!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Let\u2019s just try some troubleshooting steps on my phone, please."
+  },
+  {
+   "role": "agent",
+   "content": "Let\u2019s start with some basic troubleshooting steps to try to restore your phone\u2019s signal. Please follow these instructions:\n\n1. Check if Airplane Mode is ON:\n   - Look for an airplane icon at the top of your screen. If it\u2019s on, turn it off.\n\n2. Restart Your Phone:\n   - Power off your phone completely, wait a few seconds, and then turn it back on.\n\n3. Reseat Your SIM Card:\n   - If possible, remove your SIM card, wait a few seconds, and reinsert it securely.\n\n4. Check Network Settings:\n   - Make sure your phone is set to use 4G or 5G networks, not just 2G/3G.\n\n5. Reset Network Settings:\n   - Go to your phone\u2019s settings and look for an option to reset network settings. This will restore default network configurations.\n\nAfter trying these steps, let me know if you see any improvement or if you still have no signal. If the issue persists, please let me know what you see in your phone\u2019s status bar (any icons or messages), and I can guide you further.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Can we go through these one at a time? Which should I try first?"
+  },
+  {
+   "role": "agent",
+   "content": "Absolutely, let\u2019s go step by step. The first thing to check is whether Airplane Mode is ON, as this is a common cause of losing all signal.\n\nStep 1: Check Airplane Mode\n- Look at the top of your phone\u2019s screen (the status bar) for an airplane icon.\n- If you see an airplane icon, Airplane Mode is ON. Please turn it OFF by swiping down to open your quick settings and tapping the airplane icon.\n\nLet me know if Airplane Mode was ON and if turning it off restores your signal. If it was already OFF, please let me know, and we\u2019ll move to the next step.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "There's no airplane icon in my status bar. What I do see is a 'No Signal' icon, 'Data Enabled', and it says 'Connected to Chestnut-5G'. But nothing works and I still can't send messages or use the internet.",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the details. Here\u2019s what your status bar indicates:\n- No Signal: Your phone isn\u2019t connecting to the cellular network.\n- Data Enabled: Mobile data is turned on.\n- Connected to Chestnut-5G: You are connected to a Wi-Fi network.\n\nSince you have no cellular signal, let\u2019s proceed to the next troubleshooting step:\n\nStep 2: Restart Your Phone\n- Please power off your phone completely.\n- Wait about 10 seconds.\n- Turn your phone back on.\n\nAfter your phone restarts, check if you have any signal bars or if the \u201cNo Signal\u201d icon is still present. Let me know what you see, and we\u2019ll continue troubleshooting if needed.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I rebooted my phone successfully, but I still see the 'No Signal' icon and nothing has changed\u2014there's still no signal or connectivity.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying that. Since rebooting didn\u2019t resolve the issue, let\u2019s move to the next step:\n\nStep 3: Reseat Your SIM Card\n- Power off your phone.\n- Remove the SIM card from its slot (you may need a SIM tool or paperclip).\n- Wait about 10 seconds.\n- Reinsert the SIM card securely.\n- Power your phone back on.\n\nAfter your phone restarts, check if the signal returns or if the \u201cNo Signal\u201d icon is still present. Please let me know the result, and we\u2019ll continue troubleshooting if needed.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I removed and reinserted the SIM card as you suggested. My phone says the SIM status is active, but the 'No Signal' icon is still there and nothing has changed.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming the SIM status is active. Since the SIM is recognized but you still have no signal, let\u2019s check your network mode settings next.\n\nStep 4: Check Network Mode Settings\n- Go to your phone\u2019s Settings.\n- Find the section for Mobile Network or Cellular Network.\n- Look for \u201cPreferred Network Type\u201d or \u201cNetwork Mode.\u201d\n- Make sure it is set to include 4G or 5G (for example, \u201c4G/5G Auto\u201d or \u201c4G/5G Preferred\u201d), not just 2G or 3G.\n\nPlease let me know what your current network mode is set to, and if you change it, let me know if that restores your signal. If it\u2019s already set to 4G/5G and you still have no signal, we\u2019ll proceed to the next step.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone\u2019s network mode is already set to 4G/5G preferred, but I still have no signal at all.",
+   "tool_calls": [
+    {
+     "tool_name": "check_network_mode_preference",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking that. Since your network mode is set correctly and you still have no signal, the next step is to reset your network settings. This can resolve issues caused by incorrect or corrupted network configurations.\n\nStep 5: Reset Network Settings\n- Go to your phone\u2019s Settings.\n- Look for \u201cSystem\u201d or \u201cGeneral Management.\u201d\n- Find and select \u201cReset\u201d or \u201cReset Options.\u201d\n- Choose \u201cReset Network Settings.\u201d\n- Confirm the reset (this will not delete your personal data, but you may need to reconnect to Wi-Fi networks afterward).\n\nAfter resetting, your phone will restart or prompt you to restart. Once it\u2019s back on, check if you have signal.\n\nPlease let me know if this step restores your signal or if the issue persists. If there\u2019s still no signal, I\u2019ll provide further guidance.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I\u2019ve reset my network settings as you described. My phone restarted, but I still see the 'No Signal' icon and can\u2019t connect to the network."
+  },
+  {
+   "role": "agent",
+   "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez has no cellular signal despite troubleshooting all device steps (airplane mode, reboot, SIM reseat, network mode, network reset). SIM is active, network mode is 4G/5G, but still 'No Signal'. Unable to locate account with provided name, phone number, and DOB. Needs human agent to check account/line status or network issues."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez has no cellular signal despite troubleshooting all device steps (airplane mode, reboot, SIM reseat, network mode, network reset). SIM is active, network mode is 4G/5G, but still 'No Signal'. Unable to locate account with provided name, phone number, and DOB. Needs human agent to check account/line status or network issues."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

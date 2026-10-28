@@ -1,0 +1,256 @@
+{
+ "case": "2:[graph:Understanding and Troublesho]toggle_roaming|toggle_data_saver_mode|disconnect_vpn|set_network_mode_preference",
+ "arm": "R4_suspension",
+ "repeat": 1,
+ "solved": false,
+ "actions_done": 4,
+ "actions_required": 5,
+ "turns": 21,
+ "calls": [
+  "get_customer_by_phone",
+  "check_status_bar",
+  "toggle_data_saver_mode",
+  "disconnect_vpn",
+  "check_network_mode_preference",
+  "set_network_mode_preference",
+  "check_status_bar",
+  "run_speed_test"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_roaming",
+   "ok": false,
+   "why": "tool 'toggle_roaming' was never called by the user"
+  },
+  {
+   "id": "s1_toggle_data_saver_mode",
+   "ok": true,
+   "why": "tool 'toggle_data_saver_mode' was called"
+  },
+  {
+   "id": "s2_disconnect_vpn",
+   "ok": true,
+   "why": "tool 'disconnect_vpn' was called"
+  },
+  {
+   "id": "s3_set_network_mode_preference",
+   "ok": true,
+   "why": "tool 'set_network_mode_preference' was called with {'mode': '4g_5g_preferred'}"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was not called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "My phone is still really slow compared to my husband's, and it never seems to connect to the faster network. Pages are taking forever to load no matter where I go."
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot your slow phone connection and network issues. To get started, I\u2019ll need to identify your account. Could you please provide either your phone number, customer ID, or your full name and date of birth? This will allow me to check your line and plan details to assist you further.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Sure, my name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you, Sofia. I have your account details. To help resolve your slow connection and network issues, I\u2019ll need to check your line\u2019s current status and settings.\n\nCould you please confirm if you are currently using your phone and able to perform some quick checks or actions if needed? This will help me guide you through troubleshooting steps to improve your connection speed.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Yes, I\u2019m using my phone right now and can do any checks or actions you need."
+  },
+  {
+   "role": "agent",
+   "content": "Great! Let\u2019s start by checking your phone\u2019s current network status and connection type. Please use the check_status_bar function on your phone and let me know what icons or indicators you see, especially regarding signal strength, network type (like 5G, 4G, etc.), and if there are any unusual icons such as Airplane Mode or Data Saver.\n\nOnce you provide that information, I\u2019ll guide you through the next steps to improve your connection speed.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Here's what I see in the status bar: signal strength is excellent, but it's showing 4G instead of 5G. Data is enabled, Data Saver is on, and it says I'm connected to Chestnut-5G. I also see a VPN icon.",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the details. Here\u2019s what I recommend based on what you see:\n\n1. Your phone is connected to Wi-Fi (Chestnut-5G), but you mentioned slow speeds everywhere, not just at home. Since you also see a VPN icon and Data Saver is on, both can slow down your connection.\n2. Your phone is showing 4G instead of 5G, which could be due to network mode settings.\n\nLet\u2019s address these step by step:\n\n- Please turn off Data Saver mode.\n- Disconnect from the VPN.\n- After that, check your network mode preference and let me know if it\u2019s set to prefer 5G/4G.\n\nLet me know once you\u2019ve done these steps or if you need instructions for any of them.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I've turned Data Saver mode off. What should I do next?",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_data_saver_mode",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Great! Next, please disconnect from the VPN on your phone. This can often improve your connection speed, as VPNs sometimes slow down internet performance.\n\nAfter you disconnect from the VPN, please check your network mode preference. Let me know what it is currently set to (for example: 5G preferred, 4G only, etc.). If you\u2019re not sure how to check this, let me know and I can guide you through the steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I've disconnected from the VPN and saw a message saying my internet traffic is no longer routed through the VPN server. What should I do next to check my network mode preference?",
+   "tool_calls": [
+    {
+     "tool_name": "disconnect_vpn",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "To check your network mode preference, please use the check_network_mode_preference function on your phone. This will show whether your phone is set to prefer 5G, 4G, or another network type.\n\nOnce you see the result, let me know what it says. I\u2019ll guide you on what to do next based on that information.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My network mode preference is currently set to 4G only. What should I do next to try to get 5G?",
+   "tool_calls": [
+    {
+     "tool_name": "check_network_mode_preference",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "To allow your phone to connect to 5G, you should change your network mode preference to include 5G. Please set your network mode preference to \u201c4G/5G preferred\u201d (or a similar option if available).\n\nOnce you\u2019ve changed the setting, check your status bar again to see if your phone connects to 5G. Let me know if you see the 5G icon or if it remains on 4G.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I tried to change the network mode to 5G preferred, but I got an error saying a required argument ('mode') is missing. It didn't let me change the setting."
+  },
+  {
+   "role": "agent",
+   "content": "It looks like the network mode change requires you to specify the exact mode. Please try setting your network mode preference to \"4g_5g_preferred\" (the exact value may be required by your phone\u2019s settings).\n\nIf you have an option to enter or select a mode, choose or enter \"4g_5g_preferred\". After making this change, check your status bar again to see if your phone connects to 5G. Let me know the result or if you encounter any issues.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I changed the network mode to 4g_5g_preferred, and now my status bar shows 5G with excellent signal strength. What should I do next?",
+   "tool_calls": [
+    {
+     "tool_name": "set_network_mode_preference",
+     "arguments": {
+      "mode": "4g_5g_preferred"
+     },
+     "actor": "user"
+    },
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "That\u2019s excellent! Now that your phone is connected to 5G with excellent signal strength, let\u2019s check if your internet speed has improved.\n\nPlease run a speed test on your phone and let me know the result (download speed and quality, if shown). This will help confirm if your connection is now faster and if your issue is resolved.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "The speed test shows I'm on 5G with excellent download speed and excellent connection quality. Everything is much better now!",
+   "tool_calls": [
+    {
+     "tool_name": "run_speed_test",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "That\u2019s great to hear! Your phone is now connected to 5G with excellent speed and quality, so your browsing and app experience should be much faster.\n\nIf you notice any issues in the future or need further assistance, feel free to reach out. Is there anything else I can help you with today?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

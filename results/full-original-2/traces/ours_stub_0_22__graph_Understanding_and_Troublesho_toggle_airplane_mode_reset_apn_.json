@@ -1,0 +1,306 @@
+{
+ "case": "22:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings",
+ "arm": "stub",
+ "repeat": 0,
+ "solved": false,
+ "actions_done": 2,
+ "actions_required": 4,
+ "turns": 25,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "check_sim_status",
+  "get_data_usage",
+  "check_apn_settings",
+  "reboot_device"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_airplane_mode",
+   "ok": false,
+   "why": "tool 'toggle_airplane_mode' was never called by the user"
+  },
+  {
+   "id": "s1_reset_apn_settings",
+   "ok": false,
+   "why": "tool 'reset_apn_settings' was never called by the user"
+  },
+  {
+   "id": "s2_reboot_device",
+   "ok": true,
+   "why": "tool 'reboot_device' was called"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was not called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, nothing loads, and I can't send picture messages. Can you help?"
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're experiencing no service on your phone. To help you, I\u2019ll need to check your account and line status. Could you please provide your phone number or the name and date of birth on the account? This will help me locate your details and assist you further.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your phone number. I see that your line is currently listed as \"Active\" in our system, which means there are no suspensions or holds on your account.\n\nSince you have no service at all (no bars, nothing loads, and you can't send picture messages), here are a few quick troubleshooting steps you can try:\n\n1. Restart your phone.\n2. Make sure Airplane Mode is turned off.\n3. Remove and reinsert your SIM card.\n4. Check if you have coverage in your current location.\n\nIf you\u2019ve already tried these steps or if the issue persists, please let me know. I can assist further, such as checking for network outages in your area or helping with a SIM replacement if needed. Have you noticed this issue only in certain locations, or is it happening everywhere?",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "This is happening everywhere, not just in certain locations. I already tried restarting my phone and toggling airplane mode, but it didn\u2019t help."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. Since the issue is happening everywhere and basic troubleshooting hasn\u2019t helped, it could be related to your SIM card, device, or a deeper network issue.\n\nLet\u2019s try the following next steps:\n\n1. Have you recently changed your device or SIM card?\n2. Are you able to try your SIM card in another phone to see if it works there, or try a different SIM card in your current phone?\n3. Is your phone showing any error messages (like \u201cNo SIM,\u201d \u201cEmergency Calls Only,\u201d etc.)?\n\nIf you can provide this information, I can better pinpoint the issue. If not, I can assist you with options such as a SIM replacement or escalate the issue for further technical support. Please let me know how you\u2019d like to proceed!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I haven't changed my device or SIM card recently. My phone just shows no bars and doesn't display any error messages\u2014it's like I have no signal at all. I haven't tried my SIM in another phone."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the details. Since you haven\u2019t changed your device or SIM card, and there are no error messages but you have no signal everywhere, this could indicate a possible SIM card failure or a network provisioning issue.\n\nHere\u2019s what I recommend next:\n\n1. If possible, try your SIM card in another phone. This will help determine if the issue is with your SIM card or your device.\n2. If your SIM card also doesn\u2019t work in another phone, it\u2019s likely the SIM card needs to be replaced.\n3. If your SIM works in another phone, the issue may be with your device\u2019s antenna or settings.\n\nWould you like to proceed with a SIM replacement, or do you want to try your SIM in another device first? If you prefer, I can also escalate this to our technical team for further investigation. Please let me know how you\u2019d like to proceed!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I don\u2019t have another phone to test the SIM card in right now. Is there something I can check on my phone to see if the SIM is working?"
+  },
+  {
+   "role": "agent",
+   "content": "Absolutely, you can check a few things on your phone to see if the SIM card is being detected:\n\n1. **SIM Card Status:**  \n   - Go to your phone\u2019s Settings.\n   - Look for \u201cAbout Phone\u201d or \u201cStatus.\u201d\n   - Find \u201cSIM Status\u201d or \u201cNetwork.\u201d  \n   - See if it says \u201cNo SIM,\u201d \u201cSIM not provisioned,\u201d or if it shows your carrier name.\n\n2. **SIM Card Menu:**  \n   - In Settings, look for \u201cMobile Networks\u201d or \u201cCellular Networks.\u201d\n   - Check if your phone recognizes your SIM card (it should show your phone number or carrier).\n\n3. **APN Settings:**  \n   - Sometimes, incorrect Access Point Name (APN) settings can cause network issues.  \n   - In \u201cMobile Networks,\u201d look for \u201cAccess Point Names\u201d and make sure it\u2019s set to your carrier\u2019s default.\n\n4. **SIM Card Tray:**  \n   - Remove the SIM card, check for any visible damage or dirt, and reinsert it securely.\n\nIf your phone says \u201cNo SIM\u201d or doesn\u2019t recognize the SIM card, it\u2019s likely a SIM issue. If it recognizes the SIM but still shows no signal, it could be a network or device issue.\n\nCould you please check your SIM status in your phone\u2019s settings and let me know what it says? This will help me guide you to the next step.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked the SIM status in my phone's settings, but I\u2019m not sure what it\u2019s supposed to say. Do you want me to run a SIM status check on my phone?"
+  },
+  {
+   "role": "agent",
+   "content": "Yes, please! Running a SIM status check on your phone will help us understand whether your device is detecting the SIM card and if it\u2019s connecting to the network.\n\nHere\u2019s what to look for, depending on your phone type:\n\n**For Android:**\n1. Go to Settings > About Phone > Status > SIM Status (or Network).\n2. Look for fields like:\n   - Network: Should show your carrier\u2019s name (not \u201cUnknown\u201d or \u201cNot available\u201d).\n   - Signal Strength: Should show a number (not \u201c0\u201d or \u201c\u2014\u201d).\n   - Mobile Network State: Should say \u201cConnected\u201d or \u201cDisconnected\u201d (not \u201cDisconnected\u201d all the time).\n   - Service State: Should say \u201cIn Service\u201d (not \u201cOut of Service\u201d or \u201cNo Service\u201d).\n\n**For iPhone:**\n1. Go to Settings > General > About.\n2. Scroll down to \u201cNetwork\u201d and \u201cCarrier.\u201d\n3. If it says \u201cNo SIM,\u201d \u201cNo Service,\u201d or \u201cSearching,\u201d let me know.\n\nPlease let me know exactly what your phone displays for these fields. This information will help me determine if your SIM card is being detected and if there\u2019s a network connection issue.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I ran the SIM status check and it says the SIM is active.",
+   "tool_calls": [
+    {
+     "tool_name": "check_sim_status",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Your line is active and your SIM card is recognized as active by your phone. There are no data or plan limits reached, and your account is in good standing. This means there are no obvious account or usage issues causing your lack of service.\n\nSince you still have no signal everywhere, the issue may be related to a network provisioning error or a technical fault with your line or SIM card that isn\u2019t visible in the standard checks.\n\nAt this point, the best next step is to either:\n- Replace your SIM card (which can resolve hidden SIM faults), or\n- Escalate your case to our technical team for a deeper investigation.\n\nWould you like to proceed with a SIM replacement, or should I escalate this issue for further technical support? Let me know your preference, and I\u2019ll take care of it for you.",
+   "tool_calls": [
+    {
+     "tool_name": "get_data_usage",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_data_usage",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "plan_name": "Advantage 50GB",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "data_limit_gb": 50,
+      "total_data_available_gb": 50,
+      "cycle_end_date": "2025-03-05"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I\u2019d like to try any troubleshooting steps I can do myself before getting a new SIM or escalating. Is there anything else I can check or try on my phone?"
+  },
+  {
+   "role": "agent",
+   "content": "Absolutely! Here are some additional troubleshooting steps you can try on your phone before proceeding with a SIM replacement or escalation:\n\n1. **Network Selection (Manual Search):**\n   - Go to Settings > Mobile Networks > Network Operators.\n   - Select \u201cSearch networks\u201d or \u201cManual.\u201d\n   - Wait for your phone to search for available networks.\n   - When your carrier appears, select it manually.\n   - If it fails to register, note any error messages.\n\n2. **Reset Network Settings:**\n   - This will reset Wi-Fi, Bluetooth, and mobile network settings (but not delete your data).\n   - For Android: Settings > System > Reset > Reset Network Settings.\n   - For iPhone: Settings > General > Transfer or Reset iPhone > Reset > Reset Network Settings.\n   - Your phone will restart\u2014check if service returns.\n\n3. **Check for Carrier Settings Update:**\n   - For iPhone: Settings > General > About. If an update is available, you\u2019ll see a prompt.\n   - For Android: Settings > About Phone > System Updates (look for carrier or profile updates).\n\n4. **Check Airplane Mode Again:**\n   - Toggle Airplane Mode on for 30 seconds, then off.\n\n5. **Try the SIM in a Different Slot (if dual SIM):**\n   - If your phone has two SIM slots, try moving your SIM to the other slot.\n\n6. **Check for Software Updates:**\n   - Make sure your phone\u2019s operating system is up to date.\n\n7. **Inspect SIM Card:**\n   - Remove the SIM card and gently clean it with a soft cloth.\n   - Check for any visible damage or dirt on the SIM or in the SIM tray.\n\nIf you try these steps and still have no service, please let me know what you observe\u2014especially if you see any error messages or changes in your phone\u2019s status. If nothing changes, we can proceed with a SIM replacement or escalate the issue for further investigation.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I tried manually searching for networks, but my phone doesn\u2019t find any\u2014no carriers show up in the list. I also reset the network settings and made sure my phone is up to date, but there\u2019s still no signal at all. No error messages appeared, and everything else seems normal except there\u2019s just no service."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying those steps and providing detailed feedback. Since your phone cannot find any networks during a manual search, even after resetting network settings and updating your device, this strongly suggests one of the following:\n\n- There is a hardware issue with your phone\u2019s antenna or SIM slot (less likely if everything else works and the SIM is detected as active).\n- The SIM card has developed a fault that prevents it from connecting to the network, even though it\u2019s recognized by the phone.\n- There is a rare network provisioning issue on your account or line that isn\u2019t visible in standard checks.\n\nAt this point, you\u2019ve done all the troubleshooting steps that can be performed on your end. The next best step is to replace your SIM card, as this is the most common and quickest fix for this type of issue. If a new SIM does not resolve the problem, then escalation to our technical team for a deeper investigation would be necessary.\n\nWould you like me to initiate a SIM replacement for you, or would you prefer I escalate your case to our technical team right away? Let me know how you\u2019d like to proceed, and I\u2019ll take care of it for you.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked my APN settings, and it says the APN settings are not set. The APN name is 'fast.telecom.net,' but the status is listed as 'Not set.'",
+   "tool_calls": [
+    {
+     "tool_name": "check_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking your APN settings. If your APN status is listed as \"Not set,\" even though the APN name is present, this could definitely cause issues with data and MMS, but it usually wouldn\u2019t prevent you from having any signal at all. However, it\u2019s important to ensure your APN settings are fully and correctly configured.\n\nLet\u2019s try the following:\n\n1. **Delete and Re-enter the APN:**\n   - Go to Settings > Mobile Networks > Access Point Names.\n   - Delete the current APN (if possible).\n   - Tap \u201cAdd\u201d or \u201c+\u201d to create a new APN.\n   - Enter the following details (if these are your carrier\u2019s standard settings):\n\n     - Name: Fast Telecom\n     - APN: fast.telecom.net\n     - MMSC: http://mmsc.fast.telecom.net\n     - MMS Proxy: 10.10.10.10\n     - MMS Port: 8080\n     - MCC: 310\n     - MNC: 260\n     - Authentication Type: None\n     - APN Type: default,supl,mms\n\n   - Leave other fields blank or as default unless your carrier provided specific values.\n   - Save the APN and select it as active.\n\n2. **Restart your phone** after saving the new APN.\n\n3. **Check if you now have any signal or data.**\n\nIf you\u2019re unsure about any of the APN values or if your carrier uses different settings, let me know and I can confirm the correct APN details for you.\n\nPlease try these steps and let me know if your service returns or if there\u2019s any change in your phone\u2019s status. If there\u2019s still no signal, we\u2019ll proceed with the next steps as discussed earlier.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I tried to set the new APN settings, but I got an error message saying something was missing. The phone did restart successfully, but I still have no signal\u2014no bars and nothing loads.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying to update the APN settings and letting me know about the error. The fact that you received an error when entering the APN, and still have no signal after a restart, further suggests that your phone is unable to connect to the network at a fundamental level\u2014likely due to a SIM card or network provisioning issue, rather than just an APN misconfiguration.\n\nSince:\n- Your SIM is detected as active but cannot find any networks,\n- Manual network search finds no carriers,\n- Resetting network settings and updating your phone did not help,\n- APN changes do not resolve the issue,\n\nYou have completed all possible troubleshooting steps on your end.\n\nThe next step is to either:\n1. Replace your SIM card (the most common fix for this type of issue), or\n2. Escalate your case to our technical team for a deeper investigation if you prefer.\n\nWould you like me to initiate a SIM replacement for you, or would you like your case escalated to technical support? Please let me know how you\u2019d like to proceed, and I\u2019ll handle it right away.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Let\u2019s go ahead with the SIM replacement. How do I get a new SIM card?"
+  },
+  {
+   "role": "agent",
+   "content": "Great, I can help you with the SIM replacement process. Here\u2019s how it works:\n\n1. **Shipping a New SIM Card:**  \n   We can ship a replacement SIM card to your address on file (412 Chestnut Street, Apt 5B, Boston, MA 02116). Delivery usually takes 2\u20135 business days.\n\n2. **In-Store Pickup (if available):**  \n   If you prefer, you can visit a local store or authorized retailer to get a replacement SIM card immediately. Let me know if you\u2019d like to find the nearest location.\n\n3. **Activation:**  \n   Once you receive your new SIM card, you\u2019ll need to activate it. Instructions will be included, or you can contact us for assistance.\n\nWould you like me to ship a new SIM card to your address, or would you prefer to pick one up at a store? Please let me know your preference, and I\u2019ll get the process started for you.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

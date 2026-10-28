@@ -1,0 +1,134 @@
+{
+ "case": "2:[graph:Understanding and Troublesho]toggle_roaming|toggle_data_saver_mode|disconnect_vpn|set_network_mode_preference",
+ "arm": "R2_apn",
+ "repeat": 2,
+ "solved": false,
+ "actions_done": 1,
+ "actions_required": 5,
+ "turns": 11,
+ "calls": [
+  "get_customer_by_phone",
+  "get_customer_by_name"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_roaming",
+   "ok": false,
+   "why": "tool 'toggle_roaming' was never called by the user"
+  },
+  {
+   "id": "s1_toggle_data_saver_mode",
+   "ok": false,
+   "why": "tool 'toggle_data_saver_mode' was never called by the user"
+  },
+  {
+   "id": "s2_disconnect_vpn",
+   "ok": false,
+   "why": "tool 'disconnect_vpn' was never called by the user"
+  },
+  {
+   "id": "s3_set_network_mode_preference",
+   "ok": false,
+   "why": "tool 'set_network_mode_preference' was never called by the user"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was not called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "My phone is still really slow everywhere I go, even though it does get online. My husband's phone is always faster and stays on the better network."
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot your phone\u2019s slow data speeds. To get started, I\u2019ll need to identify your account. Could you please provide either:\n\n- The phone number associated with your line,\n- Your customer ID,\n- Or your full name and date of birth?\n\nOnce I have this information, I\u2019ll check your line and plan details to assist further.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Sure, my name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "It appears I couldn't find a customer profile associated with the phone number +1-617-555-0148. Could you please confirm the number, or alternatively provide your date of birth along with your full name? This will help me locate your account and assist you further.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+16175550148"
+     },
+     "params": {
+      "phone_number": "+16175550148"
+     },
+     "failed": true
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {},
+     "latency_ms": 0,
+     "error": "No customer found with phone number +16175550148"
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "That's definitely my number: +1-617-555-0148. My full name is Sofia Martinez. My date of birth is 03/14/1990."
+  },
+  {
+   "role": "agent",
+   "content": "I was unable to locate your account using both your phone number and your full name with date of birth. Could you please double-check the information provided, or let me know if you have another phone number, customer ID, or email address associated with your account? This will help me assist you more effectively.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_name",
+     "arguments": {
+      "full_name": "Sofia Martinez",
+      "dob": "1990-03-14"
+     },
+     "params": {
+      "full_name": "Sofia Martinez",
+      "dob": "1990-03-14"
+     },
+     "failed": true
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_name",
+     "response": {},
+     "latency_ms": 0,
+     "error": "No customer found with name 'Sofia Martinez' and date of birth '1990-03-14'"
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I\u2019m sure that\u2019s my number and info. I don\u2019t have another number or customer ID, but my email is sofia.martinez@email.com if that helps."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your email. Unfortunately, I am unable to search for customer accounts using email addresses\u2014only phone number, customer ID, or full name with date of birth are supported for account lookup.\n\nCould you please confirm if your phone service is definitely with this provider, or if the account might be under a different name (such as a family member or spouse)? If you have access to your account details (such as a bill or account portal), any additional information from there could help me locate your account and assist with your slow data issue.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My service is definitely with this provider and the account should be under my name. I don\u2019t have a paper bill handy, but I usually log in with my phone number. Is there another way to check what\u2019s going on with my data speed?"
+  },
+  {
+   "role": "agent",
+   "content": "To troubleshoot your data speed, I need to access your account details to check your plan, data usage, and line settings. Unfortunately, I can only look up accounts using your phone number, customer ID, or your full name with date of birth. So far, I haven\u2019t been able to locate your account with the information provided.\n\nCould you please double-check the spelling of your name, your date of birth, or confirm if there might be any variations (such as a middle name or maiden name) on your account? If you have any recent emails from us (such as billing or service notifications), they might include your customer ID or the exact name on your account.\n\nOnce I can access your account, I\u2019ll be able to help you resolve your slow data speed issue. If you\u2019re unable to provide any other details, I can transfer you to a human agent for further assistance. Would you like to proceed with a transfer?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

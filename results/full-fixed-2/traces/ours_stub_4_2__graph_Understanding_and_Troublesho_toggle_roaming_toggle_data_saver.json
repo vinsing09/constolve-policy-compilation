@@ -1,0 +1,349 @@
+{
+ "case": "2:[graph:Understanding and Troublesho]toggle_roaming|toggle_data_saver_mode|disconnect_vpn|set_network_mode_preference",
+ "arm": "stub",
+ "repeat": 4,
+ "solved": false,
+ "actions_done": 0,
+ "actions_required": 5,
+ "turns": 23,
+ "calls": [
+  "get_customer_by_phone",
+  "get_data_usage",
+  "get_details_by_id",
+  "get_details_by_id",
+  "reset_apn_settings",
+  "reboot_device",
+  "reseat_sim_card",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_roaming",
+   "ok": false,
+   "why": "tool 'toggle_roaming' was never called by the user"
+  },
+  {
+   "id": "s1_toggle_data_saver_mode",
+   "ok": false,
+   "why": "tool 'toggle_data_saver_mode' was never called by the user"
+  },
+  {
+   "id": "s2_disconnect_vpn",
+   "ok": false,
+   "why": "tool 'disconnect_vpn' was never called by the user"
+  },
+  {
+   "id": "s3_set_network_mode_preference",
+   "ok": false,
+   "why": "tool 'set_network_mode_preference' was never called by the user"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "My phone is still really slow online compared to my husband's, even though we\u2019re in the same place. Pages just crawl or don\u2019t load unless I wait forever."
+  },
+  {
+   "role": "agent",
+   "content": "I\u2019m sorry to hear you\u2019re having trouble with slow internet on your phone. To help you further, I\u2019ll need to check your data usage and line status. Could you please provide your phone number or the name and date of birth on your account? This will help me locate your account and investigate the issue.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148. The name on the account is Sofia Martinez."
+  },
+  {
+   "role": "agent",
+   "content": "Your line is active and you are on the Advantage 50GB plan. You have used about 12.4GB out of your 50GB data limit for this billing cycle, so you should still have plenty of high-speed data available.\n\nSince you\u2019re not close to your data limit, the slow speeds are likely not due to data throttling. Here are a few things you can try:\n\n1. Restart your phone.\n2. Toggle airplane mode on and off.\n3. Check if your phone\u2019s software is up to date.\n4. Try using data in a different app or browser.\n\nIf you\u2019ve already tried these steps, let me know. I can also check your line for any network issues or help you further troubleshoot. Have you noticed if this happens everywhere, or just in certain locations?",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_data_usage",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_data_usage",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "plan_name": "Advantage 50GB",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "data_limit_gb": 50,
+      "total_data_available_gb": 50,
+      "cycle_end_date": "2025-03-05"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I've noticed it happens everywhere, not just at home. I already tried restarting and toggling airplane mode, but it didn't help. What should I check next?"
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the details. Since the issue happens everywhere and basic troubleshooting hasn\u2019t helped, here are the next steps you can try:\n\n1. Check for software updates on your Pixel 8 Pro and install any available updates.\n2. Make sure your mobile network settings are set to use the fastest available network (5G/4G/LTE).\n3. Remove and reinsert your SIM card (or, if you use eSIM, try resetting network settings: Settings > System > Reset > Reset Wi-Fi, mobile & Bluetooth).\n4. Test your SIM in another phone, if possible, to see if the issue follows the SIM or stays with your device.\n\nIf you\u2019ve tried these steps or need help with any of them, let me know. If the problem persists, it could be a SIM or device issue, or something on your account that needs deeper investigation. Would you like me to escalate this to a technical specialist for further review?",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "DEV-55210"
+     },
+     "params": {
+      "id": "DEV-55210"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "device_id": "DEV-55210",
+      "device_type": "phone",
+      "model": "Pixel 8 Pro",
+      "imei": "356938035643809",
+      "esim_capable": true,
+      "activation_status": "Active",
+      "activation_date": "2023-05-18",
+      "last_esim_transfer_date": "2023-05-18",
+      "entity_type": "device"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I haven\u2019t checked my network settings yet. Can you walk me through how to make sure my phone is set to use the fastest network? I\u2019ll try that first."
+  },
+  {
+   "role": "agent",
+   "content": "Absolutely! Here\u2019s how you can check and set your Pixel 8 Pro to use the fastest available network:\n\n1. **Open Settings:**  \n   Tap the Settings app on your home screen or app drawer.\n\n2. **Go to Network & Internet:**  \n   Tap on \u201cNetwork & internet.\u201d\n\n3. **Select SIMs:**  \n   Tap on \u201cSIMs\u201d (or it may say \u201cMobile network\u201d depending on your software version).\n\n4. **Choose Your SIM:**  \n   If you have more than one SIM/eSIM, select the one you use for mobile data.\n\n5. **Preferred Network Type:**  \n   Look for an option called \u201cPreferred network type\u201d or \u201cNetwork mode.\u201d  \n   Tap it, and you should see options like:\n   - 5G/4G/3G/2G (auto connect)\n   - 4G/3G/2G (auto connect)\n   - 3G only, etc.\n\n6. **Select the Fastest Option:**  \n   Choose the option that includes 5G or 4G/LTE (usually \u201c5G/4G/3G/2G (auto connect)\u201d or \u201c4G/3G/2G (auto connect)\u201d).\n\n7. **Save/Exit:**  \n   The setting usually saves automatically. Exit Settings.\n\nAfter making this change, try browsing again to see if your speed improves. If you don\u2019t see 5G as an option, let me know\u2014there may be a device or plan limitation, or a network issue we need to check.\n\nLet me know if you need help with any step or if you notice any changes!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I set it to 5G/4G/3G/2G (auto connect) like you said. My phone still seems slow and I don\u2019t see 5G showing up in the status bar. What should I do next?"
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying those steps. Since you set your phone to use the fastest network and still don\u2019t see 5G (and your speeds remain slow), here are the next things to consider:\n\n1. **Check Coverage:**  \n   Even if your plan and phone support 5G, not all areas have 5G coverage. However, you should still get good speeds on 4G/LTE. If you\u2019re not seeing 4G/LTE either, that could indicate a network or SIM issue.\n\n2. **SIM or Device Issue:**  \n   Since your husband\u2019s phone works fine in the same locations, it\u2019s less likely to be a network-wide problem.\n\n3. **Try SIM in Another Phone:**  \n   If possible, place your SIM card in another compatible phone. If the issue follows the SIM, it may need to be replaced. If the other phone works fine with your SIM, your device may need further troubleshooting.\n\n4. **Reset Network Settings:**  \n   On your Pixel 8 Pro, go to:  \n   Settings > System > Reset options > Reset Wi-Fi, mobile & Bluetooth  \n   (This will not erase your personal data, but you\u2019ll need to reconnect to Wi-Fi networks.)\n\nWould you like to try resetting your network settings, or would you prefer to test your SIM in another phone first? If you\u2019ve already tried these or would like me to escalate this for a deeper technical review or SIM replacement, just let me know!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I\u2019d like to try resetting my network settings first. Should I go ahead and do that now?"
+  },
+  {
+   "role": "agent",
+   "content": "Yes, you can go ahead and reset your network settings now. Here\u2019s a quick guide for your Pixel 8 Pro:\n\n1. Open the **Settings** app.\n2. Scroll down and tap **System**.\n3. Tap **Reset options**.\n4. Select **Reset Wi-Fi, mobile & Bluetooth**.\n5. Confirm by tapping **Reset settings**.\n\nThis will reset your mobile network, Wi-Fi, and Bluetooth settings. You won\u2019t lose any personal data, but you will need to reconnect to Wi-Fi networks and re-pair Bluetooth devices afterward.\n\nAfter the reset, your phone will restart or briefly disconnect from the network. Once it\u2019s back on, try browsing the internet again and see if your speed improves or if you see 4G/5G in the status bar.\n\nLet me know how it goes or if you need any help during the process!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "After resetting my network settings, I also reset the APN settings. The phone says I need to reboot for the APN changes to take effect. Should I restart my device now?",
+   "tool_calls": [
+    {
+     "tool_name": "reset_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Yes, please go ahead and restart your device now. Restarting will ensure that the APN (Access Point Name) changes take effect and your phone can reconnect to the network with the updated settings.\n\nAfter your phone restarts, check your network status bar for 4G or 5G and try browsing the internet again to see if your speed improves.\n\nLet me know how it goes or if you need further assistance!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone rebooted successfully after the reset, but I'm still not seeing 5G in the status bar and my internet speeds are still very slow. What else can I try?",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. Since you\u2019ve:\n\n- Set your network mode to the fastest available,\n- Reset your network and APN settings,\n- Rebooted your device,\n- And you\u2019re still not seeing 5G or improved speeds (while your husband\u2019s phone works fine in the same area),\n\nthis suggests the issue may be with your SIM card, device hardware, or something specific to your line/account.\n\nHere are the next steps you can try:\n\n1. **Test Your SIM in Another Phone:**  \n   If possible, insert your SIM card into another compatible phone.  \n   - If the SIM is slow in the other phone, the SIM may be faulty and need replacement.\n   - If the SIM works fine in the other phone, your Pixel 8 Pro may have a hardware issue.\n\n2. **Check for Physical SIM Damage:**  \n   If you use a physical SIM, inspect it for any visible damage or dirt.\n\n3. **Check for Carrier Updates:**  \n   Go to Settings > Network & internet > SIMs > [Your SIM] > Carrier settings and check for updates.\n\n4. **Contact Support for SIM Replacement or Further Investigation:**  \n   If you\u2019re unable to test your SIM in another phone, or if the issue persists after testing, it may be best to escalate this for a SIM replacement or deeper technical review.\n\nWould you like me to escalate your case to a technical specialist for further investigation or arrange a SIM replacement? Let me know how you\u2019d like to proceed!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I can try reseating the SIM card first before swapping it into another phone. Should I go ahead and take the SIM out and put it back in?"
+  },
+  {
+   "role": "agent",
+   "content": "Yes, that\u2019s a great next step! Please go ahead and power off your phone, carefully remove the SIM card, check it for any visible damage or dirt, and then reinsert it securely. After that, power your phone back on.\n\nOnce your phone restarts, check if you see 4G or 5G in the status bar and test your internet speed again.\n\nLet me know if this helps or if you notice any changes. If the issue persists, we can proceed with testing your SIM in another phone or escalate the issue for further support.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I removed and reinserted the SIM card. My phone powered back on and shows the SIM status as active, but I still don\u2019t see 5G in the status bar and my internet is still very slow.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying all those steps. Since you\u2019ve:\n\n- Reset network and APN settings,\n- Rebooted your device,\n- Reseated your SIM card,\n- Set your network mode to the fastest available,\n- And your husband\u2019s phone works fine in the same area,\n\nthis strongly suggests the issue is either with your SIM card or something specific to your account or line.\n\nThe next best step is to test your SIM card in another compatible phone, if possible. This will help determine if the problem follows the SIM (indicating a SIM or account issue) or stays with your device (indicating a device hardware issue).\n\nIf you\u2019re unable to test your SIM in another phone, or if the issue persists even after testing, I recommend escalating your case for a SIM replacement or a deeper technical review.\n\nWould you like me to escalate your case now for further investigation and possible SIM replacement, or will you be able to test your SIM in another phone first? Let me know how you\u2019d like to proceed, and I\u2019ll assist you accordingly.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I don\u2019t have another phone to test the SIM in right now, so please go ahead and escalate my case for further investigation and a possible SIM replacement."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for your patience and for trying all the troubleshooting steps. I am now escalating your case to a technical specialist for further investigation and to arrange a possible SIM replacement. A support agent will review your account and contact you soon to resolve this issue.\n\nIf you have any additional details or questions in the meantime, please let me know. We\u2019re committed to getting your service back to normal as quickly as possible!",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez is experiencing consistently slow mobile data speeds and cannot access 5G, despite being on an active 50GB plan and having tried all standard troubleshooting steps (network reset, APN reset, SIM reseating, correct network mode, etc.). Her husband\u2019s phone works fine in the same locations. She cannot currently test her SIM in another device. Please investigate for possible SIM or account issues and arrange a SIM replacement if needed."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez is experiencing consistently slow mobile data speeds and cannot access 5G, despite being on an active 50GB plan and having tried all standard troubleshooting steps (network reset, APN reset, SIM reseating, correct network mode, etc.). Her husband\u2019s phone works fine in the same locations. She cannot currently test her SIM in another device. Please investigate for possible SIM or account issues and arrange a SIM replacement if needed."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

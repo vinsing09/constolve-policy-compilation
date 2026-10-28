@@ -1,0 +1,348 @@
+{
+ "case": "9:[graph:Understanding and Troublesho]reset_apn_settings",
+ "arm": "R2_apn",
+ "repeat": 1,
+ "solved": false,
+ "actions_done": 1,
+ "actions_required": 3,
+ "turns": 25,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "check_status_bar",
+  "get_details_by_id",
+  "reseat_sim_card",
+  "reboot_device",
+  "check_network_mode_preference",
+  "toggle_airplane_mode",
+  "toggle_airplane_mode",
+  "toggle_airplane_mode",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_reset_apn_settings",
+   "ok": false,
+   "why": "tool 'reset_apn_settings' was never called by the user"
+  },
+  {
+   "id": "s1_reboot_device",
+   "ok": true,
+   "why": "tool 'reboot_device' was called"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, nothing loads, and I can't send picture messages. Can you help me fix this?"
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot your service issue. First, I need to identify your account to check for any line or account problems. Could you please provide one of the following:\n\n- Your phone number\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I\u2019ll begin diagnosing the issue.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148. Let me know what you need me to do next."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your phone number. To troubleshoot your \"no service\" issue, I\u2019ll need you to perform a few checks on your device. Please let me know if you see any of the following on your phone\u2019s status bar:\n\n- Airplane mode icon (\u2708\ufe0f)\n- \u201cNo SIM\u201d or \u201cSIM error\u201d messages\n- Any signal bars at all (even 1 bar)\n- Network type indicators (like 5G, 4G, LTE, etc.)\n\nIf you\u2019re able, please check your status bar and describe what you see. This will help me guide you through the next steps to restore your service.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "On my status bar, I see 'No Signal', 'Data Enabled', and 'Connected to Chestnut-5G'. There are no signal bars at all.",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the details. Since your status bar shows \u201cNo Signal\u201d (no bars) but \u201cData Enabled\u201d and you\u2019re connected to Wi-Fi, this confirms your phone is not connecting to the cellular network at all.\n\nLet\u2019s start with these steps:\n\n1. Check if Airplane Mode is ON (even briefly toggling it can help).\n2. Check if your SIM card is being detected or if there\u2019s a SIM error.\n\nCould you please confirm:\n- Is Airplane Mode currently ON?\n- Are you seeing any messages about the SIM card (like \u201cNo SIM\u201d or \u201cSIM error\u201d)?\n\nIf you\u2019re not sure, I can guide you through checking these settings. Would you like instructions on how to check Airplane Mode and SIM status?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Airplane mode is currently OFF, and I don't see any messages about the SIM card like 'No SIM' or 'SIM error.' Let me know what to check next."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming that Airplane Mode is off and there are no SIM error messages. Since your device is active and there are no obvious SIM issues, the next step is to reseat your SIM card. This can often resolve \u201cNo Signal\u201d problems.\n\nWould you like step-by-step instructions on how to reseat your SIM card, or are you comfortable doing this on your own? If you prefer, I can also guide you through a quick SIM reset using your phone\u2019s settings. Let me know how you\u2019d like to proceed!",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "DEV-55210"
+     },
+     "params": {
+      "id": "DEV-55210"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "device_id": "DEV-55210",
+      "device_type": "phone",
+      "model": "Pixel 8 Pro",
+      "imei": "356938035643809",
+      "esim_capable": true,
+      "activation_status": "Active",
+      "activation_date": "2023-05-18",
+      "last_esim_transfer_date": "2023-05-18",
+      "entity_type": "device"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I've removed and reinserted the SIM card. The SIM status now says 'active,' but I still don't have any signal bars or service.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for reseating your SIM card and confirming its status is now \u201cactive.\u201d Since you still have no signal bars or service, let\u2019s try the next troubleshooting steps:\n\n1. Restart your phone. This can refresh your connection to the network.\n2. If restarting doesn\u2019t help, we\u2019ll check your network mode settings to ensure your phone is set to connect to the correct network types (like 4G/5G).\n\nPlease restart your phone now. After it powers back on, let me know if you see any signal bars or if the situation remains the same.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I restarted my phone, and it rebooted successfully, but I still have no signal bars or service. Nothing has changed after the restart.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for restarting your phone. Since there\u2019s still no signal, let\u2019s check your network mode settings. Sometimes, if your phone is set to use an unsupported network type (like 2G/3G only), it can cause a complete loss of service.\n\nCould you please check and let me know what your current network mode preference is set to? If you\u2019re unsure how to check this, I can guide you through the process. Would you like instructions on how to check or change your network mode settings?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I'm not sure how to check my network mode settings. Could you give me instructions on how to do that?"
+  },
+  {
+   "role": "agent",
+   "content": "Certainly! Here\u2019s how you can check your network mode settings on your Pixel 8 Pro:\n\n1. Open the Settings app on your phone.\n2. Tap on \u201cNetwork & Internet.\u201d\n3. Select \u201cMobile network.\u201d\n4. Look for an option called \u201cPreferred network type\u201d or \u201cNetwork mode.\u201d\n5. Tap on it, and you should see options like 5G, 4G, 3G, or 2G.\n\nPlease let me know what your current network mode is set to. If you see options, let me know which ones are available and which one is selected. This will help me guide you on the next step.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My current network mode preference is set to '4g_5g_preferred.' What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "check_network_mode_preference",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking your network mode. Since it\u2019s set to \u201c4g_5g_preferred,\u201d your phone should be able to connect to the latest networks.\n\nLet\u2019s try resetting your network settings by toggling Airplane Mode ON for about 10 seconds, then turning it OFF again. This can sometimes force your phone to reconnect to the network.\n\nPlease do the following:\n1. Turn Airplane Mode ON.\n2. Wait about 10 seconds.\n3. Turn Airplane Mode OFF.\n\nAfter you do this, let me know if you see any signal bars or if the situation remains the same.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I turned Airplane Mode on, and now it's showing 'Airplane mode is now ON.' Should I turn it back off now?",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_airplane_mode",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Yes, please turn Airplane Mode OFF now. After you do so, check your status bar to see if any signal bars appear or if your service returns. Let me know what you see after turning Airplane Mode off.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Airplane Mode is now OFF, but I still have no signal bars or service. Nothing changed after toggling Airplane Mode.",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_airplane_mode",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "toggle_airplane_mode",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer has no cellular service (no signal bars, no service) despite SIM status being active, correct network mode (4g_5g_preferred), and after reseating SIM, restarting device, and toggling Airplane Mode. Needs backend/provisioning investigation."
+     },
+     "params": {
+      "summary": "Customer has no cellular service (no signal bars, no service) despite SIM status being active, correct network mode (4g_5g_preferred), and after reseating SIM, restarting device, and toggling Airplane Mode. Needs backend/provisioning investigation."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Okay, I'll wait for the human agent. Please let me know when someone is available."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for your patience. A human agent will assist you shortly. Please stay connected, and they will update you as soon as they are available.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Okay, I'll stay connected and wait for the human agent. Thank you."
+  },
+  {
+   "role": "agent",
+   "content": "You\u2019re welcome! Please stay connected\u2014someone from our team will be with you soon to assist further. If you have any additional details or questions, feel free to share them with the human agent when they join.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

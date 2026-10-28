@@ -1,0 +1,251 @@
+{
+ "case": "4:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_wifi_calling|grant_app_permission",
+ "arm": "stub",
+ "repeat": 2,
+ "solved": false,
+ "actions_done": 3,
+ "actions_required": 6,
+ "turns": 17,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "reboot_device",
+  "check_network_status",
+  "toggle_airplane_mode",
+  "reseat_sim_card"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_airplane_mode",
+   "ok": true,
+   "why": "tool 'toggle_airplane_mode' was called"
+  },
+  {
+   "id": "s1_reset_apn_settings",
+   "ok": false,
+   "why": "tool 'reset_apn_settings' was never called by the user"
+  },
+  {
+   "id": "s2_reboot_device",
+   "ok": true,
+   "why": "tool 'reboot_device' was called"
+  },
+  {
+   "id": "s3_toggle_wifi_calling",
+   "ok": false,
+   "why": "tool 'toggle_wifi_calling' was never called by the user"
+  },
+  {
+   "id": "s4_grant_app_permission",
+   "ok": false,
+   "why": "tool 'grant_app_permission' was never called by the user"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was not called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all. There are no bars, nothing loads, and I can't send picture messages."
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're experiencing no service on your phone. Let's try to resolve this together. To assist you better, could you please provide your phone number or the name and date of birth on your account? This will help me check your line status and see if there are any issues affecting your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your phone number. I checked your account, and your line status is currently \"Active,\" which means there are no suspensions or holds on your service.\n\nSince your line appears active but you have no service (no bars, nothing loads, and you can't send picture messages), here are a few quick troubleshooting steps you can try:\n\n1. Restart your phone.\n2. Make sure Airplane Mode is turned off.\n3. Remove and reinsert your SIM card.\n4. Check if you have coverage in your current location.\n\nIf you've already tried these steps or if the issue persists, please let me know. I can provide further assistance or escalate the issue if needed.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I haven't tried those steps yet. Should I do them one at a time, or do you want me to start with a specific one?"
+  },
+  {
+   "role": "agent",
+   "content": "Great question! Here\u2019s the best order to try the steps, as it can help pinpoint the issue more efficiently:\n\n1. **Restart your phone** \u2013 This is the simplest fix and often resolves temporary glitches.\n2. **Check Airplane Mode** \u2013 Make sure it\u2019s turned off. Sometimes it can be accidentally enabled.\n3. **Remove and reinsert your SIM card** \u2013 This can help if the SIM isn\u2019t seated properly.\n4. **Check your coverage** \u2013 If possible, move to a different location to see if you get service.\n\nTry each step one at a time, checking your service after each one. If your service returns at any step, you can stop there. If you finish all the steps and still have no service, let me know and I\u2019ll assist you further or escalate the issue.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I restarted my phone, and it rebooted successfully, but I still have no service\u2014no bars and nothing loads.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. Since restarting didn\u2019t resolve the issue, please proceed with the next steps:\n\n1. **Check Airplane Mode:** Make sure Airplane Mode is turned off. You can usually find this in your phone\u2019s quick settings or settings menu.\n2. **Remove and Reinsert SIM Card:** Power off your phone, carefully remove the SIM card, wait a few seconds, then reinsert it and power your phone back on.\n3. **Check Coverage:** If possible, move to a different location (even just outside or to another room) to see if you get any signal.\n\nAfter each step, check if your service returns. If you still have no service after trying these, please let me know, and I\u2019ll assist you further or escalate the issue for you.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I just checked, and Airplane Mode is actually ON. Should I turn it off now?",
+   "tool_calls": [
+    {
+     "tool_name": "check_network_status",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Yes, please turn Airplane Mode off. When Airplane Mode is enabled, your phone cannot connect to any mobile network, which explains why you have no service.\n\nOnce you turn it off, wait a few moments to see if your phone reconnects to the network and if your service returns. Let me know what happens after you turn off Airplane Mode!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Airplane mode is now off, but I still don't have any service\u2014still no bars and nothing loads.",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_airplane_mode",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking that. Since turning off Airplane Mode didn\u2019t restore your service, let\u2019s move to the next step:\n\nPlease power off your phone, remove the SIM card, wait about 10 seconds, then reinsert the SIM card and power your phone back on. After your phone restarts, check if you have service.\n\nIf you still have no service after this, please let me know. I\u2019ll continue to assist you and, if needed, escalate the issue for further investigation.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I reseated the SIM card and powered the phone back on. The SIM status says it's active, but I still have no service\u2014no bars and nothing loads.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying all those steps. Since your SIM status shows as active but you still have no service, this could indicate a network issue, a SIM card problem, or a device-related issue.\n\nHere\u2019s what I can do next:\n\n- Check your line and SIM status on our end for any hidden issues.\n- If everything looks normal, I can escalate this to our technical team for further investigation.\n\nBefore I proceed, could you let me know if you have recently:\n- Traveled internationally or changed your location significantly?\n- Switched devices or had any recent repairs done to your phone?\n- Noticed any error messages or SIM card warnings on your phone?\n\nAny additional details will help me assist you better. If not, I\u2019ll go ahead and escalate the issue for you.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I haven't traveled, switched devices, or had any repairs recently. There are no error messages or SIM card warnings on my phone\u2014just no service at all."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming those details. Since you haven\u2019t traveled, switched devices, or received any error messages, and all basic troubleshooting steps have been completed, it appears there may be a deeper network or SIM issue that requires technical investigation.\n\nI will escalate your case to our technical support team so they can investigate and resolve the issue as quickly as possible. You will be contacted with updates or further instructions.\n\nIs there anything else you\u2019d like me to mention to the technical team, or any preferred contact method for follow-up? If not, I\u2019ll proceed with the escalation now.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

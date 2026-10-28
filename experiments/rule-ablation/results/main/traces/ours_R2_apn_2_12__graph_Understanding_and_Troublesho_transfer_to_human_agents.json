@@ -1,0 +1,206 @@
+{
+ "case": "12:[graph:Understanding and Troublesho]transfer_to_human_agents",
+ "arm": "R2_apn",
+ "repeat": 2,
+ "solved": true,
+ "actions_done": 2,
+ "actions_required": 2,
+ "turns": 11,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "check_status_bar",
+  "check_sim_status",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_check_sim_status",
+   "ok": true,
+   "why": "tool 'check_sim_status' was called"
+  },
+  {
+   "id": "s1_transfer_to_human_agents",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, can't get online, and I can't send picture messages. Can you help me get it working again?"
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot your phone\u2019s service issues. First, I\u2019ll need to identify your account to check for any line or account problems. Could you please provide one of the following:\n\n- The phone number associated with your account\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I\u2019ll guide you through the steps to restore your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your information. Your account and line are both active, so let\u2019s start troubleshooting your phone\u2019s service.\n\nTo proceed, I\u2019ll need you to perform a few quick checks on your device. Please let me know if you\u2019re ready, and I\u2019ll guide you through the steps to check your phone\u2019s status bar and SIM card.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I'm ready. Please let me know what to do first."
+  },
+  {
+   "role": "agent",
+   "content": "Great! Let\u2019s start by checking your phone\u2019s status bar for important indicators.\n\nPlease follow these steps:\n\n1. Check the top of your phone\u2019s screen (the status bar) and let me know what you see:\n   - Is there an airplane icon (\u2708\ufe0f)?\n   - Are there any signal bars, or does it show \u201cNo Service\u201d or \u201cNo Signal\u201d?\n   - Do you see any icons for 4G, 5G, LTE, or similar?\n   - Is there a mobile data icon (like two arrows or \u201cH+\u201d, \u201cE\u201d, etc.)?\n\nPlease describe what you see in the status bar, especially regarding airplane mode, signal bars, and network type. This will help me determine the next steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "At the top of my screen, it shows 'No Signal.' I also see a 'Data Enabled' icon and a 'Connected to Chestnut-5G' icon. My battery is at 87%. There is no airplane mode icon.",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the details. Here\u2019s what your status bar indicates:\n\n- \u201cNo Signal\u201d means your phone isn\u2019t connecting to the cellular network.\n- \u201cData Enabled\u201d shows mobile data is on, but it won\u2019t work without a signal.\n- \u201cConnected to Chestnut-5G\u201d means you\u2019re on Wi-Fi, but this doesn\u2019t affect cellular service.\n- No airplane mode icon, so airplane mode is off.\n\nNext, let\u2019s check your SIM card status, as a SIM issue is a common cause of \u201cNo Signal.\u201d Please check your phone\u2019s SIM card status in your settings (usually under \u201cAbout Phone\u201d or \u201cSIM Status\u201d). If you\u2019re unsure how to do this, let me know your phone model, and I can guide you.\n\nOnce you\u2019ve checked, please tell me if your phone says the SIM is:\n- Active/Ready\n- Missing/Not detected\n- Locked (PIN or PUK required)\n- Any error message\n\nThis will help us determine the next step.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked the SIM status and it says 'Locked.' What should I do next?",
+   "tool_calls": [
+    {
+     "tool_name": "check_sim_status",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer's SIM card is locked, resulting in no cellular service. Needs assistance unlocking the SIM (PIN/PUK required)."
+     },
+     "params": {
+      "summary": "Customer's SIM card is locked, resulting in no cellular service. Needs assistance unlocking the SIM (PIN/PUK required)."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

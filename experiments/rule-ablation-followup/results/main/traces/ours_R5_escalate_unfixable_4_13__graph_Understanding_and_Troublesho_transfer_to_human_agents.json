@@ -1,0 +1,267 @@
+{
+ "case": "13:[graph:Understanding and Troublesho]transfer_to_human_agents",
+ "arm": "R5_escalate_unfixable",
+ "repeat": 4,
+ "solved": false,
+ "actions_done": 2,
+ "actions_required": 3,
+ "turns": 19,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "reboot_device",
+  "reseat_sim_card",
+  "reboot_device",
+  "reset_apn_settings",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "diagnosed_before_handoff",
+   "ok": false,
+   "why": "tool 'check_sim_status' was never called"
+  },
+  {
+   "id": "s2_get_data_usage",
+   "ok": true,
+   "why": "tool 'get_data_usage' was called"
+  },
+  {
+   "id": "s3_transfer_to_human_agents",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, I can't get any signal on my phone at all. I can't make calls or use the internet. Can you help?"
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot your signal issue. First, I need to identify your account to check for any line or account-related problems. Could you please provide one of the following:\n\n- Your phone number\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I\u2019ll guide you through the steps to restore your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you, Sofia. I have identified your account. To help you restore your signal, I\u2019ll need to check a few things on your device and your line status.\n\nCould you please confirm:\n- Are you seeing any icons like \u201cAirplane Mode\u201d or \u201cNo SIM\u201d on your phone\u2019s status bar?\n- Have you recently changed your SIM card or made any changes to your phone settings?\n\nOnce you confirm, I\u2019ll guide you through the next steps to diagnose and fix the issue.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I don't see Airplane Mode or No SIM icons on my status bar. I haven't changed my SIM card or made any recent changes to my phone settings."
+  },
+  {
+   "role": "agent",
+   "content": "Your line status appears to be active, and there are no recent changes or suspensions on your account. Since you don\u2019t see Airplane Mode or No SIM icons, let\u2019s try some basic troubleshooting steps:\n\n1. Please restart your phone if you haven\u2019t already.\n2. If the issue persists after restarting, let me know so I can guide you through checking your SIM card and network settings.\n\nHave you already tried restarting your phone? If not, please do so now and let me know if you get any signal after the restart.",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 0,
+      "roaming_enabled": false,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I just restarted my phone. It rebooted successfully, but I still don't have any signal.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming. Since restarting didn\u2019t resolve the issue, let\u2019s check your SIM card status and network settings next.\n\nCould you please check and let me know if your phone shows any error messages about the SIM card, or if it asks for a PIN or PUK code? If not, I\u2019ll guide you through reseating your SIM card and checking your network mode settings.\n\nPlease let me know if you see any SIM-related messages, or if you\u2019re ready to proceed with the next troubleshooting steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I'm not seeing any error messages about the SIM card, and it's not asking for a PIN or PUK code. I'm ready to proceed with the next troubleshooting steps."
+  },
+  {
+   "role": "agent",
+   "content": "Great, thank you for confirming. Let\u2019s proceed with the next steps:\n\n1. Please remove your SIM card from your phone, wait about 10 seconds, and then reinsert it securely.\n2. After reinserting the SIM card, restart your phone again.\n\nOnce you\u2019ve done this, let me know if you see any change in your signal or if the issue persists.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "After reseating the SIM card and rebooting, my phone says the SIM is still locked. There's no signal.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the update. Since your phone now says the SIM is locked, it may require a PIN or PUK code to unlock it. This can happen if the wrong PIN was entered multiple times or if the SIM has become locked for security reasons.\n\nPlease check your phone\u2019s screen for any prompt asking for a PIN or PUK code. If you see such a prompt, do you know your SIM PIN or PUK code? If not, I can assist you further.\n\nLet me know if you see a prompt for a PIN or PUK code, and if you need help retrieving or resetting it.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I don't see any prompt for a PIN or PUK code on my screen. It just says SIM locked with no option to enter anything."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for clarifying. Since your phone says \u201cSIM locked\u201d but does not prompt for a PIN or PUK code, this could indicate a deeper SIM or network issue.\n\nLet\u2019s try resetting your network settings by refreshing your phone\u2019s APN (Access Point Name) settings, which can sometimes resolve SIM and connectivity issues.\n\nWould you like me to guide you through resetting your APN settings and rebooting your device? This process will not erase your personal data, but it will reset your network settings to default. Please confirm if you\u2019d like to proceed.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Yes, please guide me through resetting my APN settings. I'm ready to proceed."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming. Here\u2019s what you need to do:\n\n1. Please go to your phone\u2019s settings and look for the \u201cMobile Network\u201d or \u201cCellular Network\u201d section.\n2. Find the \u201cAccess Point Names\u201d (APN) option.\n3. There should be an option to \u201cReset to Default\u201d or \u201cReset Settings.\u201d Please select this option to reset your APN settings.\n4. After resetting, restart your phone.\n\nOnce you\u2019ve completed these steps, let me know if your signal returns or if the issue persists. If you need more detailed instructions for your specific phone model, please let me know the make and model of your device.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I already reset the APN settings and rebooted, but there's still no signal and the SIM locked message is still showing.",
+   "tool_calls": [
+    {
+     "tool_name": "reset_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez has no signal and phone displays 'SIM locked' with no prompt for PIN/PUK. Standard troubleshooting (reboot, reseat SIM, APN reset) did not resolve. Needs advanced SIM/account support."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez has no signal and phone displays 'SIM locked' with no prompt for PIN/PUK. Standard troubleshooting (reboot, reseat SIM, APN reset) did not resolve. Needs advanced SIM/account support."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

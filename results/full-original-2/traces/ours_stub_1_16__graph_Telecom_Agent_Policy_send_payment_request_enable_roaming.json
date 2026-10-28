@@ -1,0 +1,401 @@
+{
+ "case": "16:[graph:Telecom Agent Policy]send_payment_request|enable_roaming",
+ "arm": "stub",
+ "repeat": 1,
+ "solved": false,
+ "actions_done": 3,
+ "actions_required": 5,
+ "turns": 21,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "get_details_by_id",
+  "resume_line",
+  "reboot_device",
+  "get_details_by_id",
+  "reseat_sim_card",
+  "get_details_by_id",
+  "enable_roaming",
+  "reboot_device"
+ ],
+ "criteria": [
+  {
+   "id": "s0_send_payment_request",
+   "ok": false,
+   "why": "tool 'send_payment_request' was never called by the assistant"
+  },
+  {
+   "id": "s1_make_payment",
+   "ok": false,
+   "why": "tool 'make_payment' was never called by the user"
+  },
+  {
+   "id": "s2_enable_roaming",
+   "ok": true,
+   "why": "tool 'enable_roaming' was called with {'customer_id': 'CUS-4501283', 'line_id': 'LN-8830142'}"
+  },
+  {
+   "id": "s3_resume_line",
+   "ok": true,
+   "why": "tool 'resume_line' was called with {'customer_id': 'CUS-4501283', 'line_id': 'LN-8830142'}"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was not called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone suddenly has no signal at all\u2014nothing works and I can\u2019t get online or send picture messages. It was fine before, but now there\u2019s just nothing showing. Can you help?"
+  },
+  {
+   "role": "agent",
+   "content": "I\u2019m sorry to hear you\u2019re having trouble with your phone signal. To help you quickly, could you please provide your phone number or the name on your account? This will allow me to check your line status and see if there are any issues affecting your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Your phone line is currently showing as \"Suspended,\" which is why you have no signal and cannot use any services. This could happen for several reasons, such as billing issues, a requested suspension, or other account-related matters.\n\nWould you like me to check the reason for the suspension and help you reactivate your line? If you did not request this suspension, I can assist you in resuming your service right away. Please confirm how you\u2019d like to proceed.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Suspended",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": false,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Yes, please check why my line is suspended and help me get it working again. I didn\u2019t ask for a suspension."
+  },
+  {
+   "role": "agent",
+   "content": "Your line was suspended, but there was no specific reason listed for the suspension. I have now reactivated your line, and your service should be restored shortly.\n\nPlease restart your phone in a minute or two to refresh your connection. If you still have no signal after restarting, let me know and I\u2019ll assist you further.",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "resume_line",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Suspended",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": false,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "resume_line",
+     "response": {
+      "result": "Line LN-8830142 has been resumed and is now Active."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I rebooted my phone successfully, but I still have no signal\u2014nothing has changed. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. Since your line is now active but you still have no signal, let\u2019s try a few troubleshooting steps:\n\n1. Check SIM Card: Remove your SIM card, wait 30 seconds, and reinsert it securely. Then restart your phone.\n2. Network Selection: Go to your phone\u2019s network settings and try selecting your carrier manually.\n3. Airplane Mode: Turn Airplane Mode on for 30 seconds, then turn it off.\n4. Try Another Device: If possible, insert your SIM card into another compatible phone to see if it works there.\n\nIf none of these steps restore your signal, there may be an issue with your SIM card or device. Would you like me to check your device and SIM status on your account, or would you prefer to be connected to a human agent for further assistance?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Let\u2019s check my device and SIM status first. What do you need me to do?"
+  },
+  {
+   "role": "agent",
+   "content": "Thank you! I have access to your device information on file. Your current device is a Pixel 8 Pro, and it\u2019s showing as active in our system.\n\nTo further check your SIM status, could you please confirm:\n- Are you using a physical SIM card or an eSIM in your Pixel 8 Pro?\n- Have you seen any error messages on your phone (such as \u201cNo SIM,\u201d \u201cSIM not provisioned,\u201d or similar)?\n\nThis information will help me guide you through the next steps or identify if there\u2019s a SIM-related issue.",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "DEV-55210"
+     },
+     "params": {
+      "id": "DEV-55210"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "device_id": "DEV-55210",
+      "device_type": "phone",
+      "model": "Pixel 8 Pro",
+      "imei": "356938035643809",
+      "esim_capable": true,
+      "activation_status": "Active",
+      "activation_date": "2023-05-18",
+      "last_esim_transfer_date": "2023-05-18",
+      "entity_type": "device"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I'm using a physical SIM card. There are no error messages\u2014the phone just shows no signal and no bars at all."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming that you\u2019re using a physical SIM card and not seeing any error messages\u2014just no signal or bars.\n\nHere\u2019s what we can try next:\n\n1. **SIM Card Check:**  \n   - Remove the SIM card and inspect it for any visible damage or dirt.  \n   - Gently clean the gold contacts with a soft, dry cloth if needed.  \n   - Reinsert the SIM card, making sure it\u2019s seated properly.\n\n2. **Test in Another Phone:**  \n   - If you have access to another unlocked phone, try inserting your SIM card into that device.  \n   - If the SIM works in another phone, the issue may be with your Pixel 8 Pro.  \n   - If the SIM does not work in another phone, the SIM card itself may be faulty.\n\n3. **Check for Carrier Settings Update:**  \n   - On your Pixel 8 Pro, go to Settings > Network & Internet > Mobile Network.  \n   - Look for any prompts to update carrier settings.\n\nIf your SIM card still does not work after these steps, it may need to be replaced. Would you like me to assist you with ordering a replacement SIM card, or would you prefer to speak with a human agent for further troubleshooting?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I removed and reinserted the SIM card. My phone says the SIM status is active, but I still have no signal or bars showing.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying those steps and letting me know the SIM status is showing as active on your phone, but you still have no signal or bars.\n\nSince your line is active, your device is registered as active, and your SIM is recognized by your phone, but you still have no service, this suggests a possible issue with the SIM card itself, a network provisioning problem, or a rare device hardware issue.\n\nHere\u2019s what we can do next:\n\n1. **Test SIM in Another Phone:**  \n   If possible, please try your SIM card in another unlocked phone. This will help determine if the issue is with the SIM card or your Pixel 8 Pro.\n\n2. **Check for Outages:**  \n   Are you aware of any network outages in your area? If not, I can check for you if you provide your current location.\n\n3. **SIM Replacement:**  \n   If your SIM card does not work in another phone, it likely needs to be replaced. I can help you order a replacement SIM.\n\nWould you like to try your SIM in another phone, have me check for outages in your area, or proceed with a SIM replacement? Please let me know how you\u2019d like to continue.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I don\u2019t have another phone to test the SIM card in. I\u2019m not aware of any outages, but I\u2019m currently travelling outside my home network. Can you check if that might be causing the issue?"
+  },
+  {
+   "role": "agent",
+   "content": "It appears that international roaming was not enabled on your line, which would prevent you from getting a signal while traveling outside your home network.\n\nI have now enabled roaming on your line at no extra cost. Please restart your phone once more to allow it to connect to available networks in your current location.\n\nLet me know if you are able to get a signal after restarting, or if you need any further assistance.",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "enable_roaming",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": false,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": null,
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "enable_roaming",
+     "response": {
+      "result": "Roaming has been enabled at no cost on line LN-8830142 (+1-617-555-0148) for customer Sofia Martinez."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I restarted my phone as you asked, but there\u2019s still no signal and no bars showing. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for your patience and for following the steps so far. Since your line is active, roaming is now enabled, your SIM is recognized, and you\u2019re still not getting any signal while traveling, here are the next steps to try:\n\n1. **Manual Network Selection:**  \n   - Go to Settings > Network & Internet > Mobile Network > Network Operators (or similar, depending on your phone).\n   - Turn off \u201cAutomatic\u201d and let your phone search for available networks.\n   - When the list appears, try selecting one of the available networks manually, even if it\u2019s not your usual carrier.\n\n2. **Check Airplane Mode:**  \n   - Make sure Airplane Mode is off.\n   - Toggle it on for 30 seconds, then off again.\n\n3. **SIM Card Status:**  \n   - If your phone has a SIM status or diagnostics menu, check if it says \u201cRegistered\u201d or \u201cNot Registered\u201d on network.\n\n4. **Check for Carrier Updates:**  \n   - Go to Settings > System > Advanced > System Update to see if there are any carrier or system updates available.\n\nIf you still have no signal after these steps, it\u2019s possible there\u2019s a deeper provisioning issue or a compatibility problem with local networks. At this point, I recommend connecting you to a human agent who can perform advanced troubleshooting or escalate the issue.\n\nWould you like me to transfer you to a human agent for further assistance?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I manually searched for networks but nothing shows up, even after toggling airplane mode. My SIM status says 'not registered on network.' There are no carrier or system updates available. What else can I try?"
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing those details. Since:\n\n- Your SIM status says \u201cnot registered on network,\u201d\n- No networks appear when searching manually,\n- Roaming is enabled and your line is active,\n- You\u2019ve already restarted your phone and reinserted the SIM,\n- There are no updates available,\n- And you\u2019re traveling outside your home network,\n\nThis strongly suggests one of the following:\n- There may be a deeper provisioning issue with your SIM or account,\n- Your SIM card may be faulty or not compatible with local networks,\n- There could be a hardware issue with your phone\u2019s SIM reader (less likely since the SIM is detected).\n\nAt this point, you\u2019ve tried all the standard troubleshooting steps. The next best step is to escalate your case to a human agent who can check your account provisioning in detail, possibly re-provision your SIM remotely, or arrange for a replacement SIM if needed.\n\nWould you like me to transfer you to a human agent now for advanced support?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

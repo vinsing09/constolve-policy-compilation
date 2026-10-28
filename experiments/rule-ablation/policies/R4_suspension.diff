@@ -1,0 +1,6 @@
+--- control.md
++++ R4_suspension.md
+@@ -125,3 +125,2 @@
+ 
+-You are allowed to lift the suspension after the user has paid all their overdue bills.
+ You are not allowed to lift the suspension if the line's contract end date is in the past, even if the user has paid all their overdue bills.

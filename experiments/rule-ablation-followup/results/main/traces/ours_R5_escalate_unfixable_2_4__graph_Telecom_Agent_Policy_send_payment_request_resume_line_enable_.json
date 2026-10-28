@@ -1,0 +1,380 @@
+{
+ "case": "4:[graph:Telecom Agent Policy]send_payment_request|resume_line|enable_roaming",
+ "arm": "R5_escalate_unfixable",
+ "repeat": 2,
+ "solved": false,
+ "actions_done": 4,
+ "actions_required": 5,
+ "turns": 23,
+ "calls": [
+  "get_customer_by_phone",
+  "check_sim_status",
+  "check_apn_settings",
+  "get_details_by_id",
+  "get_bills_for_customer",
+  "send_payment_request",
+  "check_payment_request",
+  "make_payment",
+  "resume_line",
+  "reboot_device",
+  "check_status_bar"
+ ],
+ "criteria": [
+  {
+   "id": "s0_send_payment_request",
+   "ok": true,
+   "why": "tool 'send_payment_request' was called with {'customer_id': 'CUS-4501283', 'bill_id': 'BILL-4501283-2025-01'}"
+  },
+  {
+   "id": "s1_make_payment",
+   "ok": true,
+   "why": "tool 'make_payment' was called"
+  },
+  {
+   "id": "s2_resume_line",
+   "ok": true,
+   "why": "tool 'resume_line' was called with {'customer_id': 'CUS-4501283', 'line_id': 'LN-8830142'}"
+  },
+  {
+   "id": "s3_enable_roaming",
+   "ok": false,
+   "why": "tool 'enable_roaming' was never called by the assistant"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was not called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no signal at all. I can't make any calls or use my data."
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot your signal issue. First, I need to identify your account to check for any line or account-related problems. Could you please provide one of the following:\n\n- Your phone number\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I\u2019ll begin the troubleshooting process.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your information. To help resolve your no signal issue, I\u2019ll guide you through some quick checks and troubleshooting steps. Before we proceed, could you confirm:\n\n- Is Airplane Mode turned off on your phone?\n- Have you recently changed your SIM card or device?\n\nIf you\u2019re not sure, I can walk you through checking these settings. Please let me know, or if you\u2019d like, I can provide step-by-step instructions to check your phone\u2019s status.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Airplane Mode is turned off, and I haven't changed my SIM card or device recently."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming. Next, let\u2019s check your phone\u2019s SIM card status and network connection to identify the cause of the no signal issue.\n\nCould you please check your SIM card status on your phone? If you need help, I can guide you through the steps. Let me know if you\u2019d like instructions or if you already know how to check it.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked my SIM card status and it says the SIM is active.",
+   "tool_calls": [
+    {
+     "tool_name": "check_sim_status",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking. Since your SIM card is active and Airplane Mode is off, the next step is to check your network settings, specifically your Access Point Name (APN) settings, as incorrect APN settings can cause a loss of service.\n\nCould you please check your APN settings on your phone? If you\u2019re unsure how to do this, I can provide step-by-step instructions. Let me know how you\u2019d like to proceed.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked my APN settings and they are correct. The APN name is fast.telecom.net.",
+   "tool_calls": [
+    {
+     "tool_name": "check_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Your line is currently suspended, which is why you have no signal. This usually happens due to an overdue bill or account issue.\n\nI see you have an overdue bill from the previous billing cycle. To restore your service, you\u2019ll need to pay this overdue bill. Would you like me to send you a payment request for the overdue amount so you can proceed with the payment?",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_bills_for_customer",
+     "arguments": {
+      "customer_id": "CUS-4501283"
+     },
+     "params": {
+      "customer_id": "CUS-4501283"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Suspended",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": false,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "2025-02-25",
+      "suspension_reason": 1,
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_bills_for_customer",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "count": 2,
+      "bills": [
+       {
+        "bill_id": "BILL-4501283-2025-02",
+        "customer_id": "CUS-4501283",
+        "period_start": "2025-01-06",
+        "period_end": "2025-02-05",
+        "issue_date": "2025-02-06",
+        "total_amount_due": 70.0,
+        "due_date": "2025-02-26",
+        "status": "Paid"
+       },
+       {
+        "bill_id": "BILL-4501283-2025-01",
+        "customer_id": "CUS-4501283",
+        "period_start": "2024-12-06",
+        "period_end": "2025-01-05",
+        "issue_date": "2025-01-06",
+        "total_amount_due": 65.0,
+        "due_date": "2025-01-26",
+        "status": "overdue"
+       }
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Yes, please send me the payment request so I can pay the overdue bill."
+  },
+  {
+   "role": "agent",
+   "content": "A payment request for your overdue bill ($65.00) has been sent to you. Please check your payment requests and follow the instructions to complete the payment.\n\nOnce you\u2019ve made the payment, let me know so I can verify and help restore your service.",
+   "tool_calls": [
+    {
+     "tool_name": "send_payment_request",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "bill_id": "BILL-4501283-2025-01"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "bill_id": "BILL-4501283-2025-01"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "send_payment_request",
+     "response": {
+      "result": "Payment request for bill BILL-4501283-2025-01 (amount due $65.0) sent to Sofia Martinez. Bill status is now Awaiting Payment."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I've completed the payment for the overdue bill, and it shows as paid now. What should I do next to restore my service?",
+   "tool_calls": [
+    {
+     "tool_name": "check_payment_request",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "make_payment",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Your payment has been received and your line has been reactivated. Please reboot your phone now to restore your signal and service.\n\nIf you still experience any issues after restarting your device, let me know and I\u2019ll assist you further.",
+   "tool_calls": [
+    {
+     "tool_name": "resume_line",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "resume_line",
+     "response": {
+      "result": "Line LN-8830142 has been resumed and is now Active."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "My phone rebooted successfully, but I still don't have any signal. There are still no bars showing at the top of my screen.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. Since your line is now active and you\u2019ve rebooted your phone, let\u2019s continue troubleshooting the no signal issue.\n\nPlease check your phone\u2019s status bar and confirm the following:\n- Is there any icon indicating \u201cNo SIM\u201d or \u201cSIM error\u201d?\n- Is there any signal strength icon at all (even if it\u2019s empty or has an \u201cx\u201d)?\n- Are you seeing any other unusual icons (like a triangle with an exclamation mark)?\n\nThis information will help narrow down the cause. If you\u2019re unsure, I can guide you through checking your phone\u2019s status bar step by step. Let me know what you see or if you\u2019d like instructions.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I actually see excellent signal strength, 5G, data enabled, and it says I'm connected to Chestnut-5G in the status bar now.",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Based on your status bar:\n- You have excellent signal strength.\n- 5G is active.\n- Mobile data is enabled.\n- You are connected to a Wi-Fi network (Chestnut-5G).\n\nThis means your phone is now successfully connected to both the cellular and Wi-Fi networks, and your service has been restored. You should be able to make calls, send texts, and use mobile data.\n\nIf you are still experiencing any specific issues (such as not being able to make calls, send texts, or use data when Wi-Fi is off), please let me know the details so I can assist further. Otherwise, your service should be fully functional now.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Can you please guide me through running a speed test to make sure everything is working? I want to make sure my connection is excellent."
+  },
+  {
+   "role": "agent",
+   "content": "Certainly! Here\u2019s how you can run a speed test on your phone to check your connection quality:\n\n1. Make sure you are either on mobile data or Wi-Fi, depending on which connection you want to test.\n2. Open your preferred web browser or download a speed test app (such as Ookla Speedtest or Fast.com).\n3. Go to a speed test website like speedtest.net or fast.com.\n4. Tap the \u201cGo\u201d or \u201cStart\u201d button to begin the test.\n5. Wait for the test to complete. It will show your download and upload speeds.\n\nLet me know the results you see, especially the download speed, and I can help you interpret them. If you\u2019d like, I can also guide you through running a speed test specifically on your mobile data connection (by turning off Wi-Fi first). Would you like instructions for that?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I ran the speed test and the results show excellent, 5G, excellent, excellent. Everything looks good now."
+  },
+  {
+   "role": "agent",
+   "content": "That\u2019s great to hear! Your speed test results confirm that your connection is excellent and your service is fully restored.\n\nIf you have any other questions or need further assistance, feel free to ask. Otherwise, you\u2019re all set and can enjoy your service!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

@@ -1,0 +1,52 @@
+id,section,lines,text,kind
+G01,General,8,"You should not provide any information, knowledge, or procedures not provided by the user or available tools",must_not
+G02,General,8,or give subjective recommendations or comments.,must_not
+G03,General,10,You should only make one tool call at a time,must
+G04,General,10,"if you make a tool call, you should not respond to the user simultaneously. If you respond to the user, you should not make a tool call at the same time.",must_not
+G05,General,12,You should deny user requests that are against this policy.,must
+G06,General,14,You should transfer the user to a human agent if and only if the request cannot be handled within the scope of your actions.,condition
+G07,General,14,"To transfer, first make a tool call to transfer_to_human_agents, and then send the message 'YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.' to the user.",order
+G08,General,16;171,You should try your best to resolve the issue for the user before transferring the user to a human agent. | Make sure you try all the possible ways to resolve the user's issue before transferring to a human agent.,order
+L01,Customer lookup,100,"For name lookup, date of birth is required for verification purposes.",condition
+T01,Technical support,160,You must first identify the customer.,order
+B01,Overdue bill payment,106;118,Check the bill status to make sure it is overdue. | You should always check that the bill is overdue before sending a payment request.,order
+B02,Overdue bill payment,107,Check the bill amount due,must
+B03,Overdue bill payment,108,Send the user a payment request for the overdue bill.,must
+B04,Overdue bill payment,110-111,Inform the user that a payment request has been sent. They should: | Check their payment requests using the check_payment_request tool.,must
+B05,Overdue bill payment,112,"If the user accepts the payment request, use the make_payment tool to make the payment.",condition
+B06,Overdue bill payment,114,Always check that the bill status is updated to PAID before informing the user that the bill has been paid.,order
+B07,Overdue bill payment,117,A user can only have one bill in the AWAITING PAYMENT status at a time.,must_not
+S01,Line suspension,126,You are allowed to lift the suspension after the user has paid all their overdue bills.,condition
+S02,Line suspension,127,"You are not allowed to lift the suspension if the line's contract end date is in the past, even if the user has paid all their overdue bills.",must_not
+S03,Line suspension,129,"After you resume the line, the user will have to reboot their device to get service.",order
+D01,Data refueling,135,The maximum amount of data that can be refueled is 2GB.,must_not
+D02,Data refueling,137,Ask them how much data they want to refuel,must
+D03,Data refueling,138,Confirm the price,must
+D04,Data refueling,139,Apply the refueled data to the line associated with the phone number the user provided.,must
+P01,Change plan,145,Make sure you know what line the user wants to change the plan for.,must
+P02,Change plan,146,Gather available plans,must
+P03,Change plan,147,Ask the user to select one.,must
+P04,Change plan,148,Calculate the price of the new plan.,must
+P05,Change plan,149,Confirm the price.,must
+P06,Change plan,150,Apply the plan to the line associated with the phone number the user provided.,must
+R01,Data roaming,156;301,"If a user is traveling outside their home network, you should check if the line is roaming enabled. | You should check that the line associated with the phone number the user provided is roaming enabled.",condition
+R02,Data roaming,156,"If it is not, you should enable it at no cost for the user.",condition
+C01,Cellular service,239,"If it is ON, guide the user to use `toggle_airplane_mode()` to turn it OFF.",condition
+C02,Cellular service,245,Use `check_sim_status()` to check the status of the SIM card.,must
+C03,Cellular service,246,"If it shows ""Missing"", guide the user to use `reseat_sim_card()` to ensure the SIM card is correctly inserted.",condition
+C04,Cellular service,247,"If it shows ""Locked"" (due to incorrect PIN or PUK entries), **escalate to technical support for assistance with SIM security**.",condition
+C05,Cellular service,252,"If `check_apn_settings()` shows ""Incorrect"", guide the user to use `reset_apn_settings()` to reset the APN settings.",condition
+C06,Cellular service,253;360,"After resetting the APN settings, the user must be instructed to use `reboot_device()` for the changes to apply. | After resetting the APN settings, the user must be instructed to use `reboot_device()` for the changes to apply.",order
+C07,Cellular service,257,Investigate if the line is suspended.,must
+C08,Cellular service,258,"If the line is suspended and the agent can lift the suspension (per general policy), verify if service is restored.",condition
+C09,Cellular service,259,"If the suspension cannot be lifted by the agent (e.g., due to contract end date as mentioned in general policy, or other reasons not resolvable by the agent), **escalate to technical support**.",condition
+M01,Mobile data,296,"If `check_network_status()` shows mobile data is disabled, guide the user to use `toggle_data()` to turn mobile data ON.",condition
+M02,Mobile data,300,"If the user is outside their carrier's primary coverage area (roaming) and mobile data isn't working, guide them to use `toggle_roaming()` to ensure Data Roaming is ON.",condition
+M03,Mobile data,306,"If `check_data_restriction_status()` shows ""Data Saver mode is ON"", guide the user to use `toggle_data_saver_mode()` to turn it OFF.",condition
+M04,Mobile data,311,"If `check_vpn_status()` shows ""VPN is ON and connected"" and performance level is ""Poor"", guide the user to use `disconnect_vpn()` to disconnect the VPN.",condition
+M05,Mobile data,324,"If `check_network_mode_preference()` shows ""2G"" or ""3G"", guide the user to use `set_network_mode_preference(mode: str)` with the mode `""4g_5g_preferred""` to allow the phone to connect to 5G.",condition
+X01,MMS,349,"First, ensure the user can make calls and that their mobile data is working for other apps (e.g., browsing the web).",order
+X02,MMS,354,"If `check_network_status()` shows ""2G"", guide the user to use `set_network_mode_preference(mode: str)` to switch to a network mode that includes 3G, 4G, or 5G (e.g., `""4g_5g_preferred""` or `""4g_only""`).",condition
+X03,MMS,359,"If `check_apn_settings()` shows MMSC URL is not set, guide the user to use `reset_apn_settings()` to reset the APN settings.",condition
+X04,MMS,364,"If `check_wifi_calling_status()` shows ""Wi-Fi Calling is ON"", guide the user to use `toggle_wifi_calling()` to turn it OFF.",condition
+X05,MMS,368,"If `check_app_permissions(app_name=""messaging"")` shows ""storage"" and ""sms"" permissions are not listed as granted, guide the user to use `grant_app_permission(app_name=""messaging"", permission=""storage"")` and `grant_app_permission(app_name=""messaging"", permission=""sms"")` to grant the necessary permissions.",condition

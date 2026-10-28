@@ -1,0 +1,268 @@
+{
+ "case": "7:[graph:Understanding and Troublesho]toggle_airplane_mode",
+ "arm": "R3_payment",
+ "repeat": 1,
+ "solved": false,
+ "actions_done": 1,
+ "actions_required": 2,
+ "turns": 17,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "check_status_bar",
+  "toggle_airplane_mode",
+  "check_sim_status",
+  "check_apn_settings",
+  "reseat_sim_card",
+  "reboot_device",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_airplane_mode",
+   "ok": true,
+   "why": "tool 'toggle_airplane_mode' was called"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, nothing loads, and I can't send picture messages. It's completely dead as far as the network goes. Can you help?"
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot your phone\u2019s service issue. First, I\u2019ll need to identify your account to check for any line or account problems. Could you please provide one of the following:\n\n- The phone number associated with your account\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I\u2019ll guide you through the steps to restore your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Sure, my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your phone number. Your line status is currently Active, so let\u2019s proceed with troubleshooting your phone\u2019s service.\n\nTo get started, could you please check your phone\u2019s status bar and let me know if you see any of the following:\n\n- Airplane mode icon\n- \u201cNo SIM\u201d or \u201cSIM error\u201d message\n- Any signal bars at all (even if they\u2019re empty)\n- Any network type indicator (like 5G, 4G, LTE, etc.)\n\nThis information will help me determine the next steps. If you\u2019re unsure how to check, let me know and I can guide you through it.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I see the airplane mode icon and 'No Signal' in the status bar, along with the data enabled icon. There are no signal bars or network indicators.",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "It looks like Airplane Mode is enabled on your phone, which disables all wireless connections\u2014including cellular service. This is likely the reason you have no service or signal.\n\nPlease turn off Airplane Mode on your device. Once you do, check if your signal bars or network indicators return and let me know if your service is restored. If you need instructions on how to turn off Airplane Mode, let me know your phone model and I can guide you through the steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Airplane mode is now OFF, but there's still no signal\u2014no bars or network indicators, and it still says 'No Signal.' What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_airplane_mode",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for turning off Airplane Mode. Since you still have no signal, the next step is to check your SIM card status. Sometimes, the SIM card may not be properly seated or could have an issue.\n\nCould you please check your SIM card status on your phone? If you need help, I can guide you through the process. Let me know if you see any messages like \u201cNo SIM,\u201d \u201cSIM error,\u201d or if it shows as \u201cActive.\u201d",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked the SIM status, and it says the SIM is active. There are still no signal bars and the status bar says 'No Signal.'",
+   "tool_calls": [
+    {
+     "tool_name": "check_sim_status",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking the SIM status and confirming it is active. Since the SIM is recognized but you still have no signal, the next step is to check your phone\u2019s network settings, specifically the Access Point Name (APN) settings, as incorrect APN settings can cause a complete loss of service.\n\nCould you please check your APN settings and let me know if anything appears incorrect or missing, especially the APN name or MMSC URL? If you\u2019re unsure how to check, I can guide you through the process.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My APN settings show as correct: APN name is 'fast.telecom.net' and the MMSC URL is set. Still no signal or service.",
+   "tool_calls": [
+    {
+     "tool_name": "check_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming your APN settings are correct and the SIM is active, but you still have no signal or service. Since your line is active on our end and your device recognizes the SIM, let\u2019s try reseating the SIM card. This can resolve issues where the phone isn\u2019t connecting to the network even though the SIM is detected.\n\nPlease remove your SIM card from your phone, wait a few seconds, and then reinsert it securely. After doing this, check if your phone regains signal or service. Let me know if you need instructions for your specific phone model. Once you\u2019ve reseated the SIM, let me know if anything changes with your signal or service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I reseated the SIM card and the SIM status is active, but there is still no signal\u2014no bars, no network indicators, and it still says 'No Signal.' What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for reseating the SIM card and checking the status. Since your SIM is active, APN settings are correct, Airplane Mode is off, and your line is active on our end, but you still have no signal, the next step is to reboot your device. Restarting the phone can often resolve temporary network connection issues.\n\nPlease restart your phone now. After it powers back on, check if you have any signal bars or network indicators. Let me know if your service returns or if the issue persists after the reboot.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I rebooted my phone, but there is still no signal\u2014no bars, no network indicators, and it still says 'No Signal.' What should I do next?",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer has no cellular service: SIM is active, APN settings are correct, Airplane Mode is off, SIM has been reseated, and device has been rebooted. Line is active in system, but phone still shows 'No Signal' with no bars or network indicators. Needs advanced technical support."
+     },
+     "params": {
+      "summary": "Customer has no cellular service: SIM is active, APN settings are correct, Airplane Mode is off, SIM has been reseated, and device has been rebooted. Line is active in system, but phone still shows 'No Signal' with no bars or network indicators. Needs advanced technical support."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

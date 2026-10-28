@@ -1,0 +1,412 @@
+{
+ "case": "19:[graph:Telecom Agent Policy]refuel_data",
+ "arm": "R2_apn",
+ "repeat": 1,
+ "solved": false,
+ "actions_done": 1,
+ "actions_required": 2,
+ "turns": 27,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "check_status_bar",
+  "toggle_wifi",
+  "reboot_device",
+  "check_apn_settings",
+  "get_data_usage",
+  "get_details_by_id",
+  "refuel_data",
+  "reboot_device",
+  "reset_apn_settings",
+  "reboot_device",
+  "toggle_wifi",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_refuel_data",
+   "ok": true,
+   "why": "tool 'refuel_data' was called with {'customer_id': 'CUS-4501283', 'line_id': 'LN-8830142'}"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no internet at all unless I'm on Wi-Fi, and I can't send picture messages either. Can you help me fix this?"
+  },
+  {
+   "role": "agent",
+   "content": "I can help you with this issue. To get started, I need to identify your account. Could you please provide one of the following:\n\n- The phone number associated with your account\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I can begin troubleshooting your mobile data and MMS issues.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148. My name is Sofia Martinez."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the information. I see your line is active, but you have no internet unless on Wi-Fi and cannot send picture messages (MMS). I\u2019ll help you troubleshoot both mobile data and MMS issues.\n\nTo proceed, I\u2019ll need to check a few things on your device, such as your mobile data status, network connection, and some settings. Are you able to follow step-by-step instructions on your phone if needed? If so, please let me know what type of phone you are using (Android or iPhone), or if you\u2019d like to proceed right away, I can guide you through the checks.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Yes, I can follow step-by-step instructions. I'm using an Android phone. Please let me know what to do first."
+  },
+  {
+   "role": "agent",
+   "content": "Great! Let\u2019s start by checking your phone\u2019s current network and data status. Please follow these steps:\n\n1. Check your phone\u2019s status bar (the top of your screen) and let me know:\n   - Do you see any signal bars? (How many?)\n   - Is there a 4G, LTE, 5G, or similar icon?\n   - Is there an \u201cx\u201d or \u201c!\u201d symbol near the signal bars?\n   - Is Airplane Mode (\u2708\ufe0f) showing?\n\n2. Are you able to see a mobile data icon (usually two arrows or a \u201c4G/5G\u201d symbol) when Wi-Fi is turned off?\n\nPlease describe what you see, or if you prefer, I can guide you through checking these details in your phone\u2019s settings.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "In my status bar, I see excellent signal bars, a 5G icon, and a 'Data Enabled' icon. I'm also connected to Wi-Fi (Chestnut-5G) right now, and my battery is at 87%.",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the details. Since you have excellent signal, 5G, and data enabled, your phone should be able to use mobile data. However, since you only have internet on Wi-Fi, let\u2019s try the following steps:\n\n1. Please turn off Wi-Fi on your phone so that it switches to mobile data only.\n2. After turning off Wi-Fi, try browsing a website or using an app that needs internet. Let me know if you get any connection or error messages.\n3. Also, let me know if the 5G icon and signal bars remain visible after Wi-Fi is off.\n\nOnce you\u2019ve done this, please tell me what happens. This will help us determine if your phone is connecting to mobile data at all.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Wi-Fi is now off. The phone shows 5G and full signal bars, but nothing loads in my browser or apps. It just keeps trying to load with no error messages.",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_wifi",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking. Since your phone shows 5G and full signal bars with data enabled, but nothing loads on mobile data, let\u2019s try the following troubleshooting steps:\n\n1. Restart your phone. This can often resolve temporary network issues.\n2. After restarting, make sure Wi-Fi is still off and check if mobile data works.\n3. If it still doesn\u2019t work, we\u2019ll check your Access Point Name (APN) settings, which are required for mobile data and MMS.\n\nPlease restart your phone now, keep Wi-Fi off, and let me know if mobile data starts working after the restart. If not, I\u2019ll guide you through checking your APN settings next.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I've already restarted my phone and kept Wi-Fi off. It still shows 5G and full signal, but nothing loads on mobile data.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming. Since restarting didn\u2019t help, the next step is to check your Access Point Name (APN) settings, as incorrect APN settings are a common cause of both mobile data and MMS issues.\n\nPlease follow these steps on your Android phone:\n\n1. Go to Settings > Network & Internet (or Connections) > Mobile Network > Access Point Names (APN).\n2. Find and select your current APN.\n3. Let me know the following details from your APN settings:\n   - Name\n   - APN\n   - MMSC (if listed)\n   - Any other fields that look filled in\n\nOnce you provide these details, I\u2019ll check if your APN settings are correct or if they need to be updated.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My APN settings show the name as 'fast.telecom.net' and the MMSC as 'http://mms.telecom.net/mms/wapenc'. It says the APN settings are correct.",
+   "tool_calls": [
+    {
+     "tool_name": "check_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your APN details. The APN name and MMSC appear to be correct for your carrier. Since your phone shows 5G and data enabled but still cannot access the internet or send MMS, let\u2019s check for any data restrictions or saver modes that might be blocking your mobile data.\n\nPlease check if Data Saver mode is enabled on your phone:\n\n1. Go to Settings > Network & Internet > Data Saver.\n2. See if Data Saver is turned ON. If it is, please turn it OFF.\n\nAfter turning Data Saver OFF (if it was on), try using mobile data again with Wi-Fi off. Let me know if this resolves the issue or if you still cannot access the internet or send picture messages.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Data Saver was already off. I still can't access the internet or send picture messages with Wi-Fi off."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking. Since Data Saver is off and your APN settings are correct, but you still have no mobile data or MMS, let\u2019s check for other possible restrictions:\n\n1. Are you using a VPN app or service on your phone? If so, please disconnect or disable it and try using mobile data again.\n2. Have you recently changed your SIM card or had any issues with your SIM?\n3. Is your phone showing any notifications about SIM issues, network problems, or account suspension?\n\nPlease let me know about any VPN usage or SIM changes, and if you see any warning messages. If none of these apply, I will check your account and line status on my end for any issues that could be affecting your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I'm not using a VPN, and I haven't changed my SIM card recently. There are no notifications or warning messages about SIM or network issues on my phone."
+  },
+  {
+   "role": "agent",
+   "content": "Your plan, Advantage 50GB, has a monthly data limit of 50GB. You have already used 50.5GB, which means you have exceeded your plan\u2019s data allowance for this billing cycle. When this happens, your mobile data is cut off until you either refuel (add more data) or the next billing cycle starts.\n\nYou have two options to restore your mobile data and MMS:\n\n1. Add more data (refuel) to your line for $5.00 per GB (up to 2GB at a time).\n2. Wait until your billing cycle resets on March 5, 2025.\n\nWould you like to add 1GB or 2GB of data now to restore your mobile data and MMS? If so, please let me know how much data you\u2019d like to add.",
+   "tool_calls": [
+    {
+     "tool_name": "get_data_usage",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "PLN-2002"
+     },
+     "params": {
+      "id": "PLN-2002"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_data_usage",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "plan_name": "Advantage 50GB",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 0,
+      "data_limit_gb": 50,
+      "total_data_available_gb": 50,
+      "cycle_end_date": "2025-03-05"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "plan_id": "PLN-2002",
+      "name": "Advantage 50GB",
+      "data_limit_gb": 50,
+      "monthly_price": 65.0,
+      "data_refueling_price_per_gb": 5.0,
+      "entity_type": "plan"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I'd like to add 1GB of data, please."
+  },
+  {
+   "role": "agent",
+   "content": "1GB of data has been added to your line for $5.00, and the charge will appear on your current bill. Please turn off Wi-Fi and try using mobile data again. You should now be able to access the internet and send picture messages (MMS).\n\nIf you still experience issues, let me know and I\u2019ll help you further. Otherwise, you\u2019re all set!",
+   "tool_calls": [
+    {
+     "tool_name": "refuel_data",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142",
+      "gb_amount": 1
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142",
+      "gb_amount": 1
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "refuel_data",
+     "response": {
+      "result": "Refueled 1.0GB on line LN-8830142 (+1-617-555-0148). Charge of $5.00 added to bill BILL-4501283-2025-02."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Wi-Fi is off. I still can't load anything over mobile data, and picture messages won't send."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. Since you now have available data and your line is active, but mobile data and MMS still do not work, let\u2019s try a few more troubleshooting steps:\n\n1. Please restart your phone one more time. This will help your device recognize the newly added data.\n2. After restarting, keep Wi-Fi off and try browsing the internet or sending a picture message.\n\nIf it still does not work after the restart, please let me know. I will then guide you through resetting your APN settings, which can resolve lingering data and MMS issues even if the settings appear correct.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I already restarted my phone as you asked, and it rebooted successfully, but I still can't access the internet or send picture messages over mobile data. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming. Since restarting did not resolve the issue, the next step is to reset your APN settings, as sometimes hidden or incorrect values can cause persistent problems even if the main fields look correct.\n\nHere\u2019s how to reset your APN settings on Android:\n\n1. Go to Settings > Network & Internet (or Connections) > Mobile Network > Access Point Names (APN).\n2. Tap the three dots (\u22ee) in the upper right corner or look for a \u201cMore\u201d or \u201cMenu\u201d option.\n3. Select \u201cReset to default\u201d or \u201cReset settings.\u201d\n4. Confirm the reset if prompted.\n\nAfter resetting, your phone should automatically load the correct APN settings for your carrier. Once done:\n- Restart your phone again.\n- Make sure Wi-Fi is off.\n- Try using mobile data and sending a picture message.\n\nPlease let me know if this resolves the issue or if you still cannot access the internet or send MMS.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I reset my APN settings to default, rebooted the device, and then turned Wi-Fi back on, but I'm not connected to any Wi-Fi network right now. I still can't use mobile data or send picture messages.",
+   "tool_calls": [
+    {
+     "tool_name": "reset_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "toggle_wifi",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez (+1-617-555-0148) cannot use mobile data or send MMS despite active line, sufficient data, correct APN, no VPN/Data Saver, and multiple restarts. All standard troubleshooting steps have been exhausted."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez (+1-617-555-0148) cannot use mobile data or send MMS despite active line, sufficient data, correct APN, no VPN/Data Saver, and multiple restarts. All standard troubleshooting steps have been exhausted."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

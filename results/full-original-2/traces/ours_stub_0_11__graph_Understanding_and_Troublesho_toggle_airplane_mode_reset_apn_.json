@@ -1,0 +1,292 @@
+{
+ "case": "11:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line",
+ "arm": "stub",
+ "repeat": 0,
+ "solved": false,
+ "actions_done": 3,
+ "actions_required": 5,
+ "turns": 19,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "resume_line",
+  "reboot_device",
+  "get_details_by_id",
+  "reseat_sim_card"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_airplane_mode",
+   "ok": false,
+   "why": "tool 'toggle_airplane_mode' was never called by the user"
+  },
+  {
+   "id": "s1_reset_apn_settings",
+   "ok": false,
+   "why": "tool 'reset_apn_settings' was never called by the user"
+  },
+  {
+   "id": "s2_reboot_device",
+   "ok": true,
+   "why": "tool 'reboot_device' was called"
+  },
+  {
+   "id": "s3_resume_line",
+   "ok": true,
+   "why": "tool 'resume_line' was called with {'customer_id': 'CUS-4501283', 'line_id': 'LN-8830142'}"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was not called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no signal bars, nothing loads, and I can't send picture messages. Can you help me fix this?"
+  },
+  {
+   "role": "agent",
+   "content": "I'm here to help! To assist you better, could you please provide your phone number or the name and date of birth on your account? This will help me check your line status and troubleshoot the issue.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Your phone line is currently suspended, which is why you have no service or signal. This is likely the cause of all the issues you're experiencing.\n\nWould you like me to resume (reactivate) your line so you can regain service? If you know the reason for the suspension or if it was a mistake, please let me know.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Suspended",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "2025-02-25",
+      "suspension_reason": 1,
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Yes, please reactivate my line. I'm not sure why it was suspended, but I'd like to get my service back as soon as possible."
+  },
+  {
+   "role": "agent",
+   "content": "Your line has been reactivated and is now active again. You should regain service shortly\u2014please restart your phone if you don\u2019t see signal bars within a few minutes.\n\nIf you continue to have issues or need further assistance, let me know!",
+   "tool_calls": [
+    {
+     "tool_name": "resume_line",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "resume_line",
+     "response": {
+      "result": "Line LN-8830142 has been resumed and is now Active."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I restarted my phone as you suggested, but I still don't see any signal bars and nothing is loading.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Your line is now active, and your device (Pixel 8 Pro) is also showing as active in our system. Since you still have no signal after restarting your phone, let's try a few troubleshooting steps:\n\n1. Make sure Airplane Mode is off.\n2. Try toggling Airplane Mode on for 10 seconds, then off again.\n3. Check if your SIM card (or eSIM) is properly installed.\n4. If possible, try your SIM card in another phone to see if it gets signal.\n5. Go to your phone\u2019s network settings and select your carrier manually.\n\nIf none of these steps work, please let me know if you see any error messages or if your phone says \"No SIM,\" \"Emergency Calls Only,\" or something similar. This will help me further diagnose the issue.",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "DEV-55210"
+     },
+     "params": {
+      "id": "DEV-55210"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "device_id": "DEV-55210",
+      "device_type": "phone",
+      "model": "Pixel 8 Pro",
+      "imei": "356938035643809",
+      "esim_capable": true,
+      "activation_status": "Active",
+      "activation_date": "2023-05-18",
+      "last_esim_transfer_date": "2023-05-18",
+      "entity_type": "device"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I'm not sure about the airplane mode status. Can you tell me where to look or how to check that?"
+  },
+  {
+   "role": "agent",
+   "content": "Absolutely! Here\u2019s how you can check and toggle Airplane Mode on your Pixel 8 Pro:\n\n1. **Swipe Down from the Top:**  \n   Swipe down from the very top of your screen to open the Quick Settings panel.\n\n2. **Look for the Airplane Icon:**  \n   You\u2019ll see an airplane icon labeled \u201cAirplane mode.\u201d  \n   - If the icon is highlighted or colored, Airplane Mode is ON (which disables all wireless connections).\n   - If it\u2019s grayed out, Airplane Mode is OFF.\n\n3. **Toggle Airplane Mode:**  \n   - Tap the icon once to turn Airplane Mode ON (wait about 10 seconds).\n   - Tap it again to turn Airplane Mode OFF.\n\nAfter turning Airplane Mode off, wait a moment to see if your phone reconnects to the network and shows signal bars.\n\nLet me know what you find or if you need more help!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked, and Airplane Mode was already off. I toggled it on for 10 seconds and then turned it back off, but I still don't see any signal bars."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying that. Since Airplane Mode was off and toggling it didn\u2019t help, let\u2019s try a couple more steps:\n\n1. **Check for SIM Card Issues:**\n   - If you\u2019re using a physical SIM card, remove it and reinsert it carefully.\n   - If you\u2019re using an eSIM, let me know\u2014sometimes reactivating the eSIM or resetting network settings can help.\n\n2. **Manual Network Selection:**\n   - Go to Settings > Network & Internet > SIMs > [Your SIM] > Network.\n   - Tap \u201cChoose network\u201d or \u201cSelect manually.\u201d\n   - Wait for your phone to search for available networks, then select your carrier from the list.\n\n3. **Reset Network Settings:**\n   - Go to Settings > System > Reset options > Reset Wi-Fi, mobile & Bluetooth.\n   - Confirm the reset (this will not delete your personal data, but you\u2019ll need to reconnect to Wi-Fi networks).\n\nIf you\u2019re still not getting any signal after these steps, please let me know:\n- If your phone displays any error messages (like \u201cNo SIM,\u201d \u201cEmergency Calls Only,\u201d etc.)\n- Whether you\u2019re using a physical SIM or eSIM\n\nThis will help me determine if there\u2019s a deeper issue with your line, SIM/eSIM, or device. If needed, I can escalate this to a technical specialist.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I'm using a physical SIM card. I haven't tried removing and reinserting it yet. Would you like me to do that now, or should we try the manual network selection first?"
+  },
+  {
+   "role": "agent",
+   "content": "Let\u2019s start by removing and reinserting your physical SIM card, as this is a common cause of \u201cno signal\u201d issues and is quick to check:\n\n1. Power off your phone.\n2. Use the SIM ejector tool (or a paperclip) to gently remove the SIM tray.\n3. Take out the SIM card, check for any visible damage or dust, and reinsert it securely.\n4. Put the SIM tray back in and power your phone back on.\n\nAfter your phone restarts, check if you have signal bars.\n\nIf you still don\u2019t see any signal, then proceed with the manual network selection steps I mentioned earlier.\n\nLet me know what happens after you reinsert the SIM card!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I removed and reinserted the SIM card, and my phone says the SIM status is active, but there are still no signal bars showing and nothing is loading.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. Since your SIM status is showing as active but you still have no signal bars and nothing is loading, let\u2019s try the manual network selection next:\n\n1. Go to **Settings** > **Network & Internet** > **SIMs** > select your SIM.\n2. Tap **Network** or **Mobile network**.\n3. Tap **Choose network** or **Select manually**.\n4. Wait for your phone to search for available networks.\n5. When the list appears, select your carrier.\n\nIf your carrier does not appear, or if you get an error when trying to connect, please let me know what you see.\n\nAdditionally, if you see any error messages (like \u201cNo Service,\u201d \u201cEmergency Calls Only,\u201d or similar), please share those details. This will help me determine if there\u2019s a deeper issue with your SIM, device, or account, and I can escalate your case to a technical specialist if needed.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I followed your steps to manually select the network, but my phone didn't find any networks at all. There were no options listed, and it still shows no signal bars at the top. No new error messages have appeared\u2014just no service."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying those steps and providing detailed feedback. Since your phone is not detecting any networks at all\u2014even after reinserting the SIM and attempting manual network selection\u2014this suggests a deeper issue that could be related to:\n\n- A problem with the SIM card itself (even if it appears \u201cactive\u201d)\n- A device hardware issue (SIM reader or antenna)\n- A network provisioning issue on your account\n\nAt this point, further troubleshooting may require advanced diagnostics or a replacement SIM card. I recommend escalating your case to a technical specialist who can investigate your account and SIM status in more detail, and guide you through next steps (such as SIM replacement or device testing).\n\nWould you like me to connect you with a human agent for further assistance?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

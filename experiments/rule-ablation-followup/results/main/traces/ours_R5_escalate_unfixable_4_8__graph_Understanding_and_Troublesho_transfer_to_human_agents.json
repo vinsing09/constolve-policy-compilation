@@ -1,0 +1,224 @@
+{
+ "case": "8:[graph:Understanding and Troublesho]transfer_to_human_agents",
+ "arm": "R5_escalate_unfixable",
+ "repeat": 4,
+ "solved": true,
+ "actions_done": 2,
+ "actions_required": 2,
+ "turns": 13,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "check_status_bar",
+  "toggle_airplane_mode",
+  "check_sim_status",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "diagnosed_before_handoff",
+   "ok": true,
+   "why": "tool 'check_status_bar' was called"
+  },
+  {
+   "id": "s3_transfer_to_human_agents",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no signal at all and I can't send picture messages or use mobile data. Can you help?"
+  },
+  {
+   "role": "agent",
+   "content": "I can help you with that! To begin troubleshooting, I\u2019ll need to identify your account. Could you please provide either your phone number, customer ID, or your full name and date of birth?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez, and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the information. I see your line is active, but you\u2019re experiencing no signal, can\u2019t send picture messages, and can\u2019t use mobile data. Let\u2019s start by checking your phone\u2019s status and settings to diagnose the issue.\n\nCould you please check your phone\u2019s status bar and let me know:\n- If Airplane Mode is enabled\n- What the signal strength indicator shows (e.g., no bars, \u201cNo Service,\u201d etc.)\n- If you see any network type (like 5G, 4G, LTE, etc.)\n\nThis will help me guide you through the next steps.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I see an airplane icon, 'No Signal', and 'Data Disabled' in the status bar. What should I do next?",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "It looks like Airplane Mode is enabled on your phone, which turns off all wireless connections, including cellular service and mobile data. To restore your signal and data:\n\n1. Please turn off Airplane Mode on your phone.\n2. After turning it off, wait a few seconds and check if your signal returns and if mobile data is enabled.\n\nLet me know what you see in your status bar after turning off Airplane Mode.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Airplane mode is now off, but the status bar still shows no signal bars, 'No Service', and mobile data is still disabled. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_airplane_mode",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for updating me. Since Airplane Mode is off but you still have no signal and mobile data is disabled, the next step is to check your SIM card status. Sometimes, the SIM card may not be properly seated or could have an issue.\n\nPlease check your phone\u2019s SIM card status and let me know if it shows as active, missing, or locked (with a PIN or PUK code). If you\u2019re not sure how to check, let me know your phone model and I can guide you through the steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I just checked, and it says the SIM status is 'Locked.' What should I do now?",
+   "tool_calls": [
+    {
+     "tool_name": "check_sim_status",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "A \u201cLocked\u201d SIM status means your SIM card is secured with a PIN or PUK code and needs to be unlocked before you can use cellular service.\n\nHere\u2019s what you should do:\n1. If your phone is asking for a PIN, enter your SIM PIN code. (If you don\u2019t remember it, be careful\u2014too many incorrect attempts will require a PUK code.)\n2. If your phone is asking for a PUK code, you\u2019ll need to enter the PUK code provided by your carrier (usually found in your original SIM card packaging or by contacting customer support).\n\nDo you know your SIM PIN or PUK code? If not, I recommend checking any documentation you received with your SIM card. If you don\u2019t have the code, I can transfer you to a human agent who can securely provide your PUK code after verifying your identity.\n\nWould you like to try entering your PIN/PUK, or should I transfer you to a human agent for further assistance?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I don't know my PIN or PUK code, so please transfer me to a human agent for further assistance."
+  },
+  {
+   "role": "agent",
+   "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez has a SIM card locked status and does not know her SIM PIN or PUK code. She needs assistance unlocking her SIM to restore cellular service."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez has a SIM card locked status and does not know her SIM PIN or PUK code. She needs assistance unlocking her SIM to restore cellular service."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

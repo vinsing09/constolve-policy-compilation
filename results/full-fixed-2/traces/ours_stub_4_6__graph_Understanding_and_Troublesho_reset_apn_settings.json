@@ -1,0 +1,233 @@
+{
+ "case": "6:[graph:Understanding and Troublesho]reset_apn_settings",
+ "arm": "stub",
+ "repeat": 4,
+ "solved": false,
+ "actions_done": 2,
+ "actions_required": 3,
+ "turns": 13,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "reboot_device",
+  "reseat_sim_card",
+  "get_data_usage"
+ ],
+ "criteria": [
+  {
+   "id": "s0_reset_apn_settings",
+   "ok": false,
+   "why": "tool 'reset_apn_settings' was never called by the user"
+  },
+  {
+   "id": "s1_reboot_device",
+   "ok": true,
+   "why": "tool 'reboot_device' was called"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was not called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all right now. I can't make calls, send messages, or use data. Can you help me fix this?"
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're experiencing no service on your phone. Let's work together to resolve this. To assist you, I\u2019ll need to identify your account and line.\n\nCould you please provide one of the following:\n- The phone number of the affected line\n- Your full name and date of birth (for verification)\n\nOnce I have this information, I can check your line status and help restore your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your information. I\u2019ve identified your account and checked your line status, which currently shows as \"Active.\" Since your line is active but you have no service (no calls, messages, or data), here are a few quick troubleshooting steps:\n\n1. Have you tried restarting your phone?\n2. Are you seeing any error messages or symbols (like \"No SIM\" or \"SOS only\") on your phone?\n3. Are you currently in your usual coverage area, or have you recently traveled?\n\nPlease let me know if you\u2019ve already tried these steps or if you notice anything unusual on your device. This will help me assist you further.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I'm at home in Boston, which is my usual area. I haven't restarted my phone yet. There are no error messages, but there are no signal bars showing at all on the screen."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the details. Since you\u2019re in your usual area and there are no error messages, but you see no signal bars at all, this could be due to a temporary network issue, a SIM card problem, or a device issue.\n\nHere\u2019s what I recommend as the next steps:\n\n1. Restart your phone. This can often resolve temporary network or SIM issues.\n2. After restarting, check if the signal bars reappear.\n3. If there\u2019s still no service, try removing your SIM card (if possible), wait a few seconds, and reinsert it securely.\n\nPlease try restarting your phone now and let me know if the signal returns or if the issue persists. If it doesn\u2019t resolve after these steps, I can check for network outages or escalate the issue further.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I restarted my phone, but there are still no signal bars and no service. Nothing changed after the reboot.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying the restart. Since your line is active and you\u2019re still not getting any signal after rebooting, let\u2019s proceed with the following:\n\n1. Please confirm if you can try removing and reinserting your SIM card. Sometimes, a loose or faulty SIM connection can cause this issue.\n2. Have you recently changed your device or SIM card, or experienced any physical damage to your phone?\n\nIf you\u2019re able to check the SIM card and the issue persists, I can check for any network outages in your area or escalate the issue for further technical support. Please let me know about the SIM card and any recent changes or damage to your device.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I removed and reinserted the SIM card just now. My SIM status shows as active, but I still have no signal bars or service on my phone.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming that you\u2019ve reinserted the SIM card and checked the SIM status. Since your line is active, your SIM is recognized, and you\u2019re still not getting any signal, this suggests a possible network issue in your area, a SIM card malfunction, or a device hardware problem.\n\nHere\u2019s what I can do next:\n\n- Check for any known network outages or issues affecting your line.\n- If there are no outages, the next step may be to try your SIM card in another compatible phone (if available) to see if the issue is with your device or the SIM itself.\n\nWould you like me to check for network issues on your line now? And do you have access to another phone to test your SIM card? Let me know how you\u2019d like to proceed, and I\u2019ll assist you further.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Yes, please check for network issues on my line. I don't have another phone to test the SIM card right now."
+  },
+  {
+   "role": "agent",
+   "content": "I checked your line and there are no signs of suspension or data blockages\u2014your plan is active, and you have not exceeded your data limit. This suggests the issue is not related to your account or plan.\n\nSince you don\u2019t have another phone to test the SIM card, and you\u2019ve already tried restarting your device and reinserting the SIM, the next best step is to escalate this to our technical support team. They can check for any local network outages or deeper technical issues affecting your service.\n\nWould you like me to escalate your case to a human agent for further investigation and support?",
+   "tool_calls": [
+    {
+     "tool_name": "get_data_usage",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_data_usage",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "plan_name": "Advantage 50GB",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "data_limit_gb": 50,
+      "total_data_available_gb": 50,
+      "cycle_end_date": "2025-03-05"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

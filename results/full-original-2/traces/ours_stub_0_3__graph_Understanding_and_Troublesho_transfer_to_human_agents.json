@@ -1,0 +1,283 @@
+{
+ "case": "3:[graph:Understanding and Troublesho]transfer_to_human_agents",
+ "arm": "stub",
+ "repeat": 0,
+ "solved": false,
+ "actions_done": 2,
+ "actions_required": 3,
+ "turns": 15,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "get_data_usage",
+  "get_details_by_id",
+  "reseat_sim_card",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_check_sim_status",
+   "ok": false,
+   "why": "tool 'check_sim_status' was never called by the user"
+  },
+  {
+   "id": "s1_get_data_usage",
+   "ok": true,
+   "why": "tool 'get_data_usage' was called"
+  },
+  {
+   "id": "s2_transfer_to_human_agents",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone suddenly lost all signal\u2014no calls, no internet, nothing loads at all. It was working perfectly yesterday. Can you help?"
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're experiencing this issue. To assist you better, could you please provide your phone number or the name and date of birth associated with your account? This will help me check your line status and identify the cause of the problem.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Your line is currently active, but I see that you have used 50.5GB of data, which is over your plan's 50GB monthly limit. This could be why you have lost internet access, as your data may be blocked until your cycle renews or you add more data.\n\nFor calls and texts, your line status is still active, so there may be another issue if those are not working either. Can you confirm if you are unable to make calls and send texts as well, or is it just the internet that is not working? \n\nIf you\u2019d like, I can help you refuel (add more data) to restore your internet access right away. Would you like to proceed with a data top-up?",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_data_usage",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_data_usage",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "plan_name": "Advantage 50GB",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 0,
+      "data_limit_gb": 50,
+      "total_data_available_gb": 50,
+      "cycle_end_date": "2025-03-05"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "It's not just the internet\u2014calls and texts aren't working either. I can't send or receive anything, and there's no signal at all."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for clarifying. Since your line status is active and there are no suspensions or blocks on your account, but you have no signal at all (not just data), here are a few quick checks:\n\n1. Have you recently changed your SIM card or device?\n2. Are you in an area where you usually have good coverage?\n3. Have you tried restarting your phone?\n\nIf you\u2019ve already checked these and still have no signal, there could be a network outage in your area or a technical issue with your SIM or device. Would you like me to check for device or SIM issues, or would you prefer to be connected to a human agent for further troubleshooting?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I'm at home in Boston where I always have great coverage. I haven't changed my SIM or phone, and restarting didn't help. Can you check if there's something wrong with my device or SIM?"
+  },
+  {
+   "role": "agent",
+   "content": "Your device (Pixel 8 Pro) and SIM are both showing as active in our system, with no recent changes or issues reported. Since you\u2019re in an area with normally good coverage and have already restarted your phone, this suggests the problem may be due to a local network outage or a technical issue not visible from our end.\n\nHere\u2019s what you can try next:\n- Remove and reinsert your SIM card (if it\u2019s a physical SIM).\n- If you have access to another phone, try inserting your SIM into that device to see if you get a signal.\n- Check if others nearby (family, neighbors) are experiencing similar issues.\n\nIf none of these steps help, the issue may require technical support or a SIM replacement. Would you like me to escalate this to a human agent for further troubleshooting and possible SIM replacement?",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "DEV-55210"
+     },
+     "params": {
+      "id": "DEV-55210"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "device_id": "DEV-55210",
+      "device_type": "phone",
+      "model": "Pixel 8 Pro",
+      "imei": "356938035643809",
+      "esim_capable": true,
+      "activation_status": "Active",
+      "activation_date": "2023-05-18",
+      "last_esim_transfer_date": "2023-05-18",
+      "entity_type": "device"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I can try removing and reinserting the SIM card. Please walk me through it step by step."
+  },
+  {
+   "role": "agent",
+   "content": "Absolutely! Here\u2019s a step-by-step guide to safely remove and reinsert your SIM card on your Pixel 8 Pro:\n\n1. **Turn Off Your Phone:**  \n   Power off your Pixel 8 Pro completely to avoid any potential damage.\n\n2. **Locate the SIM Card Tray:**  \n   The SIM card tray is usually on the left side of your phone. Look for a small pinhole next to a thin tray outline.\n\n3. **Eject the SIM Card Tray:**  \n   - Use the SIM eject tool that came with your phone (or a small paperclip).\n   - Gently insert the tool into the pinhole and press until the tray pops out.\n\n4. **Remove the SIM Card:**  \n   - Carefully pull the tray out.\n   - Take out the SIM card from the tray. Note how it fits so you can put it back the same way.\n\n5. **Check the SIM Card:**  \n   - Inspect the SIM card and tray for any dust or damage.\n   - If you see dust, gently wipe it off with a soft, dry cloth.\n\n6. **Reinsert the SIM Card:**  \n   - Place the SIM card back into the tray in the correct orientation.\n   - Slide the tray back into the phone until it clicks into place.\n\n7. **Turn On Your Phone:**  \n   - Power your phone back on.\n   - Wait a moment to see if your phone detects the SIM and regains signal.\n\nLet me know once you\u2019ve completed these steps, or if you have any questions along the way!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I removed and reinserted the SIM card, but my phone says the SIM is still locked. Reseating didn\u2019t change anything\u2014the signal is still completely dead.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying those steps. If your phone is now saying the SIM is \u201clocked\u201d and you still have no signal, this could indicate:\n\n- The SIM card is damaged or malfunctioning.\n- There\u2019s a network-side issue affecting your SIM.\n- The phone is requesting a PIN or PUK code (sometimes shown as \u201cSIM locked\u201d).\n\nHere\u2019s what you can do next:\n1. If your phone is asking for a PIN or PUK code, do not attempt to guess it\u2014too many incorrect attempts can permanently lock the SIM.\n2. If you have another phone available, try inserting your SIM card into that device to see if it works there.\n3. If the SIM does not work in another phone, it likely needs to be replaced.\n\nSince your SIM is showing as active in our system but is not working in your device, I recommend escalating this to a human agent for further troubleshooting and to arrange a SIM replacement if needed.\n\nWould you like me to connect you to a human agent now for immediate assistance?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Yes, please connect me to a human agent for further help. Thank you."
+  },
+  {
+   "role": "agent",
+   "content": "You will now be connected to a human agent for further assistance. They will help you troubleshoot the SIM issue and arrange a replacement if necessary. Thank you for your patience!",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer's phone suddenly lost all signal (calls, texts, data). SIM is active in system, but phone says SIM is locked after reseating. Customer has tried restarting and reseating SIM, but issue persists. Needs further troubleshooting and possibly a SIM replacement."
+     },
+     "params": {
+      "summary": "Customer's phone suddenly lost all signal (calls, texts, data). SIM is active in system, but phone says SIM is locked after reseating. Customer has tried restarting and reseating SIM, but issue persists. Needs further troubleshooting and possibly a SIM replacement."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

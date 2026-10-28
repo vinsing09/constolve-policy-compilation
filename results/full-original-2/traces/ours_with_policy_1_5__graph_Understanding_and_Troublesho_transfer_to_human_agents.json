@@ -1,0 +1,213 @@
+{
+ "case": "5:[graph:Understanding and Troublesho]transfer_to_human_agents",
+ "arm": "with_policy",
+ "repeat": 1,
+ "solved": false,
+ "actions_done": 2,
+ "actions_required": 3,
+ "turns": 13,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "reseat_sim_card",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "diagnosed_before_handoff",
+   "ok": false,
+   "why": "tool 'check_status_bar' was never called"
+  },
+  {
+   "id": "s2_get_data_usage",
+   "ok": true,
+   "why": "tool 'get_data_usage' was called"
+  },
+  {
+   "id": "s3_transfer_to_human_agents",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no signal at all. Nothing loads, I can't send picture messages, and I can't get online or make a call. Can you help?"
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot your phone\u2019s signal and connectivity issues. To get started, I\u2019ll need to identify your account. Could you please provide one of the following:\n\n- The phone number associated with your account\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I can check your line status and assist you further.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your information. Your line status is currently Active, so let\u2019s start troubleshooting your phone\u2019s signal issue.\n\nCould you please check your phone\u2019s status bar and let me know if you see any of the following:\n- Airplane mode icon (\u2708\ufe0f)\n- \u201cNo Signal\u201d or a signal strength indicator (bars)\n- Any other unusual icons\n\nThis will help determine if the issue is related to your device settings or something else. If you\u2019re not sure how to check, let me know and I can guide you through it.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I checked the status bar and I don't see any signal bars at all. There's no airplane mode icon either. It just looks empty where the signal bars should be."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking. Since there are no signal bars and airplane mode is not enabled, the next step is to check if your SIM card is being detected by your phone. Sometimes, a SIM card issue can cause a complete loss of signal.\n\nCould you please check your SIM card status on your phone? If you need instructions, let me know your phone model (Android or iPhone), and I can guide you through the steps. Alternatively, if you have already checked and see any messages like \u201cNo SIM,\u201d \u201cSIM not detected,\u201d or \u201cSIM locked,\u201d please let me know.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I haven't checked my SIM card status yet. I'm using an Android phone. Can you tell me how to check it?"
+  },
+  {
+   "role": "agent",
+   "content": "Sure! Here\u2019s how you can check your SIM card status on most Android phones:\n\n1. Open the Settings app on your phone.\n2. Scroll down and tap on \u201cAbout phone\u201d or \u201cAbout device.\u201d\n3. Look for an option called \u201cStatus\u201d or \u201cSIM status.\u201d\n4. Tap on \u201cSIM status.\u201d Here, you should see information about your SIM card, such as:\n   - Network\n   - Signal strength\n   - Mobile network state\n   - SIM status (should say \u201cActive,\u201d \u201cReady,\u201d or similar)\n\nPlease let me know what it says under SIM status, or if you see any error messages like \u201cNo SIM card,\u201d \u201cSIM not detected,\u201d or \u201cSIM locked.\u201d This will help determine the next steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked under SIM status and it says 'No SIM card.' What should I do next?"
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking. Since your phone says \u201cNo SIM card,\u201d it\u2019s likely that the SIM card is either not properly seated or there\u2019s a temporary connection issue.\n\nHere\u2019s what you should do next:\n1. Power off your phone.\n2. Remove the SIM card tray and take out the SIM card.\n3. Carefully reinsert the SIM card, making sure it\u2019s properly aligned.\n4. Put the tray back in and power your phone back on.\n\nAfter your phone restarts, check the SIM status again to see if it\u2019s now detected and if you have signal bars.\n\nPlease let me know if this resolves the issue or if you still see \u201cNo SIM card.\u201d",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "After removing and reinserting the SIM card, my phone now says the SIM is still Locked. Reseating didn't unlock it and I still have no signal.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer's SIM card is locked after reseating. The phone displays 'SIM Locked' and has no signal. Needs assistance with SIM PIN/PUK unlock."
+     },
+     "params": {
+      "summary": "Customer's SIM card is locked after reseating. The phone displays 'SIM Locked' and has no signal. Needs assistance with SIM PIN/PUK unlock."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

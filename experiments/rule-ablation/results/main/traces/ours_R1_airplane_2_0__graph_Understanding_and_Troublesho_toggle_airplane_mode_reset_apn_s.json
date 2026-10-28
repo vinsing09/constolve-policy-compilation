@@ -1,0 +1,403 @@
+{
+ "case": "0:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data",
+ "arm": "R1_airplane",
+ "repeat": 2,
+ "solved": false,
+ "actions_done": 5,
+ "actions_required": 6,
+ "turns": 25,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "get_bills_for_customer",
+  "resume_line",
+  "reboot_device",
+  "check_status_bar",
+  "toggle_airplane_mode",
+  "check_apn_settings",
+  "reset_apn_settings",
+  "reboot_device",
+  "toggle_data",
+  "toggle_airplane_mode",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_airplane_mode",
+   "ok": true,
+   "why": "tool 'toggle_airplane_mode' was called"
+  },
+  {
+   "id": "s1_reset_apn_settings",
+   "ok": true,
+   "why": "tool 'reset_apn_settings' was called"
+  },
+  {
+   "id": "s2_reboot_device",
+   "ok": true,
+   "why": "tool 'reboot_device' was called"
+  },
+  {
+   "id": "s3_resume_line",
+   "ok": true,
+   "why": "tool 'resume_line' was called with {'customer_id': 'CUS-4501283', 'line_id': 'LN-8830142'}"
+  },
+  {
+   "id": "s4_toggle_data",
+   "ok": true,
+   "why": "tool 'toggle_data' was called"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, nothing loads, and I can't send picture messages. It's totally dead as far as the network goes."
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot your phone\u2019s service issue. To get started, I\u2019ll need to identify your account. Could you please provide one of the following:\n\n- The phone number associated with your account\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I\u2019ll guide you through the steps to restore your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Your line was suspended, which is why you had no service or ability to send picture messages. I have now resumed your line, and your service should be restored.\n\nPlease reboot your phone to complete the process. After restarting, you should regain network connectivity and be able to send messages again.\n\nLet me know if you need further assistance after rebooting your device.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_bills_for_customer",
+     "arguments": {
+      "customer_id": "CUS-4501283"
+     },
+     "params": {
+      "customer_id": "CUS-4501283"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "resume_line",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Suspended",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "2025-02-25",
+      "suspension_reason": 1,
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_bills_for_customer",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "count": 2,
+      "bills": [
+       {
+        "bill_id": "BILL-4501283-2025-02",
+        "customer_id": "CUS-4501283",
+        "period_start": "2025-01-06",
+        "period_end": "2025-02-05",
+        "issue_date": "2025-02-06",
+        "total_amount_due": 70.0,
+        "due_date": "2025-02-26",
+        "status": "Paid"
+       },
+       {
+        "bill_id": "BILL-4501283-2025-01",
+        "customer_id": "CUS-4501283",
+        "period_start": "2024-12-06",
+        "period_end": "2025-01-05",
+        "issue_date": "2025-01-06",
+        "total_amount_due": 65.0,
+        "due_date": "2025-01-26",
+        "status": "Paid"
+       }
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "resume_line",
+     "response": {
+      "result": "Line LN-8830142 has been resumed and is now Active."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I just rebooted my phone, but I still don't have any service\u2014no bars and nothing loads.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. Since your line is now active but you still have no service, let's troubleshoot your device further. Please follow these steps:\n\n1. Check if Airplane Mode is turned off.\n2. Check if your SIM card is properly inserted and not showing any errors.\n3. Check your phone\u2019s network status and signal strength.\n\nCould you please check your phone\u2019s status bar and let me know:\n- If you see an Airplane Mode icon,\n- What the signal bars show (if any),\n- If there are any error messages about the SIM card?\n\nIf you need help checking these, let me know what type of phone you have (Android or iPhone), and I can guide you through the steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I actually see the Airplane Mode icon, No Signal, and Data Disabled on my status bar. It looks like Airplane Mode might be on after all.",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "That explains why you have no service\u2014Airplane Mode disables all wireless connections, including cellular service.\n\nPlease turn off Airplane Mode on your phone. Once it\u2019s off, wait a few moments and check if your signal bars return and if you can use your service again.\n\nLet me know once you\u2019ve done this, or if you need instructions on how to turn off Airplane Mode.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Airplane mode is now off. I see one bar, but it's still not showing 5G and nothing is loading yet.",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_airplane_mode",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for updating me. Since you now have one bar of signal but still no data connection or 5G, let\u2019s continue troubleshooting:\n\n1. Please check if mobile data is enabled on your phone.\n2. If mobile data is off, turn it on and see if your connection improves.\n3. If mobile data is already on and you still have issues, let me know what network type (e.g., 3G, 4G, 5G) appears on your status bar, if any.\n\nCan you confirm if mobile data is enabled and what network type is displayed? If you need help checking or enabling mobile data, let me know your phone type (Android or iPhone) for step-by-step instructions.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Mobile data is enabled, but the status bar only shows one bar with 'LTE'\u2014still not showing 5G. Nothing is loading yet."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the details. Since you have LTE (which should provide data), but nothing is loading, let's try the following steps:\n\n1. Reset your phone\u2019s network settings by toggling Airplane Mode on and off again.\n2. If that doesn\u2019t help, try turning mobile data off and then back on.\n3. If you still have issues, the problem might be with your phone\u2019s APN (Access Point Name) settings, which are required for data and MMS.\n\nWould you like to proceed with these steps, or do you want instructions for checking and resetting your APN settings? Let me know your preference or if you need guidance for your specific phone type.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Let's check and reset my APN settings. I'm ready for the next steps."
+  },
+  {
+   "role": "agent",
+   "content": "Great! Resetting your APN settings can often resolve data and MMS issues. Here\u2019s what we\u2019ll do:\n\n1. Check your current APN settings.\n2. If needed, reset them to default.\n3. Reboot your device for the changes to take effect.\n\nLet\u2019s start by checking your current APN settings. Please use your phone to check the APN settings and let me know if you see any unusual entries or if you\u2019re unsure what\u2019s listed.\n\nIf you\u2019re ready, I can guide you through resetting the APN settings now. Would you like step-by-step instructions for your phone type (Android or iPhone), or are you comfortable proceeding on your own?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked my APN settings. It says 'fast.telecom.net' but the status is 'Not set.' The MMSC URL is listed, but it looks like the APN isn't fully set up.",
+   "tool_calls": [
+    {
+     "tool_name": "check_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking. Since your APN status is \u201cNot set,\u201d this could definitely cause your data and MMS issues. Let\u2019s reset your APN settings to the default values.\n\nPlease follow these steps:\n\n1. Go to your phone\u2019s APN settings menu.\n2. Select the option to \u201cReset to default\u201d or \u201cReset settings.\u201d\n3. After resetting, reboot your device to apply the changes.\n\nOnce your phone restarts, check if your data connection is working and if you can send/receive picture messages.\n\nLet me know once you\u2019ve completed these steps or if you need help finding the reset option on your device.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I already reset the APN settings to default and rebooted my phone. After restarting, I still have only one bar and LTE\u2014no 5G, nothing loads, and picture messages still won't send.",
+   "tool_calls": [
+    {
+     "tool_name": "reset_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for following those steps. Since you still have only one bar, LTE, and no data or MMS after resetting the APN and rebooting, let\u2019s continue troubleshooting:\n\n1. Let\u2019s check if Data Saver mode is enabled, as this can block data.\n2. Let\u2019s also check if there are any restrictions or issues with your SIM card.\n\nCould you please:\n- Check if Data Saver mode is turned on in your phone\u2019s settings and turn it off if it is.\n- Let me know if you see any SIM card error messages or if your phone indicates the SIM is locked or missing.\n\nIf you need instructions for either step, let me know your phone type (Android or iPhone), and I\u2019ll guide you through it.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Data Saver mode is off, and there are no SIM card error messages. My phone doesn't show the SIM is locked or missing."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming that Data Saver mode is off and your SIM card is recognized without errors. Since your line is active, APN settings are reset, Data Saver is off, and the SIM is working, but you still have only one bar of LTE and no data or MMS, let\u2019s try the following:\n\n1. Toggle mobile data off and then back on.\n2. If that doesn\u2019t help, try toggling Airplane Mode on and off again.\n3. If you still have issues, try changing your network mode preference to \u201c4G/5G preferred\u201d (if your phone supports it), as sometimes the phone may be stuck on a less optimal network mode.\n\nPlease let me know if you need instructions for any of these steps or if you notice any changes after trying them. If the issue persists after these steps, please let me know, and we\u2019ll continue troubleshooting.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "After toggling mobile data and Airplane Mode, nothing changed. I still only have one bar of LTE, no 5G, and nothing is loading. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_data",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "toggle_airplane_mode",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Since toggling mobile data and Airplane Mode did not resolve the issue, let\u2019s try changing your network mode preference to \u201c4G/5G preferred.\u201d This can help your phone connect to the best available network and may restore your data connection.\n\nPlease follow these steps:\n1. Go to your phone\u2019s network settings.\n2. Find the option for \u201cPreferred network type\u201d or \u201cNetwork mode.\u201d\n3. Select \u201c4G/5G preferred\u201d (or similar wording).\n\nAfter changing the network mode, wait a moment to see if your signal improves and if you get a 5G connection or better data performance.\n\nLet me know if you need step-by-step instructions for your phone type (Android or iPhone), or if you notice any changes after making this adjustment.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "When I tried to change the network mode, I got an error saying it was missing a required setting. The network mode didn't actually change, and I'm still stuck with one bar of LTE and nothing loading."
+  },
+  {
+   "role": "agent",
+   "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez has an active line but no service (only one bar of LTE, no 5G, nothing loads, MMS not working). APN reset, Data Saver off, SIM recognized, toggled Airplane Mode and mobile data, attempted to change network mode but received a missing setting error. Needs advanced technical support for possible provisioning/device configuration issue."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez has an active line but no service (only one bar of LTE, no 5G, nothing loads, MMS not working). APN reset, Data Saver off, SIM recognized, toggled Airplane Mode and mobile data, attempted to change network mode but received a missing setting error. Needs advanced technical support for possible provisioning/device configuration issue."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

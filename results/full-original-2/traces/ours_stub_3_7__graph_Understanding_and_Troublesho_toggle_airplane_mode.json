@@ -1,0 +1,307 @@
+{
+ "case": "7:[graph:Understanding and Troublesho]toggle_airplane_mode",
+ "arm": "stub",
+ "repeat": 3,
+ "solved": false,
+ "actions_done": 0,
+ "actions_required": 2,
+ "turns": 25,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "get_data_usage",
+  "reseat_sim_card",
+  "check_apn_settings",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_airplane_mode",
+   "ok": false,
+   "why": "tool 'toggle_airplane_mode' was never called by the user"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, nothing loads, and I can't send picture messages. Can you help me figure out what's wrong?"
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're experiencing no service on your phone. Let's work together to resolve this. To assist you better, could you please provide one of the following:\n\n- The phone number associated with your line\n- Your full name and date of birth\n\nThis will help me look up your account and check for any issues with your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your information. I checked your account and here\u2019s what I found:\n\n- Your line is currently active.\n- You have not reached your data limit (you\u2019ve used 12.4GB out of 50GB for this cycle).\n- There are no suspensions or blocks on your line.\n\nSince your account and line appear to be in good standing, let\u2019s try a few troubleshooting steps:\n\n1. Restart your phone.\n2. Make sure Airplane Mode is off.\n3. Remove and reinsert your SIM card.\n4. Check if you have service in different locations.\n\nIf you\u2019ve already tried these steps or the issue persists, please let me know. I can check for network outages in your area or escalate the issue further. Have you noticed this problem everywhere, or just in certain places?",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_data_usage",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_data_usage",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "plan_name": "Advantage 50GB",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "data_limit_gb": 50,
+      "total_data_available_gb": 50,
+      "cycle_end_date": "2025-03-05"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I've tried restarting my phone and moving to different rooms, but it still has no service. I haven't checked the SIM card yet. Do you want me to do that next?"
+  },
+  {
+   "role": "agent",
+   "content": "Yes, please try removing your SIM card, wait about 30 seconds, and then reinsert it securely into your phone. After that, restart your phone again and check if you regain service.\n\nIf you\u2019re not sure how to remove the SIM card, let me know your phone model and I can provide step-by-step instructions.\n\nOnce you\u2019ve tried this, let me know if your service returns or if the issue persists. If there\u2019s still no service, I\u2019ll help you with the next steps, which may include checking for network outages or possible SIM card issues.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I removed and reinserted the SIM card, and my phone says the SIM status is active, but I still have no service\u2014no bars and nothing loads.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying those steps. Since your SIM status is active but you still have no service, and your account and line are in good standing, this could indicate:\n\n- A possible network outage in your area\n- A SIM card or device issue\n- A network configuration problem\n\nLet\u2019s proceed with the following:\n\n1. Can you confirm if you see any error messages (like \u201cNo Service,\u201d \u201cEmergency Calls Only,\u201d or \u201cSIM Not Provisioned\u201d) on your phone?\n2. Have you recently traveled internationally or changed your device?\n3. Is anyone else nearby (on the same network) experiencing similar issues?\n\nIf none of these apply, the next best step may be to try your SIM card in another compatible phone (if available). This will help determine if the issue is with your phone or the SIM/network.\n\nPlease let me know your answers, and I\u2019ll guide you further or escalate the issue if needed.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "There are no error messages, it just shows no bars at all. I haven\u2019t traveled or changed my device, and I don\u2019t know if anyone else nearby has the same problem. I don\u2019t have another phone to test the SIM card in."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the details. Since:\n\n- Your account and line are active and in good standing,\n- You\u2019ve restarted your phone and reinserted the SIM,\n- There are no error messages, just no signal bars,\n- You haven\u2019t traveled or changed devices,\n- You can\u2019t test the SIM in another phone,\n\nThis suggests a possible network issue in your area or a hardware/SIM problem that needs further investigation.\n\nHere\u2019s what I can do next:\n\n- Check for any known network outages or issues affecting your line.\n- If no outages are found, escalate your case for further technical support or recommend a SIM replacement if needed.\n\nWould you like me to escalate this issue to a technical specialist for a deeper investigation and possible resolution? If yes, I\u2019ll transfer your case right away.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Before escalating, can we check if there's something wrong with my network settings or configuration? Maybe there's something on my phone that's turned off or not set up right."
+  },
+  {
+   "role": "agent",
+   "content": "Absolutely, let\u2019s check your phone\u2019s network settings before escalating. Here are some common settings to review:\n\n1. **Airplane Mode:** Make sure it\u2019s turned off.\n2. **Mobile Data:** Ensure it\u2019s turned on in your phone\u2019s settings.\n3. **Network Selection:** Go to Settings > Connections > Mobile Networks > Network Operators (or similar) and set it to \u201cAutomatic.\u201d\n4. **Preferred Network Type:** Make sure your phone is set to use 4G/5G/3G (not \u201c2G only\u201d or \u201cLTE only\u201d).\n5. **APN Settings:** Sometimes, incorrect Access Point Name (APN) settings can cause issues. You can usually find this under Settings > Mobile Networks > Access Point Names. If you\u2019d like, I can provide the correct APN settings for your carrier.\n\nCould you let me know your phone\u2019s make and model (e.g., iPhone 13, Samsung Galaxy S21)? I can then give you step-by-step instructions tailored to your device.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone is a Samsung Galaxy S21. What should I check first?"
+  },
+  {
+   "role": "agent",
+   "content": "Great, here are the steps to check your network settings on a Samsung Galaxy S21:\n\n1. **Airplane Mode**\n   - Swipe down from the top of the screen to open Quick Settings.\n   - Make sure the Airplane Mode icon is NOT highlighted (it should be off).\n\n2. **Mobile Data**\n   - Go to Settings > Connections > Data usage.\n   - Make sure \u201cMobile data\u201d is turned ON.\n\n3. **Network Mode**\n   - Go to Settings > Connections > Mobile networks > Network mode.\n   - Select \u201c5G/4G/3G/2G (auto connect)\u201d or the highest available option.\n\n4. **Network Operator**\n   - Go to Settings > Connections > Mobile networks > Network operators.\n   - Set to \u201cSelect automatically.\u201d\n\n5. **Access Point Names (APN)**\n   - Go to Settings > Connections > Mobile networks > Access Point Names.\n   - Tap your carrier\u2019s APN. If it\u2019s missing or looks incorrect, let me know and I can provide the correct settings.\n\n6. **Restart**\n   - After making any changes, restart your phone.\n\nPlease go through these steps and let me know if you notice anything unusual or if your service returns after checking these settings. If everything looks correct and you still have no service, I\u2019ll help you escalate the issue for further support.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked Airplane Mode and it\u2019s off. Mobile data is on. My network mode is set to 5G/4G/3G/2G (auto connect). Network operator is set to select automatically. APN shows my carrier\u2019s name, but I\u2019m not sure if the settings are correct. I still don\u2019t have any service after restarting."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking all those settings. Since everything appears correct and you still have no service, the issue could be with the APN configuration, a SIM or device fault, or a network problem in your area.\n\nLet\u2019s quickly verify your APN settings:\n\n1. Go to Settings > Connections > Mobile networks > Access Point Names.\n2. Tap on your carrier\u2019s APN to view the details.\n3. Please let me know the following fields as they appear on your phone:\n   - Name\n   - APN\n   - MMSC\n   - MCC\n   - MNC\n   - Authentication type\n   - APN type\n\nAlternatively, if you prefer, I can provide the correct APN settings for your carrier, and you can compare or update them.\n\nWould you like to share your current APN details, or would you like me to send you the correct APN settings to enter?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I can check the APN details and share what I see. Should I just copy those fields here?"
+  },
+  {
+   "role": "agent",
+   "content": "Yes, please! Copy and share the following APN fields as they appear on your phone:\n\n- Name\n- APN\n- MMSC\n- MCC\n- MNC\n- Authentication type\n- APN type\n\nOnce you provide these details, I\u2019ll compare them with the correct settings for your carrier and let you know if anything needs to be updated. This will help us rule out any configuration issues before moving to the next step.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My APN settings show 'fast.telecom.net' and the status says they're correct, with the MMSC as 'http://mms.telecom.net/mms/wapenc.' Is there anything else I should check?",
+   "tool_calls": [
+    {
+     "tool_name": "check_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for sharing your APN details. Based on what you provided:\n\n- APN: fast.telecom.net\n- MMSC: http://mms.telecom.net/mms/wapenc\n\nThese settings look correct for many telecom carriers, but to be thorough, here are the typical APN settings you should have:\n\n- Name: (Your carrier\u2019s name, e.g., Telecom)\n- APN: fast.telecom.net\n- MMSC: http://mms.telecom.net/mms/wapenc\n- MCC: Usually 310 or 311 (for US carriers; may vary)\n- MNC: Usually 260, 480, etc. (varies by carrier)\n- Authentication type: None or PAP\n- APN type: default,mms,supl\n\nPlease check if your MCC, MNC, Authentication type, and APN type match these values. If any of these fields are blank or different, please let me know what you see.\n\nIf all these settings are correct and you still have no service, then the issue is likely not with your APN configuration. In that case, the problem may be with your SIM card, device hardware, or a network outage in your area.\n\nWould you like to share the rest of your APN fields, or would you like me to escalate your issue to a technical specialist for further investigation?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Here are the rest of my APN fields:\n- MCC: 310\n- MNC: 260\n- Authentication type: None\n- APN type: default,mms,supl\nLet me know if these look right or if I should change anything."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing the full APN details. Here\u2019s a quick review:\n\n- Name: (Carrier\u2019s name, not critical)\n- APN: fast.telecom.net\n- MMSC: http://mms.telecom.net/mms/wapenc\n- MCC: 310\n- MNC: 260\n- Authentication type: None\n- APN type: default,mms,supl\n\nThese settings are standard and look correct for most US carriers using these values. There\u2019s nothing here that should prevent your phone from getting service or sending picture messages.\n\nSince your APN settings are correct, your account and line are active, and you\u2019ve already tried all basic troubleshooting steps, the issue is likely due to:\n\n- A SIM card fault\n- Device hardware issue\n- A local network outage\n\nAt this point, I recommend escalating your case to a technical specialist who can check for outages, run remote diagnostics, or advise on a SIM replacement if needed.\n\nWould you like me to escalate your issue now for further investigation and support?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Yes, please escalate my issue to a technical specialist so we can get this figured out. I still have no service."
+  },
+  {
+   "role": "agent",
+   "content": "Your issue has been escalated to a technical specialist. They will review your account, check for any network outages, and provide further troubleshooting or arrange a SIM replacement if needed.\n\nThank you for your patience and for providing all the details. A specialist will contact you soon to help resolve your no service issue. If you have any other questions in the meantime, feel free to ask!",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez has no service on her Samsung Galaxy S21. Account and line are active, data not exceeded, no suspensions. Customer has tried restarting, reinserting SIM, and verified all network and APN settings are correct. No error messages, just no signal bars. Needs technical specialist to check for network outages, SIM or device issues, and provide further troubleshooting or resolution."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez has no service on her Samsung Galaxy S21. Account and line are active, data not exceeded, no suspensions. Customer has tried restarting, reinserting SIM, and verified all network and APN settings are correct. No error messages, just no signal bars. Needs technical specialist to check for network outages, SIM or device issues, and provide further troubleshooting or resolution."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

@@ -1,0 +1,291 @@
+{
+ "case": "1:[graph:Telecom Agent Policy]make_payment|refuel_data|enable_roaming",
+ "arm": "stub",
+ "repeat": 4,
+ "solved": false,
+ "actions_done": 2,
+ "actions_required": 6,
+ "turns": 15,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "resume_line",
+  "reboot_device",
+  "reseat_sim_card",
+  "reboot_device",
+  "get_details_by_id",
+  "check_apn_settings"
+ ],
+ "criteria": [
+  {
+   "id": "s0_send_payment_request",
+   "ok": false,
+   "why": "tool 'send_payment_request' was never called by the assistant"
+  },
+  {
+   "id": "s1_make_payment",
+   "ok": false,
+   "why": "tool 'make_payment' was never called by the user"
+  },
+  {
+   "id": "s2_resume_line",
+   "ok": true,
+   "why": "tool 'resume_line' was called with {'customer_id': 'CUS-4501283', 'line_id': 'LN-8830142'}"
+  },
+  {
+   "id": "s3_refuel_data",
+   "ok": false,
+   "why": "tool 'refuel_data' was never called by the assistant"
+  },
+  {
+   "id": "s4_enable_roaming",
+   "ok": false,
+   "why": "tool 'enable_roaming' was never called by the assistant"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was not called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no signal at all. Nothing loads, no internet, and I can't send picture messages. It's completely dead as far as the network goes."
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're experiencing this issue. To help you further, could you please provide your phone number or account details? This will allow me to check your line status and see if there are any network or account-related problems affecting your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Sure, my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Your phone line is currently suspended, which is why you have no signal, internet, or messaging capabilities.\n\nWould you like me to help you resume (reactivate) your line so your service can be restored? If you know the reason for the suspension or if it was unintentional, please let me know.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Suspended",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 0,
+      "roaming_enabled": false,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Yes, please help me reactivate my line. I wasn't aware it was suspended, so I'd like to get it working again as soon as possible."
+  },
+  {
+   "role": "agent",
+   "content": "Your line has been reactivated and is now active again. You should regain signal and full service shortly. If you still experience issues after a few minutes, please try restarting your phone.\n\nIf you have any other questions or need further assistance, let me know!",
+   "tool_calls": [
+    {
+     "tool_name": "resume_line",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "resume_line",
+     "response": {
+      "result": "Line LN-8830142 has been resumed and is now Active."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I just restarted my phone, but I still don't have any signal or internet. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. Since your line is now active but you still have no signal or internet after restarting your phone, let's try a few troubleshooting steps:\n\n1. Check Airplane Mode: Make sure Airplane Mode is turned off.\n2. SIM Card: Remove your SIM card, wait 30 seconds, and reinsert it securely.\n3. Network Selection: Go to your phone\u2019s network settings and try selecting your carrier manually.\n4. Location: If possible, move to a different area to rule out local network issues.\n5. Device Restart: Restart your phone again after reinserting the SIM card.\n\nIf you\u2019ve tried these steps and still have no service, please let me know:\n- If you see any error messages on your phone (e.g., \u201cNo SIM,\u201d \u201cEmergency Calls Only\u201d).\n- If your phone shows any bars of signal at all.\n- If this issue is happening everywhere or just in one location.\n\nThis information will help me assist you further or escalate the issue if needed.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I already removed and reinserted the SIM card, and restarted my phone. The SIM status is active, but I still have no signal or service at all\u2014no bars and no error messages.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the update. Your SIM status and device activation both appear normal, but you still have no signal or service. Since you\u2019ve already tried reinserting the SIM and restarting your phone, and there are no error messages, this could indicate a deeper network or SIM issue.\n\nHere\u2019s what you can try next:\n1. Test your SIM card in another compatible phone (if available) to see if it gets signal there.\n2. If you have another SIM card, try inserting it into your phone to check if your device can detect any network.\n\nIf your SIM doesn\u2019t work in another phone, or if another SIM works in your phone, please let me know. Otherwise, I can escalate this issue to a human agent for further investigation, as it may require technical support or a SIM replacement.\n\nWould you like me to escalate this to a specialist for you?",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "DEV-55210"
+     },
+     "params": {
+      "id": "DEV-55210"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "device_id": "DEV-55210",
+      "device_type": "phone",
+      "model": "Pixel 8 Pro",
+      "imei": "356938035643809",
+      "esim_capable": true,
+      "activation_status": "Active",
+      "activation_date": "2023-05-18",
+      "last_esim_transfer_date": "2023-05-18",
+      "entity_type": "device"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I don\u2019t have another phone or SIM card with me right now. Can we try any other troubleshooting steps before escalating?"
+  },
+  {
+   "role": "agent",
+   "content": "Absolutely, let\u2019s try a few more troubleshooting steps before escalating:\n\n1. Network Reset: On your Pixel 8 Pro, go to Settings > System > Reset options > Reset Wi-Fi, mobile & Bluetooth. This will reset your network settings (you may need to re-enter Wi-Fi passwords afterward).\n2. Carrier Settings Update: Check if there are any carrier or system updates available. Go to Settings > System > System update.\n3. Preferred Network Type: Go to Settings > Network & Internet > Mobile network > Preferred network type, and try switching between options (e.g., 5G, 4G, 3G).\n4. APN Settings: Ensure your Access Point Name (APN) settings match those provided by your carrier. You can usually find these in Settings > Network & Internet > Mobile network > Advanced > Access Point Names.\n\nPlease try these steps and let me know if anything changes or if you encounter any errors. If the issue persists after these steps, I can escalate your case to a specialist for further assistance.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked my APN settings and they are correct: the APN is set to fast.telecom.net. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "check_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming your APN settings are correct. Since you\u2019ve already tried the main troubleshooting steps (SIM reinsert, restart, APN check, and your line is active), and you don\u2019t have another device or SIM to test with, it\u2019s likely that the issue may be related to your SIM card, device hardware, or a deeper network problem.\n\nAt this point, the best course of action is to escalate your case to a specialist who can investigate further, check for any backend issues, and advise on a possible SIM replacement or other solutions.\n\nWould you like me to connect you with a human agent for advanced troubleshooting and support?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

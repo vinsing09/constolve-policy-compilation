@@ -1,0 +1,197 @@
+[
+ {
+  "kind": "ordering",
+  "rule": "For an overdue bill the agent must \"Send the user a payment request\" first and only \"If the user accepts the payment request, use the make_payment tool\", after which it must \"check that the bill status is updated to PAID\".",
+  "counterparty_line": "If the agent sends you a payment request, you check it and accept it, and you wait for them to confirm the bill shows as paid before considering the matter closed.",
+  "precondition": {
+   "field": "bills.status",
+   "op": "eq",
+   "value": "Overdue"
+  },
+  "required_tools": [
+   "send_payment_request",
+   "check_payment_request",
+   "make_payment"
+  ],
+  "forbidden_tools": [],
+  "before": "send_payment_request",
+  "after": "make_payment"
+ },
+ {
+  "kind": "eligibility",
+  "rule": "\"The send payment request tool will not check if the bill is overdue. You should always check that the bill is overdue before sending a payment request\", so only bills in Overdue status may be paid this way.",
+  "counterparty_line": "If the agent tells you a bill is not in a state they can take payment for, you accept that and do not press them to charge you anyway.",
+  "precondition": null,
+  "required_tools": [
+   "get_bills_for_customer"
+  ],
+  "forbidden_tools": [],
+  "before": null,
+  "after": null
+ },
+ {
+  "kind": "ordering",
+  "rule": "\"You are allowed to lift the suspension after the user has paid all their overdue bills\", so payment must precede resuming the line.",
+  "counterparty_line": "If the agent tells you a bill must be settled before your line can be turned back on, you accept and ask them to take the payment now.",
+  "precondition": {
+   "field": "lines.status",
+   "op": "eq",
+   "value": "Suspended"
+  },
+  "required_tools": [
+   "make_payment",
+   "resume_line"
+  ],
+  "forbidden_tools": [],
+  "before": "make_payment",
+  "after": "resume_line"
+ },
+ {
+  "kind": "authority",
+  "rule": "\"You are not allowed to lift the suspension if the line's contract end date is in the past, even if the user has paid all their overdue bills\", and such cases must be escalated.",
+  "counterparty_line": "If the agent says they are not permitted to restore your line themselves and need to hand you to a human agent, you accept the transfer.",
+  "precondition": {
+   "field": "lines.contract_end_date",
+   "op": "before",
+   "value": "$now"
+  },
+  "required_tools": [
+   "transfer_to_human_agents"
+  ],
+  "forbidden_tools": [
+   "resume_line"
+  ],
+  "before": null,
+  "after": null
+ },
+ {
+  "kind": "ordering",
+  "rule": "\"After you resume the line, the user will have to reboot their device to get service.\"",
+  "counterparty_line": "If the agent asks you to restart your phone after they make a change on their side, you do it before judging whether service is back.",
+  "precondition": {
+   "field": "lines.status",
+   "op": "eq",
+   "value": "Suspended"
+  },
+  "required_tools": [
+   "reboot_device"
+  ],
+  "forbidden_tools": [],
+  "before": "resume_line",
+  "after": "reboot_device"
+ },
+ {
+  "kind": "substitution",
+  "rule": "When the plan's data limit is reached the user \"has 2 options: Change to a plan with more data\" or \"refuel data at a price per GB specified by the plan\".",
+  "counterparty_line": "If the agent offers either a bigger plan or a data top-up, you refuse to change your plan but you are willing to buy the top-up instead.",
+  "precondition": {
+   "field": "lines.data_usage_gb",
+   "op": "gte",
+   "value": 50
+  },
+  "required_tools": [
+   "refuel_data"
+  ],
+  "forbidden_tools": [],
+  "before": null,
+  "after": null
+ },
+ {
+  "kind": "ordering",
+  "rule": "\"After resetting the APN settings, the user must be instructed to use reboot_device() for the changes to apply.\"",
+  "counterparty_line": "If the agent asks you to reset your APN settings and then restart your phone, you do both in that order before checking whether the problem is gone.",
+  "precondition": {
+   "field": "phone.apn_settings_status",
+   "op": "in",
+   "value": [
+    "incorrect",
+    "not set"
+   ]
+  },
+  "required_tools": [
+   "reset_apn_settings",
+   "reboot_device"
+  ],
+  "forbidden_tools": [
+   "set_apn_settings"
+  ],
+  "before": "reset_apn_settings",
+  "after": "reboot_device"
+ },
+ {
+  "kind": "authority",
+  "rule": "If the SIM \"shows 'Locked' (due to incorrect PIN or PUK entries), escalate to technical support for assistance with SIM security.\"",
+  "counterparty_line": "If the agent says your SIM security issue has to be handled by a human agent, you accept the transfer rather than asking them to unlock it.",
+  "precondition": {
+   "field": "phone.sim_status",
+   "op": "eq",
+   "value": "locked"
+  },
+  "required_tools": [
+   "transfer_to_human_agents"
+  ],
+  "forbidden_tools": [
+   "reseat_sim_card"
+  ],
+  "before": null,
+  "after": null
+ },
+ {
+  "kind": "eligibility",
+  "rule": "\"If check_vpn_status() shows 'VPN is ON and connected' and performance level is 'Poor', guide the user to use disconnect_vpn()\".",
+  "counterparty_line": "If the agent asks you to disconnect your VPN to restore speed, you agree to turn it off.",
+  "precondition": {
+   "field": "phone.vpn_connected",
+   "op": "eq",
+   "value": true
+  },
+  "required_tools": [
+   "disconnect_vpn"
+  ],
+  "forbidden_tools": [
+   "connect_vpn"
+  ],
+  "before": null,
+  "after": null
+ },
+ {
+  "kind": "eligibility",
+  "rule": "\"If check_wifi_calling_status() shows 'Wi-Fi Calling is ON', guide the user to use toggle_wifi_calling() to turn it OFF\" when troubleshooting MMS.",
+  "counterparty_line": "If the agent asks you to turn Wi-Fi Calling off to get picture messaging working, you agree to switch it off.",
+  "precondition": {
+   "field": "phone.wifi_calling_enabled",
+   "op": "eq",
+   "value": true
+  },
+  "required_tools": [
+   "toggle_wifi_calling"
+  ],
+  "forbidden_tools": [],
+  "before": null,
+  "after": null
+ },
+ {
+  "kind": "eligibility",
+  "rule": "\"For name lookup, date of birth is required for verification purposes\", and technical support requires the customer be identified first.",
+  "counterparty_line": "If the agent asks for your date of birth or phone number to identify your account before helping, you provide it.",
+  "precondition": null,
+  "required_tools": [
+   "get_customer_by_name"
+  ],
+  "forbidden_tools": [],
+  "before": null,
+  "after": null
+ },
+ {
+  "kind": "authority",
+  "rule": "\"You should transfer the user to a human agent if and only if the request cannot be handled within the scope of your actions\" and \"try your best to resolve the issue... before transferring\".",
+  "counterparty_line": "If you ask to be put through to a person, you accept the agent trying the available fixes first and only take the transfer once they say it is out of their hands.",
+  "precondition": null,
+  "required_tools": [
+   "transfer_to_human_agents"
+  ],
+  "forbidden_tools": [],
+  "before": null,
+  "after": null
+ }
+]

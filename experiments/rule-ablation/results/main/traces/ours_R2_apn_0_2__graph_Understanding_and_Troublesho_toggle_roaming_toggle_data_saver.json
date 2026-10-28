@@ -1,0 +1,346 @@
+{
+ "case": "2:[graph:Understanding and Troublesho]toggle_roaming|toggle_data_saver_mode|disconnect_vpn|set_network_mode_preference",
+ "arm": "R2_apn",
+ "repeat": 0,
+ "solved": false,
+ "actions_done": 4,
+ "actions_required": 5,
+ "turns": 25,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "get_details_by_id",
+  "check_network_mode_preference",
+  "set_network_mode_preference",
+  "run_speed_test",
+  "check_data_restriction_status",
+  "check_vpn_status",
+  "check_status_bar",
+  "toggle_data_saver_mode",
+  "disconnect_vpn",
+  "run_speed_test"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_roaming",
+   "ok": false,
+   "why": "tool 'toggle_roaming' was never called by the user"
+  },
+  {
+   "id": "s1_toggle_data_saver_mode",
+   "ok": true,
+   "why": "tool 'toggle_data_saver_mode' was called"
+  },
+  {
+   "id": "s2_disconnect_vpn",
+   "ok": true,
+   "why": "tool 'disconnect_vpn' was called"
+  },
+  {
+   "id": "s3_set_network_mode_preference",
+   "ok": true,
+   "why": "tool 'set_network_mode_preference' was called with {'mode': '4g_5g_preferred'}"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was not called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "My phone is still really slow online compared to my husband's. Pages load very slowly and I never seem to be on the faster network like he is, no matter where I go."
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot your slow mobile data issue. To get started, I\u2019ll need to identify your account. Could you please provide your phone number, customer ID, or your full name and date of birth? This will help me check your line and plan details.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the information. Your line is active and you are on the \"Advantage 50GB\" plan, which should provide fast data speeds up to 50GB per month. Since you are experiencing consistently slow speeds compared to your husband, we should check a few things on your device:\n\n1. Your current network mode (to ensure you are set to use 4G/5G).\n2. If mobile data or data saver features are limiting your speed.\n3. If a VPN is active, which can sometimes slow down your connection.\n4. Your current signal strength and network connection.\n\nCould you please let me know if you are able to run diagnostic checks on your phone, or would you like step-by-step instructions for these checks?",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "PLN-2002"
+     },
+     "params": {
+      "id": "PLN-2002"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "plan_id": "PLN-2002",
+      "name": "Advantage 50GB",
+      "data_limit_gb": 50,
+      "monthly_price": 65.0,
+      "data_refueling_price_per_gb": 5.0,
+      "entity_type": "plan"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I can run diagnostic checks on my phone directly. Let me know what you'd like me to check first."
+  },
+  {
+   "role": "agent",
+   "content": "Great! Let\u2019s start by checking your network mode preference to see if your phone is set to use the fastest available network (like 4G or 5G).\n\nPlease run the check_network_mode_preference diagnostic on your phone and let me know what it reports.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My network mode preference shows '4g_only' right now, not 5G.",
+   "tool_calls": [
+    {
+     "tool_name": "check_network_mode_preference",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking. Since your phone is set to \"4g_only,\" it will not connect to 5G networks, which could explain why your speeds are slower than your husband's if he is using 5G.\n\nWould you like to switch your network mode preference to allow both 4G and 5G (usually labeled as \"4g_5g_preferred\")? This will let your phone connect to the fastest available network in your area.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Yes, please guide me through switching my network mode preference to allow both 4G and 5G."
+  },
+  {
+   "role": "agent",
+   "content": "To switch your network mode preference to allow both 4G and 5G, please run the set_network_mode_preference diagnostic on your phone and select the option labeled \"4g_5g_preferred\" (or similar wording).\n\nOnce you\u2019ve made the change, let me know, and we\u2019ll check your connection and speed again.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I tried to change the network mode preference, but I got an error message saying it was missing a required argument for 'mode.' What should I do next?"
+  },
+  {
+   "role": "agent",
+   "content": "When running the set_network_mode_preference diagnostic, you need to specify the mode you want to switch to. Please enter the following exactly as the mode argument:\n\n4g_5g_preferred\n\nSo, when prompted, set the mode to 4g_5g_preferred. After you do this, let me know if the change is successful or if you encounter any other issues.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I set the network mode to 4g_5g_preferred, and it now shows the current network type as 5G. What should I do next?",
+   "tool_calls": [
+    {
+     "tool_name": "set_network_mode_preference",
+     "arguments": {
+      "mode": "4g_5g_preferred"
+     },
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Excellent! Now that your phone is connected to 5G, let\u2019s check if your internet speed has improved.\n\nPlease run a speed test on your phone using the run_speed_test diagnostic. Let me know the result (download speed and quality rating), and if you notice any improvement in your browsing experience.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "The speed test shows I'm on 5G, but the download speed and connection quality are both rated poor. My browsing is still really slow.",
+   "tool_calls": [
+    {
+     "tool_name": "run_speed_test",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the update. Since you are now on 5G but still experiencing poor speeds, let\u2019s check for other possible causes:\n\n1. Data Saver mode might be limiting your speed.\n2. A VPN connection could be slowing your data.\n3. Signal strength may be weak even on 5G.\n\nPlease run the following diagnostics on your phone and let me know the results:\n- check_data_restriction_status (to see if Data Saver is ON)\n- check_vpn_status (to see if a VPN is active)\n- check_status_bar (to see your signal strength and any other relevant icons)\n\nOnce you provide these details, I\u2019ll guide you through the next steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I see that Data Saver mode is ON and my VPN is connected, with the performance level showing as poor. My status bar shows 5G with excellent signal, Data Saver, and VPN icons. What should I do next?",
+   "tool_calls": [
+    {
+     "tool_name": "check_data_restriction_status",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "check_vpn_status",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Both Data Saver mode and an active VPN with poor performance can significantly slow down your internet, even on a strong 5G signal.\n\nHere\u2019s what to do next:\n\n1. Turn OFF Data Saver mode on your phone.\n2. Disconnect your VPN.\n\nAfter you\u2019ve done both, please run another speed test and let me know if your connection improves. If you need instructions on how to turn off Data Saver or disconnect the VPN, let me know!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I turned off Data Saver mode and disconnected the VPN. What should I do next?",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_data_saver_mode",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "disconnect_vpn",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Great! Now, please run another speed test on your phone using the run_speed_test diagnostic. Let me know the new download speed and connection quality rating, and if you notice any improvement in your browsing experience.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "The speed test result now shows I\u2019m on 5G with excellent download speed and excellent connection quality. My internet is much faster and everything is working great!",
+   "tool_calls": [
+    {
+     "tool_name": "run_speed_test",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "That\u2019s fantastic news! Turning off Data Saver mode and disconnecting the VPN resolved the speed issue, and you\u2019re now getting excellent 5G performance.\n\nIf you ever experience slow speeds again, you can check for:\n- Data Saver mode being enabled\n- An active VPN with poor performance\n- Network mode preference (ensure it\u2019s set to allow 5G)\n\nIf you need further assistance or have any other questions, feel free to ask. I\u2019m glad your internet is working great now!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Thank you for your help! Everything is working perfectly now. I\u2019ll remember to check those settings if I have slow speeds again."
+  },
+  {
+   "role": "agent",
+   "content": "You\u2019re very welcome! I\u2019m glad I could help resolve your issue. If you ever need assistance in the future, don\u2019t hesitate to reach out. Have a great day and enjoy your fast connection!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

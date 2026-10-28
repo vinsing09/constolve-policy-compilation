@@ -1,0 +1,477 @@
+{
+ "case": "5:[graph:Telecom Agent Policy]send_payment_request|resume_line|refuel_data|enable_roaming",
+ "arm": "R5_escalate_unfixable",
+ "repeat": 1,
+ "solved": false,
+ "actions_done": 4,
+ "actions_required": 6,
+ "turns": 23,
+ "calls": [
+  "get_customer_by_phone",
+  "check_status_bar",
+  "get_details_by_id",
+  "get_bills_for_customer",
+  "send_payment_request",
+  "check_payment_request",
+  "make_payment",
+  "resume_line",
+  "enable_roaming",
+  "reboot_device",
+  "toggle_airplane_mode",
+  "toggle_airplane_mode",
+  "reseat_sim_card",
+  "get_details_by_id",
+  "check_network_mode_preference",
+  "check_apn_settings",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_send_payment_request",
+   "ok": true,
+   "why": "tool 'send_payment_request' was called with {'customer_id': 'CUS-4501283', 'bill_id': 'BILL-4501283-2025-01'}"
+  },
+  {
+   "id": "s1_make_payment",
+   "ok": true,
+   "why": "tool 'make_payment' was called"
+  },
+  {
+   "id": "s2_resume_line",
+   "ok": true,
+   "why": "tool 'resume_line' was called with {'customer_id': 'CUS-4501283', 'line_id': 'LN-8830142'}"
+  },
+  {
+   "id": "s3_refuel_data",
+   "ok": false,
+   "why": "tool 'refuel_data' was never called by the assistant"
+  },
+  {
+   "id": "s4_enable_roaming",
+   "ok": true,
+   "why": "tool 'enable_roaming' was called with {'customer_id': 'CUS-4501283', 'line_id': 'LN-8830142'}"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone can't connect to the internet at all. Nothing is loading and I can't use mobile data."
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot your mobile data issue. First, I\u2019ll need to identify your account to check for any service or plan-related problems. Could you please provide one of the following:\n\n- Your phone number\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I\u2019ll begin diagnosing the issue.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148 and my name is Sofia Martinez."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you, Sofia. I have identified your account. To help resolve your mobile data issue, I\u2019ll need to check a few things about your line and service.\n\nCould you please confirm:\n- Are you seeing any error messages or icons (like \u201cNo Service\u201d or \u201cAirplane Mode\u201d) on your phone\u2019s status bar?\n- Are you currently in your home country or traveling abroad?\n\nThis information will help me guide you through the next troubleshooting steps.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I'm currently traveling outside my home network. There are no error messages, but nothing loads and I can't use mobile data. Do you want me to check my status bar for any specific icons?"
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for clarifying that you are traveling outside your home network. Yes, please check your phone\u2019s status bar and let me know if you see any of the following icons:\n\n- Airplane mode (\u2708\ufe0f)\n- Signal strength bars (\ud83d\udcf6 or \ud83d\udcf5)\n- Network type (e.g., 5G, 4G, 3G, E)\n- Data enabled/disabled (\ud83d\udcf1 or \ud83d\udcf5)\n- Roaming indicator (often an \u201cR\u201d or similar symbol)\n\nThis will help determine if your phone is connected to a network and if roaming or data is enabled. Please let me know what you see.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I just checked my status bar. It shows 'No Signal', 'Data Enabled', and 'Connected to Chestnut-5G'.",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Your line is suspended due to an overdue bill from January. To restore your service (including mobile data and roaming), you\u2019ll need to pay the overdue amount of $65.00.\n\nI have just sent you a payment request for this overdue bill. Please check your payment requests and follow the instructions to complete the payment. Once the bill is paid, I can help you resume your line and enable roaming so you can use mobile data while traveling.\n\nLet me know once you\u2019ve accepted and completed the payment, or if you need any assistance with the payment process.",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_bills_for_customer",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "limit": 3
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "limit": 3
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "send_payment_request",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "bill_id": "BILL-4501283-2025-01"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "bill_id": "BILL-4501283-2025-01"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Suspended",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 0,
+      "roaming_enabled": false,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "2025-02-25",
+      "suspension_reason": 1,
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_bills_for_customer",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "count": 2,
+      "bills": [
+       {
+        "bill_id": "BILL-4501283-2025-02",
+        "customer_id": "CUS-4501283",
+        "period_start": "2025-01-06",
+        "period_end": "2025-02-05",
+        "issue_date": "2025-02-06",
+        "total_amount_due": 70.0,
+        "due_date": "2025-02-26",
+        "status": "Paid"
+       },
+       {
+        "bill_id": "BILL-4501283-2025-01",
+        "customer_id": "CUS-4501283",
+        "period_start": "2024-12-06",
+        "period_end": "2025-01-05",
+        "issue_date": "2025-01-06",
+        "total_amount_due": 65.0,
+        "due_date": "2025-01-26",
+        "status": "overdue"
+       }
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "send_payment_request",
+     "response": {
+      "result": "Payment request for bill BILL-4501283-2025-01 (amount due $65.0) sent to Sofia Martinez. Bill status is now Awaiting Payment."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I have completed the payment, and it now shows the bill status as Paid. What should I do next?",
+   "tool_calls": [
+    {
+     "tool_name": "check_payment_request",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "make_payment",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Your payment has been received, and I have now resumed your line. Roaming has also been enabled at no cost, so you\u2019ll be able to use mobile data while traveling.\n\nPlease reboot your phone now to restore service and connect to the local network. After rebooting, you should see signal bars and be able to use mobile data.\n\nIf you still have issues after rebooting, let me know and I\u2019ll help you further.",
+   "tool_calls": [
+    {
+     "tool_name": "resume_line",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "enable_roaming",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "resume_line",
+     "response": {
+      "result": "Line LN-8830142 has been resumed and is now Active."
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "enable_roaming",
+     "response": {
+      "result": "Roaming has been enabled at no cost on line LN-8830142 (+1-617-555-0148) for customer Sofia Martinez."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I rebooted my phone successfully, but I still have no signal bars and can't access the internet. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for rebooting your phone. Since you still have no signal bars and cannot access the internet, let\u2019s try the following troubleshooting steps:\n\n1. Check if Airplane Mode is ON. If it is, turn it OFF.\n2. Reseat your SIM card (remove it and reinsert it).\n3. Make sure your phone is set to prefer 4G/5G networks.\n\nWould you like step-by-step instructions for any of these actions, or can you try them now and let me know what you see?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I turned Airplane Mode on just now, and now I have no connection at all. Should I turn it off again?",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_airplane_mode",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Yes, please turn Airplane Mode off again. When Airplane Mode is on, your phone cannot connect to any cellular or Wi-Fi networks. \n\nAfter turning it off, wait a few moments and check if you see any signal bars or network connection. Let me know what you see in your status bar after turning Airplane Mode off.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Airplane mode is now OFF, but I still have no signal bars and no network connection. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_airplane_mode",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming. Since Airplane Mode is off and you still have no signal, let\u2019s try reseating your SIM card. This can help resolve recognition issues that may prevent your phone from connecting to the network.\n\nPlease remove your SIM card, wait a few seconds, and then reinsert it securely. After doing this, check your status bar for signal bars or network connection.\n\nLet me know if you see any changes after reseating your SIM card. If nothing changes, I\u2019ll guide you through the next steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I reseated my SIM card and the SIM status shows as active, but there is still no signal and no network connection in the status bar. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Since your SIM card is active but you still have no signal, the next step is to check your phone\u2019s network mode settings. Sometimes, if your phone is set to use only certain network types (like 2G or 3G), it may not connect properly when roaming.\n\nPlease check your phone\u2019s network mode preference and let me know what it is currently set to (e.g., 5G, 4G, 3G, or 2G). If you\u2019re not sure how to check this, I can guide you through the process.",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "PLN-2002"
+     },
+     "params": {
+      "id": "PLN-2002"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "plan_id": "PLN-2002",
+      "name": "Advantage 50GB",
+      "data_limit_gb": 50,
+      "monthly_price": 65.0,
+      "data_refueling_price_per_gb": 5.0,
+      "entity_type": "plan"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "My network mode preference is set to 4G/5G preferred. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "check_network_mode_preference",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming your network mode is set to 4G/5G preferred. Since your SIM is active, Airplane Mode is off, and your network mode is correct, but you still have no signal while roaming, the next step is to check your APN (Access Point Name) settings. Incorrect APN settings can prevent your phone from connecting to the network, especially when roaming.\n\nPlease check your APN settings and let me know if they appear correct or if you see any errors. If you\u2019re unsure, I can guide you through resetting your APN settings to default, which often resolves connectivity issues.\n\nWould you like instructions on how to check or reset your APN settings?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My APN settings show as 'fast.telecom.net' and status is 'correct.' What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "check_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez is traveling abroad and cannot connect to any cellular network. Line is active, roaming is enabled, SIM is active and reseated, Airplane Mode is off, network mode is 4G/5G preferred, and APN settings are correct. Customer still has no signal. Needs advanced technical support."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez is traveling abroad and cannot connect to any cellular network. Line is active, roaming is enabled, SIM is active and reseated, Airplane Mode is off, network mode is 4G/5G preferred, and APN settings are correct. Customer still has no signal. Needs advanced technical support."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

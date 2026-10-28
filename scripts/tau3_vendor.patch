@@ -1,0 +1,26 @@
+diff --git a/src/tau2/utils/llm_utils.py b/src/tau2/utils/llm_utils.py
+index 0000000..cb5d1fe 100644
+--- a/src/tau2/utils/llm_utils.py
++++ b/src/tau2/utils/llm_utils.py
+@@ -48,10 +48,17 @@ warnings.filterwarnings(
+     category=UserWarning,
+ )
+ 
+-# Configure httpx connection limits for LiteLLM
+-httpx_limits = httpx.Limits(max_keepalive_connections=5, max_connections=10)
+-litellm.client_session = httpx.Client(limits=httpx_limits)
+-litellm.aclient_session = httpx.AsyncClient(limits=httpx_limits)
++# Configure httpx connection limits for LiteLLM.
++# 2026-06-07 (agentops): pinning a single 10-connection global pool poisons ALL
++# litellm sync traffic once connections wedge — litellm's _get_sync_http_client
++# returns this exact client forever, so even freshly built OpenAI clients reuse
++# the dead pool (docs/ERRORS.md H10). Default is now UNPINNED: litellm builds
++# per-client pools with httpx defaults. Set TAU2_PIN_LITELLM_SESSIONS=1 to
++# restore upstream behavior.
++if os.getenv("TAU2_PIN_LITELLM_SESSIONS", "0") == "1":
++    httpx_limits = httpx.Limits(max_keepalive_connections=5, max_connections=10)
++    litellm.client_session = httpx.Client(limits=httpx_limits)
++    litellm.aclient_session = httpx.AsyncClient(limits=httpx_limits)
+ 
+ # Context variable to store the directory where LLM debug logs should be written
+ llm_log_dir: ContextVar[Optional[Path]] = ContextVar("llm_log_dir", default=None)

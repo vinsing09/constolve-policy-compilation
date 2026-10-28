@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "If you use these artifacts, please cite them as below."
+title: "Research artifacts for 'Compiling Operating Policies into Executable Test Environments for Tool-Calling Agents'"
+type: dataset
+authors:
+  - family-names: Singh
+    given-names: Vineet
+    affiliation: Constolve
+date-released: 2026-10-28
+license: MIT
+repository-code: "https://github.com/vinsing09/constolve-policy-compilation"
+keywords:
+  - tool-calling agents
+  - agent evaluation
+  - operating policies
+  - test generation
+  - tau-bench
+preferred-citation:
+  type: article
+  title: "Compiling Operating Policies into Executable Test Environments for Tool-Calling Agents"
+  authors:
+    - family-names: Singh
+      given-names: Vineet
+      affiliation: Constolve
+  year: 2026

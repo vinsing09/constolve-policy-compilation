@@ -1,0 +1,229 @@
+{
+ "case": "5:[graph:Understanding and Troublesho]transfer_to_human_agents",
+ "arm": "R4_suspension",
+ "repeat": 0,
+ "solved": true,
+ "actions_done": 3,
+ "actions_required": 3,
+ "turns": 13,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "check_status_bar",
+  "toggle_airplane_mode",
+  "reseat_sim_card",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "diagnosed_before_handoff",
+   "ok": true,
+   "why": "tool 'check_status_bar' was called"
+  },
+  {
+   "id": "s2_get_data_usage",
+   "ok": true,
+   "why": "tool 'get_data_usage' was called"
+  },
+  {
+   "id": "s3_transfer_to_human_agents",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no signal at all. Nothing loads, I can't send picture messages, get online, or make calls\u2014it's completely dead as far as the network goes."
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot your phone\u2019s network issue. First, I\u2019ll need to identify your account to check for any line or account problems. Could you please provide one of the following:\n\n- The phone number associated with your account\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I\u2019ll guide you through the next steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Sure, my phone number is +1-617-555-0148. My name is Sofia Martinez."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the information. Your account and line are both active, so there\u2019s no suspension or contract issue blocking your service.\n\nLet\u2019s start troubleshooting your phone\u2019s network connection. Please confirm:\n\n- Are you able to see any signal bars or network icons at the top of your phone\u2019s screen?\n- Is Airplane Mode possibly enabled?\n\nIf you\u2019re unsure, I can guide you through checking these settings or provide steps to help diagnose the issue directly on your device. Would you like step-by-step instructions?",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I\u2019m not sure about the signal bars or airplane mode. Can you tell me where to look or what to do?"
+  },
+  {
+   "role": "agent",
+   "content": "Absolutely! Here\u2019s how you can check for signal bars and Airplane Mode on your phone:\n\n1. Look at the very top of your phone\u2019s screen (the status bar).\n   - Signal bars: These usually look like a series of ascending bars or dots. If you see an \u201cx\u201d, \u201cno service\u201d, or empty bars, it means there\u2019s no signal.\n   - Airplane Mode: Look for an airplane icon (\u2708\ufe0f). If you see it, Airplane Mode is ON, which disables all network connections.\n\nIf you see the airplane icon, you\u2019ll need to turn Airplane Mode OFF:\n- Swipe down from the top of your screen to open the quick settings panel.\n- Tap the airplane icon to turn it off (it should no longer be highlighted).\n\nIf you don\u2019t see any signal bars or the airplane icon, let me know what you do see at the top of your screen, and I\u2019ll guide you further. If you\u2019d like, I can also provide step-by-step instructions for your specific phone model\u2014just let me know what type of phone you have (Android or iPhone).",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked the top of my screen and I see the airplane icon, 'No Signal', and 'Data Enabled'. So I think Airplane Mode is on.",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "That\u2019s very helpful! Since you see the airplane icon, Airplane Mode is ON, which is why you have no signal and can\u2019t use any network services.\n\nPlease turn Airplane Mode OFF:\n1. Swipe down from the top of your screen to open the quick settings panel.\n2. Tap the airplane icon to turn it off. The icon should disappear from the top of your screen.\n\nOnce you\u2019ve done this, check if your signal bars reappear and if you can make calls or use data. Let me know if this restores your service or if you still have issues.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Airplane mode is now OFF, and the airplane icon disappeared, but I still don\u2019t see any signal bars. It still says 'No Signal' and nothing is loading.",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_airplane_mode",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking. Since Airplane Mode is now off but you still have no signal, the next step is to check your SIM card status. Sometimes, the SIM card may not be properly seated or recognized, which can cause a complete loss of service.\n\nPlease follow these steps:\n1. Locate your SIM card tray (usually on the side of your phone).\n2. Use a SIM ejector tool or a paperclip to gently remove the SIM card tray.\n3. Take out the SIM card, wait a few seconds, and then carefully reinsert it.\n4. Push the tray back in and wait for your phone to recognize the SIM.\n\nAfter reseating the SIM card, check if your phone regains signal. Let me know if you see any change, or if you need more detailed instructions for your specific phone model.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "After reseating the SIM card, I saw a message saying the SIM is still locked. There\u2019s still no signal.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer's phone shows 'SIM is locked' after reseating the SIM card. Airplane mode is off, but there is still no signal. Needs assistance with SIM PIN/PUK unlock."
+     },
+     "params": {
+      "summary": "Customer's phone shows 'SIM is locked' after reseating the SIM card. Airplane mode is off, but there is still no signal. Needs assistance with SIM PIN/PUK unlock."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

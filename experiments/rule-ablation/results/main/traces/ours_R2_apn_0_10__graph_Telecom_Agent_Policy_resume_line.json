@@ -1,0 +1,363 @@
+{
+ "case": "10:[graph:Telecom Agent Policy]resume_line",
+ "arm": "R2_apn",
+ "repeat": 0,
+ "solved": false,
+ "actions_done": 1,
+ "actions_required": 2,
+ "turns": 23,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "get_bills_for_customer",
+  "resume_line",
+  "reboot_device",
+  "check_status_bar",
+  "toggle_wifi",
+  "check_sim_status",
+  "check_apn_settings",
+  "reboot_device",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_resume_line",
+   "ok": true,
+   "why": "tool 'resume_line' was called with {'customer_id': 'CUS-4501283', 'line_id': 'LN-8830142'}"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no signal at all\u2014no bars, no internet, and I can't send picture messages. Can you help?"
+  },
+  {
+   "role": "agent",
+   "content": "I can help you with this issue. To begin, I need to identify your account. Could you please provide one of the following:\n\n- The phone number associated with your account\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I\u2019ll guide you through troubleshooting your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Sure, my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Your line is currently suspended, which is why you have no signal, no internet, and cannot send picture messages. However, I checked your recent bills and both are marked as paid, so there are no overdue payments on your account.\n\nSince your contract is still active and there are no unpaid bills, I can attempt to restore your service now. Once your line is reactivated, you may need to reboot your phone to regain service.\n\nWould you like me to proceed with resuming your line?",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_bills_for_customer",
+     "arguments": {
+      "customer_id": "CUS-4501283"
+     },
+     "params": {
+      "customer_id": "CUS-4501283"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Suspended",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "2025-02-25",
+      "suspension_reason": 1,
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_bills_for_customer",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "count": 2,
+      "bills": [
+       {
+        "bill_id": "BILL-4501283-2025-02",
+        "customer_id": "CUS-4501283",
+        "period_start": "2025-01-06",
+        "period_end": "2025-02-05",
+        "issue_date": "2025-02-06",
+        "total_amount_due": 70.0,
+        "due_date": "2025-02-26",
+        "status": "Paid"
+       },
+       {
+        "bill_id": "BILL-4501283-2025-01",
+        "customer_id": "CUS-4501283",
+        "period_start": "2024-12-06",
+        "period_end": "2025-01-05",
+        "issue_date": "2025-01-06",
+        "total_amount_due": 65.0,
+        "due_date": "2025-01-26",
+        "status": "Paid"
+       }
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Yes, please go ahead and resume my line."
+  },
+  {
+   "role": "agent",
+   "content": "Your line has been resumed and is now active. Please reboot your phone to restore your signal and services.\n\nIf you still experience any issues after restarting your device, let me know and I can help you further troubleshoot.",
+   "tool_calls": [
+    {
+     "tool_name": "resume_line",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "resume_line",
+     "response": {
+      "result": "Line LN-8830142 has been resumed and is now Active."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "My device rebooted successfully, but I still have no signal, no internet, and can't send picture messages.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. Since your line is now active but you still have no signal, no internet, and can't send picture messages, let's troubleshoot your phone's connectivity step by step.\n\nCould you please check your phone's status bar and let me know if you see any of the following:\n- Airplane mode icon\n- Signal bars (even if empty)\n- Network type (e.g., 5G, 4G, LTE)\n- Any other icons or messages at the top of your screen\n\nThis information will help me determine the next steps to resolve your issue.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Actually, now I see excellent signal bars, 5G, data enabled, and connected to Chestnut-5G in the status bar. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the update. Since you now have excellent signal bars, 5G, and data enabled, your cellular service appears to be restored. However, you mentioned you are also connected to \"Chestnut-5G,\" which is likely a Wi-Fi network.\n\nTo confirm your mobile data and MMS (picture messaging) are working, please try the following steps:\n1. Turn off Wi-Fi on your phone temporarily.\n2. Once Wi-Fi is off, check if you can access the internet using mobile data (try browsing a website or using an app).\n3. Try sending a picture message (MMS) while Wi-Fi is off.\n\nLet me know the results of these steps, and if you encounter any issues, please describe what happens. This will help me further diagnose any remaining problems.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Wi-Fi is now off and my phone is disconnected from any wireless network. What should I do next?",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_wifi",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Great, thank you for turning off Wi-Fi. Please try the following:\n\n1. Open your web browser or any app that uses the internet and check if you can access any websites or online content using mobile data only.\n2. Try sending a picture message (MMS) to someone.\n\nLet me know:\n- If you are able to browse the internet using mobile data.\n- If your picture message (MMS) sends successfully or if you receive any error messages.\n\nThis will help me determine if both your mobile data and MMS are working correctly or if further troubleshooting is needed.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I tried browsing the internet but nothing loads, and when I tried to send a picture message, it didn't go through."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for testing. Since you have excellent signal and data enabled, but cannot browse the internet or send picture messages with Wi-Fi off, let's continue troubleshooting your mobile data and MMS.\n\nPlease check and let me know:\n- Do you see any icons or messages in the status bar indicating \"Data Saver\" or \"VPN\" is active?\n- Are you able to see any error messages when trying to browse or send MMS, or does it just fail silently?\n\nThis information will help me guide you through the next steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "There are no Data Saver or VPN icons in the status bar. When I try to browse, I just get a connection error, and when I try to send an MMS, it just says 'Not sent, tap to try again.'"
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the details. Since Data Saver and VPN are not active, and you have excellent signal and data enabled, the next likely cause is an issue with your phone\u2019s SIM card or network settings.\n\nLet\u2019s check your SIM card status:\nPlease check your SIM card status on your phone and let me know if it shows as:\n- Active\n- Missing\n- Locked (PIN or PUK required)\n\nThis will help determine if your phone is recognizing the SIM card correctly or if further action is needed.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My SIM card status is active. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "check_sim_status",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Since your SIM card is active, let\u2019s check your phone\u2019s APN (Access Point Name) settings. Incorrect APN settings can prevent both mobile data and MMS from working, even if your signal is excellent.\n\nPlease check your APN settings and let me know:\n- The APN name listed\n- If there is an MMSC (MMS Center) URL shown\n\nIf you\u2019re unsure how to find this, let me know what you see, and I can guide you further.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My APN name is 'fast.telecom.net', and the APN settings status shows as 'correct' with the MMSC URL 'http://mms.telecom.net/mms/wapenc'.",
+   "tool_calls": [
+    {
+     "tool_name": "check_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming your APN settings and MMSC URL\u2014they appear to be correct. Since your SIM is active, you have excellent signal, data is enabled, and your APN settings are correct, but you still cannot use mobile data or send MMS, let's try one more step:\n\nPlease try restarting your device one more time. Sometimes, after changes to your line status or network, a second reboot can help your phone fully reconnect to the network.\n\nAfter restarting:\n- Try browsing the internet with Wi-Fi off.\n- Try sending a picture message (MMS) again.\n\nLet me know if either function works after the reboot, or if the issue persists.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I already rebooted my phone, but I still can't use the internet or send picture messages. The issue is still not resolved.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.\n\nA specialist will assist you further with your mobile data and MMS issue.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer's line was suspended but is now active. SIM is active, signal is excellent, data is enabled, APN and MMSC settings are correct, and there are no Data Saver or VPN issues. Despite troubleshooting, customer cannot use mobile data or send MMS after multiple reboots. Needs advanced technical support."
+     },
+     "params": {
+      "summary": "Customer's line was suspended but is now active. SIM is active, signal is excellent, data is enabled, APN and MMSC settings are correct, and there are no Data Saver or VPN issues. Despite troubleshooting, customer cannot use mobile data or send MMS after multiple reboots. Needs advanced technical support."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

@@ -1,0 +1,492 @@
+{
+ "engine": "code-fixed/generated/env_telecom.py",
+ "engine_sha256": "67ce994c24582079ebc5cd2b7510503f040275b1d5931e2cc89502846e0a3394",
+ "selection_sha256": "9892b7b260e49687d66a0494705b39a03bcbfc3d6b8d8f529931a749f6506582",
+ "cases": [
+  {
+   "rule": "R3_payment",
+   "walk_index": 2924,
+   "certified": true,
+   "gate": {
+    "solvable": true,
+    "kind": "repair",
+    "declared_broken": [
+     "has_cellular_service",
+     "line_active",
+     "mms_working",
+     "mobile_data_fast",
+     "mobile_data_working",
+     "no_outstanding_bills"
+    ],
+    "phantom": [],
+    "residual": [],
+    "unrepaired": [],
+    "errors": [],
+    "why": ""
+   },
+   "prefix_gate": {
+    "ok": true,
+    "verdict": "every step needed",
+    "redundant_from": null,
+    "n": 3
+   }
+  },
+  {
+   "rule": "R3_payment",
+   "walk_index": 2928,
+   "certified": true,
+   "gate": {
+    "solvable": true,
+    "kind": "repair",
+    "declared_broken": [
+     "data_allowance_available",
+     "has_cellular_service",
+     "line_active",
+     "mms_working",
+     "mobile_data_fast",
+     "mobile_data_working",
+     "no_outstanding_bills"
+    ],
+    "phantom": [],
+    "residual": [],
+    "unrepaired": [],
+    "errors": [],
+    "why": ""
+   },
+   "prefix_gate": {
+    "ok": true,
+    "verdict": "every step needed",
+    "redundant_from": null,
+    "n": 4
+   }
+  },
+  {
+   "rule": "R3_payment",
+   "walk_index": 2929,
+   "certified": true,
+   "gate": {
+    "solvable": true,
+    "kind": "repair",
+    "declared_broken": [
+     "has_cellular_service",
+     "line_active",
+     "mms_working",
+     "mobile_data_fast",
+     "mobile_data_working",
+     "no_outstanding_bills",
+     "roaming_ready"
+    ],
+    "phantom": [],
+    "residual": [],
+    "unrepaired": [],
+    "errors": [],
+    "why": ""
+   },
+   "prefix_gate": {
+    "ok": true,
+    "verdict": "every step needed",
+    "redundant_from": null,
+    "n": 4
+   }
+  },
+  {
+   "rule": "R3_payment",
+   "walk_index": 2936,
+   "certified": true,
+   "gate": {
+    "solvable": true,
+    "kind": "repair",
+    "declared_broken": [
+     "data_allowance_available",
+     "has_cellular_service",
+     "line_active",
+     "mms_working",
+     "mobile_data_fast",
+     "mobile_data_working",
+     "no_outstanding_bills"
+    ],
+    "phantom": [],
+    "residual": [],
+    "unrepaired": [],
+    "errors": [],
+    "why": ""
+   },
+   "prefix_gate": {
+    "ok": true,
+    "verdict": "every step needed",
+    "redundant_from": null,
+    "n": 4
+   }
+  },
+  {
+   "rule": "R3_payment",
+   "walk_index": 2937,
+   "certified": true,
+   "gate": {
+    "solvable": true,
+    "kind": "repair",
+    "declared_broken": [
+     "has_cellular_service",
+     "line_active",
+     "mms_working",
+     "mobile_data_fast",
+     "mobile_data_working",
+     "no_outstanding_bills",
+     "roaming_ready"
+    ],
+    "phantom": [],
+    "residual": [],
+    "unrepaired": [],
+    "errors": [],
+    "why": ""
+   },
+   "prefix_gate": {
+    "ok": true,
+    "verdict": "every step needed",
+    "redundant_from": null,
+    "n": 4
+   }
+  },
+  {
+   "rule": "R3_payment",
+   "walk_index": 2946,
+   "certified": true,
+   "gate": {
+    "solvable": true,
+    "kind": "repair",
+    "declared_broken": [
+     "data_allowance_available",
+     "has_cellular_service",
+     "line_active",
+     "mms_working",
+     "mobile_data_fast",
+     "mobile_data_working",
+     "no_outstanding_bills",
+     "roaming_ready"
+    ],
+    "phantom": [],
+    "residual": [],
+    "unrepaired": [],
+    "errors": [],
+    "why": ""
+   },
+   "prefix_gate": {
+    "ok": true,
+    "verdict": "every step needed",
+    "redundant_from": null,
+    "n": 5
+   }
+  },
+  {
+   "rule": "R5_escalate_unfixable",
+   "walk_index": 90,
+   "certified": true,
+   "gate": {
+    "solvable": true,
+    "kind": "escalation",
+    "declared_broken": [
+     "has_cellular_service",
+     "mms_working",
+     "mobile_data_fast",
+     "mobile_data_working",
+     "roaming_ready",
+     "sim_card_healthy"
+    ],
+    "phantom": [],
+    "unrepaired": [],
+    "residual": [],
+    "errors": [],
+    "why": ""
+   },
+   "prefix_gate": {
+    "ok": true,
+    "verdict": "every step needed",
+    "redundant_from": null,
+    "n": 2
+   }
+  },
+  {
+   "rule": "R5_escalate_unfixable",
+   "walk_index": 97,
+   "certified": true,
+   "gate": {
+    "solvable": true,
+    "kind": "escalation",
+    "declared_broken": [
+     "has_cellular_service",
+     "line_active",
+     "messaging_app_permissions_ready",
+     "mms_working",
+     "mobile_data_fast",
+     "mobile_data_working"
+    ],
+    "phantom": [],
+    "unrepaired": [],
+    "residual": [],
+    "errors": [],
+    "why": ""
+   },
+   "prefix_gate": {
+    "ok": true,
+    "verdict": "every step needed",
+    "redundant_from": null,
+    "n": 3
+   }
+  },
+  {
+   "rule": "R5_escalate_unfixable",
+   "walk_index": 372,
+   "certified": true,
+   "gate": {
+    "solvable": true,
+    "kind": "escalation",
+    "declared_broken": [
+     "data_allowance_available",
+     "has_cellular_service",
+     "mms_working",
+     "mobile_data_fast",
+     "mobile_data_working",
+     "sim_card_healthy"
+    ],
+    "phantom": [],
+    "unrepaired": [],
+    "residual": [],
+    "errors": [],
+    "why": ""
+   },
+   "prefix_gate": {
+    "ok": true,
+    "verdict": "every step needed",
+    "redundant_from": null,
+    "n": 4
+   }
+  },
+  {
+   "rule": "R5_escalate_unfixable",
+   "walk_index": 702,
+   "certified": true,
+   "gate": {
+    "solvable": true,
+    "kind": "escalation",
+    "declared_broken": [
+     "has_cellular_service",
+     "mms_working",
+     "mobile_data_fast",
+     "mobile_data_working",
+     "roaming_ready",
+     "sim_card_healthy"
+    ],
+    "phantom": [],
+    "unrepaired": [],
+    "residual": [],
+    "errors": [],
+    "why": ""
+   },
+   "prefix_gate": {
+    "ok": true,
+    "verdict": "every step needed",
+    "redundant_from": null,
+    "n": 4
+   }
+  },
+  {
+   "rule": "R5_escalate_unfixable",
+   "walk_index": 715,
+   "certified": true,
+   "gate": {
+    "solvable": true,
+    "kind": "escalation",
+    "declared_broken": [
+     "has_cellular_service",
+     "line_active",
+     "mms_working",
+     "mobile_data_fast",
+     "mobile_data_working",
+     "roaming_ready"
+    ],
+    "phantom": [],
+    "unrepaired": [],
+    "residual": [],
+    "errors": [],
+    "why": ""
+   },
+   "prefix_gate": {
+    "ok": true,
+    "verdict": "every step needed",
+    "redundant_from": null,
+    "n": 4
+   }
+  },
+  {
+   "rule": "R5_escalate_unfixable",
+   "walk_index": 1245,
+   "certified": true,
+   "gate": {
+    "solvable": true,
+    "kind": "escalation",
+    "declared_broken": [
+     "apn_settings_healthy",
+     "has_cellular_service",
+     "line_active",
+     "mms_working",
+     "mobile_data_fast",
+     "mobile_data_working"
+    ],
+    "phantom": [],
+    "unrepaired": [],
+    "residual": [],
+    "errors": [],
+    "why": ""
+   },
+   "prefix_gate": {
+    "ok": true,
+    "verdict": "every step needed",
+    "redundant_from": null,
+    "n": 4
+   }
+  },
+  {
+   "rule": "R5_escalate_unfixable",
+   "walk_index": 1255,
+   "certified": true,
+   "gate": {
+    "solvable": true,
+    "kind": "escalation",
+    "declared_broken": [
+     "apn_settings_healthy",
+     "has_cellular_service",
+     "line_active",
+     "mms_working",
+     "mobile_data_fast",
+     "mobile_data_working",
+     "roaming_ready"
+    ],
+    "phantom": [],
+    "unrepaired": [],
+    "residual": [],
+    "errors": [],
+    "why": ""
+   },
+   "prefix_gate": {
+    "ok": true,
+    "verdict": "every step needed",
+    "redundant_from": null,
+    "n": 3
+   }
+  },
+  {
+   "rule": "R5_escalate_unfixable",
+   "walk_index": 1320,
+   "certified": true,
+   "gate": {
+    "solvable": true,
+    "kind": "escalation",
+    "declared_broken": [
+     "has_cellular_service",
+     "messaging_app_permissions_ready",
+     "mms_working",
+     "mobile_data_fast",
+     "mobile_data_working",
+     "roaming_ready",
+     "sim_card_healthy"
+    ],
+    "phantom": [],
+    "unrepaired": [],
+    "residual": [],
+    "errors": [],
+    "why": ""
+   },
+   "prefix_gate": {
+    "ok": true,
+    "verdict": "every step needed",
+    "redundant_from": null,
+    "n": 4
+   }
+  },
+  {
+   "rule": "R5_escalate_unfixable",
+   "walk_index": 1396,
+   "certified": true,
+   "gate": {
+    "solvable": true,
+    "kind": "escalation",
+    "declared_broken": [
+     "data_allowance_available",
+     "has_cellular_service",
+     "messaging_app_permissions_ready",
+     "mms_working",
+     "mobile_data_fast",
+     "mobile_data_working",
+     "sim_card_healthy"
+    ],
+    "phantom": [],
+    "unrepaired": [],
+    "residual": [],
+    "errors": [],
+    "why": ""
+   },
+   "prefix_gate": {
+    "ok": true,
+    "verdict": "every step needed",
+    "redundant_from": null,
+    "n": 5
+   }
+  },
+  {
+   "rule": "R5_escalate_unfixable",
+   "walk_index": 2680,
+   "certified": true,
+   "gate": {
+    "solvable": true,
+    "kind": "escalation",
+    "declared_broken": [
+     "data_allowance_available",
+     "has_cellular_service",
+     "mms_working",
+     "mobile_data_fast",
+     "mobile_data_working",
+     "roaming_ready",
+     "sim_card_healthy"
+    ],
+    "phantom": [],
+    "unrepaired": [],
+    "residual": [],
+    "errors": [],
+    "why": ""
+   },
+   "prefix_gate": {
+    "ok": true,
+    "verdict": "every step needed",
+    "redundant_from": null,
+    "n": 4
+   }
+  }
+ ],
+ "dropped": [],
+ "suite_prefix_gate_ok": [
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true
+ ]
+}

@@ -1,0 +1,777 @@
+{
+ "atoms": [
+  {
+   "break": {
+    "tool": "disable_roaming",
+    "args": {
+     "customer_id": "CUS-4501283",
+     "line_id": "LN-8830142"
+    }
+   },
+   "predicates": [
+    "roaming_ready"
+   ],
+   "fix": {
+    "tool": "enable_roaming",
+    "args": {
+     "customer_id": "CUS-4501283",
+     "line_id": "LN-8830142"
+    }
+   },
+   "fix_sequence": [
+    {
+     "tool": "enable_roaming",
+     "args": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     }
+    }
+   ]
+  },
+  {
+   "break": {
+    "tool": "reset_apn_settings",
+    "args": {}
+   },
+   "predicates": [
+    "apn_settings_healthy",
+    "has_cellular_service",
+    "mms_working",
+    "mobile_data_fast",
+    "mobile_data_working"
+   ],
+   "fix": {
+    "tool": "reboot_device",
+    "args": {}
+   },
+   "fix_sequence": [
+    {
+     "tool": "reboot_device",
+     "args": {}
+    }
+   ]
+  },
+  {
+   "break": {
+    "tool": "set_apn_settings",
+    "args": {
+     "apn_settings": "x"
+    }
+   },
+   "predicates": [
+    "apn_settings_healthy",
+    "has_cellular_service",
+    "mms_working",
+    "mobile_data_fast",
+    "mobile_data_working"
+   ],
+   "fix": {
+    "tool": "reboot_device",
+    "args": {}
+   },
+   "fix_sequence": [
+    {
+     "tool": "reboot_device",
+     "args": {}
+    }
+   ]
+  },
+  {
+   "break": {
+    "tool": "set_network_mode_preference",
+    "args": {
+     "mode": "4g_only"
+    }
+   },
+   "predicates": [
+    "mobile_data_fast"
+   ],
+   "fix": {
+    "tool": "set_network_mode_preference",
+    "args": {
+     "mode": "4g_5g_preferred"
+    }
+   },
+   "fix_sequence": [
+    {
+     "tool": "set_network_mode_preference",
+     "args": {
+      "mode": "4g_5g_preferred"
+     }
+    }
+   ]
+  },
+  {
+   "break": {
+    "tool": "set_network_mode_preference",
+    "args": {
+     "mode": "2g_only"
+    }
+   },
+   "predicates": [
+    "mms_working",
+    "mobile_data_fast"
+   ],
+   "fix": {
+    "tool": "set_network_mode_preference",
+    "args": {
+     "mode": "4g_5g_preferred"
+    }
+   },
+   "fix_sequence": [
+    {
+     "tool": "set_network_mode_preference",
+     "args": {
+      "mode": "4g_5g_preferred"
+     }
+    }
+   ]
+  },
+  {
+   "break": {
+    "tool": "suspend_line",
+    "args": {
+     "customer_id": "CUS-4501283",
+     "line_id": "LN-8830142",
+     "reason": 1
+    }
+   },
+   "predicates": [
+    "has_cellular_service",
+    "line_active",
+    "mms_working",
+    "mobile_data_fast",
+    "mobile_data_working"
+   ],
+   "fix": {
+    "tool": "resume_line",
+    "args": {
+     "customer_id": "CUS-4501283",
+     "line_id": "LN-8830142"
+    }
+   },
+   "fix_sequence": [
+    {
+     "tool": "resume_line",
+     "args": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     }
+    }
+   ]
+  },
+  {
+   "break": {
+    "tool": "toggle_airplane_mode",
+    "args": {}
+   },
+   "predicates": [
+    "has_cellular_service",
+    "mms_working",
+    "mobile_data_fast",
+    "mobile_data_working",
+    "roaming_ready"
+   ],
+   "fix": {
+    "tool": "toggle_airplane_mode",
+    "args": {}
+   },
+   "fix_sequence": [
+    {
+     "tool": "toggle_airplane_mode",
+     "args": {}
+    }
+   ]
+  },
+  {
+   "break": {
+    "tool": "toggle_data",
+    "args": {}
+   },
+   "predicates": [
+    "mms_working",
+    "mobile_data_fast",
+    "mobile_data_working"
+   ],
+   "fix": {
+    "tool": "toggle_data",
+    "args": {}
+   },
+   "fix_sequence": [
+    {
+     "tool": "toggle_data",
+     "args": {}
+    }
+   ]
+  },
+  {
+   "break": {
+    "tool": "toggle_data_saver_mode",
+    "args": {}
+   },
+   "predicates": [
+    "mobile_data_fast"
+   ],
+   "fix": {
+    "tool": "toggle_data_saver_mode",
+    "args": {}
+   },
+   "fix_sequence": [
+    {
+     "tool": "toggle_data_saver_mode",
+     "args": {}
+    }
+   ]
+  },
+  {
+   "break": {
+    "tool": "toggle_roaming",
+    "args": {}
+   },
+   "predicates": [
+    "roaming_ready"
+   ],
+   "fix": {
+    "tool": "toggle_roaming",
+    "args": {}
+   },
+   "fix_sequence": [
+    {
+     "tool": "toggle_roaming",
+     "args": {}
+    }
+   ]
+  },
+  {
+   "break": {
+    "tool": "toggle_wifi_calling",
+    "args": {}
+   },
+   "predicates": [
+    "mms_working"
+   ],
+   "fix": {
+    "tool": "toggle_wifi_calling",
+    "args": {}
+   },
+   "fix_sequence": [
+    {
+     "tool": "toggle_wifi_calling",
+     "args": {}
+    }
+   ]
+  },
+  {
+   "break": {
+    "tool": "<field:lines.data_usage_gb>",
+    "args": {
+     "value": 50.5
+    }
+   },
+   "predicates": [
+    "data_allowance_available",
+    "mms_working",
+    "mobile_data_fast",
+    "mobile_data_working"
+   ],
+   "fix": {
+    "tool": "refuel_data",
+    "args": {
+     "customer_id": "CUS-4501283",
+     "line_id": "LN-8830142",
+     "gb_amount": 1
+    }
+   },
+   "fix_sequence": [
+    {
+     "tool": "refuel_data",
+     "args": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142",
+      "gb_amount": 1
+     }
+    }
+   ]
+  },
+  {
+   "break": {
+    "tool": "<field:lines.roaming_enabled>",
+    "args": {
+     "value": false
+    }
+   },
+   "predicates": [
+    "roaming_ready"
+   ],
+   "fix": {
+    "tool": "enable_roaming",
+    "args": {
+     "customer_id": "CUS-4501283",
+     "line_id": "LN-8830142"
+    }
+   },
+   "fix_sequence": [
+    {
+     "tool": "enable_roaming",
+     "args": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     }
+    }
+   ]
+  },
+  {
+   "break": {
+    "tool": "<field:lines.suspension_start_date>",
+    "args": {
+     "value": "invalid_value"
+    }
+   },
+   "predicates": [
+    "line_active"
+   ],
+   "fix": {
+    "tool": "suspend_line",
+    "args": {
+     "customer_id": "CUS-4501283",
+     "line_id": "LN-8830142",
+     "reason": 1
+    }
+   },
+   "fix_sequence": [
+    {
+     "tool": "suspend_line",
+     "args": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142",
+      "reason": 1
+     }
+    },
+    {
+     "tool": "resume_line",
+     "args": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     }
+    }
+   ]
+  },
+  {
+   "break": {
+    "tool": "<field:bills.status>",
+    "args": {
+     "value": "awaiting payment"
+    }
+   },
+   "predicates": [
+    "no_outstanding_bills"
+   ],
+   "fix": {
+    "tool": "reseat_sim_card",
+    "args": {}
+   },
+   "fix_sequence": [
+    {
+     "tool": "reseat_sim_card",
+     "args": {}
+    },
+    {
+     "tool": "send_payment_request",
+     "args": {
+      "customer_id": "CUS-4501283",
+      "bill_id": "BILL-4501283-2025-01"
+     }
+    },
+    {
+     "tool": "make_payment",
+     "args": {}
+    }
+   ]
+  },
+  {
+   "break": {
+    "tool": "<field:app_permissions.app_name>",
+    "args": {
+     "value": ""
+    }
+   },
+   "predicates": [
+    "messaging_app_permissions_ready",
+    "mms_working"
+   ],
+   "fix": {
+    "tool": "grant_app_permission",
+    "args": {
+     "app_name": "messaging",
+     "permission": "storage"
+    }
+   },
+   "fix_sequence": [
+    {
+     "tool": "grant_app_permission",
+     "args": {
+      "app_name": "messaging",
+      "permission": "storage"
+     }
+    }
+   ]
+  },
+  {
+   "break": {
+    "tool": "<field:app_permissions.granted>",
+    "args": {
+     "value": false
+    }
+   },
+   "predicates": [
+    "messaging_app_permissions_ready",
+    "mms_working"
+   ],
+   "fix": {
+    "tool": "grant_app_permission",
+    "args": {
+     "app_name": "messaging",
+     "permission": "storage"
+    }
+   },
+   "fix_sequence": [
+    {
+     "tool": "grant_app_permission",
+     "args": {
+      "app_name": "messaging",
+      "permission": "storage"
+     }
+    }
+   ]
+  },
+  {
+   "break": {
+    "tool": "<field:phone.airplane_mode>",
+    "args": {
+     "value": true
+    }
+   },
+   "predicates": [
+    "has_cellular_service",
+    "mms_working",
+    "mobile_data_fast",
+    "mobile_data_working",
+    "roaming_ready"
+   ],
+   "fix": {
+    "tool": "toggle_airplane_mode",
+    "args": {}
+   },
+   "fix_sequence": [
+    {
+     "tool": "toggle_airplane_mode",
+     "args": {}
+    }
+   ]
+  },
+  {
+   "break": {
+    "tool": "<field:phone.network_mode_preference>",
+    "args": {
+     "value": ""
+    }
+   },
+   "predicates": [
+    "mobile_data_fast"
+   ],
+   "fix": {
+    "tool": "set_network_mode_preference",
+    "args": {
+     "mode": "4g_5g_preferred"
+    }
+   },
+   "fix_sequence": [
+    {
+     "tool": "set_network_mode_preference",
+     "args": {
+      "mode": "4g_5g_preferred"
+     }
+    }
+   ]
+  },
+  {
+   "break": {
+    "tool": "<field:phone.mobile_data_enabled>",
+    "args": {
+     "value": false
+    }
+   },
+   "predicates": [
+    "mms_working",
+    "mobile_data_fast",
+    "mobile_data_working"
+   ],
+   "fix": {
+    "tool": "toggle_data",
+    "args": {}
+   },
+   "fix_sequence": [
+    {
+     "tool": "toggle_data",
+     "args": {}
+    }
+   ]
+  },
+  {
+   "break": {
+    "tool": "<field:phone.roaming_enabled>",
+    "args": {
+     "value": false
+    }
+   },
+   "predicates": [
+    "roaming_ready"
+   ],
+   "fix": {
+    "tool": "toggle_roaming",
+    "args": {}
+   },
+   "fix_sequence": [
+    {
+     "tool": "toggle_roaming",
+     "args": {}
+    }
+   ]
+  },
+  {
+   "break": {
+    "tool": "<field:phone.data_saver_enabled>",
+    "args": {
+     "value": true
+    }
+   },
+   "predicates": [
+    "mobile_data_fast"
+   ],
+   "fix": {
+    "tool": "toggle_data_saver_mode",
+    "args": {}
+   },
+   "fix_sequence": [
+    {
+     "tool": "toggle_data_saver_mode",
+     "args": {}
+    }
+   ]
+  },
+  {
+   "break": {
+    "tool": "<field:phone.sim_status>",
+    "args": {
+     "value": ""
+    }
+   },
+   "predicates": [
+    "has_cellular_service",
+    "mms_working",
+    "mobile_data_fast",
+    "mobile_data_working",
+    "sim_card_healthy"
+   ],
+   "fix": {
+    "tool": "reseat_sim_card",
+    "args": {}
+   },
+   "fix_sequence": [
+    {
+     "tool": "reseat_sim_card",
+     "args": {}
+    }
+   ]
+  },
+  {
+   "break": {
+    "tool": "<field:phone.apn_settings_status>",
+    "args": {
+     "value": ""
+    }
+   },
+   "predicates": [
+    "apn_settings_healthy",
+    "has_cellular_service",
+    "mms_working",
+    "mobile_data_fast",
+    "mobile_data_working"
+   ],
+   "fix": {
+    "tool": "reset_apn_settings",
+    "args": {}
+   },
+   "fix_sequence": [
+    {
+     "tool": "reset_apn_settings",
+     "args": {}
+    },
+    {
+     "tool": "reboot_device",
+     "args": {}
+    }
+   ]
+  },
+  {
+   "break": {
+    "tool": "<field:phone.mmsc_url>",
+    "args": {
+     "value": ""
+    }
+   },
+   "predicates": [
+    "apn_settings_healthy",
+    "mms_working"
+   ],
+   "fix": {
+    "tool": "reset_apn_settings",
+    "args": {}
+   },
+   "fix_sequence": [
+    {
+     "tool": "reset_apn_settings",
+     "args": {}
+    },
+    {
+     "tool": "reboot_device",
+     "args": {}
+    }
+   ]
+  },
+  {
+   "break": {
+    "tool": "<field:phone.wifi_calling_enabled>",
+    "args": {
+     "value": true
+    }
+   },
+   "predicates": [
+    "mms_working"
+   ],
+   "fix": {
+    "tool": "toggle_wifi_calling",
+    "args": {}
+   },
+   "fix_sequence": [
+    {
+     "tool": "toggle_wifi_calling",
+     "args": {}
+    }
+   ]
+  },
+  {
+   "break": {
+    "tool": "<field:phone.pending_reboot>",
+    "args": {
+     "value": true
+    }
+   },
+   "predicates": [
+    "apn_settings_healthy",
+    "has_cellular_service",
+    "mms_working",
+    "mobile_data_fast",
+    "mobile_data_working"
+   ],
+   "fix": {
+    "tool": "reboot_device",
+    "args": {}
+   },
+   "fix_sequence": [
+    {
+     "tool": "reboot_device",
+     "args": {}
+    }
+   ]
+  },
+  {
+   "break": {
+    "tool": "<compound:phone.vpn_performance_level+connect_vpn>",
+    "args": {
+     "field_value": "poor",
+     "call_args": {}
+    },
+    "compound": {
+     "pert": {
+      "collection": "phone",
+      "index": null,
+      "field": "vpn_performance_level",
+      "value": "poor"
+     },
+     "call": {
+      "tool": "connect_vpn",
+      "args": {}
+     }
+    }
+   },
+   "predicates": [
+    "mobile_data_fast"
+   ],
+   "fix": {
+    "tool": "disconnect_vpn",
+    "args": {}
+   },
+   "fix_sequence": [
+    {
+     "tool": "disconnect_vpn",
+     "args": {}
+    }
+   ]
+  }
+ ],
+ "unrepairable": [
+  {
+   "break": {
+    "tool": "send_payment_request",
+    "args": {
+     "customer_id": "CUS-4501283",
+     "bill_id": "BILL-4501283-2025-01"
+    }
+   },
+   "predicates": [
+    "no_outstanding_bills",
+    "payment_request_settled"
+   ]
+  },
+  {
+   "break": {
+    "tool": "<field:lines.status>",
+    "args": {
+     "value": ""
+    }
+   },
+   "predicates": [
+    "has_cellular_service",
+    "line_active",
+    "mms_working",
+    "mobile_data_fast",
+    "mobile_data_working"
+   ]
+  },
+  {
+   "break": {
+    "tool": "<field:app_permissions.permission>",
+    "args": {
+     "value": ""
+    }
+   },
+   "predicates": [
+    "messaging_app_permissions_ready",
+    "mms_working"
+   ]
+  },
+  {
+   "break": {
+    "tool": "<field:payment_request.sent>",
+    "args": {
+     "value": false
+    }
+   },
+   "predicates": [
+    "payment_request_settled"
+   ]
+  }
+ ],
+ "n_breaks": 32
+}

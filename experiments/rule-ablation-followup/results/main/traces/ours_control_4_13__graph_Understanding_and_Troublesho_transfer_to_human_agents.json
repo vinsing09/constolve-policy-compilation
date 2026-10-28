@@ -1,0 +1,231 @@
+{
+ "case": "13:[graph:Understanding and Troublesho]transfer_to_human_agents",
+ "arm": "control",
+ "repeat": 4,
+ "solved": false,
+ "actions_done": 2,
+ "actions_required": 3,
+ "turns": 15,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "check_status_bar",
+  "reseat_sim_card",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "diagnosed_before_handoff",
+   "ok": false,
+   "why": "tool 'check_sim_status' was never called"
+  },
+  {
+   "id": "s2_get_data_usage",
+   "ok": true,
+   "why": "tool 'get_data_usage' was called"
+  },
+  {
+   "id": "s3_transfer_to_human_agents",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone can't get any signal at all. I can't make calls or use the internet."
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot your signal issue. First, I\u2019ll need to identify your account to check for any line or account-related problems. Could you please provide one of the following:\n\n- The phone number associated with your account\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I\u2019ll proceed with the necessary checks.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your information. Your line status is currently active, so let's proceed with troubleshooting your phone's signal issue.\n\nTo help you further, could you please check your phone's status bar and let me know if you see any of the following:\n\n- Airplane mode icon (\u2708\ufe0f)\n- \"No Signal\" or a signal strength indicator (bars)\n- Any other unusual icons\n\nThis will help determine if the issue is related to your device settings or something else. If you need guidance on how to check, let me know your phone model (Android or iPhone), and I can assist you step by step.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 0,
+      "roaming_enabled": false,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I see 'No Signal' and 'Data Disabled' in the status bar, but it also says 'Connected to Chestnut-5G'. My battery is at 87%.",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the details. Here\u2019s what your status bar indicates:\n\n- \"No Signal\": Your phone is not connected to the cellular network.\n- \"Data Disabled\": Mobile data is turned off.\n- \"Connected to Chestnut-5G\": You are connected to a Wi-Fi network.\n\nLet\u2019s start troubleshooting:\n\n1. Airplane Mode: Please check if Airplane Mode is enabled. If it is, turn it off.\n2. SIM Card: If Airplane Mode is off, your SIM card may not be recognized or seated properly.\n3. Mobile Data: Even though you\u2019re on Wi-Fi, mobile data should be enabled for cellular service.\n\nCould you please confirm if Airplane Mode is off? If it is, I\u2019ll guide you to check your SIM card status next.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Airplane mode is off. What should I do next?"
+  },
+  {
+   "role": "agent",
+   "content": "Great, since Airplane Mode is off, let\u2019s check your SIM card status. Please check your SIM card status on your phone. If you see any messages like \u201cSIM missing,\u201d \u201cSIM not detected,\u201d or \u201cSIM locked,\u201d let me know.\n\nIf you\u2019re not sure how to check, I can guide you through the process. Would you like instructions for Android or iPhone?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I'm using an Android phone. Could you guide me through checking the SIM card status?"
+  },
+  {
+   "role": "agent",
+   "content": "Certainly! Here\u2019s how you can check your SIM card status on an Android phone:\n\n1. Open the Settings app on your phone.\n2. Scroll down and tap on \u201cAbout phone\u201d or \u201cAbout device.\u201d\n3. Tap on \u201cStatus\u201d or \u201cSIM status.\u201d\n4. Look for information such as \u201cSIM status,\u201d \u201cNetwork,\u201d or \u201cService state.\u201d\n\nPlease let me know what it says for SIM status or Service state (e.g., \u201cActive,\u201d \u201cNo SIM card,\u201d \u201cSIM locked,\u201d etc.). This will help determine the next steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Under SIM status, it says 'No service' and 'SIM card detected'. The service state is 'Out of service'."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking. Since your SIM card is detected but the service state is \u201cOut of service\u201d and you have \u201cNo Signal,\u201d the next step is to reseat your SIM card. This can often resolve temporary connection issues.\n\nHere\u2019s what to do:\n1. Power off your phone.\n2. Remove the SIM card from its slot.\n3. Wait about 10 seconds, then reinsert the SIM card securely.\n4. Power your phone back on.\n\nAfter your phone restarts, check if you now have signal bars or if the service state changes.\n\nPlease let me know if you see any improvement or if the issue persists after reseating the SIM card.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "After reseating the SIM card, I saw a message that the SIM is still locked. The status is still 'No Signal' and 'Out of service.' What should I do next?",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez's SIM card is detected but locked after reseating. The phone shows 'No Signal' and 'Out of service.' Needs assistance with SIM unlock (PIN/PUK)."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez's SIM card is detected but locked after reseating. The phone shows 'No Signal' and 'Out of service.' Needs assistance with SIM unlock (PIN/PUK)."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

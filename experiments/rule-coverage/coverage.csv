@@ -1,0 +1,52 @@
+id,section,lines,kind,status,n_criteria,scenarios,note
+G01,General,8,must_not,not_checkable,0,,speech: content of the agent's replies
+G02,General,8,must_not,not_checkable,0,,speech: content of the agent's replies
+G03,General,10,must,not_covered,0,,no criterion type checks parallel tool calls
+G04,General,10,must_not,not_checkable,0,,speech: whether a reply accompanies a tool call
+G05,General,12,must,not_covered,0,,no criterion checks a refusal of an out-of-policy request
+G06,General,14,condition,covered,24,0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23,
+G07,General,14,order,not_checkable,0,,speech: the fixed hand-off message
+G08,General,16;171,order,covered,19,0 1 2 4 6 7 8 9 10 11 13 14 15 16 18 19 20 21 22,
+L01,Customer lookup,100,condition,not_covered,0,,no criterion grades get_customer_by_name
+T01,Technical support,160,order,not_covered,0,,no criterion grades a customer lookup (get_customer_by_*)
+B01,Overdue bill payment,106;118,order,not_covered,0,,no criterion grades the bill lookup before send_payment_request
+B02,Overdue bill payment,107,must,not_covered,0,,no criterion grades the bill lookup
+B03,Overdue bill payment,108,must,covered,3,1 13 16,
+B04,Overdue bill payment,110-111,must,not_checkable,0,,speech: telling the user a request was sent
+B05,Overdue bill payment,112,condition,covered,3,1 13 16,
+B06,Overdue bill payment,114,order,not_checkable,0,,speech: timed against telling the user the bill is paid
+B07,Overdue bill payment,117,must_not,not_covered,0,,no scenario starts with a bill in AWAITING PAYMENT
+S01,Line suspension,126,condition,covered,9,0 1 8 10 11 13 15 16 20,
+S02,Line suspension,127,must_not,not_covered,0,,scenario 23 meets the condition but has no tool_not_called(resume_line)
+S03,Line suspension,129,order,covered,5,0 8 11 15 20,
+D01,Data refueling,135,must_not,not_covered,0,,"no criterion compares gb_amount (refuel criteria compare customer_id, line_id only)"
+D02,Data refueling,137,must,not_checkable,0,,speech: asking the amount
+D03,Data refueling,138,must,not_checkable,0,,speech: confirming the price
+D04,Data refueling,139,must,covered,2,1 19,
+P01,Change plan,145,must,not_covered,0,,no scenario asks for a plan change; the agent has no plan-change tool
+P02,Change plan,146,must,not_covered,0,,no criterion grades get_available_plan_ids
+P03,Change plan,147,must,not_checkable,0,,speech: asking the user to choose
+P04,Change plan,148,must,not_checkable,0,,"speech: internal price calculation, said to the user"
+P05,Change plan,149,must,not_checkable,0,,speech: confirming the price
+P06,Change plan,150,must,not_covered,0,,the agent's tool set (tau2 telecom) has no plan-change tool
+R01,Data roaming,156;301,condition,not_covered,0,,no criterion grades the line lookup alone (s*_get_data_usage also passes on get_data_usage)
+R02,Data roaming,156,condition,covered,2,1 16,
+C01,Cellular service,239,condition,covered,11,0 4 7 8 11 14 15 18 20 21 22,
+C02,Cellular service,245,must,covered,3,3 12 17,
+C03,Cellular service,246,condition,not_covered,0,,no scenario has a missing SIM
+C04,Cellular service,247,condition,covered,4,3 5 12 17,
+C05,Cellular service,252,condition,covered,10,0 4 6 8 9 11 15 20 21 22,
+C06,Cellular service,253;360,order,covered,10,0 4 6 8 9 11 15 20 21 22,
+C07,Cellular service,257,must,not_covered,0,,no criterion grades the line lookup alone
+C08,Cellular service,258,condition,not_covered,0,,no criterion grades a service check after resume_line
+C09,Cellular service,259,condition,covered,1,23,
+M01,Mobile data,296,condition,covered,3,0 15 21,
+M02,Mobile data,300,condition,covered,2,2 20,
+M03,Mobile data,306,condition,covered,1,2,
+M04,Mobile data,311,condition,covered,1,2,
+M05,Mobile data,324,condition,not_covered,0,,"only network-mode criterion (scenario 2) starts at 4g_only, not 2G/3G"
+X01,MMS,349,order,not_covered,0,,diagnosed_before_handoff also passes on check_sim_status
+X02,MMS,354,condition,not_covered,0,,no scenario is on a 2G network
+X03,MMS,359,condition,not_covered,0,,every scenario has an MMSC URL set
+X04,MMS,364,condition,covered,1,4,
+X05,MMS,368,condition,covered,1,4,

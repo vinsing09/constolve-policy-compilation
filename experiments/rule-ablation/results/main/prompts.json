@@ -1,0 +1,1334 @@
+{
+ "R1_airplane|0|0:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|0|10:[graph:Telecom Agent Policy]resume_line": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|0|11:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|0|12:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|0|13:[graph:Telecom Agent Policy]send_payment_request": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|0|14:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|0|15:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|0|16:[graph:Telecom Agent Policy]send_payment_request|enable_roaming": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|0|17:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|0|18:[graph:Understanding and Troublesho]toggle_airplane_mode|reboot_device": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|0|19:[graph:Telecom Agent Policy]refuel_data": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|0|1:[graph:Telecom Agent Policy]make_payment|refuel_data|enable_roaming": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|0|20:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_roaming": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|0|21:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_data": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|0|22:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|0|23:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|0|2:[graph:Understanding and Troublesho]toggle_roaming|toggle_data_saver_mode|disconnect_vpn|set_network_mode_preference": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|0|3:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|0|4:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_wifi_calling|grant_app_permission": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|0|5:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|0|6:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|0|7:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|0|8:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|0|9:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|1|0:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|1|10:[graph:Telecom Agent Policy]resume_line": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|1|11:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|1|12:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|1|13:[graph:Telecom Agent Policy]send_payment_request": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|1|14:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|1|15:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|1|16:[graph:Telecom Agent Policy]send_payment_request|enable_roaming": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|1|17:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|1|18:[graph:Understanding and Troublesho]toggle_airplane_mode|reboot_device": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|1|19:[graph:Telecom Agent Policy]refuel_data": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|1|1:[graph:Telecom Agent Policy]make_payment|refuel_data|enable_roaming": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|1|20:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_roaming": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|1|21:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_data": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|1|22:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|1|23:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|1|2:[graph:Understanding and Troublesho]toggle_roaming|toggle_data_saver_mode|disconnect_vpn|set_network_mode_preference": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|1|3:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|1|4:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_wifi_calling|grant_app_permission": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|1|5:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|1|6:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|1|7:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|1|8:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|1|9:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|2|0:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|2|10:[graph:Telecom Agent Policy]resume_line": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|2|11:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|2|12:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|2|13:[graph:Telecom Agent Policy]send_payment_request": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|2|14:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|2|15:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|2|1:[graph:Telecom Agent Policy]make_payment|refuel_data|enable_roaming": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|2|2:[graph:Understanding and Troublesho]toggle_roaming|toggle_data_saver_mode|disconnect_vpn|set_network_mode_preference": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|2|3:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|2|4:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_wifi_calling|grant_app_permission": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|2|5:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|2|6:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|2|7:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|2|8:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R1_airplane|2|9:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "0a9f229b309dd36a109e2b74fe00e96fedd5c85e97a33129c202f817e1e469e3"
+ ],
+ "R2_apn|0|0:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|0|10:[graph:Telecom Agent Policy]resume_line": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|0|11:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|0|12:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|0|13:[graph:Telecom Agent Policy]send_payment_request": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|0|14:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|0|15:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|0|16:[graph:Telecom Agent Policy]send_payment_request|enable_roaming": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|0|17:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|0|18:[graph:Understanding and Troublesho]toggle_airplane_mode|reboot_device": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|0|19:[graph:Telecom Agent Policy]refuel_data": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|0|1:[graph:Telecom Agent Policy]make_payment|refuel_data|enable_roaming": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|0|20:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_roaming": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|0|21:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_data": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|0|22:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|0|23:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|0|2:[graph:Understanding and Troublesho]toggle_roaming|toggle_data_saver_mode|disconnect_vpn|set_network_mode_preference": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|0|3:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|0|4:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_wifi_calling|grant_app_permission": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|0|5:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|0|6:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|0|7:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|0|8:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|0|9:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|1|0:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|1|10:[graph:Telecom Agent Policy]resume_line": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|1|11:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|1|12:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|1|13:[graph:Telecom Agent Policy]send_payment_request": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|1|14:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|1|15:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|1|16:[graph:Telecom Agent Policy]send_payment_request|enable_roaming": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|1|17:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|1|18:[graph:Understanding and Troublesho]toggle_airplane_mode|reboot_device": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|1|19:[graph:Telecom Agent Policy]refuel_data": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|1|1:[graph:Telecom Agent Policy]make_payment|refuel_data|enable_roaming": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|1|20:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_roaming": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|1|21:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_data": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|1|22:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|1|23:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|1|2:[graph:Understanding and Troublesho]toggle_roaming|toggle_data_saver_mode|disconnect_vpn|set_network_mode_preference": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|1|3:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|1|4:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_wifi_calling|grant_app_permission": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|1|5:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|1|6:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|1|7:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|1|8:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|1|9:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|2|0:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|2|10:[graph:Telecom Agent Policy]resume_line": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|2|11:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|2|12:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|2|13:[graph:Telecom Agent Policy]send_payment_request": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|2|14:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|2|15:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|2|1:[graph:Telecom Agent Policy]make_payment|refuel_data|enable_roaming": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|2|2:[graph:Understanding and Troublesho]toggle_roaming|toggle_data_saver_mode|disconnect_vpn|set_network_mode_preference": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|2|3:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|2|4:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_wifi_calling|grant_app_permission": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|2|5:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|2|6:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|2|7:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|2|8:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R2_apn|2|9:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "1f19144d4f04e4eecda7bbcd6ad9ae835909c4c627f450597667b20dacf7d085"
+ ],
+ "R3_payment|0|0:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|0|10:[graph:Telecom Agent Policy]resume_line": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|0|11:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|0|12:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|0|13:[graph:Telecom Agent Policy]send_payment_request": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|0|14:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|0|15:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|0|16:[graph:Telecom Agent Policy]send_payment_request|enable_roaming": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|0|17:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|0|18:[graph:Understanding and Troublesho]toggle_airplane_mode|reboot_device": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|0|19:[graph:Telecom Agent Policy]refuel_data": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|0|1:[graph:Telecom Agent Policy]make_payment|refuel_data|enable_roaming": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|0|20:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_roaming": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|0|21:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_data": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|0|22:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|0|23:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|0|2:[graph:Understanding and Troublesho]toggle_roaming|toggle_data_saver_mode|disconnect_vpn|set_network_mode_preference": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|0|3:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|0|4:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_wifi_calling|grant_app_permission": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|0|5:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|0|6:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|0|7:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|0|8:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|0|9:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|1|0:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|1|10:[graph:Telecom Agent Policy]resume_line": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|1|11:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|1|12:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|1|13:[graph:Telecom Agent Policy]send_payment_request": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|1|14:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|1|15:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|1|16:[graph:Telecom Agent Policy]send_payment_request|enable_roaming": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|1|17:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|1|18:[graph:Understanding and Troublesho]toggle_airplane_mode|reboot_device": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|1|19:[graph:Telecom Agent Policy]refuel_data": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|1|1:[graph:Telecom Agent Policy]make_payment|refuel_data|enable_roaming": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|1|20:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_roaming": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|1|21:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_data": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|1|22:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|1|23:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|1|2:[graph:Understanding and Troublesho]toggle_roaming|toggle_data_saver_mode|disconnect_vpn|set_network_mode_preference": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|1|3:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|1|4:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_wifi_calling|grant_app_permission": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|1|5:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|1|6:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|1|7:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|1|8:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|1|9:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|2|0:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|2|10:[graph:Telecom Agent Policy]resume_line": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|2|11:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|2|12:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|2|13:[graph:Telecom Agent Policy]send_payment_request": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|2|14:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|2|1:[graph:Telecom Agent Policy]make_payment|refuel_data|enable_roaming": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|2|2:[graph:Understanding and Troublesho]toggle_roaming|toggle_data_saver_mode|disconnect_vpn|set_network_mode_preference": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|2|3:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|2|4:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_wifi_calling|grant_app_permission": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|2|5:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|2|6:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|2|7:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|2|8:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R3_payment|2|9:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "ec3a7cec642891b677367107fad6d3dc472dcabfc3e2f57a49da9b11cc7d5e64"
+ ],
+ "R4_suspension|0|0:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|0|10:[graph:Telecom Agent Policy]resume_line": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|0|11:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|0|12:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|0|13:[graph:Telecom Agent Policy]send_payment_request": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|0|14:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|0|15:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|0|16:[graph:Telecom Agent Policy]send_payment_request|enable_roaming": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|0|17:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|0|18:[graph:Understanding and Troublesho]toggle_airplane_mode|reboot_device": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|0|19:[graph:Telecom Agent Policy]refuel_data": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|0|1:[graph:Telecom Agent Policy]make_payment|refuel_data|enable_roaming": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|0|20:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_roaming": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|0|21:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_data": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|0|22:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|0|23:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|0|2:[graph:Understanding and Troublesho]toggle_roaming|toggle_data_saver_mode|disconnect_vpn|set_network_mode_preference": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|0|3:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|0|4:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_wifi_calling|grant_app_permission": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|0|5:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|0|6:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|0|7:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|0|8:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|0|9:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|1|0:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|1|10:[graph:Telecom Agent Policy]resume_line": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|1|11:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|1|12:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|1|13:[graph:Telecom Agent Policy]send_payment_request": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|1|14:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|1|15:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|1|16:[graph:Telecom Agent Policy]send_payment_request|enable_roaming": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|1|17:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|1|18:[graph:Understanding and Troublesho]toggle_airplane_mode|reboot_device": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|1|19:[graph:Telecom Agent Policy]refuel_data": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|1|1:[graph:Telecom Agent Policy]make_payment|refuel_data|enable_roaming": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|1|20:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_roaming": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|1|21:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_data": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|1|22:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|1|23:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|1|2:[graph:Understanding and Troublesho]toggle_roaming|toggle_data_saver_mode|disconnect_vpn|set_network_mode_preference": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|1|3:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|1|4:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_wifi_calling|grant_app_permission": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|1|5:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|1|6:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|1|7:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|1|8:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|1|9:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|2|0:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|2|10:[graph:Telecom Agent Policy]resume_line": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|2|11:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|2|12:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|2|13:[graph:Telecom Agent Policy]send_payment_request": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|2|14:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|2|1:[graph:Telecom Agent Policy]make_payment|refuel_data|enable_roaming": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|2|2:[graph:Understanding and Troublesho]toggle_roaming|toggle_data_saver_mode|disconnect_vpn|set_network_mode_preference": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|2|3:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|2|4:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_wifi_calling|grant_app_permission": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|2|5:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|2|6:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|2|7:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|2|8:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R4_suspension|2|9:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "853db367e9bf937951f17b794b3375b2add95936745b8e6569a4fd9a107d1f89"
+ ],
+ "R5_escalate_unfixable|0|0:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|0|10:[graph:Telecom Agent Policy]resume_line": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|0|11:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|0|12:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|0|13:[graph:Telecom Agent Policy]send_payment_request": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|0|14:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|0|15:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|0|16:[graph:Telecom Agent Policy]send_payment_request|enable_roaming": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|0|17:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|0|18:[graph:Understanding and Troublesho]toggle_airplane_mode|reboot_device": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|0|19:[graph:Telecom Agent Policy]refuel_data": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|0|1:[graph:Telecom Agent Policy]make_payment|refuel_data|enable_roaming": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|0|20:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_roaming": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|0|21:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_data": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|0|22:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|0|23:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|0|2:[graph:Understanding and Troublesho]toggle_roaming|toggle_data_saver_mode|disconnect_vpn|set_network_mode_preference": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|0|3:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|0|4:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_wifi_calling|grant_app_permission": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|0|5:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|0|6:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|0|7:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|0|8:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|0|9:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|1|0:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|1|10:[graph:Telecom Agent Policy]resume_line": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|1|11:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|1|12:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|1|13:[graph:Telecom Agent Policy]send_payment_request": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|1|14:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|1|15:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|1|16:[graph:Telecom Agent Policy]send_payment_request|enable_roaming": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|1|17:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|1|18:[graph:Understanding and Troublesho]toggle_airplane_mode|reboot_device": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|1|19:[graph:Telecom Agent Policy]refuel_data": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|1|1:[graph:Telecom Agent Policy]make_payment|refuel_data|enable_roaming": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|1|20:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_roaming": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|1|21:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_data": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|1|22:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|1|23:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|1|2:[graph:Understanding and Troublesho]toggle_roaming|toggle_data_saver_mode|disconnect_vpn|set_network_mode_preference": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|1|3:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|1|4:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_wifi_calling|grant_app_permission": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|1|5:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|1|6:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|1|7:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|1|8:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|1|9:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|2|0:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|2|10:[graph:Telecom Agent Policy]resume_line": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|2|11:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|2|12:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|2|13:[graph:Telecom Agent Policy]send_payment_request": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|2|14:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|2|1:[graph:Telecom Agent Policy]make_payment|refuel_data|enable_roaming": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|2|2:[graph:Understanding and Troublesho]toggle_roaming|toggle_data_saver_mode|disconnect_vpn|set_network_mode_preference": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|2|3:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|2|4:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_wifi_calling|grant_app_permission": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|2|5:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|2|6:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|2|7:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|2|8:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R5_escalate_unfixable|2|9:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "e6618df7db8ddf708c24751e4385ce5e3e16b641a4378667b735ba010532616d"
+ ],
+ "R6_transfer_scope|0|0:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|0|10:[graph:Telecom Agent Policy]resume_line": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|0|11:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|0|12:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|0|13:[graph:Telecom Agent Policy]send_payment_request": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|0|14:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|0|15:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|0|16:[graph:Telecom Agent Policy]send_payment_request|enable_roaming": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|0|17:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|0|18:[graph:Understanding and Troublesho]toggle_airplane_mode|reboot_device": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|0|19:[graph:Telecom Agent Policy]refuel_data": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|0|1:[graph:Telecom Agent Policy]make_payment|refuel_data|enable_roaming": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|0|20:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_roaming": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|0|21:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_data": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|0|22:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|0|23:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|0|2:[graph:Understanding and Troublesho]toggle_roaming|toggle_data_saver_mode|disconnect_vpn|set_network_mode_preference": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|0|3:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|0|4:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_wifi_calling|grant_app_permission": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|0|5:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|0|6:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|0|7:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|0|8:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|0|9:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|1|0:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|1|10:[graph:Telecom Agent Policy]resume_line": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|1|11:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|1|12:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|1|13:[graph:Telecom Agent Policy]send_payment_request": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|1|14:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|1|15:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|1|16:[graph:Telecom Agent Policy]send_payment_request|enable_roaming": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|1|17:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|1|18:[graph:Understanding and Troublesho]toggle_airplane_mode|reboot_device": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|1|19:[graph:Telecom Agent Policy]refuel_data": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|1|1:[graph:Telecom Agent Policy]make_payment|refuel_data|enable_roaming": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|1|20:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_roaming": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|1|21:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_data": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|1|22:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|1|23:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|1|2:[graph:Understanding and Troublesho]toggle_roaming|toggle_data_saver_mode|disconnect_vpn|set_network_mode_preference": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|1|3:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|1|4:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_wifi_calling|grant_app_permission": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|1|5:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|1|6:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|1|7:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|1|8:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|1|9:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|2|0:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|2|10:[graph:Telecom Agent Policy]resume_line": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|2|11:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|2|12:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|2|13:[graph:Telecom Agent Policy]send_payment_request": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|2|14:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|2|1:[graph:Telecom Agent Policy]make_payment|refuel_data|enable_roaming": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|2|2:[graph:Understanding and Troublesho]toggle_roaming|toggle_data_saver_mode|disconnect_vpn|set_network_mode_preference": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|2|3:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|2|4:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_wifi_calling|grant_app_permission": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|2|5:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|2|6:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|2|7:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|2|8:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "R6_transfer_scope|2|9:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "a3328e9316fa76ec21176739fa8c478ffe49d0e258a7aeabc2cde425393b7668"
+ ],
+ "control|0|0:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|0|10:[graph:Telecom Agent Policy]resume_line": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|0|11:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|0|12:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|0|13:[graph:Telecom Agent Policy]send_payment_request": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|0|14:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|0|15:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|0|16:[graph:Telecom Agent Policy]send_payment_request|enable_roaming": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|0|17:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|0|18:[graph:Understanding and Troublesho]toggle_airplane_mode|reboot_device": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|0|19:[graph:Telecom Agent Policy]refuel_data": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|0|1:[graph:Telecom Agent Policy]make_payment|refuel_data|enable_roaming": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|0|20:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_roaming": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|0|21:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_data": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|0|22:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|0|23:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|0|2:[graph:Understanding and Troublesho]toggle_roaming|toggle_data_saver_mode|disconnect_vpn|set_network_mode_preference": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|0|3:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|0|4:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_wifi_calling|grant_app_permission": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|0|5:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|0|6:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|0|7:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|0|8:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|0|9:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|1|0:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|1|10:[graph:Telecom Agent Policy]resume_line": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|1|11:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|1|12:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|1|13:[graph:Telecom Agent Policy]send_payment_request": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|1|14:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|1|15:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|1|16:[graph:Telecom Agent Policy]send_payment_request|enable_roaming": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|1|17:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|1|18:[graph:Understanding and Troublesho]toggle_airplane_mode|reboot_device": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|1|19:[graph:Telecom Agent Policy]refuel_data": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|1|1:[graph:Telecom Agent Policy]make_payment|refuel_data|enable_roaming": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|1|20:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_roaming": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|1|21:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_data": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|1|22:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|1|23:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|1|2:[graph:Understanding and Troublesho]toggle_roaming|toggle_data_saver_mode|disconnect_vpn|set_network_mode_preference": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|1|3:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|1|4:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_wifi_calling|grant_app_permission": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|1|5:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|1|6:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|1|7:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|1|8:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|1|9:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|2|0:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|2|10:[graph:Telecom Agent Policy]resume_line": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|2|11:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|2|12:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|2|13:[graph:Telecom Agent Policy]send_payment_request": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|2|14:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|2|15:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|2|1:[graph:Telecom Agent Policy]make_payment|refuel_data|enable_roaming": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|2|2:[graph:Understanding and Troublesho]toggle_roaming|toggle_data_saver_mode|disconnect_vpn|set_network_mode_preference": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|2|3:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|2|4:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_wifi_calling|grant_app_permission": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|2|5:[graph:Understanding and Troublesho]transfer_to_human_agents": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|2|6:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|2|7:[graph:Understanding and Troublesho]toggle_airplane_mode": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|2|8:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ],
+ "control|2|9:[graph:Understanding and Troublesho]reset_apn_settings": [
+  "065b48503bf780153fc671455cdfddb85b4c6ffb11e2ea93bd940233d804c3e9"
+ ]
+}

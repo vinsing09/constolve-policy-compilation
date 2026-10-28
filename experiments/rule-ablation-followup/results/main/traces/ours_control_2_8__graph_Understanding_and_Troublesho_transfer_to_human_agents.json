@@ -1,0 +1,256 @@
+{
+ "case": "8:[graph:Understanding and Troublesho]transfer_to_human_agents",
+ "arm": "control",
+ "repeat": 2,
+ "solved": true,
+ "actions_done": 2,
+ "actions_required": 2,
+ "turns": 17,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "check_status_bar",
+  "toggle_airplane_mode",
+  "reseat_sim_card",
+  "reset_apn_settings",
+  "reboot_device",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "diagnosed_before_handoff",
+   "ok": true,
+   "why": "tool 'check_status_bar' was called"
+  },
+  {
+   "id": "s3_transfer_to_human_agents",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no signal at all and I can't send picture messages or use mobile data. Can you help me fix this?"
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot your phone\u2019s signal, mobile data, and picture messaging issues. First, I\u2019ll need to identify your account to check for any line or account-related problems.\n\nCould you please provide one of the following:\n- Your phone number\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I\u2019ll guide you through the steps to restore your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148 and my name is Sofia Martinez."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your information. Your line is currently active, so let\u2019s start troubleshooting your phone\u2019s signal, mobile data, and picture messaging issues.\n\nTo proceed, I\u2019ll need you to perform a few quick checks on your device. Are you able to access your phone\u2019s status bar and settings? If so, please let me know, and I\u2019ll guide you through the steps. If you need instructions on how to check specific settings, just let me know your phone model (Android or iPhone).",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Yes, I can access my phone\u2019s status bar and settings. Just let me know what you need me to check."
+  },
+  {
+   "role": "agent",
+   "content": "Great! Let\u2019s start by checking a few things to diagnose the issue:\n\n1. Check if Airplane Mode is ON.\n2. Check your signal strength and network type.\n3. Check if mobile data is enabled.\n\nPlease do the following:\n- Look at your phone\u2019s status bar (top of the screen) and let me know:\n  - Do you see an airplane icon?\n  - Are there any signal bars, or does it show \u201cNo Signal\u201d?\n  - Do you see \u201c4G\u201d, \u201c5G\u201d, \u201cLTE\u201d, or any network type indicator?\n  - Is there a mobile data icon (usually two arrows or \u201cLTE/4G/5G\u201d)?\n\nLet me know what you see for each of these, and we\u2019ll continue troubleshooting from there.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Actually, I do see an airplane icon in the status bar, along with 'No Signal' and 'Data Disabled.' There are no signal bars or network type indicators showing.",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "It looks like Airplane Mode is enabled on your phone, which turns off all wireless connections\u2014including cellular service, mobile data, and the ability to send picture messages.\n\nPlease turn off Airplane Mode:\n1. Swipe down from the top of your screen to open the quick settings panel.\n2. Tap the airplane icon to disable Airplane Mode.\n\nOnce you\u2019ve done this, wait a few seconds and check if your signal bars and network type (like 4G, 5G, or LTE) reappear. Let me know if your signal returns and if you can use mobile data or send picture messages. If not, we\u2019ll continue troubleshooting.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Airplane mode is now OFF. I see one signal bar, but I still can't use mobile data or send picture messages and there is no 5G or LTE showing.",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_airplane_mode",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the update. Since you now have a weak signal but still can\u2019t use mobile data or send picture messages, let\u2019s check a few more things:\n\n1. Is mobile data enabled? Please check your status bar or settings to see if mobile data is ON.\n2. What network type is showing now (e.g., 3G, H+, E, or nothing)?\n3. Are you able to browse the internet or use any apps that require data?\n\nPlease let me know what you see for each of these. If mobile data is OFF, please turn it ON and let me know if anything changes. If you see a network type (like 3G or H+), let me know which one. This will help determine the next steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Mobile data is ON, but there is no network type showing\u2014just one signal bar. I can't browse the internet or use any apps that need data."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking. Since mobile data is ON but there\u2019s no network type showing and you can\u2019t use data, let\u2019s try the following steps:\n\n1. Reseat your SIM card. This can help if the phone isn\u2019t connecting properly to the network.\n2. Reset your APN (Access Point Name) settings. Incorrect APN settings can prevent mobile data and MMS from working.\n3. Reboot your device after resetting APN settings.\n\nWould you like step-by-step instructions for these actions, or are you comfortable performing them on your own? If you\u2019d like instructions, please let me know your phone type (Android or iPhone).",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I can follow step-by-step instructions. My phone is an Android."
+  },
+  {
+   "role": "agent",
+   "content": "Perfect! Here are the step-by-step instructions for each action:\n\n1. Reseat Your SIM Card:\n   - Power off your phone.\n   - Remove the SIM card tray using the SIM ejector tool or a paperclip.\n   - Take out the SIM card, wait a few seconds, then reinsert it securely.\n   - Put the tray back in and power your phone ON.\n\n2. Reset APN Settings:\n   - Open the Settings app.\n   - Tap on \u201cNetwork & Internet\u201d or \u201cConnections.\u201d\n   - Tap \u201cMobile Network\u201d or \u201cCellular Networks.\u201d\n   - Tap \u201cAccess Point Names\u201d or \u201cAPN.\u201d\n   - Tap the three dots (menu) in the top right corner and select \u201cReset to default.\u201d\n\n3. Reboot Your Device:\n   - After resetting the APN, restart your phone.\n\nAfter completing these steps, check if your signal improves, if a network type (like 4G, LTE, or 5G) appears, and if you can use mobile data or send picture messages.\n\nPlease let me know the results or if you encounter any issues during these steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I followed your steps, but after reseating the SIM card, my phone said the SIM is still locked. I reset the APN settings and rebooted, but I still only have one signal bar, no network type showing, and I can't use mobile data or send picture messages.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "reset_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer's SIM card is locked after troubleshooting signal, mobile data, and MMS issues. User cannot unlock SIM and needs assistance with SIM security (PIN/PUK unlock)."
+     },
+     "params": {
+      "summary": "Customer's SIM card is locked after troubleshooting signal, mobile data, and MMS issues. User cannot unlock SIM and needs assistance with SIM security (PIN/PUK unlock)."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

@@ -1,0 +1,128 @@
+{
+ "run": "full-original-2",
+ "copy": "code-original",
+ "copy_checksum": "522eaebaa7031d4435801dc650a62b657212638407a6b893ddae90540005a5ec",
+ "copy_tree_hash": "72103141b42e17b82d778046eb9db7cf5a099e7aa91959a21832f31244d89eeb",
+ "project_commit": "644c3668fd92c055ed1de6fb972b1aea387e431d",
+ "command": [
+  "/home/vineet/Documents/my_projects/telecom-rerun/.venv/bin/python",
+  "/home/vineet/Documents/my_projects/telecom-rerun/scripts/run_manifest.py",
+  "--copy",
+  "code-original",
+  "--run",
+  "full-original-2",
+  "--",
+  "--suite",
+  "ours",
+  "--domain",
+  "telecom",
+  "--cases",
+  "24",
+  "--repeats",
+  "5",
+  "--max-turns",
+  "30"
+ ],
+ "bench_command": [
+  "scripts/bench.py",
+  "--suite",
+  "ours",
+  "--domain",
+  "telecom",
+  "--cases",
+  "24",
+  "--repeats",
+  "5",
+  "--max-turns",
+  "30"
+ ],
+ "cwd": "/home/vineet/Documents/my_projects/telecom-rerun/code-original",
+ "python": "3.12.14",
+ "packages": {
+  "litellm": "1.82.6",
+  "openai": "2.26.0",
+  "httpx": "0.28.1",
+  "pydantic": "2.13.5"
+ },
+ "models_requested": {
+  "agent": "gpt-4.1",
+  "customer": "gpt-4.1"
+ },
+ "temperatures": {
+  "agent": 0,
+  "customer": 0.7
+ },
+ "cap": 30,
+ "cases": 24,
+ "repeats": 5,
+ "concurrency": 8,
+ "suite": "ours",
+ "domain": "telecom",
+ "start": "2026-10-20T16:18:50+05:30",
+ "models_resolved": {
+  "agent": "gpt-4.1",
+  "customer": "gpt-4.1",
+  "customer_temperature": 0.7
+ },
+ "case_ids": [
+  "0:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data",
+  "1:[graph:Telecom Agent Policy]make_payment|refuel_data|enable_roaming",
+  "2:[graph:Understanding and Troublesho]toggle_roaming|toggle_data_saver_mode|disconnect_vpn|set_network_mode_preference",
+  "3:[graph:Understanding and Troublesho]transfer_to_human_agents",
+  "4:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_wifi_calling|grant_app_permission",
+  "5:[graph:Understanding and Troublesho]transfer_to_human_agents",
+  "6:[graph:Understanding and Troublesho]reset_apn_settings",
+  "7:[graph:Understanding and Troublesho]toggle_airplane_mode",
+  "8:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line",
+  "9:[graph:Understanding and Troublesho]reset_apn_settings",
+  "10:[graph:Telecom Agent Policy]resume_line",
+  "11:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line",
+  "12:[graph:Understanding and Troublesho]transfer_to_human_agents",
+  "13:[graph:Telecom Agent Policy]send_payment_request",
+  "14:[graph:Understanding and Troublesho]toggle_airplane_mode",
+  "15:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_data",
+  "16:[graph:Telecom Agent Policy]send_payment_request|enable_roaming",
+  "17:[graph:Understanding and Troublesho]transfer_to_human_agents",
+  "18:[graph:Understanding and Troublesho]toggle_airplane_mode|reboot_device",
+  "19:[graph:Telecom Agent Policy]refuel_data",
+  "20:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|resume_line|toggle_roaming",
+  "21:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings|toggle_data",
+  "22:[graph:Understanding and Troublesho]toggle_airplane_mode|reset_apn_settings",
+  "23:[graph:Understanding and Troublesho]transfer_to_human_agents"
+ ],
+ "end": "2026-10-20T16:42:58+05:30",
+ "bench_exit": 0,
+ "summary": {
+  "expected": 240,
+  "trace_files": 240,
+  "report_rows": 240,
+  "report_errors": 0,
+  "conversations_with_no_criteria": 0,
+  "customer_errors": 0,
+  "conversations_with_customer_error": 0,
+  "customer_errors_visible_in_transcript": 0,
+  "model_calls": 6833,
+  "failed_calls": 0,
+  "sdk_retries": 6,
+  "calls_by_caller": {
+   "agent": 3189,
+   "customer": 3644
+  },
+  "requested_models": [
+   "gpt-4.1"
+  ],
+  "returned_models": [
+   "gpt-4.1-2025-04-14"
+  ],
+  "calls_missing_usage_or_cost": 0,
+  "customer_reply_shapes": {
+   "ok": 3644
+  },
+  "customer_response_formats": [
+   "null"
+  ],
+  "cost_usd": 27.7791,
+  "problems": [],
+  "copy_unchanged": true
+ }
+}

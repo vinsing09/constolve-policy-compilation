@@ -1,0 +1,249 @@
+{
+ "case": "9:[graph:Understanding and Troublesho]reset_apn_settings",
+ "arm": "stub",
+ "repeat": 0,
+ "solved": false,
+ "actions_done": 1,
+ "actions_required": 3,
+ "turns": 17,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "reboot_device",
+  "reseat_sim_card",
+  "check_network_mode_preference",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_reset_apn_settings",
+   "ok": false,
+   "why": "tool 'reset_apn_settings' was never called by the user"
+  },
+  {
+   "id": "s1_reboot_device",
+   "ok": true,
+   "why": "tool 'reboot_device' was called"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, nothing loads, and I can't send picture messages. Can you help me fix this?"
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're experiencing no service on your phone. Let's try to resolve this together. To assist you better, could you please provide your phone number or the name on your account? This will help me check your line status and see if there are any issues on our end.\n\nIn the meantime, here are a few quick troubleshooting steps you can try:\n\n1. Restart your phone.\n2. Make sure Airplane Mode is turned off.\n3. Check if your SIM card is properly inserted.\n4. Try toggling mobile data off and on.\n\nOnce you provide your phone number or account details, I can check your line status and help further.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148. Should I start with restarting my phone, or is there something else you want me to try first?"
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your details. I\u2019ve checked your account, and your line status is showing as Active, which is good. Since your line is active but you have no service at all, here\u2019s what I recommend:\n\n1. Yes, please start by restarting your phone. This can often resolve temporary network issues.\n2. After restarting, check if you have service bars.\n3. If you still have no service, please confirm:\n   - Is Airplane Mode turned off?\n   - Is your SIM card properly inserted?\n   - Are you in an area where you usually have coverage?\n\nIf you try these steps and still have no service, let me know. I can then guide you through more advanced troubleshooting or check for any network outages in your area.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I just restarted my phone, but I still have no service\u2014there are no bars showing. How do I check if Airplane Mode is off?",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "To check if Airplane Mode is off, follow these steps (the process may vary slightly depending on your phone type):\n\nFor iPhone:\n1. Swipe down from the top-right corner of the screen (or up from the bottom on older models) to open Control Center.\n2. Look for the airplane icon. If it\u2019s orange or highlighted, Airplane Mode is ON. Tap it once to turn it OFF (it should turn gray or unhighlighted).\n\nFor Android:\n1. Swipe down from the top of the screen to open the Quick Settings panel.\n2. Look for the airplane icon. If it\u2019s colored or highlighted, Airplane Mode is ON. Tap it once to turn it OFF (it should turn gray or unhighlighted).\n\nOnce you\u2019ve confirmed Airplane Mode is off, check if you have service bars. If you still have no service, please let me know, and we\u2019ll continue troubleshooting.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Thanks, I checked and Airplane Mode is off. I still have no service bars showing after restarting."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking. Since Airplane Mode is off and you still have no service after restarting, let\u2019s try a few more steps:\n\n1. **SIM Card Check:**  \n   - Power off your phone.\n   - Remove the SIM card (usually found in a tray on the side or back of your phone).\n   - Wait 30 seconds, then reinsert the SIM card securely.\n   - Power your phone back on and check for service.\n\n2. **Network Selection:**  \n   - Go to your phone\u2019s Settings > Cellular/Mobile Network > Network Selection.\n   - Make sure it\u2019s set to \u201cAutomatic.\u201d If it\u2019s already on automatic, try toggling it off and back on.\n\n3. **Check for Outages:**  \n   - Are you in an area where you usually have good coverage, or are you traveling?  \n   - Are other people nearby (on the same network) experiencing issues?\n\nPlease try the SIM card step first and let me know if you see any change. If you still have no service, I can check for network issues in your area or escalate this for further support.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I already removed and reinserted the SIM card. The SIM status shows as active, but I still have no service bars showing. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know you\u2019ve already reinserted the SIM card and confirmed it\u2019s active, but you still have no service bars. Since your line is active in our system and you\u2019ve tried the basic troubleshooting steps, let\u2019s try the following:\n\n1. **Manual Network Selection:**\n   - Go to Settings > Cellular/Mobile Network > Network Selection.\n   - Turn off \u201cAutomatic\u201d and let your phone search for available networks.\n   - If you see your carrier\u2019s network, select it manually.\n   - If you get an error or no networks appear, let me know.\n\n2. **Test the SIM in Another Phone (if possible):**\n   - If you have access to another unlocked phone, insert your SIM card into that device.\n   - See if the other phone gets service bars. This helps determine if the issue is with your phone or the SIM/network.\n\n3. **Check for Roaming Settings:**\n   - Sometimes, if you\u2019re near a border or traveling, roaming settings can affect service.\n   - Go to Settings > Cellular/Mobile Network > Roaming and make sure it\u2019s enabled if you\u2019re outside your usual coverage area.\n\nIf none of these steps restore your service, please let me know:\n- If you see any error messages (like \u201cNo SIM,\u201d \u201cEmergency Calls Only,\u201d etc.).\n- If you recently changed your device, SIM, or plan.\n\nIf the issue persists after these steps, I can escalate this to our technical team for further investigation or assist with a SIM replacement if needed. Please let me know the results of the above steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My network mode preference is set to '4g_5g_preferred'. Still no service bars showing.",
+   "tool_calls": [
+    {
+     "tool_name": "check_network_mode_preference",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking your network mode. Since your preference is set to \"4G/5G Preferred\" and you still have no service bars, let\u2019s try switching the network mode to see if that helps:\n\n1. Go to Settings > Cellular/Mobile Network > Preferred Network Type (or similar).\n2. Change the setting from \u201c4G/5G Preferred\u201d to \u201c3G\u201d or \u201c2G/3G/4G (Auto)\u201d if available.\n3. Wait a few moments to see if any service bars appear.\n\nThis can sometimes help if there\u2019s a temporary issue with 4G/5G coverage in your area.\n\nIf you still have no service after trying this, please let me know:\n- If you see any error messages on your phone (such as \u201cNo Service,\u201d \u201cEmergency Calls Only,\u201d etc.).\n- If you recently changed your device, SIM card, or made any account changes.\n\nIf none of these steps work, I can escalate your issue to our technical team for further investigation or assist with a SIM replacement if needed. Please let me know the results after changing the network mode.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I tried to change the network mode to 3G only, but I got an error message about a missing argument. The network mode didn't actually change, and I still have no service bars showing."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. The error message when trying to change the network mode suggests there may be a deeper issue with your device, SIM, or network provisioning.\n\nSince:\n- Your line is active in our system,\n- You\u2019ve restarted your phone and checked Airplane Mode,\n- You\u2019ve reinserted the SIM card,\n- Manual network selection and network mode changes are not working,\n- And you\u2019re still seeing no service bars,\n\nIt\u2019s likely there is a technical issue that requires further investigation or possibly a SIM replacement.\n\nWould you like me to escalate this issue to our technical support team for advanced troubleshooting, or would you prefer to request a SIM replacement? Please let me know your preference, and I\u2019ll proceed accordingly to resolve your service issue as quickly as possible.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "If there are any other troubleshooting steps I can try myself before escalating, please let me know. Otherwise, please go ahead and escalate this to the technical support team."
+  },
+  {
+   "role": "agent",
+   "content": "I\u2019ve escalated your issue to our technical support team. They will review your case and reach out to you with advanced troubleshooting steps or a solution as soon as possible.\n\nThank you for your patience and for trying all the recommended steps. If you have any updates or receive any new error messages, please let the technical team know when they contact you. If you need anything else in the meantime, feel free to ask!",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez (+1-617-555-0148) has no service (no bars, nothing loads, can't send picture messages). Line is active in the system. Customer has restarted phone, checked Airplane Mode, reinserted SIM, attempted manual network selection, and tried to change network mode (received error). Issue persists. Needs advanced technical support."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez (+1-617-555-0148) has no service (no bars, nothing loads, can't send picture messages). Line is active in the system. Customer has restarted phone, checked Airplane Mode, reinserted SIM, attempted manual network selection, and tried to change network mode (received error). Issue persists. Needs advanced technical support."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

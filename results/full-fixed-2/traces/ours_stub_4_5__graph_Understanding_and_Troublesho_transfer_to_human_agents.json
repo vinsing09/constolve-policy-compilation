@@ -1,0 +1,357 @@
+{
+ "case": "5:[graph:Understanding and Troublesho]transfer_to_human_agents",
+ "arm": "stub",
+ "repeat": 4,
+ "solved": false,
+ "actions_done": 2,
+ "actions_required": 3,
+ "turns": 21,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "get_data_usage",
+  "reboot_device",
+  "reseat_sim_card",
+  "get_details_by_id",
+  "get_details_by_id",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "diagnosed_before_handoff",
+   "ok": false,
+   "why": "tool 'check_status_bar' was never called"
+  },
+  {
+   "id": "s2_get_data_usage",
+   "ok": true,
+   "why": "tool 'get_data_usage' was called"
+  },
+  {
+   "id": "s3_transfer_to_human_agents",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no signal at all. Nothing will load, I can't send picture messages, and I can't get online or make a call. Can you help?"
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're having trouble with your phone signal. Let's try to get this resolved. To assist you better, could you please provide your phone number or the name on your account? This will help me check your line status and see if there are any issues affecting your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Your line is currently active, but I see that you have used 50.5GB of data, which is over your plan's 50GB data limit for this billing cycle. This could be why you are unable to get online, send picture messages, or use other data services.\n\nWould you like to purchase additional data (refuel) so you can regain access to online services? If you prefer, I can also provide troubleshooting steps for calls and texts if you believe the issue is not related to data usage. Please let me know how you'd like to proceed!",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_data_usage",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_data_usage",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "plan_name": "Advantage 50GB",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 0,
+      "data_limit_gb": 50,
+      "total_data_available_gb": 50,
+      "cycle_end_date": "2025-03-05"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I can't make calls or send texts either, not just data. Can you help me troubleshoot that? I don't want to buy extra data if the whole network isn't working."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for clarifying. Since you\u2019re unable to make calls or send texts as well as use data, this could indicate a broader issue than just exceeding your data limit. Here are a few quick troubleshooting steps you can try:\n\n1. Restart your phone: Power it off, wait 30 seconds, then turn it back on.\n2. Check for \u201cAirplane Mode\u201d: Make sure it\u2019s turned off.\n3. Remove and reinsert your SIM card: This can help reset your connection to the network.\n4. Try your SIM in another phone (if possible): This helps determine if the issue is with your phone or the SIM/network.\n\nIf you\u2019ve already tried these steps or if you try them now and still have no signal, please let me know. I can then check for any network outages in your area or escalate the issue for further investigation. \n\nHave you already tried any of these steps? If not, please give them a try and let me know what happens.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I've just restarted my phone, and it rebooted successfully, but I still have no signal\u2014nothing has changed.",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying that. Since restarting your phone didn\u2019t resolve the issue and you still have no signal for calls, texts, or data, this suggests there may be a problem with your SIM card, your account, or a possible network issue in your area.\n\nLet\u2019s continue troubleshooting:\n\n1. Are you able to see any network bars at all, or does it say \u201cNo Service\u201d or \u201cEmergency Calls Only\u201d?\n2. Have you recently traveled to a different area or country?\n3. Have you noticed any physical damage to your SIM card or phone?\n4. Is anyone else nearby (on the same network) experiencing similar issues?\n\nIf you can answer these questions, it will help narrow down the cause. In the meantime, I can check your line status and account, which both appear active and in good standing. If you\u2019d like, I can also escalate this to a technical specialist for further investigation.\n\nWould you like me to escalate this issue for you, or would you like to try removing and reinserting your SIM card first?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked the top of my phone and there are no network bars at all. It just says 'No Service.' I haven\u2019t traveled recently and there\u2019s no damage to my SIM or phone. I don\u2019t know if anyone else nearby has the same issue. I can try removing and reinserting my SIM card if you want."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the details. Since your phone shows \"No Service\" and there are no network bars, this usually points to one of the following:\n\n- A SIM card issue (not seated properly or malfunctioning)\n- A local network outage\n- A rare account or line provisioning problem\n\nPlease try removing your SIM card, wait about 30 seconds, and then reinsert it securely. After reinserting, restart your phone again and check if you regain service.\n\nIf you still see \"No Service\" after this, please let me know right away. At that point, I can escalate your case to a technical specialist to check for network outages or deeper account issues.\n\nLet me know what happens after you reinsert your SIM card!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "After reseating the SIM card and restarting, my phone still says 'No Service.' I noticed it also says the SIM is Locked. What should I do next?",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the update. If your phone says the SIM is \u201cLocked,\u201d this usually means your SIM card is requesting a PIN code (often called a SIM PIN or PUK code) to unlock it. This can happen if the wrong PIN was entered multiple times or if the SIM lock was enabled accidentally.\n\nHere\u2019s what you should do next:\n\n1. Do not attempt to enter the SIM PIN or PUK code repeatedly, as too many incorrect attempts can permanently disable the SIM card.\n2. Check if you have the original SIM card packaging or documentation\u2014sometimes the default PIN or PUK code is printed there.\n3. If you don\u2019t have the code, I can help you retrieve your PUK code to unlock your SIM.\n\nWould you like me to retrieve your PUK code so you can unlock your SIM card? If so, please confirm, and I\u2019ll provide the instructions and code for you.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Yes, please help me get my PUK code so I can unlock my SIM card."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming. I am retrieving your PUK code now so you can unlock your SIM card. Please hold on for a moment while I access this information.\n\nOnce I provide the PUK code, I\u2019ll also give you step-by-step instructions on how to use it safely.",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "DEV-55210"
+     },
+     "params": {
+      "id": "DEV-55210"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "device_id": "DEV-55210",
+      "device_type": "phone",
+      "model": "Pixel 8 Pro",
+      "imei": "356938035643809",
+      "esim_capable": true,
+      "activation_status": "Active",
+      "activation_date": "2023-05-18",
+      "last_esim_transfer_date": "2023-05-18",
+      "entity_type": "device"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Okay, I'm waiting for the PUK code and instructions."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for your patience. I am in the process of retrieving your PUK code. As soon as I have it, I will provide you with both the code and clear instructions on how to unlock your SIM card safely.\n\nPlease do not attempt to enter any codes until I provide the official PUK code, as too many incorrect attempts can permanently disable your SIM card. I\u2019ll update you shortly!",
+   "tool_calls": [
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Okay, I won't try anything until you send the official PUK code and instructions. I'll wait for your update."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for your patience and for waiting. At this time, I do not have direct access to display your PUK code through this system. For your security and privacy, PUK codes are often only available through secure channels or your account portal.\n\nHere\u2019s what you should do next:\n\n1. Check your carrier\u2019s official website or mobile app: Many providers allow you to log in and view your PUK code under your account or SIM card settings.\n2. If you cannot find it online, you may need to contact customer support directly by phone or visit a store with your ID for verification.\n\nIf you would like, I can escalate your request to a human agent who can securely verify your identity and provide your PUK code. Would you like me to connect you to a specialist for this?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Yes, please connect me to a specialist so I can get my PUK code and unlock my SIM card."
+  },
+  {
+   "role": "agent",
+   "content": "I am now connecting you to a specialist who can securely provide your PUK code and help you unlock your SIM card. Please stay on the line or monitor your messages\u2014someone will assist you shortly. Thank you for your patience!",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez's SIM card is locked and requires the PUK code to unlock it. She has already tried basic troubleshooting and is waiting for the official PUK code and instructions to unlock her SIM. Please assist her with securely providing the PUK code."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez's SIM card is locked and requires the PUK code to unlock it. She has already tried basic troubleshooting and is waiting for the official PUK code and instructions to unlock her SIM. Please assist her with securely providing the PUK code."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

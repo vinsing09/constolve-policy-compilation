@@ -1,0 +1,279 @@
+{
+ "case": "9:[graph:Understanding and Troublesho]reset_apn_settings",
+ "arm": "R6_transfer_scope",
+ "repeat": 0,
+ "solved": false,
+ "actions_done": 2,
+ "actions_required": 3,
+ "turns": 19,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "check_status_bar",
+  "reseat_sim_card",
+  "reboot_device",
+  "check_apn_settings",
+  "reset_apn_settings",
+  "reboot_device",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_reset_apn_settings",
+   "ok": true,
+   "why": "tool 'reset_apn_settings' was called"
+  },
+  {
+   "id": "s1_reboot_device",
+   "ok": true,
+   "why": "tool 'reboot_device' was called"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, nothing loads, and I can't send picture messages. Can you help?"
+  },
+  {
+   "role": "agent",
+   "content": "I can help you troubleshoot your phone\u2019s service and picture messaging issues. First, I\u2019ll need to identify your account to check for any line or account-related problems.\n\nCould you please provide one of the following:\n- Your phone number\n- Your customer ID\n- Your full name and date of birth\n\nOnce I have this information, I\u2019ll guide you through the next steps.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My name is Sofia Martinez and my phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your information. Your line is currently active, so let\u2019s start troubleshooting your phone\u2019s service and picture messaging issues.\n\nTo proceed, I\u2019ll need you to perform a quick check on your phone:\n- Please check your phone\u2019s status bar and let me know if you see any icons such as Airplane Mode, signal bars, or any error messages.\n\nIf you\u2019re able, please describe what you see at the top of your phone\u2019s screen, or let me know if you need instructions on how to check this. This will help me determine the next steps.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "At the top of my screen, it shows 'No Signal', but data is enabled and it says 'Connected to Chestnut-5G'. My battery is at 87%.",
+   "tool_calls": [
+    {
+     "tool_name": "check_status_bar",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the details. Since your phone shows \u201cNo Signal\u201d but data is enabled and you\u2019re connected to Wi-Fi, this means your device isn\u2019t connecting to the cellular network at all. Let\u2019s troubleshoot step by step:\n\n1. Is Airplane Mode turned on? If so, please turn it off.\n2. If Airplane Mode is off, the next step is to check your SIM card status. Please check if your phone shows any messages about the SIM card (such as \u201cNo SIM,\u201d \u201cSIM Locked,\u201d or similar).\n\nCould you confirm if Airplane Mode is off and let me know if there are any SIM-related messages on your phone? If you\u2019re unsure how to check, I can guide you through it.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Airplane Mode is off. I don't see any SIM-related messages like 'No SIM' or 'SIM Locked' on my phone."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming. Since Airplane Mode is off and there are no SIM-related error messages, let\u2019s try the following steps:\n\n1. Reseat your SIM card: Remove your SIM card from your phone, wait a few seconds, and then reinsert it securely.\n2. After reinserting the SIM card, restart your phone.\n\nPlease let me know once you\u2019ve completed these steps and if anything changes with your signal or service. If you need instructions on how to remove and reinsert your SIM card, let me know your phone model and I can guide you.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I reseated the SIM card and restarted my phone. The SIM status is active, but I still have no signal and nothing has changed.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying those steps. Since your SIM status is active, Airplane Mode is off, and you still have no signal after reseating the SIM and restarting your phone, the next step is to check your phone\u2019s network settings\u2014specifically the Access Point Name (APN) settings, which are crucial for connecting to the cellular network.\n\nCould you please check your APN settings and let me know if anything looks incorrect or if there\u2019s no APN set? If you\u2019re unsure how to check, I can guide you through the process or provide instructions for your phone model.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I'm not sure what the APN settings should look like. Can you guide me on how to check them?"
+  },
+  {
+   "role": "agent",
+   "content": "Certainly! Here\u2019s how you can check your APN settings, depending on your phone type:\n\nFor Android:\n1. Open the Settings app.\n2. Tap on \u201cNetwork & Internet\u201d or \u201cConnections.\u201d\n3. Tap on \u201cMobile Network.\u201d\n4. Tap on \u201cAccess Point Names\u201d or \u201cAPN.\u201d\n5. You\u2019ll see a list of APN profiles. Tap on the active one to view its details.\n\nFor iPhone:\n1. Open the Settings app.\n2. Tap on \u201cCellular\u201d or \u201cMobile Data.\u201d\n3. Tap on \u201cCellular Data Options\u201d or \u201cMobile Data Options.\u201d\n4. Tap on \u201cCellular Network\u201d or \u201cMobile Data Network.\u201d\n5. You\u2019ll see the APN settings listed.\n\nPlease check if there is an APN set and if there\u2019s an entry for \u201cMMSC\u201d (for picture messaging). If you see anything missing or blank, let me know. If you\u2019re unsure, you can describe what you see, and I\u2019ll help you determine if it\u2019s correct.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked my APN settings. It shows the APN name as 'fast.telecom.net', but the status says 'Not set'. The MMSC URL is filled in as 'http://mms.telecom.net/mms/wapenc'.",
+   "tool_calls": [
+    {
+     "tool_name": "check_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking your APN settings. The APN name is present, and the MMSC URL is filled in, but the status says \u201cNot set.\u201d This could indicate a configuration issue.\n\nLet\u2019s reset your APN settings to the default values, which often resolves connectivity problems. After resetting, you\u2019ll need to restart your phone for the changes to take effect.\n\nWould you like instructions on how to reset your APN settings, or do you know how to do this on your device?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I reset the APN settings and restarted my phone. The message said the APN is now set to 'internet' and the MMSC URL is 'http://mms.carrier.com/mms'. After rebooting, I still have no signal and nothing has changed.",
+   "tool_calls": [
+    {
+     "tool_name": "reset_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    },
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez has no cellular service (no signal, no bars, cannot send MMS) despite line and SIM being active. Airplane Mode is off, SIM reseated, APN reset, and device rebooted. Issue persists after all standard troubleshooting steps."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez has no cellular service (no signal, no bars, cannot send MMS) despite line and SIM being active. Airplane Mode is off, SIM reseated, APN reset, and device rebooted. Issue persists after all standard troubleshooting steps."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "Okay, I'll wait for the human agent. Please let me know when someone is available."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for your patience. A human agent will assist you shortly. Please stay on the line, and they will let you know when they are available to help further.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

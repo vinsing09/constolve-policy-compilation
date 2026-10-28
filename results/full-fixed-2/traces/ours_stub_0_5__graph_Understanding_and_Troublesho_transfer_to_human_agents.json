@@ -1,0 +1,376 @@
+{
+ "case": "5:[graph:Understanding and Troublesho]transfer_to_human_agents",
+ "arm": "stub",
+ "repeat": 0,
+ "solved": false,
+ "actions_done": 1,
+ "actions_required": 3,
+ "turns": 29,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "get_data_usage",
+  "check_wifi_calling_status",
+  "toggle_wifi_calling",
+  "check_apn_settings",
+  "refuel_data",
+  "can_send_mms",
+  "reboot_device",
+  "check_network_status",
+  "toggle_airplane_mode"
+ ],
+ "criteria": [
+  {
+   "id": "diagnosed_before_handoff",
+   "ok": false,
+   "why": "tool 'check_status_bar' was never called"
+  },
+  {
+   "id": "s2_get_data_usage",
+   "ok": true,
+   "why": "tool 'get_data_usage' was called"
+  },
+  {
+   "id": "s3_transfer_to_human_agents",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was never called by the assistant"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no signal at all. I can't call, text, or get online\u2014nothing loads."
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're experiencing no signal on your phone. Let's try to resolve this together. To assist you better, could you please provide your phone number or the name on your account? This will help me check your line status and see if there are any issues affecting your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Your line is active, but I see that you've used 50.5GB of data, which is over your plan's 50GB monthly limit. This could be why you have no signal or can't access services.\n\nWould you like to refuel (add more data) to restore your connectivity, or do you have access to Wi-Fi for now? Let me know how you'd like to proceed, and I can help you add more data right away.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_data_usage",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_data_usage",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "plan_name": "Advantage 50GB",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 0,
+      "data_limit_gb": 50,
+      "total_data_available_gb": 50,
+      "cycle_end_date": "2025-03-05"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I have Wi-Fi at home, but even with Wi-Fi on, I can't make calls or send picture messages. Shouldn't I at least see some kind of signal or be able to use Wi-Fi calling?"
+  },
+  {
+   "role": "agent",
+   "content": "You\u2019re absolutely right\u2014if you have Wi-Fi at home, you should be able to use Wi-Fi calling and send picture messages (MMS) over Wi-Fi, even if your mobile data is depleted. Also, you should still see some signal bars for calls and texts, unless there\u2019s a different issue.\n\nLet\u2019s check a few things:\n\n1. Is Wi-Fi calling enabled on your phone? (You can usually find this in your phone\u2019s settings under \u201cWi-Fi Calling.\u201d)\n2. Are you able to connect to the internet and browse websites using Wi-Fi?\n3. Are you seeing \u201cNo Service\u201d or \u201cSOS Only\u201d on your phone, or does it show your carrier name with no bars?\n\nIf you\u2019ve already checked these and everything seems correct, there could be an issue with your SIM card, device, or network registration. Would you like troubleshooting steps for your device, or would you prefer I check for any network or SIM issues on your account?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked, and Wi-Fi Calling is OFF on my phone.",
+   "tool_calls": [
+    {
+     "tool_name": "check_wifi_calling_status",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "That explains why you can\u2019t make calls or send picture messages over Wi-Fi\u2014Wi-Fi Calling needs to be enabled for those features to work when you have no cellular signal or data.\n\nHere\u2019s what you can do:\n\n1. Go to your phone\u2019s Settings.\n2. Search for \u201cWi-Fi Calling\u201d (it\u2019s usually under \u201cConnections,\u201d \u201cNetwork & Internet,\u201d or \u201cPhone\u201d settings).\n3. Turn Wi-Fi Calling ON.\n\nOnce enabled, your phone should use your Wi-Fi connection to make calls and send messages, even if you have no cellular signal or have exceeded your data limit.\n\nWould you like step-by-step instructions for your specific phone model (iPhone or Android)? If so, please let me know your device type, and I\u2019ll guide you through the process!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I have an Android phone. Please walk me through turning Wi-Fi Calling on."
+  },
+  {
+   "role": "agent",
+   "content": "Absolutely! Here\u2019s how to enable Wi-Fi Calling on most Android phones:\n\n### How to Turn On Wi-Fi Calling (Android)\n\n1. **Open the Settings app** on your phone.\n2. Tap on **Connections** or **Network & Internet** (the exact name may vary by device).\n3. Look for **Wi-Fi Calling**.  \n   - If you don\u2019t see it right away, tap on **Mobile Network** or **SIM & Network**.\n4. Tap **Wi-Fi Calling**.\n5. Toggle the switch to **ON**.\n\n**Note:**  \n- You may be asked to enter or confirm your emergency address for 911 calls.\n- If you don\u2019t see the Wi-Fi Calling option, your carrier or device may not support it, or it may be under a slightly different menu.\n\nAfter enabling, you should see a Wi-Fi Calling icon in your status bar when connected to Wi-Fi. Try making a call or sending a picture message to test it out.\n\nIf you have trouble finding the option, let me know your phone\u2019s brand and model (e.g., Samsung Galaxy S22, Google Pixel 7), and I\u2019ll provide more specific steps!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I turned Wi-Fi Calling ON and I see the Wi-Fi Calling icon in my status bar now.",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_wifi_calling",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "That\u2019s great news! With Wi-Fi Calling enabled and the icon showing, you should now be able to make calls and send messages (including picture messages) over your Wi-Fi connection, even though your mobile data is depleted.\n\nIf you still experience issues with calling or messaging, please let me know, and I can help troubleshoot further. Otherwise, you\u2019re all set to use your phone as usual while connected to Wi-Fi.\n\nWould you like to add more mobile data to restore your cellular service when you\u2019re away from Wi-Fi, or do you have any other questions or concerns?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "With Wi-Fi Calling on, I can make calls now, but picture messages still aren't sending. I need to be able to send MMS too."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the update. It\u2019s good to hear that calls are working with Wi-Fi Calling enabled! However, picture messages (MMS) can sometimes be a bit trickier, as some Android phones and carriers require a mobile data connection for MMS, even if you\u2019re on Wi-Fi.\n\nHere\u2019s what you can try:\n\n### 1. Check MMS Settings\n- Go to **Settings > Connections > Mobile Networks > Access Point Names (APN)**.\n- Make sure your carrier\u2019s APN is selected and configured correctly. If you\u2019ve changed carriers or reset your phone, the MMS settings might need to be updated.\n\n### 2. Restart Your Phone\n- Sometimes, a simple restart can help your phone re-register with the network and fix MMS issues.\n\n### 3. Try Sending a Smaller Picture\n- Large images may fail to send if they exceed your carrier\u2019s size limit.\n\n### 4. Confirm Mobile Data is Enabled\n- Even with Wi-Fi Calling, some Android devices require mobile data to be ON (even if you\u2019re out of data) for MMS to work. Try toggling mobile data ON and see if the message sends.\n\n### 5. Update Messaging App\n- Make sure your default messaging app is up to date.\n\n### Important Note:\nSince you\u2019ve exceeded your data limit, your phone may be blocked from sending MMS until you refuel your data. Would you like me to add more data to your plan so you can send picture messages right away? If so, let me know how many GB you\u2019d like to add, or I can recommend an amount based on your usage.\n\nLet me know how you\u2019d like to proceed!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My APN settings say they are correct, with the APN name set to fast.telecom.net and the MMSC URL showing as http://mms.telecom.net/mms/wapenc.",
+   "tool_calls": [
+    {
+     "tool_name": "check_apn_settings",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming your APN settings\u2014they look correct for MMS on your carrier.\n\nGiven that:\n- Your APN settings are correct,\n- Wi-Fi Calling is enabled and working for calls,\n- You\u2019ve exceeded your mobile data limit,\n\nIt\u2019s very likely that your phone or carrier requires at least some available mobile data to send MMS, even when you\u2019re connected to Wi-Fi. This is a common limitation on many Android devices and networks.\n\nTo resolve this, you\u2019ll need to refuel (add) some mobile data to your plan. Once you have available data, MMS (picture messages) should start working again, even if you\u2019re primarily using Wi-Fi.\n\nWould you like me to add more data to your plan now? If so, please let me know how much data you\u2019d like to add (for example, 1GB, 5GB, etc.), or I can recommend an amount based on your previous usage.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Please add 1GB of data to my plan so I can try sending a picture message again."
+  },
+  {
+   "role": "agent",
+   "content": "1GB of data has been added to your plan, and you should now be able to send picture messages (MMS) again. Please try sending a picture message now.\n\nIf you still have any issues, let me know and I\u2019ll help you troubleshoot further. Otherwise, you\u2019re all set!",
+   "tool_calls": [
+    {
+     "tool_name": "refuel_data",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142",
+      "gb_amount": 1
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142",
+      "gb_amount": 1
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "refuel_data",
+     "response": {
+      "result": "Refueled 1.0GB on line LN-8830142 (+1-617-555-0148). Charge of $5.00 added to bill BILL-4501283-2025-02."
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I tried sending a picture message, but it still won't go through. My messaging app says it cannot send MMS messages.",
+   "tool_calls": [
+    {
+     "tool_name": "can_send_mms",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. Since you now have available data and your APN settings are correct, but MMS still won\u2019t send, let\u2019s try a few more troubleshooting steps:\n\n### 1. Restart Your Phone\n- Power off your phone completely, wait 10 seconds, then turn it back on. This can help your device recognize the new data balance and re-register with the network.\n\n### 2. Confirm Mobile Data is Enabled\n- Go to Settings > Connections > Mobile Networks and make sure \u201cMobile Data\u201d is turned ON, even if you\u2019re on Wi-Fi.\n\n### 3. Try Sending an MMS with Wi-Fi OFF\n- Temporarily turn off Wi-Fi and try sending a picture message using mobile data only. Some devices/carriers require this for the first MMS after a data top-up.\n\n### 4. Clear Messaging App Cache (Android)\n- Go to Settings > Apps > [Your Messaging App] > Storage > Clear Cache (and optionally Clear Data, but this may delete message history).\n\n### 5. Check for Carrier or Device Updates\n- Go to Settings > Software Update and check for any available updates.\n\nIf you try these steps and MMS still won\u2019t send, please let me know:\n- The exact error message you see (if any).\n- Your phone\u2019s brand and model (e.g., Samsung Galaxy S22, Google Pixel 7).\n\nThis will help me provide more targeted troubleshooting or escalate the issue if needed. Let me know how it goes!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I restarted my Samsung Galaxy S21 and tried sending a picture message again, but it still doesn't go through. The error just says 'Message not sent.'",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the details and for trying those steps. Since you have available data, correct APN settings, and have restarted your Samsung Galaxy S21, but MMS still won\u2019t send, here are a few more targeted steps for your device:\n\n### 1. Double-Check Mobile Data is ON\n- Go to Settings > Connections > Data usage and ensure \u201cMobile data\u201d is toggled ON.\n- Even if you\u2019re on Wi-Fi, MMS often requires mobile data to be enabled.\n\n### 2. Check Roaming Settings\n- Go to Settings > Connections > Mobile networks.\n- Make sure \u201cData roaming\u201d is ON (sometimes required for MMS, even domestically).\n\n### 3. Reset Network Settings\n- Go to Settings > General management > Reset > Reset network settings.\n- This will reset Wi-Fi, Bluetooth, and mobile data settings (you\u2019ll need to reconnect to Wi-Fi after).\n\n### 4. Test with a Different Messaging App\n- Try installing Google Messages from the Play Store and set it as your default SMS app. Sometimes, the default app has issues that another app can bypass.\n\n### 5. Try Sending a Small Image\n- Try sending a very small image (under 300KB) to rule out size limits.\n\nIf you\u2019ve tried all of the above and MMS still won\u2019t send, there may be a deeper network or SIM issue. Would you like me to escalate this to a human support agent for further investigation, or would you like to try any of the above steps first? Let me know how you\u2019d like to proceed!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked, and mobile data is ON. Roaming is OFF. Would you like me to try resetting network settings next?"
+  },
+  {
+   "role": "agent",
+   "content": "Yes, resetting your network settings is a good next step. This can resolve hidden configuration issues that sometimes prevent MMS from working, even when everything else appears correct.\n\nHere\u2019s how to reset network settings on your Samsung Galaxy S21:\n\n1. Open the **Settings** app.\n2. Scroll down and tap **General management**.\n3. Tap **Reset**.\n4. Select **Reset network settings**.\n5. Tap **Reset settings** and confirm if prompted.\n\nThis will reset your Wi-Fi, Bluetooth, and mobile data settings (you\u2019ll need to reconnect to your Wi-Fi network afterward).\n\nAfter the reset, make sure mobile data is ON, reconnect to Wi-Fi if needed, and try sending a picture message again.\n\nLet me know if this resolves the issue or if you still have trouble sending MMS. If it still doesn\u2019t work, I can escalate your case to a human support agent for deeper troubleshooting.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "After resetting my network settings, I checked my phone and noticed that Airplane Mode is ON. I still have no signal, and the picture message won't send.",
+   "tool_calls": [
+    {
+     "tool_name": "check_network_status",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Airplane Mode disables all wireless connections, including cellular, Wi-Fi, and Bluetooth. This would explain why you have no signal and cannot send picture messages (MMS), even with data refueled and settings correct.\n\nHere\u2019s what to do:\n\n1. Swipe down from the top of your screen to open the Quick Settings panel.\n2. Look for the Airplane Mode icon (an airplane symbol).\n3. If it\u2019s highlighted or ON, tap it once to turn Airplane Mode OFF.\n\nOnce Airplane Mode is off:\n- Your phone should reconnect to both Wi-Fi and the mobile network.\n- Try sending a picture message again.\n\nPlease let me know if turning off Airplane Mode resolves the issue!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Airplane mode is now OFF. My phone reconnected to Wi-Fi, but I still have no cellular signal and can't send picture messages.",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_airplane_mode",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the update. Since Airplane Mode is now off, your phone should attempt to reconnect to the cellular network. However, the fact that you still have no cellular signal suggests there may be a deeper issue with your SIM card, device, or network registration.\n\nHere\u2019s what we\u2019ve confirmed so far:\n- Your account and line are active.\n- You have refueled data.\n- APN settings are correct.\n- Mobile data is ON.\n- Airplane Mode is OFF.\n- You\u2019ve reset network settings and restarted your phone.\n- You\u2019re able to use Wi-Fi and Wi-Fi Calling, but not MMS or cellular service.\n\nAt this point, the issue may require advanced troubleshooting, such as checking for SIM card faults, device provisioning, or network-side problems.\n\nWould you like me to escalate your case to a human support agent who can investigate further and provide more specialized assistance? If so, I\u2019ll transfer your case right away.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

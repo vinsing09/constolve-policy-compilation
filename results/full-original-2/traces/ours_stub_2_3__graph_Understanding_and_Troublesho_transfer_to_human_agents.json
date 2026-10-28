@@ -1,0 +1,244 @@
+{
+ "case": "3:[graph:Understanding and Troublesho]transfer_to_human_agents",
+ "arm": "stub",
+ "repeat": 2,
+ "solved": false,
+ "actions_done": 2,
+ "actions_required": 3,
+ "turns": 13,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "get_data_usage",
+  "check_network_status",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_check_sim_status",
+   "ok": false,
+   "why": "tool 'check_sim_status' was never called by the user"
+  },
+  {
+   "id": "s1_get_data_usage",
+   "ok": true,
+   "why": "tool 'get_data_usage' was called"
+  },
+  {
+   "id": "s2_transfer_to_human_agents",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone suddenly has no signal at all. Nothing loads, I can't send picture messages, and it's just dead for internet. It was fine yesterday but now there's nothing."
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're experiencing this issue. To help you further, could you please provide your phone number or the name and date of birth on your account? This will allow me to check your line status and see if there are any issues affecting your service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Your line is currently active, but I see that you have used 50.5GB of data, which is over your plan's 50GB data limit for this billing cycle. This is likely why you have no signal for internet and cannot send picture messages\u2014your data access has been restricted due to exceeding your plan's limit.\n\nWould you like to purchase additional data (refuel) so you can regain internet access and send picture messages? If so, please let me know how many GB you would like to add, or if you need more information about your options.",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_data_usage",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_data_usage",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "plan_name": "Advantage 50GB",
+      "data_usage_gb": 50.5,
+      "data_refueling_gb": 0,
+      "data_limit_gb": 50,
+      "total_data_available_gb": 50,
+      "cycle_end_date": "2025-03-05"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I checked my network status just now\u2014airplane mode is off, mobile data and roaming are enabled, but it shows no signal at all and no network type. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "check_network_status",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking those settings. Since your line is active but you have exceeded your data limit, your internet/data services are restricted, but you should still see some signal bars for calls and texts (unless there\u2019s a network or SIM issue).\n\nHere are some steps you can try next:\n\n1. **Restart Your Phone:** Power it off completely, wait 30 seconds, then turn it back on.\n2. **Remove and Reinsert SIM Card:** Take out your SIM card, check for any dust or damage, and reinsert it securely.\n3. **Check for Outages:** Are others nearby having the same issue? If so, there may be a local network outage.\n4. **Try Your SIM in Another Phone:** If possible, put your SIM card in another compatible phone. If it still shows no signal, the issue may be with your SIM or account.\n5. **Network Settings Reset:** If you\u2019re comfortable, you can reset your network settings (this will erase saved Wi-Fi networks and Bluetooth pairings).\n\nSince your data is over the limit, you won\u2019t have internet access until you refuel, but you should still have basic signal for calls and texts. If you have no signal at all, it could be a SIM or network issue.\n\nWould you like me to help you refuel your data, or do you want to troubleshoot further? If you\u2019ve tried the above and still have no signal, let me know and I can escalate this to a human agent for deeper investigation.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I've already restarted my phone and checked the SIM, but still no signal at all\u2014no bars, no network name, nothing. Can you walk me through what to try next?"
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming you\u2019ve already restarted your phone and checked the SIM. Since you still have no signal at all (no bars, no network name), let\u2019s try the following steps:\n\n1. **Test SIM in Another Phone:**  \n   If you have access to another unlocked phone, insert your SIM card into it.  \n   - If the other phone also shows no signal, the issue is likely with your SIM card or account.\n   - If the other phone gets a signal, the issue may be with your original device.\n\n2. **Check for Physical SIM Damage:**  \n   Inspect your SIM card for any visible damage, scratches, or dirt. If it looks damaged, it may need to be replaced.\n\n3. **Network Settings Reset:**  \n   On your phone, go to Settings > System > Reset > Reset Network Settings (the path may vary by device). This will reset all network-related settings, including Wi-Fi and Bluetooth.\n\n4. **Check for Service Outages:**  \n   If possible, ask neighbors or friends using the same carrier if they have service. If they also have no signal, there may be a local outage.\n\n5. **SIM Card Reactivation:**  \n   Sometimes, a SIM card can become deactivated or encounter a network registration issue. I can check your account status, but your line appears active. If you\u2019ve tried all the above and still have no signal, your SIM may need to be replaced or reactivated.\n\nWould you like me to escalate this to a human agent for further investigation and possible SIM replacement? Or, if you have another phone available, can you try your SIM in that device and let me know the result?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I don't have another phone to test the SIM in, but I checked and the SIM card looks fine\u2014no visible damage or dirt. Can you walk me through how to reset my network settings?"
+  },
+  {
+   "role": "agent",
+   "content": "Absolutely! Here\u2019s how to reset your network settings. The steps may vary slightly depending on your phone\u2019s brand and operating system. Below are instructions for both Android and iPhone:\n\n---\n\n### For Android Phones\n\n1. **Open Settings** on your phone.\n2. Scroll down and tap on **System** (sometimes called \u201cGeneral Management\u201d).\n3. Tap on **Reset options** or **Reset**.\n4. Select **Reset Wi-Fi, mobile & Bluetooth** or **Network settings reset**.\n5. Tap **Reset settings** (you may need to enter your PIN or password).\n6. Confirm by tapping **Reset settings** again.\n\nYour phone will restart or briefly disconnect from networks. You\u2019ll need to re-enter Wi-Fi passwords and re-pair Bluetooth devices.\n\n---\n\n### For iPhones\n\n1. **Open Settings**.\n2. Tap **General**.\n3. Scroll down and tap **Transfer or Reset iPhone**.\n4. Tap **Reset**.\n5. Select **Reset Network Settings**.\n6. Enter your passcode if prompted, then confirm.\n\nYour iPhone will restart. You\u2019ll need to re-enter Wi-Fi passwords and re-pair Bluetooth devices.\n\n---\n\nAfter resetting, check if your phone regains signal. If you still have no signal, let me know and I can escalate your case to a human agent for further assistance, including possible SIM replacement or deeper account troubleshooting.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I followed those steps and reset my network settings. My phone rebooted, but I still have no signal\u2014no bars, no network name, nothing changed."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying all the troubleshooting steps. Since you still have no signal after resetting your network settings, I\u2019m escalating your case to a human agent for further investigation. They can assist with deeper troubleshooting and arrange a SIM replacement if needed.\n\nPlease stay by your phone or email for further instructions from our support team. If you have any additional details to share, please let the agent know when they contact you. Thank you for your patience!",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez (+1-617-555-0148) has no signal at all on her phone (no bars, no network name). Line is active, SIM appears undamaged, and customer has already restarted the phone, checked the SIM, and reset network settings. Customer cannot test SIM in another phone. Needs further troubleshooting or possible SIM replacement."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez (+1-617-555-0148) has no signal at all on her phone (no bars, no network name). Line is active, SIM appears undamaged, and customer has already restarted the phone, checked the SIM, and reset network settings. Customer cannot test SIM in another phone. Needs further troubleshooting or possible SIM replacement."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

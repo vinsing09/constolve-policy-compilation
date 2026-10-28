@@ -1,0 +1,280 @@
+{
+ "case": "18:[graph:Understanding and Troublesho]toggle_airplane_mode|reboot_device",
+ "arm": "stub",
+ "repeat": 2,
+ "solved": false,
+ "actions_done": 2,
+ "actions_required": 3,
+ "turns": 17,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "get_data_usage",
+  "reboot_device",
+  "toggle_airplane_mode",
+  "reseat_sim_card",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_toggle_airplane_mode",
+   "ok": true,
+   "why": "tool 'toggle_airplane_mode' was called"
+  },
+  {
+   "id": "s1_reboot_device",
+   "ok": true,
+   "why": "tool 'reboot_device' was called"
+  },
+  {
+   "id": "no_premature_escalation",
+   "ok": false,
+   "why": "tool 'transfer_to_human_agents' was called (forbidden)"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has completely stopped connecting. I have no bars, no internet, and picture messages won't go through. It's totally dead, not just slow."
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're having trouble with your phone connection. To help you further, could you please provide your phone number or the name and date of birth on your account? This will allow me to check your line status and see what might be causing the issue.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Your line is currently active and you have not exceeded your data limit for this billing cycle, so there are no account or data issues that would explain your complete loss of service.\n\nHere are a few quick troubleshooting steps you can try:\n1. Restart your phone.\n2. Toggle Airplane Mode on and off.\n3. Remove and reinsert your SIM card.\n4. Check if you have service in a different location.\n\nIf you\u2019ve already tried these steps or the issue persists, please let me know. I can assist further, such as checking for network outages in your area or escalating the issue. Have you noticed any error messages or changes to your device recently?",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_data_usage",
+     "arguments": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "params": {
+      "customer_id": "CUS-4501283",
+      "line_id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_data_usage",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "plan_name": "Advantage 50GB",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "data_limit_gb": 50,
+      "total_data_available_gb": 50,
+      "cycle_end_date": "2025-03-05"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "I haven\u2019t seen any error messages or changes on my device. I\u2019m still at home in Boston and the issue is the same. I haven\u2019t tried those troubleshooting steps yet. Which one should I do first?"
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for the update. Here\u2019s the recommended order for troubleshooting:\n\n1. Restart your phone: This often resolves temporary network issues.\n2. Toggle Airplane Mode: Turn Airplane Mode on for about 10 seconds, then turn it off. This forces your phone to reconnect to the network.\n3. Remove and reinsert your SIM card: Power off your phone, carefully remove the SIM card, wait a few seconds, then reinsert it and power your phone back on.\n\nPlease try these steps one at a time, checking your signal after each step. If your service returns at any point, you can stop there. If none of these steps work, let me know and I\u2019ll assist you further or escalate the issue.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I restarted my phone as you suggested. It rebooted successfully, but I still have no signal or internet connection. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. Since restarting didn\u2019t resolve the issue, please try the next step:\n\n1. Toggle Airplane Mode:\n   - Turn on Airplane Mode (usually found in your phone\u2019s quick settings or settings menu).\n   - Wait about 10 seconds.\n   - Turn Airplane Mode off and check if your signal returns.\n\nIf you still have no service after this, proceed to:\n\n2. Remove and reinsert your SIM card:\n   - Power off your phone.\n   - Carefully remove the SIM card.\n   - Wait about 10 seconds.\n   - Reinsert the SIM card and power your phone back on.\n   - Check your signal again.\n\nLet me know the results after each step, and I\u2019ll guide you further if needed.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I toggled Airplane Mode on and off, and it\u2019s now off, but I still don\u2019t have any signal or internet connection.",
+   "tool_calls": [
+    {
+     "tool_name": "toggle_airplane_mode",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying that step. Next, please try removing and reinserting your SIM card:\n\n1. Power off your phone completely.\n2. Carefully remove the SIM card from your device.\n3. Wait about 10 seconds.\n4. Reinsert the SIM card securely.\n5. Power your phone back on and check if you have signal or internet.\n\nIf you still have no service after this, please let me know. I\u2019ll check for possible network issues in your area or escalate the issue for further assistance.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I removed and reinserted the SIM card as you suggested. My phone says the SIM status is active, but I still have no signal or internet connection.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for following all the troubleshooting steps. Since your SIM status is active but you still have no signal or internet connection, and your account and line are both active with no data or billing issues, this may indicate a network issue in your area, a SIM card malfunction, or a device hardware problem.\n\nHere\u2019s what I can do next:\n\n- Check for any known network outages in your area.\n- Escalate your issue for further technical investigation or recommend a SIM replacement if needed.\n\nCould you please confirm if anyone else in your household or area is experiencing similar issues? Also, have you recently traveled or changed devices?\n\nOnce you confirm, I can proceed with the next steps or escalate your case to our technical team for a deeper investigation.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "No one else in my household is having this problem, and I haven\u2019t traveled or changed devices recently. What should I do next?"
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for confirming. Since:\n\n- Your account and line are active,\n- You have not exceeded your data limit,\n- No one else nearby is affected,\n- You haven\u2019t changed devices or traveled,\n- And all troubleshooting steps have been completed,\n\nthis suggests the issue may be with your SIM card or your device\u2019s hardware.\n\nHere\u2019s what you should do next:\n\n1. Try your SIM card in another compatible phone (if available).  \n\u2003- If your SIM works in another phone, the issue is likely with your device.\n\u2003- If your SIM does not work in another phone, the SIM card may be faulty and needs replacement.\n\n2. If you don\u2019t have access to another phone, or if the SIM does not work in another device, I recommend visiting a nearby store or requesting a SIM replacement.\n\nWould you like help locating a nearby store, or would you prefer I escalate this issue to our technical team for further investigation and support?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I don\u2019t have another phone to test the SIM card. Can you escalate this issue to the technical team for further investigation?"
+  },
+  {
+   "role": "agent",
+   "content": "I have escalated your issue to our technical team for further investigation. They will review your case and contact you with the next steps, which may include advanced troubleshooting or arranging a SIM replacement if needed.\n\nThank you for your patience and for completing all the troubleshooting steps. If you have any additional information or questions in the meantime, please let me know.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer Sofia Martinez is experiencing a complete loss of service (no signal, no internet, no picture messages) on her active line (+1-617-555-0148). Account and line are active, data is available, and billing is up to date. Customer has already restarted the phone, toggled Airplane Mode, and reinserted the SIM card. No one else in the household is affected, and the customer has not traveled or changed devices. Customer does not have another phone to test the SIM card. Needs technical team investigation or SIM replacement guidance."
+     },
+     "params": {
+      "summary": "Customer Sofia Martinez is experiencing a complete loss of service (no signal, no internet, no picture messages) on her active line (+1-617-555-0148). Account and line are active, data is available, and billing is up to date. Customer has already restarted the phone, toggled Airplane Mode, and reinserted the SIM card. No one else in the household is affected, and the customer has not traveled or changed devices. Customer does not have another phone to test the SIM card. Needs technical team investigation or SIM replacement guidance."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}

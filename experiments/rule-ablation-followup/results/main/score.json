@@ -1,0 +1,188 @@
+{
+ "run": "main",
+ "valid_blocks": 70,
+ "blocks": 70,
+ "cost_usd": 17.9887,
+ "rules": {
+  "R3_payment": {
+   "tied": {
+    "n_scenarios": 6,
+    "n_control": 60,
+    "n_variant": 60,
+    "control_pct": 96.66666666666667,
+    "variant_pct": 76.66666666666667,
+    "drop": 20.0,
+    "p": 0.0625,
+    "caught": false
+   },
+   "untied": {
+    "n_scenarios": 14,
+    "n_control": 185,
+    "n_variant": 185,
+    "control_pct": 57.2972972972973,
+    "variant_pct": 56.21621621621622,
+    "drop": 1.0810810810810807,
+    "p": 0.32421875,
+    "caught": false
+   }
+  },
+  "R5_escalate_unfixable": {
+   "tied": {
+    "n_scenarios": 8,
+    "n_control": 40,
+    "n_variant": 40,
+    "control_pct": 42.5,
+    "variant_pct": 37.5,
+    "drop": 5.0,
+    "p": 0.421875,
+    "caught": false
+   },
+   "untied": {
+    "n_scenarios": 14,
+    "n_control": 205,
+    "n_variant": 205,
+    "control_pct": 71.70731707317073,
+    "variant_pct": 69.26829268292683,
+    "drop": 2.439024390243901,
+    "p": 0.037109375,
+    "caught": false
+   }
+  }
+ },
+ "pooled_secondary": {
+  "main_valid_blocks": 63,
+  "rules": {
+   "R3_payment": {
+    "tied": {
+     "n_scenarios": 9,
+     "n_control": 76,
+     "n_variant": 76,
+     "control_pct": 97.36842105263158,
+     "variant_pct": 76.3157894736842,
+     "drop": 21.05263157894737,
+     "p": 0.015625,
+     "caught": true
+    },
+    "untied": {
+     "n_scenarios": 33,
+     "n_control": 412,
+     "n_variant": 412,
+     "control_pct": 67.47572815533981,
+     "variant_pct": 61.407766990291265,
+     "drop": 6.067961165048544,
+     "p": 0.008434957825210873,
+     "caught": false
+    }
+   },
+   "R5_escalate_unfixable": {
+    "tied": {
+     "n_scenarios": 12,
+     "n_control": 61,
+     "n_variant": 61,
+     "control_pct": 49.18032786885246,
+     "variant_pct": 34.42622950819672,
+     "drop": 14.754098360655739,
+     "p": 0.087890625,
+     "caught": false
+    },
+    "untied": {
+     "n_scenarios": 32,
+     "n_control": 427,
+     "n_variant": 427,
+     "control_pct": 75.40983606557377,
+     "variant_pct": 73.30210772833723,
+     "drop": 2.107728337236537,
+     "p": 0.06366157531738281,
+     "caught": false
+    }
+   }
+  }
+ },
+ "ties": {
+  "R3_payment": [
+   [
+    0,
+    "s0_send_payment_request"
+   ],
+   [
+    0,
+    "s1_make_payment"
+   ],
+   [
+    1,
+    "s0_send_payment_request"
+   ],
+   [
+    1,
+    "s1_make_payment"
+   ],
+   [
+    2,
+    "s0_send_payment_request"
+   ],
+   [
+    2,
+    "s1_make_payment"
+   ],
+   [
+    3,
+    "s0_send_payment_request"
+   ],
+   [
+    3,
+    "s1_make_payment"
+   ],
+   [
+    4,
+    "s0_send_payment_request"
+   ],
+   [
+    4,
+    "s1_make_payment"
+   ],
+   [
+    5,
+    "s0_send_payment_request"
+   ],
+   [
+    5,
+    "s1_make_payment"
+   ]
+  ],
+  "R5_escalate_unfixable": [
+   [
+    6,
+    "s2_transfer_to_human_agents"
+   ],
+   [
+    7,
+    "s3_transfer_to_human_agents"
+   ],
+   [
+    8,
+    "s3_transfer_to_human_agents"
+   ],
+   [
+    9,
+    "s3_transfer_to_human_agents"
+   ],
+   [
+    10,
+    "s2_transfer_to_human_agents"
+   ],
+   [
+    11,
+    "s3_transfer_to_human_agents"
+   ],
+   [
+    12,
+    "s4_transfer_to_human_agents"
+   ],
+   [
+    13,
+    "s3_transfer_to_human_agents"
+   ]
+  ]
+ },
+ "scorer_commit": "1bb7ae0488e4dd5cd0e5bba854989c3673ddc6ac"
+}

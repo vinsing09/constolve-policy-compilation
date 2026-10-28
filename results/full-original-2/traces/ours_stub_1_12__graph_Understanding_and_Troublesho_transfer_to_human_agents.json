@@ -1,0 +1,264 @@
+{
+ "case": "12:[graph:Understanding and Troublesho]transfer_to_human_agents",
+ "arm": "stub",
+ "repeat": 1,
+ "solved": false,
+ "actions_done": 1,
+ "actions_required": 2,
+ "turns": 21,
+ "calls": [
+  "get_customer_by_phone",
+  "get_details_by_id",
+  "reboot_device",
+  "reseat_sim_card",
+  "reboot_device",
+  "transfer_to_human_agents"
+ ],
+ "criteria": [
+  {
+   "id": "s0_check_sim_status",
+   "ok": false,
+   "why": "tool 'check_sim_status' was never called by the user"
+  },
+  {
+   "id": "s1_transfer_to_human_agents",
+   "ok": true,
+   "why": "tool 'transfer_to_human_agents' was called"
+  }
+ ],
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi, my phone has no service at all\u2014no bars, nothing. I can't get online or send a picture message. Can you help?"
+  },
+  {
+   "role": "agent",
+   "content": "I'm sorry to hear you're experiencing no service on your phone. Let's try to resolve this together. To assist you, I\u2019ll need to check your account and line status.\n\nCould you please provide your phone number or your full name and date of birth? This will help me locate your account and investigate the issue.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My number is +1-617-555-0148."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for providing your number. I\u2019ve checked your account, and your line status is currently \"Active,\" which means there are no suspensions or holds on your service.\n\nSince your line appears active but you have no service at all (no bars, can\u2019t get online or send messages), here are a few quick troubleshooting steps you can try:\n\n1. Restart your phone.\n2. Make sure Airplane Mode is turned off.\n3. Remove and reinsert your SIM card.\n4. Check if you have service in a different location.\n\nIf you\u2019ve already tried these steps or the issue persists, please let me know. I can check further for network outages or escalate the issue if needed. Have you noticed this problem just today, or has it been ongoing?",
+   "tool_calls": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "arguments": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "params": {
+      "phone_number": "+1-617-555-0148"
+     },
+     "failed": false
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "arguments": {
+      "id": "LN-8830142"
+     },
+     "params": {
+      "id": "LN-8830142"
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "get_customer_by_phone",
+     "response": {
+      "customer_id": "CUS-4501283",
+      "full_name": "Sofia Martinez",
+      "dob": "1989-06-14",
+      "email": "sofia.martinez@fastmail.com",
+      "phone_number": "+1-617-555-0148",
+      "address": {
+       "street": "412 Chestnut Street, Apt 5B",
+       "city": "Boston",
+       "state": "MA",
+       "zip_code": "02116"
+      },
+      "account_status": "Active",
+      "created_date": "2021-03-09",
+      "last_extension_date": "",
+      "goodwill_credit_used_this_year": 0,
+      "payment_methods": [
+       {
+        "payment_method_id": "PM-30184",
+        "method_type": "Credit Card",
+        "account_number_last_four": "4417",
+        "expiration_date": "09/2027"
+       },
+       {
+        "payment_method_id": "PM-30185",
+        "method_type": "PayPal",
+        "account_number_last_four": "2290",
+        "expiration_date": "12/2029"
+       }
+      ],
+      "line_ids": [
+       "LN-8830142"
+      ],
+      "bill_ids": [
+       "BILL-4501283-2025-01",
+       "BILL-4501283-2025-02"
+      ]
+     },
+     "latency_ms": 0,
+     "error": null
+    },
+    {
+     "tool_name": "get_details_by_id",
+     "response": {
+      "line_id": "LN-8830142",
+      "customer_id": "CUS-4501283",
+      "phone_number": "+1-617-555-0148",
+      "status": "Active",
+      "plan_id": "PLN-2002",
+      "device_id": "DEV-55210",
+      "data_usage_gb": 12.4,
+      "data_refueling_gb": 0,
+      "roaming_enabled": true,
+      "contract_end_date": "2026-08-14",
+      "last_plan_change_date": "2024-10-01",
+      "last_sim_replacement_date": "2023-05-18",
+      "suspension_start_date": "",
+      "suspension_reason": "",
+      "cycle_end_date": "2025-03-05",
+      "entity_type": "line"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "user",
+   "content": "This just started today. I haven't tried any troubleshooting yet. What should I do first?"
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. Here are the first steps you should try to resolve the \u201cno service\u201d issue:\n\n1. **Restart Your Phone:** Power off your phone completely, wait 10 seconds, then turn it back on.\n2. **Check Airplane Mode:** Make sure Airplane Mode is turned off. You can usually find this in your phone\u2019s quick settings or control center.\n3. **Remove and Reinsert SIM Card:** Power off your phone, carefully remove the SIM card, wait a few seconds, then reinsert it and power your phone back on.\n4. **Check for Service in Another Location:** If possible, move to a different area (indoors/outdoors) to see if you get any signal.\n\nPlease try these steps one at a time. After each step, check if your service returns. Let me know if any of these steps restore your service, or if the issue continues after trying them all. I\u2019m here to help further if needed!",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I just restarted my phone, but I still have no service\u2014no bars or connection. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying the restart. Next, please follow these steps:\n\n1. **Check Airplane Mode:**  \nMake sure Airplane Mode is turned off. Sometimes it can be accidentally enabled, which will block all service.  \n- On most phones, swipe down from the top of the screen (Android) or up from the bottom/right corner (iPhone) to access quick settings and look for the airplane icon. If it\u2019s on, tap it to turn it off.\n\n2. **Remove and Reinsert SIM Card:**  \n- Power off your phone.\n- Remove the SIM card (you may need a SIM tool or paperclip).\n- Wait about 10 seconds.\n- Reinsert the SIM card securely.\n- Power your phone back on.\n\nAfter doing these steps, check if your service returns. If you still have no service, please let me know, and I\u2019ll continue to assist you.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I'm not sure if Airplane Mode is on. Can you tell me where to check for that on my phone?"
+  },
+  {
+   "role": "agent",
+   "content": "Absolutely! Here\u2019s how you can check and turn off Airplane Mode, depending on your phone type:\n\n**For iPhone:**\n1. Swipe down from the top-right corner of the screen (iPhone X or newer) or swipe up from the bottom (older iPhones) to open the Control Center.\n2. Look for the airplane icon.\n3. If the airplane icon is orange or highlighted, Airplane Mode is ON. Tap it once to turn it OFF (it should turn gray).\n\n**For Android:**\n1. Swipe down from the top of the screen to open the Quick Settings menu.\n2. Look for the airplane icon.\n3. If the airplane icon is colored or highlighted, Airplane Mode is ON. Tap it once to turn it OFF (it should turn gray or unhighlighted).\n\nAfter turning off Airplane Mode, wait a few seconds to see if your service returns. Let me know if you need more specific instructions or if you\u2019re still not seeing any service.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I checked and Airplane Mode is off, but I still have no service."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for checking. Since Airplane Mode is off and you still have no service, let\u2019s try the next step:\n\n**Remove and Reinsert Your SIM Card:**\n1. Power off your phone completely.\n2. Locate your SIM card tray (usually on the side of your phone).\n3. Use a SIM eject tool or a paperclip to gently open the tray.\n4. Remove the SIM card and wait about 10 seconds.\n5. Reinsert the SIM card securely into the tray.\n6. Power your phone back on.\n\nAfter your phone restarts, check if you have service (bars or connection). If you still have no service after this step, please let me know. I can then check for possible network issues or escalate the issue for further support.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I reseated the SIM card, but my phone says the SIM is still locked. I still don't have any service.",
+   "tool_calls": [
+    {
+     "tool_name": "reseat_sim_card",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for letting me know. If your phone says the SIM is \u201clocked,\u201d this usually means it\u2019s asking for a PIN code or there\u2019s an issue with the SIM card itself. Here\u2019s what you can do next:\n\n1. **SIM PIN Prompt:**  \n   - If your phone is asking for a SIM PIN, enter the PIN if you know it.  \n   - If you enter the wrong PIN too many times, your SIM may become blocked and require a PUK code.\n\n2. **SIM Card Issue:**  \n   - If you\u2019re not being prompted for a PIN, but the phone says \u201cSIM locked\u201d or \u201cNo SIM,\u201d the SIM card may be damaged or malfunctioning.\n\n3. **Try the SIM in Another Phone (if possible):**  \n   - If you have access to another unlocked phone, try inserting your SIM card into it.  \n   - If the SIM still doesn\u2019t work, the issue is likely with the SIM card itself.\n\nWould you please clarify:\n- Are you seeing a prompt to enter a SIM PIN or PUK code?\n- Or does your phone just say \u201cSIM locked\u201d or \u201cNo SIM\u201d without asking for a code?\n\nOnce you provide this information, I can guide you on the next steps, such as providing a PUK code or arranging a SIM replacement if needed.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "My phone just says 'SIM locked' and doesn't ask me for a code. I don't have another phone to test the SIM in."
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for clarifying. Since your phone says \"SIM locked\" without prompting for a code and you don\u2019t have another phone to test the SIM, this could indicate a problem with the SIM card itself or a compatibility issue.\n\nHere\u2019s what you can do next:\n\n1. **Restart Your Phone Again:**  \n   Sometimes reseating the SIM and restarting can help the phone recognize it. Please try powering your phone off and on one more time.\n\n2. **Check for Physical SIM Issues:**  \n   - Inspect the SIM card for any visible damage, dirt, or dust.  \n   - Gently wipe the gold contacts with a soft, dry cloth if needed.\n\n3. **Check for Software Updates:**  \n   - If your phone can connect to Wi-Fi, check for any available software updates in your phone\u2019s settings.\n\nSince you still have no service and the SIM is not being recognized, it\u2019s likely the SIM card may be faulty or needs to be replaced.\n\nWould you like me to help you arrange a SIM replacement or escalate this issue to a human support agent for further assistance? Please let me know how you\u2019d like to proceed.",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "I restarted my phone again and it rebooted successfully, but it's still showing 'SIM locked' and I still have no service. What should I try next?",
+   "tool_calls": [
+    {
+     "tool_name": "reboot_device",
+     "arguments": {},
+     "actor": "user"
+    }
+   ]
+  },
+  {
+   "role": "agent",
+   "content": "Thank you for trying the restart again. Since your phone still shows \"SIM locked\" and you have no service, and you don\u2019t have another phone to test the SIM, it\u2019s likely that your SIM card is either faulty or locked due to a technical issue.\n\nAt this point, the best next steps are:\n- Arrange for a SIM card replacement.\n- Escalate your issue to a human support agent who can assist with unlocking or replacing your SIM, or provide a PUK code if needed.\n\nWould you like me to connect you with a human support agent to resolve this issue and arrange a SIM replacement?",
+   "tool_calls": [],
+   "tool_observations": []
+  },
+  {
+   "role": "user",
+   "content": "Yes, please connect me with a human support agent so I can get this SIM issue sorted out."
+  },
+  {
+   "role": "agent",
+   "content": "You will now be connected with a human support agent who can assist you further with your SIM issue and arrange a replacement if needed. Thank you for your patience while we worked through the troubleshooting steps. An agent will help you resolve this as soon as possible.",
+   "tool_calls": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "arguments": {
+      "summary": "Customer's phone shows 'SIM locked' with no service after troubleshooting steps (restart, reseating SIM, Airplane Mode off). No prompt for PIN/PUK, and no other phone available to test SIM. Needs SIM replacement or further assistance."
+     },
+     "params": {
+      "summary": "Customer's phone shows 'SIM locked' with no service after troubleshooting steps (restart, reseating SIM, Airplane Mode off). No prompt for PIN/PUK, and no other phone available to test SIM. Needs SIM replacement or further assistance."
+     },
+     "failed": false
+    }
+   ],
+   "tool_observations": [
+    {
+     "tool_name": "transfer_to_human_agents",
+     "response": {
+      "result": "Transfer successful"
+     },
+     "latency_ms": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "role": "_user_done",
+   "content": true
+  }
+ ]
+}
