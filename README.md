@@ -67,7 +67,9 @@ scripts/                    run wrapper (run_manifest.py, runlog.py), scorer (sc
                               τ³-native runner and scorer (run_deep.py, score_deep.py),
                               the two customer patches (role_fix.patch, json_mode.patch),
                               the τ³ vendor patch and provenance record, recorded code-copy
-                              hashes, and the development tests
+                              hashes, and the development tests (scripts/tests,
+                              experiments/*/tests; written against the full private tree,
+                              several need code copies or August runs not released here)
 results/full-fixed-2/       the +30.0 run: manifest, 240 traces, per-call log, bench report, score
 results/full-original-2/    the same with the original (broken-customer) code
 results/deep-v0/, deep-v2_deep-2/   τ³-native runs of the original and deep-patched policy:
@@ -205,4 +207,83 @@ Test Environments for Tool-Calling Agents*, 2026.
 
 ## Verified
 
-Pending: filled in from a fresh clone of this repository.
+On 28 October 2026 this repository was cloned fresh from GitHub into an empty temporary folder
+and `bash reproduce/verify_all.sh` was run twice: with Python 3.14.4 and only the standard
+library (step 7 skipped), and with the Python 3.12.14 environment of `requirements.txt`. Both
+exited 0. Two negative controls were also run on the clone: flipping one criterion in one
+stored trace makes `separation.py` refuse (`files differ from the seal full-fixed-2.sha256`),
+and committing a one-line change to `scripts/runlog.py` makes it refuse
+(`manifest provenance wrong: ['wrapper']`). Output of the run with the full environment
+(step 6 shortened to its summary lines):
+
+```
+== 0. secret and personal-data scan
+secret scan: 0 finding(s)
+
+== 1. +30.0 separation, and the original-code run, from stored traces
+full-fixed-2 (code-fixed, 240 conversations)
+                      policy    stub     gap   per-repeat gaps
+  solved fully          35.0     7.5   +27.5   [37.5, 20.8, 41.7, 16.7, 20.8] mean +27.5 half-range 12.5
+  criteria passed       71.8    44.2   +27.7   [34.4, 18.2, 37.0, 27.6, 21.1] mean +27.7 half-range 9.4
+  actions completed     73.8    43.8   +30.0   [35.1, 21.6, 35.1, 32.4, 25.7] mean +30.0 half-range 6.8
+  identical to the stored score.json; seal sha256 6ac00f98e79fb9cd...
+full-original-2 (code-original, 240 conversations)
+                      policy    stub     gap   per-repeat gaps
+  solved fully          35.0     5.0   +30.0   [29.2, 33.3, 29.2, 33.3, 25.0] mean +30.0 half-range 4.2
+  criteria passed       70.3    41.5   +28.8   [30.4, 38.3, 18.4, 27.8, 29.0] mean +28.8 half-range 9.9
+  actions completed     68.4    39.2   +29.2   [32.4, 36.5, 20.3, 27.0, 29.7] mean +29.2 half-range 8.1
+  (no score.json was stored for this run); seal sha256 07791791e308a5f0...
+
+== 2. scenario-cluster bootstrap and sign-flip test for +30.0 (stats/cluster30.py)
+pooled gap (must be 30.0): 30.0
+scenarios: 24 graded actions/arm: 370
+scenario-cluster bootstrap 95% CI: [24.6, 35.3]
+scenarios policy better / worse / tied: 21 2 1
+paired sign-flip permutation p (one-sided, scenario unit): 0.0001
+
+== 3. deep-patch result on the 51 unseen tasks (stats/cluster20.py)
+unseen tasks: 51 v0 62.4 patch 82.4 gap 20.0
+task-cluster bootstrap 95% CI: [10.2, 30.2]
+tasks better / worse / tied: 28 9 14
+paired sign-flip permutation p (one-sided, task unit): 0.0002
+
+== 4. rule removal: main run and registered follow-up
+RULE REMOVAL, main run: valid blocks 63 of 72, cost $54.3454
+| removed rule | tied criteria | control pass % | variant pass % | drop | p | caught? | untied change |
+|---|---|---|---|---|---|---|---|
+| R1_airplane | 28 in 11 scenarios | 85.7 | 92.9 | -7.1 | 0.7969 | no | -1.4 (p=0.564) |
+| R2_apn | 52 in 10 scenarios | 100.0 | 65.4 | +34.6 | 0.0020 | yes | -3.7 (p=0.315) |
+| R3_payment | 16 in 3 scenarios | 100.0 | 75.0 | +25.0 | 0.2500 | no | -10.1 (p=0.008) |
+| R4_suspension | 24 in 9 scenarios | 100.0 | 91.7 | +8.3 | 0.2500 | no | -3.2 (p=0.239) |
+| R5_escalate_unfixable | 26 in 5 scenarios | 61.5 | 34.6 | +26.9 | 0.0625 | no | -1.8 (p=0.413) |
+| R6_transfer_scope | 63 in 24 scenarios | 69.8 | 54.0 | +15.9 | 0.0367 | no | -0.6 (p=0.152) |
+pair R5_escalate_unfixable: own-only drop +30.8 p=0.1250; partner-only drop +12.0 p=0.1372; lands on right rule: False
+pair R6_transfer_scope: own-only drop +22.0 p=0.0146; partner-only drop +30.8 p=0.1250; lands on right rule: True
+  identical to the stored score.json
+
+RULE REMOVAL, registered follow-up: valid blocks 70 of 70, cost $17.9887
+PRIMARY (follow-up alone)
+| removed rule | tied criteria | control pass % | variant pass % | drop | p | caught? | untied change |
+|---|---|---|---|---|---|---|---|
+| R3_payment | 60 in 6 scenarios | 96.7 | 76.7 | +20.0 | 0.0625 | no | -1.1 (p=0.324) |
+| R5_escalate_unfixable | 40 in 8 scenarios | 42.5 | 37.5 | +5.0 | 0.4219 | no | -2.4 (p=0.037) |
+SECONDARY (main + follow-up pooled, functional duplicates merged)
+| removed rule | tied criteria | control pass % | variant pass % | drop | p | caught? | untied change |
+|---|---|---|---|---|---|---|---|
+| R3_payment | 76 in 9 scenarios | 97.4 | 76.3 | +21.1 | 0.0156 | yes | -6.1 (p=0.008) |
+| R5_escalate_unfixable | 61 in 12 scenarios | 49.2 | 34.4 | +14.8 | 0.0879 | no | -2.1 (p=0.064) |
+  identical to the stored score.json
+
+== 5. rule coverage (rewrites coverage.csv and coverage.md; must be unchanged)
+{"not_checkable": 11, "not_covered": 20, "covered": 20}
+coverage.csv and coverage.md unchanged
+== 6. duplicate re-analysis (rewrites results.json; must be unchanged)
+original_24 {'units': 24, 'pooled_gap': 30.0, 'gap_over_units': 30.0, 'ci95': [24.55696202531646, 35.294117647058826], 'signflip_p_mc': 0.0001, 'signflip_p_exact': 0.0, ...}
+clustered_19 {'units': 19, 'pooled_gap': 30.0, 'gap_over_units': 30.0, 'ci95': [24.65753424657534, 35.43859649122807], 'signflip_p_mc': 0.0001, 'signflip_p_exact': 0.0001, ...}
+results.json unchanged
+
+== 7. engine replay smoke test (needs requirements.txt; skipped otherwise)
+engine replay: 48 conversations, 0 errors, 110 of 186 graded actions completed (stored run, repeat 0: 118); 40 conversations grade the same as stored
+
+ALL REPRODUCTIONS MATCH
+```
