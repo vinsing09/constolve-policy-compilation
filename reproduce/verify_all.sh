@@ -30,7 +30,10 @@ echo; echo "== 6. duplicate re-analysis (rewrites results.json; must be unchange
 $PY -B reproduce/reanalysis.py
 git diff --exit-code -- experiments/duplicate-reanalysis && echo "results.json unchanged"
 
-echo; echo "== 7. engine replay smoke test (needs requirements.txt; skipped otherwise)"
+echo; echo "== 7. the paper's Tables 1-6 and Figure 2, checked against the printed values"
+$PY -B reproduce/paper_tables.py
+
+echo; echo "== 8. engine replay smoke test (needs requirements.txt; skipped otherwise)"
 if $PY -c "import litellm, loguru, deepdiff, addict, toml" 2>/dev/null; then
   $PY -B reproduce/engine_replay.py 2>/dev/null | tail -1
 else

@@ -1,0 +1,84 @@
+{
+ "domain": "airline",
+ "n_schemas": 14,
+ "n_compiled": 14,
+ "failed": [],
+ "confidence": {
+  "medium": 2,
+  "high": 12
+ },
+ "notes": {
+  "book_reservation": "No reservation_id parameter is given, so one is generated as HATnnn (unique against existing reservations). Travel certificates are looked up in payment_methods first and then in the certificates table (by certificate_id); gift card/certificate balances are decremented, credit cards are not. Policy limits (<=5 passengers, <=1 credit card, <=1 certificate, <=3 gift cards) are enforced as preconditions. Returns the created reservation with nested flights/passengers/payments plus total_price.",
+  "calculate": "Read-only utility; does not touch state. Rejects any character outside the allowed set before evaluating, and evaluates with no builtins available. Result is returned as a string rounded to 2 decimals.",
+  "cancel_reservation": "The schema has no reservation 'status' field, so cancellation is recorded via the boolean 'cancelled' field (a mirrored 'status': 'cancelled' key is only in the returned payload, not in state). Per policy the API does not verify cancellation eligibility rules (24h window, insurance, business cabin, airline cancellation); the agent enforces those, so only existence and double-cancellation are checked here.",
+  "get_reservation_details": "Assumed _find raises ValueError for a missing reservation id (per helper contract); flights sorted by date then flight number for deterministic ordering.",
+  "get_user_details": "Assumed credit-card payment methods expose brand/last_four while gift cards and travel certificates expose amount; assumed payment_type value 'credit_card' for that distinction. Reservation list includes cancelled reservations since the schema keeps them with a 'cancelled' flag.",
+  "list_all_airports": "Returned a dict mapping IATA code to city (standard airline-domain format for this tool) rather than a bare list, since the tool is a lookup and must return JSON-serialisable data.",
+  "search_direct_flight": "Only flight instances with status 'available' are returned, since delayed/on time/flying flights cannot be booked. Results are returned as a list of dicts.",
+  "search_onestop_flight": "Assumed arrival times may carry a '+1' day-offset marker; when present the second leg is searched on the next day, otherwise the connection requires arrival strictly before departure on the same date. Only instances with status 'available' are returned.",
+  "send_certificate": "Assumed the certificate should also be registered as a payment method in the user's profile (as in the original airline domain) so it can be used for future bookings; certificate ids are generated as 'certificate_<n>' starting at 3221322 and incremented until unique. Amount must be a positive integer.",
+  "transfer_to_human_agents": "Assumed a repeat transfer is a precondition failure, and that a blank summary is invalid since the parameter is required. Returns the conventional short 'Transfer successful' action string.",
+  "update_reservation_baggages": "Assumed $50 per extra (non-free) bag charged only for newly added non-free bags; certificates rejected as payment; gift card balance decremented and a reservation_payments row appended when a charge occurs. Enforced policy rule that bags can be added but not removed.",
+  "update_reservation_flights": "Follows tau-bench semantics: unchanged segments keep their old price only when the cabin is unchanged; price difference (per passenger) is charged/refunded to the given payment method; certificates are rejected and gift cards must have sufficient balance. Seat counts on flight_instances are not decremented (the original API does not do so). Returns the updated reservation with flights, passengers and payment history.",
+  "update_reservation_passengers": "Assumed passengers are matched to existing rows in list order and that the passenger count must stay the same (per policy). Returns the updated reservation with flights, passengers and payment history.",
+  "get_flight_status": "Assumed seats/prices are only meaningful (and thus only reported) when the instance status is 'available'; raises ValueError if the flight number or the specific date instance does not exist."
+ },
+ "predicates": [],
+ "observables": [],
+ "seed_failing_predicates": [],
+ "writes": {
+  "book_reservation": [
+   "reservations",
+   "reservation_flights",
+   "reservation_passengers",
+   "reservation_payments",
+   "flight_instances.available_seats_basic_economy",
+   "flight_instances.available_seats_economy",
+   "flight_instances.available_seats_business",
+   "payment_methods.amount",
+   "certificates.amount"
+  ],
+  "calculate": [],
+  "cancel_reservation": [
+   "reservations.cancelled"
+  ],
+  "get_reservation_details": [],
+  "get_user_details": [],
+  "list_all_airports": [],
+  "search_direct_flight": [],
+  "search_onestop_flight": [],
+  "send_certificate": [
+   "certificates.certificate_id",
+   "certificates.user_id",
+   "certificates.amount",
+   "payment_methods.payment_id",
+   "payment_methods.user_id",
+   "payment_methods.payment_type",
+   "payment_methods.brand",
+   "payment_methods.last_four",
+   "payment_methods.amount"
+  ],
+  "transfer_to_human_agents": [
+   "session.transferred_to_human",
+   "session.transfer_summary"
+  ],
+  "update_reservation_baggages": [
+   "reservations.total_baggages",
+   "reservations.nonfree_baggages",
+   "payment_methods.amount",
+   "reservation_payments"
+  ],
+  "update_reservation_flights": [
+   "reservations.cabin",
+   "reservation_flights",
+   "reservation_payments",
+   "payment_methods.amount"
+  ],
+  "update_reservation_passengers": [
+   "reservation_passengers.first_name",
+   "reservation_passengers.last_name",
+   "reservation_passengers.date_of_birth"
+  ],
+  "get_flight_status": []
+ }
+}

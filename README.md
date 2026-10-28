@@ -1,52 +1,75 @@
-# Compiling Operating Policies into Executable Test Environments for Tool-Calling Agents: research artifacts
+# Compiling Operating Policies into Executable Test Environments for Tool-Calling Agents
 
-Code, data and conversation traces behind the telecom measurements in *Compiling Operating
-Policies into Executable Test Environments for Tool-Calling Agents* (Vineet Singh, Constolve,
-2026), plus three follow-up experiments run on the same suite.
+Research artifacts for the preprint *Compiling Operating Policies into Executable Test
+Environments for Tool-Calling Agents* (Vineet Singh, Constolve, October 2026): the compiled
+telecom environment, the generated suite, the scenario generator, the run, scoring and
+statistics code, the conversation traces of every run the paper's telecom results rest on,
+and scripts that recompute those results without calling a model.
 
-**What this release covers, and what it does not.** It covers the paper's +30.0-point
-separation (Section 5.4, Figure 2's first bar, Table D1), the deep-patch result on the 51
-unseen tasks (+20.0 points, Table D2), and three follow-up analyses of the same 24-scenario
-suite (rule removal, rule coverage, duplicate re-analysis). Every number in those can be
-recomputed here from the stored traces without a model call, and was (see [Verified](#verified)).
-The paper's compilation, coverage (105 of 113), mutation-adequacy, precision and
-calibration figures (Tables 1 to 9, Figures 1 and 3 to 6) rest on artifacts that are **not**
-in this repository. Re-running the paid experiments is possible (commands below) but gives a
-new run, not the recorded one: the agent and customer are sampled from gpt-4.1.
+From the paper's abstract:
 
-## The paper in one paragraph
+> Tool-calling agents work under operating policies that a general benchmark cannot know. We
+> ask whether executable environments compiled from a deployment's written policy can produce
+> solvable tests that catch policy violations by such agents. Our pipeline calls a language
+> model only at build time. The model writes a state model and one function per tool from the
+> policy and the tool schemas, and we keep what survives execution. We then discover faults by
+> perturbing the compiled world, compose them into scenarios, and emit a scenario only with a
+> replay certificate showing that a reference repair sequence solves it. [...] We ran a
+> 24-scenario compiled suite, which contains 19 distinct tests, on the 2,337-line build. An
+> agent given the policy completes 73.8% of graded actions and an otherwise identical agent
+> given one sentence completes 43.8%, a separation of +30.0 percentage points (95% CI
+> [24.7, 35.4] over the 19 distinct scenarios), with the policy arm ahead on 16 of 19. In a
+> pre-registered experiment we removed one of six rules at a time from the agent's policy
+> (3 repeats, 63 valid scenario blocks). [...] One of the 6 removals meets the pre-registered
+> criterion, and the count is best read by group. [...] A pre-registered follow-up on 14 new
+> scenarios did not catch either of the two underpowered rules on its own. Pooled with the
+> first run in a secondary analysis, removal of the payment rule meets the criterion
+> (21.1 points, p = 0.016).
 
-A deployment's operating policy (here, the 23,318-character telecom policy of the public
-τ³-bench benchmark) defines what a correct agent action is. The method compiles that policy
-and the agent's tool schemas into a runnable world: a language model writes, at build time, a
-state model, one Python function per tool with its documented preconditions and effects,
-named health predicates and a seed world; a tool is kept only if it parses, matches its
-signature and executes. Test scenarios are then derived from that world by performing faults
-on it, and are graded deterministically on the tool calls the agent makes (no model in the
-grader). In one run of a 24-scenario suite with 5 repeats per arm, gpt-4.1 holding the policy
-completed 73.8% of graded actions against 43.8% for gpt-4.1 holding a one-sentence
-instruction, a separation of +30.0 points. Most graded actions check that the intended tool
-was called, not the full final state; the instrument has not been calibrated against the
-benchmark's reference environment; and the comparison is full policy against one sentence,
-not policy knowledge at matched prompt length.
+**Scope.** Everything in the paper's Discrimination and Catching known violations sections,
+and Tables 1 (telecom column), 2, 3, 4, 5 and 6 and Figure 2, is recomputed here from stored
+data and checked against the printed values (see [Verified](#verified)). The repair-call-set
+coverage (105 of 113), the fault-type match, the determinism replays and the verdict-instability
+measurement (Table 7, 834 runs) rest on data that is not in this repository; the table below
+says why for each. Re-running the paid experiments is possible but gives a new run, not the
+recorded one, because the agent and the simulated customer are sampled from gpt-4.1.
 
-## Headline results reproduced here
+## Paper ↔ artifact
 
-| result | value | source | command (no model calls) |
+Numbers refer to the preprint; labels in brackets are the LaTeX labels. All commands run from
+the repository root, need no API key and no package outside the standard library, and are run
+in this order by `bash reproduce/verify_all.sh`. `reproduce/paper_tables.py` prints Tables 1 to
+6 and Figure 2 and fails if any value differs from the paper.
+
+| Paper item | What it reports | Reproduce with | Data |
 |---|---|---|---|
-| Separation, fixed customer (paper Sec. 5.4, Fig. 2) | actions completed 73.8% vs 43.8%, **+30.0** pts; per-repeat half-range 6.8 | `results/full-fixed-2` | `python -B reproduce/separation.py` |
-| Same suite, original code with the broken simulated customer | **+29.2** pts (68.4% vs 39.2%) | `results/full-original-2` | same |
-| Scenario-level uncertainty for +30.0 (Sec. 5.4, Table D1) | bootstrap 95% CI [24.6, 35.3]; 21 / 2 / 1 scenarios better / worse / tied; sign-flip p = 0.0001 | `results/full-fixed-2` | `python -B stats/cluster30.py table_d1.csv` |
-| Deep-patched policy on the 51 unseen τ³ tasks (Table D2) | pass rate 62.4% to 82.4%, **+20.0** pts; CI [10.2, 30.2]; 28 / 9 / 14 tasks | `results/deep-v0`, `results/deep-v2_deep-2` | `python -B stats/cluster20.py table_d2.csv` |
-| Rule removal, main run (pre-registered) | **1 of 6** removed rules caught (R2, APN reset: −34.6 pts, p = 0.002); no false alarm | `experiments/rule-ablation/results/main` | `python -B reproduce/ablation.py` |
-| Rule removal, registered follow-up | neither R3 nor R5 caught alone; pooled with the main run (secondary), R3 meets the criterion (−21.1 pts, p = 0.016) | `experiments/rule-ablation-followup/results/main` | same |
-| Rule coverage | 51 policy rules; 20 of the 40 checkable rules (50%) are checked by at least one of the 93 criteria | `experiments/rule-coverage` | `python -B experiments/rule-coverage/coverage.py` |
-| Duplicate re-analysis | the 24 scenarios are 19 functionally distinct tests; +30.0 CI becomes [24.7, 35.4]; the rule-removal verdict stays 1 of 6 | `experiments/duplicate-reanalysis` | `python -B reproduce/reanalysis.py` |
+| Figure 1 [fig:pipeline] | The pipeline (compile, discover, compose, filter, render) | A diagram, no data. The code for each stage: compile output `code-fixed/generated/env_*.py`; discovery output (atoms) `experiments/rule-ablation-followup/inputs/phase3_atoms_telecom.json`; compose, certify and filter `code-fixed/scripts/phase15_graph_suite.py` with `services/{policy_graph,atom_audit,case_gate,prefix_gate,...}.py`; render `services/narrator.py` | – |
+| Algorithm 1 [alg:discover] | Discovery of fault atoms | Not re-runnable here: the discovery script and its build are not released. Its output, the 28 atoms, is released (file above) | atoms file |
+| Table 1 [tab:domains] | Domains and compilation outcomes | `python -B reproduce/paper_tables.py`: the whole telecom column (114 tasks, 43 schemas, 23,318 characters, 94 tasks with customer actions, 43/43 compiled, 11 health predicates, 5 derived observables, 2,337 lines) and the compiled counts for airline (14/14) and retail (16/16). The airline and retail task counts, schema counts and policy lengths come from upstream τ³-bench, whose airline and retail data are not vendored here | τ³ telecom data, `code-fixed/generated/` |
+| Section 5.1 text | First compilation 1,795 lines, recompilation 2,241, six hand edits to 2,337; benchmark's own environment 2,851 lines | Not reproducible here: the build history is in the private development repository. The final 2,337-line file is `code-fixed/generated/env_telecom.py` | – |
+| Section 5.1 text | Determinism: 30 telecom scenarios replayed 3 times, 7 airline and 4 retail 4 times, no divergence | Not reproducible here: the replay reports and their 2,330-line build are not released | – |
+| Section 5.2 | Discovery matches all 17 agent-repairable fault types (16 complete, 1 partial); coverage 105 of 113 tasks (90 of 94 repair-graded) on the 92,184-scenario, 2,330-line build | Not reproducible here: the coverage report and the 2,330-line build are not released. The atoms are (`inputs/phase3_atoms_telecom.json`) | – |
+| Table 2 [tab:suite] | The 24-scenario suite: 19 distinct tests, 93 criteria (74 requiring a call, 48 of them with no argument values; 19 forbidding a call), 120 conversations and 370 graded actions per arm | `python -B reproduce/paper_tables.py` | `code-fixed/generated/graph_suite_telecom.json`, `results/full-fixed-2` |
+| Table 3 [tab:rulecov] | Policy rule coverage: 51 rules, 20 covered, 20 not covered, 11 not checkable, by section | `python -B experiments/rule-coverage/coverage.py` (rewrites `coverage.csv`/`coverage.md`, which must not change), then `paper_tables.py`. The rule segmentation is `experiments/rule-coverage/rules.csv` | policy `experiments/rule-ablation/policies/control.md` |
+| Section 5.3 text, Table 4 [tab:perscen] | 73.8% (273/370) vs 43.8% (162/370), +30.0 pp; per-scenario counts; per-repeat half-range 6.8 | `python -B reproduce/separation.py` (the run's own scorer, all checks, equal to the stored `score.json`); `python -B reproduce/paper_tables.py` (Table 4 rows); `python -B stats/cluster30.py out.csv` (24-scenario per-unit rows) | `results/full-fixed-2` |
+| Section 5.3 text, Figure 2 [fig:perscen] | 19 distinct scenarios: bootstrap 95% CI [24.7, 35.4], ahead on 16, behind on 2, tied on 1, sign-flip p < 0.001; the 19 plotted points | `python -B reproduce/reanalysis.py` (writes `experiments/duplicate-reanalysis/results.json`, which must not change), then `paper_tables.py` | `results/full-fixed-2` |
+| Table 5 [tab:known] | Catching removed rules: 63 valid blocks, 1 of 6 caught (R2, 34.6 points, p = 0.008), 0 off-target | `python -B reproduce/ablation.py` (registered scorer; equal to the stored `score.json`, which uses the 24 scenarios as units), then `reproduce/reanalysis.py` and `paper_tables.py` (the paper's columns, with the 19 distinct scenarios as units) | `experiments/rule-ablation/results/main` |
+| Section 5.4 text | R5/R6 overlap pair (R6 own-only 22.0 points, p = 0.024); R3 untied change 75.8% to 65.6% (−10.1, p = 0.008); $54.35 for 444 conversations | `python -B reproduce/reanalysis.py` prints the pair rows; untied rates are the `untied` entries of `experiments/duplicate-reanalysis/results.json`; cost in the run's `manifest.json` | same |
+| Table 6 [tab:followup] | Follow-up alone: R3 20.0 points (p = 0.063), R5 5.0; pooled secondary: R3 21.1 (p = 0.016, meets), R5 14.8 | `python -B reproduce/ablation.py`, then `paper_tables.py` | `experiments/rule-ablation-followup/results/main` |
+| Section 5.4 text | Follow-up selection: 14 scenarios by rule tag with a fixed seed, each replay-certified | Records: `selection.json`, `certificate.json`, `suite_followup.json`, `pool_index.json` in `experiments/rule-ablation-followup/`. `select_scenarios.py` and `certify.py` need the full engine copy whose hash they check, so they refuse on this tree | – |
+| Section 5.5, Table 7 [tab:rel] | Verdict instability: 834 runs over 278 tasks, 29.8% / 30.7% / 34.0% of tasks change verdict; pass^1 − pass^3 | Not reproducible here: these runs were made in the benchmark's own harness by an earlier internal system and live in its run database, which is not released | – |
+
+Also included, though not reported in this version of the paper: the same 24-scenario suite run
+with the original code and its broken simulated customer (`results/full-original-2`, +29.2
+points, scored by `reproduce/separation.py`), and τ³-native runs of the original and a
+deep-patched telecom policy on the benchmark's 114 tasks (`results/deep-v0`,
+`results/deep-v2_deep-2`; `python -B stats/cluster20.py out.csv` gives +20.0 points on the 51
+tasks the patch never saw, 95% CI [10.2, 30.2]).
 
 Each experiment folder has its own `prereg.md` (design fixed before any paid call) and
-`results.md` (full tables and caveats). Read the caveats there before quoting a number: for
-example, the follow-up's R3 scenarios are variants of one situation, and in the main run R3
-and R5 could not reach p < 0.05 at any effect size with the scenarios available.
+`results.md` (full tables and caveats). The rule-removal `score.json` files and `results.md`
+treat the 24 scenarios as units; the paper's Tables 5 and 6 use the 19 distinct tests, as
+computed in `experiments/duplicate-reanalysis/`.
 
 ## Repository layout
 
@@ -56,6 +79,8 @@ code-fixed/                 the engine the +30.0 run used, trimmed to the files 
   generated/env_telecom.py    the compiled telecom environment (2,337 lines)
   generated/graph_suite_telecom.json   the generated suite (first 24 scenarios are the suite)
   generated/policy_graph_telecom.json, branches_telecom.json, env_telecom.meta.json
+  generated/env_airline.py, env_retail.py (+ .meta.json)   compiled airline and retail
+                              environments (Table 1; not used by any run here)
   runner/, services/, models.py         agent loop, grader, simulated customer, environments
   scripts/phase15_graph_suite.py + services/{policy_graph,atom_audit,case_gate,...}.py
                               the scenario generator (used by the follow-up's selection step)
@@ -105,16 +130,20 @@ bash reproduce/verify_all.sh
 
 1. `reproduce/secret_scan.py`: no credential, key or non-simulated email anywhere in the tree,
    including inside the compressed files.
-2. `reproduce/separation.py`: `scripts/score.py`'s own checks and scoring on both Job 1 runs.
+2. `reproduce/separation.py`: `scripts/score.py`'s own checks and scoring on both separation
+   runs (fixed and original code).
    The recomputed full-fixed-2 score must equal the stored `score.json` byte for byte (as JSON).
-3. `stats/cluster30.py` and `stats/cluster20.py`: the paper's scenario- and task-level
-   bootstrap and sign-flip statistics; the CSVs are the per-unit rows of Tables D1 and D2.
+3. `stats/cluster30.py` and `stats/cluster20.py`: bootstrap and sign-flip statistics with the
+   24 scenarios as units (an earlier draft's analysis; the paper's 19-scenario version comes
+   from step 6) and for the deep-patch runs on the 51 unseen tasks.
 4. `reproduce/ablation.py`: both rule-removal runs scored in registered mode; results must
    equal each stored `score.json`.
 5. `experiments/rule-coverage/coverage.py`: rewrites `coverage.csv` and `coverage.md`, which
    must be unchanged in git.
 6. `reproduce/reanalysis.py`: runs `reanalyse.py` unchanged; `results.json` must be unchanged.
-7. If the packages in `requirements.txt` are installed: `reproduce/engine_replay.py` replays
+7. `reproduce/paper_tables.py`: Tables 1 (telecom column and compiled counts), 2, 3, 4, 5
+   and 6 and the points of Figure 2, each value checked against the paper.
+8. If the packages in `requirements.txt` are installed: `reproduce/engine_replay.py` replays
    the stored conversations through the released engine (`bench.py`, compiled environment,
    simulated customer, grader) with a stand-in for the model, to show the trimmed engine
    imports and runs. It is a smoke test, not a re-measurement.
