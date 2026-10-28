@@ -26,38 +26,55 @@ From the paper's abstract:
 > first run in a secondary analysis, removal of the payment rule meets the criterion
 > (21.1 points, p = 0.016).
 
-**Scope.** Everything in the paper's Discrimination and Catching known violations sections,
-and Tables 1 (telecom column), 2, 3, 4, 5 and 6 and Figure 2, is recomputed here from stored
-data and checked against the printed values (see [Verified](#verified)). The repair-call-set
-coverage (105 of 113), the fault-type match, the determinism replays and the verdict-instability
-measurement (Table 7, 834 runs) rest on data that is not in this repository; the table below
-says why for each. Re-running the paid experiments is possible but gives a new run, not the
-recorded one, because the agent and the simulated customer are sampled from gpt-4.1.
+**Scope.** Every number in the paper falls into one of three categories, listed in full in the
+table below: (1) recomputed here from released raw records, (2) checked against archived
+outputs only, because the run that produced them kept summaries and no raw records, and (3) not
+reproducible from this release, with the reason. Everything in category 1 or 2 is checked
+against the printed value by `bash reproduce/verify_all.sh` (see [Verified](#verified)).
+Re-running the paid experiments is possible but gives a new run, not the recorded one, because
+the agent and the simulated customer are sampled from gpt-4.1.
 
 ## Paper ↔ artifact
 
 Numbers refer to the preprint; labels in brackets are the LaTeX labels. All commands run from
 the repository root, need no API key and no package outside the standard library, and are run
-in this order by `bash reproduce/verify_all.sh`. `reproduce/paper_tables.py` prints Tables 1 to
-6 and Figure 2 and fails if any value differs from the paper.
+in order by `bash reproduce/verify_all.sh`. `reproduce/paper_tables.py` prints Tables 1 to 7,
+Figure 2 and the numbers of Sections 5.1 and 5.2, and fails if any value differs from the paper.
 
-| Paper item | What it reports | Reproduce with | Data |
+### 1. Recomputed from released raw records
+
+| Paper item | What it reports | Reproduce with | Raw records |
 |---|---|---|---|
-| Figure 1 [fig:pipeline] | The pipeline (compile, discover, compose, filter, render) | A diagram, no data. The code for each stage: compile output `code-fixed/generated/env_*.py`; discovery output (atoms) `experiments/rule-ablation-followup/inputs/phase3_atoms_telecom.json`; compose, certify and filter `code-fixed/scripts/phase15_graph_suite.py` with `services/{policy_graph,atom_audit,case_gate,prefix_gate,...}.py`; render `services/narrator.py` | – |
-| Algorithm 1 [alg:discover] | Discovery of fault atoms | Not re-runnable here: the discovery script and its build are not released. Its output, the 28 atoms, is released (file above) | atoms file |
-| Table 1 [tab:domains] | Domains and compilation outcomes | `python -B reproduce/paper_tables.py`: the whole telecom column (114 tasks, 43 schemas, 23,318 characters, 94 tasks with customer actions, 43/43 compiled, 11 health predicates, 5 derived observables, 2,337 lines) and the compiled counts for airline (14/14) and retail (16/16). The airline and retail task counts, schema counts and policy lengths come from upstream τ³-bench, whose airline and retail data are not vendored here | τ³ telecom data, `code-fixed/generated/` |
-| Section 5.1 text | First compilation 1,795 lines, recompilation 2,241, six hand edits to 2,337; benchmark's own environment 2,851 lines | Not reproducible here: the build history is in the private development repository. The final 2,337-line file is `code-fixed/generated/env_telecom.py` | – |
-| Section 5.1 text | Determinism: 30 telecom scenarios replayed 3 times, 7 airline and 4 retail 4 times, no divergence | Not reproducible here: the replay reports and their 2,330-line build are not released | – |
-| Section 5.2 | Discovery matches all 17 agent-repairable fault types (16 complete, 1 partial); coverage 105 of 113 tasks (90 of 94 repair-graded) on the 92,184-scenario, 2,330-line build | Not reproducible here: the coverage report and the 2,330-line build are not released. The atoms are (`inputs/phase3_atoms_telecom.json`) | – |
-| Table 2 [tab:suite] | The 24-scenario suite: 19 distinct tests, 93 criteria (74 requiring a call, 48 of them with no argument values; 19 forbidding a call), 120 conversations and 370 graded actions per arm | `python -B reproduce/paper_tables.py` | `code-fixed/generated/graph_suite_telecom.json`, `results/full-fixed-2` |
-| Table 3 [tab:rulecov] | Policy rule coverage: 51 rules, 20 covered, 20 not covered, 11 not checkable, by section | `python -B experiments/rule-coverage/coverage.py` (rewrites `coverage.csv`/`coverage.md`, which must not change), then `paper_tables.py`. The rule segmentation is `experiments/rule-coverage/rules.csv` | policy `experiments/rule-ablation/policies/control.md` |
-| Section 5.3 text, Table 4 [tab:perscen] | 73.8% (273/370) vs 43.8% (162/370), +30.0 pp; per-scenario counts; per-repeat half-range 6.8 | `python -B reproduce/separation.py` (the run's own scorer, all checks, equal to the stored `score.json`); `python -B reproduce/paper_tables.py` (Table 4 rows); `python -B stats/cluster30.py out.csv` (24-scenario per-unit rows) | `results/full-fixed-2` |
+| Table 1 [tab:domains] | Telecom column: 114 tasks, 43 schemas, 23,318 characters of policy, 94 tasks with customer actions, 43/43 compiled, 11 health predicates, 5 derived observables, 2,337 lines; compiled counts for airline (14/14) and retail (16/16) | `python -B reproduce/paper_tables.py` | τ³ telecom data and source, `code-fixed/generated/env_*.py` and `.meta.json` |
+| Section 5.1 text | The benchmark's own telecom environment is 2,851 lines | `paper_tables.py` | `code-fixed/third_party/tau3-bench/src/tau2/domains/telecom/*.py` |
+| Section 5.2 | Discovery matches all 17 agent-repairable fault types by repair-tool name (16 complete, 1 partial: overdue-bill suspension); 2 of 19 are escalation-only. Coverage 105 of 113 tasks, 90 of the 94 repair-graded, 15 escalation-graded tasks among the 105, 8 uncovered, 92,184 emitted scenarios; one task excluded because its repair set is empty | `python -B reproduce/repair_coverage.py` (also compares the covered and missing lists and the unmatched repair sets with the archived report) | `records/coverage/emitted_repair_sets.json.xz` (the repair-call set of every emitted scenario, as 21,606 distinct sets with counts, plus the sha256 of the 183 MB scenario file they come from), `records/coverage/tasks_small.json` (τ³'s 20 single-fault tasks), the 28 atoms `experiments/rule-ablation-followup/inputs/phase3_atoms_telecom.json`, τ³ `tasks.json` and `split_tasks.json` |
+| Table 2 [tab:suite] | The 24-scenario suite: 19 distinct tests, 93 criteria (74 requiring a call, 48 of them with no argument values; 19 forbidding a call), 120 conversations and 370 graded actions per arm | `paper_tables.py` | `code-fixed/generated/graph_suite_telecom.json`, `results/full-fixed-2` |
+| Table 3 [tab:rulecov] | Policy rule coverage: 51 rules, 20 covered, 20 not covered, 11 not checkable, by section | `python -B experiments/rule-coverage/coverage.py` (rewrites `coverage.csv`/`coverage.md`, which must not change), then `paper_tables.py` | `experiments/rule-coverage/rules.csv`, policy `experiments/rule-ablation/policies/control.md` |
+| Section 5.3 text, Table 4 [tab:perscen] | 73.8% (273/370) vs 43.8% (162/370), +30.0 pp; per-scenario counts; per-repeat half-range 6.8 | `python -B reproduce/separation.py` (the run's own scorer, equal to the stored `score.json`); `paper_tables.py`; `python -B stats/cluster30.py out.csv` (24-scenario rows) | the 240 traces in `results/full-fixed-2` |
 | Section 5.3 text, Figure 2 [fig:perscen] | 19 distinct scenarios: bootstrap 95% CI [24.7, 35.4], ahead on 16, behind on 2, tied on 1, sign-flip p < 0.001; the 19 plotted points | `python -B reproduce/reanalysis.py` (writes `experiments/duplicate-reanalysis/results.json`, which must not change), then `paper_tables.py` | `results/full-fixed-2` |
-| Table 5 [tab:known] | Catching removed rules: 63 valid blocks, 1 of 6 caught (R2, 34.6 points, p = 0.008), 0 off-target | `python -B reproduce/ablation.py` (registered scorer; equal to the stored `score.json`, which uses the 24 scenarios as units), then `reproduce/reanalysis.py` and `paper_tables.py` (the paper's columns, with the 19 distinct scenarios as units) | `experiments/rule-ablation/results/main` |
-| Section 5.4 text | R5/R6 overlap pair (R6 own-only 22.0 points, p = 0.024); R3 untied change 75.8% to 65.6% (−10.1, p = 0.008); $54.35 for 444 conversations | `python -B reproduce/reanalysis.py` prints the pair rows; untied rates are the `untied` entries of `experiments/duplicate-reanalysis/results.json`; cost in the run's `manifest.json` | same |
-| Table 6 [tab:followup] | Follow-up alone: R3 20.0 points (p = 0.063), R5 5.0; pooled secondary: R3 21.1 (p = 0.016, meets), R5 14.8 | `python -B reproduce/ablation.py`, then `paper_tables.py` | `experiments/rule-ablation-followup/results/main` |
-| Section 5.4 text | Follow-up selection: 14 scenarios by rule tag with a fixed seed, each replay-certified | Records: `selection.json`, `certificate.json`, `suite_followup.json`, `pool_index.json` in `experiments/rule-ablation-followup/`. `select_scenarios.py` and `certify.py` need the full engine copy whose hash they check, so they refuse on this tree | – |
-| Section 5.5, Table 7 [tab:rel] | Verdict instability: 834 runs over 278 tasks, 29.8% / 30.7% / 34.0% of tasks change verdict; pass^1 − pass^3 | Not reproducible here: these runs were made in the benchmark's own harness by an earlier internal system and live in its run database, which is not released | – |
+| Table 5 [tab:known] | Catching removed rules: 63 valid blocks, 1 of 6 caught (R2, 34.6 points, p = 0.008), 0 off-target | `python -B reproduce/ablation.py` (registered scorer, equal to the stored `score.json`, which uses the 24 scenarios as units), then `reanalysis.py` and `paper_tables.py` (19 distinct scenarios as units) | traces in `experiments/rule-ablation/results/main` |
+| Section 5.4 text | R5/R6 overlap pair (R6 own-only 22.0 points, p = 0.024); R3 untied change 75.8% to 65.6% (−10.1, p = 0.008) | `reanalysis.py` prints the pair rows; untied rates are the `untied` entries of `results.json` | same |
+| Table 6 [tab:followup] | Follow-up alone: R3 20.0 points (p = 0.063), R5 5.0; pooled secondary: R3 21.1 (p = 0.016, meets), R5 14.8 | `ablation.py`, then `paper_tables.py` | traces in `experiments/rule-ablation-followup/results/main` |
+| Section 5.5, Table 7 [tab:rel] | 834 runs over 278 tasks; 29.8% (34/114) of telecom, 30.7% (35/114) of retail and 34.0% (17/50) of airline tasks change verdict; retail 78, 77 and 77 of 114 (68% each); airline 23, 31 and 27 of 50 (46/62/54%); no run recorded an error; pass^1 − pass^3 16.0 / 14.6 / 14.3 points, spread 1.7, base rates 30% to 68% | `python -B reproduce/instability.py` (also compares the per-task counts with the archived summaries in `records/verdict-instability/archived/`) | `records/verdict-instability/verdicts.csv`: one row per task run (domain, task, repeat, run id, pass/fail, error flag), exported from the run database of the earlier internal system |
+
+### 2. Verified against archived outputs only
+
+| Paper item | What it reports | Check with | Why there are no raw records |
+|---|---|---|---|
+| Section 5.1 text | Determinism: 30 telecom scenarios replayed 3 times, 7 airline and 4 retail scenarios 4 times, no divergence in final state or predicate values (within and across processes) or tool return values (within a process) | `python -B reproduce/determinism.py` | The replay script compared the replays in memory and wrote only these counts (`records/determinism/phase8_determinism_*.json`); no per-replay record was kept |
+| Section 5.4 text | $54.35 for the 444 conversations of the rule-removal run | the run's `manifest.json` | The cost was computed by litellm at run time and stored in the manifest |
+| Section 5.4 text | Follow-up selection: 14 scenarios by rule tag with a fixed seed, each replay-certified | `selection.json`, `certificate.json`, `suite_followup.json`, `pool_index.json` in `experiments/rule-ablation-followup/` | `select_scenarios.py` and `certify.py` need the full engine copy whose hash they check, so they refuse on this tree |
+
+### 3. Not reproducible from this release
+
+| Paper item | What it reports | Reason |
+|---|---|---|
+| Figure 1 [fig:pipeline] | The pipeline | A diagram, no data. Code for each stage: compile output `code-fixed/generated/env_*.py`; discovery output (atoms) as above; compose, certify and filter `code-fixed/scripts/phase15_graph_suite.py` with `services/{policy_graph,atom_audit,case_gate,prefix_gate,...}.py`; render `services/narrator.py` |
+| Algorithm 1 [alg:discover], scenario emission | Running discovery and emitting the 92,184 scenarios | The discovery and emission scripts and the build they ran on are in the private development repository. Their outputs (the 28 atoms and the repair-call sets of every emitted scenario) are released and give the Section 5.2 numbers above |
+| Section 5.1 text | First compilation 1,795 lines, recompilation 2,241, six hand edits to 2,337; coverage, fault types and determinism measured on the 2,330-line build | The build history is in the private repository; only the final 2,337-line file is released. The records do not carry a hash of the build that produced them: they were written on 18 August 2026, before the commit that holds the 2,330-line file, and the 11 health predicates named in the emitted scenarios are the classification first committed in that file |
+| Section 5.1 text | Re-running the determinism replays | Needs the private replay script and the 2,330-line build |
+| Table 1 [tab:domains] | Airline and retail task counts, schema counts and policy lengths | Upstream τ³-bench data, public but not vendored here (only telecom is) |
+| Section 5.5 | The conversations behind the 834 verdicts, and the simulated customer's model | The transcripts sit in the internal system's 10 GB run database and are not released; the run rows record no model names |
 
 Also included, though not reported in this version of the paper: the same 24-scenario suite run
 with the original code and its broken simulated customer (`results/full-original-2`, +29.2
@@ -109,6 +126,11 @@ experiments/rule-coverage/  which policy rules any graded criterion checks
 experiments/duplicate-reanalysis/     re-scoring with functionally duplicate scenarios merged
 stats/                      the paper's cluster-level statistics (cluster30.py, cluster20.py)
 reproduce/                  model-free verification scripts (below)
+records/coverage/           repair-call sets of the 92,184 emitted scenarios, tau3's single-fault
+                              tasks, and the archived coverage report (Section 5.2)
+records/determinism/        the three archived determinism reports (Section 5.1)
+records/verdict-instability/   the 834 per-run verdicts behind Table 7, and the archived
+                              per-task summaries they are checked against
 ```
 
 Run folders keep everything the run wrapper wrote, including the absolute paths of the
@@ -141,9 +163,16 @@ bash reproduce/verify_all.sh
 5. `experiments/rule-coverage/coverage.py`: rewrites `coverage.csv` and `coverage.md`, which
    must be unchanged in git.
 6. `reproduce/reanalysis.py`: runs `reanalyse.py` unchanged; `results.json` must be unchanged.
-7. `reproduce/paper_tables.py`: Tables 1 (telecom column and compiled counts), 2, 3, 4, 5
-   and 6 and the points of Figure 2, each value checked against the paper.
-8. If the packages in `requirements.txt` are installed: `reproduce/engine_replay.py` replays
+7. `reproduce/repair_coverage.py`: fault types and repair-call-set coverage from
+   `records/coverage`, checked against the paper and the archived coverage report.
+8. `reproduce/determinism.py`: the archived determinism reports against the paper.
+9. `reproduce/instability.py`: Table 7 and the Section 5.5 numbers from the 834 verdicts,
+   checked against the paper and the archived per-task summaries.
+10. `reproduce/tests/test_records.py`: steps 7 to 9 must fail on an altered record (one
+    flipped verdict, one recorded error, one missing repair set, one divergent replay).
+11. `reproduce/paper_tables.py`: Tables 1 (telecom column and compiled counts) to 7, the
+    points of Figure 2 and the numbers of Sections 5.1 and 5.2, each checked against the paper.
+12. If the packages in `requirements.txt` are installed: `reproduce/engine_replay.py` replays
    the stored conversations through the released engine (`bench.py`, compiled environment,
    simulated customer, grader) with a stand-in for the model, to show the trimmed engine
    imports and runs. It is a smoke test, not a re-measurement.

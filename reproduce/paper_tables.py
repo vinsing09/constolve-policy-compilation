@@ -7,8 +7,9 @@ value against the number printed in the paper (paper-v7 preprint). No model call
 Run after reproduce/reanalysis.py has confirmed experiments/duplicate-reanalysis/results.json
 (verify_all.sh does this); the 19-cluster statistics of the Discrimination section and of the
 rule-removal tables are read from that file. Everything else is computed here from the suite,
-the policy, the compiled environments, the stored traces and the experiments' score files.
-Exit 1 on any mismatch.
+the policy, the compiled environments, the stored traces and the experiments' score files, and
+(Sections 5.1, 5.2, 5.5 and Table 7) from records/ via repair_coverage.py, determinism.py and
+instability.py. Exit 1 on any mismatch.
 """
 from __future__ import annotations
 
@@ -21,9 +22,12 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.dont_write_bytecode = True
-sys.path[:0] = [str(ROOT / "scripts"), str(ROOT / "experiments" / "rule-ablation"),
+sys.path[:0] = [str(ROOT / "reproduce"), str(ROOT / "scripts"), str(ROOT / "experiments" / "rule-ablation"),
                 str(ROOT / "experiments" / "rule-ablation-followup")]
+import repair_coverage as COV  # noqa: E402
 import design as D  # noqa: E402
+import determinism as DET  # noqa: E402
+import instability as INST  # noqa: E402
 import rules  # noqa: E402
 import score as sc  # noqa: E402
 
@@ -59,7 +63,10 @@ def table_domains() -> None:
           f"tasks with customer actions {user}, tools compiled {comp['telecom']}, health "
           f"predicates {len(mod['PREDICATES'])}, derived observables {len(mod['OBSERVABLES'])}, "
           f"environment size {lines:,} lines")
+    bench = sum(len(f.read_text().splitlines()) for f in src.glob("*.py"))
     print(f"  airline tools compiled {comp['airline']}; retail tools compiled {comp['retail']}")
+    print(f"  Section 5.1: the benchmark's own telecom environment, {bench:,} lines")
+    check("Section 5.1 benchmark environment lines", bench, 2851)
     for k, g, w in (("tasks", len(tasks), 114), ("schemas", schemas, 43), ("policy", policy, 23318),
                     ("customer actions", user, 94), ("predicates", len(mod["PREDICATES"]), 11),
                     ("observables", len(mod["OBSERVABLES"]), 5), ("lines", lines, 2337)):
@@ -222,12 +229,30 @@ def table_known_and_followup() -> None:
         _same_row(f"Table 6 {part} {rule}", got, want)
 
 
+def records() -> None:
+    """Sections 5.1, 5.2 and 5.5 and Table 7 (tab:rel), from records/ (repair_coverage.py, determinism.py, instability.py)."""
+    r = COV.compute()
+    print(f"\nSection 5.2: coverage {r['covered']}/{r['denominator']}, repair-graded "
+          f"{r['repair-graded covered']}/{r['repair-graded']}, fault types {r['complete']} complete + "
+          f"{r['partial']} partial of {r['agent-repairable']}, {r['emitted']:,} emitted")
+    BAD.extend(f"Section 5.2 {b}" for b in COV.check())
+    print("Section 5.1: determinism " + ", ".join(
+        f"{d} {x['tasks']}x{x['repeats']}" for d, (x, _) in DET.load().items()))
+    BAD.extend(f"Section 5.1 {b}" for b in DET.check())
+    t = INST.compute()
+    print("Table 7 (Verdict instability): " + "; ".join(
+        f"{d} {g['tasks']} tasks {g['runs']} runs, {g['flip_pct']:.1f}% flip, drop {g['drop']:.1f}"
+        for d, g in t.items()))
+    BAD.extend(f"Table 7 {b}" for b in INST.check())
+
+
 def main() -> int:
     table_domains()
     table_suite()
     table_rulecov()
     table_perscen_and_figure()
     table_known_and_followup()
+    records()
     print()
     for b in BAD:
         print("MISMATCH", b)

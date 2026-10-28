@@ -30,10 +30,22 @@ echo; echo "== 6. duplicate re-analysis (rewrites results.json; must be unchange
 $PY -B reproduce/reanalysis.py
 git diff --exit-code -- experiments/duplicate-reanalysis && echo "results.json unchanged"
 
-echo; echo "== 7. the paper's Tables 1-6 and Figure 2, checked against the printed values"
+echo; echo "== 7. fault types and repair-call-set coverage (105/113, 90/94, 17/17) from records/coverage"
+$PY -B reproduce/repair_coverage.py
+
+echo; echo "== 8. determinism replays: archived reports (summaries only) in records/determinism"
+$PY -B reproduce/determinism.py
+
+echo; echo "== 9. verdict instability, Table 7, from the 834 per-run verdicts in records/verdict-instability"
+$PY -B reproduce/instability.py
+
+echo; echo "== 10. the record checks fail on altered records"
+$PY -B reproduce/tests/test_records.py 2>&1 | tail -1
+
+echo; echo "== 11. the paper's Tables 1-7, Figure 2 and Sections 5.1-5.2, checked against the printed values"
 $PY -B reproduce/paper_tables.py
 
-echo; echo "== 8. engine replay smoke test (needs requirements.txt; skipped otherwise)"
+echo; echo "== 12. engine replay smoke test (needs requirements.txt; skipped otherwise)"
 if $PY -c "import litellm, loguru, deepdiff, addict, toml" 2>/dev/null; then
   $PY -B reproduce/engine_replay.py 2>/dev/null | tail -1
 else
